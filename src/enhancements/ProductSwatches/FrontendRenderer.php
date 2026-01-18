@@ -76,6 +76,7 @@ class FrontendRenderer {
 		$attribute_name = isset($args['attribute']) ? $args['attribute'] : '';
 
 		if (empty($attribute_name)) {
+			
 			return $html;
 		}
 
@@ -480,7 +481,7 @@ class FrontendRenderer {
 
 		// Output hidden select for WooCommerce compatibility
 		echo '<select class="shopglut-hidden-select" name="' . esc_attr($select_name) . '" data-attribute="' . esc_attr($select_name) . '" style="display:none;">';
-		echo '<option value="">' . esc_html__('Choose an option', 'shopglut') . '</option>';
+		echo '<option value="">' . esc_html__('Choose an Option', 'shopglut') . '</option>';
 		foreach ($args['options'] as $option_slug) {
 			$term = get_term_by('slug', $option_slug, $args['attribute']);
 			$option_name = $term ? $term->name : ucwords(str_replace('-', ' ', $option_slug));
