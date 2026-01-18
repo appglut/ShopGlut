@@ -1,0 +1,547 @@
+/**
+ * Product Swatches Frontend JavaScript
+ * Handles swatch selection, variation updates, and WooCommerce integration
+ */
+
+(function($) {
+    'use strict';
+
+    // Initialize when DOM is ready
+    $(document).ready(function() {
+
+        // Flag to prevent price updates during reset
+        var isResetting = false;
+
+        // Common handler for all swatch types
+        function handleSwatchClick($swatch, wrapperClass) {
+            var $wrapper = $swatch.closest('.' + wrapperClass);
+            var value = $swatch.data('value');
+            var attribute = $swatch.data('attribute');
+
+            if (!value || !attribute) {
+                return;
+            }
+
+            // Remove selected class from siblings in same container
+            $swatch.siblings().removeClass('selected');
+
+            // Add selected class to clicked swatch
+            $swatch.addClass('selected');
+
+            // Find the variation form and update the select element
+            var $form = $wrapper.closest('.variations_form');
+
+            if ($form.length) {
+                // First try to find the select in the wrapper (for button/image/color swatches with hidden select)
+                var $select = $wrapper.find('select[name="' + attribute + '"]');
+
+                // If not found in wrapper, look in the form (for default WooCommerce dropdowns)
+                if (!$select.length) {
+                    $select = $form.find('select[name="' + attribute + '"]').not('.shopglut-swatch-dropdown');
+                }
+
+                if ($select.length) {
+                    $select.val(value).trigger('change');
+                }
+            }
+        }
+
+        // Handle button swatch clicks
+        $(document.body).on('click', '.shopglut-swatch-button:not(.disabled)', function(e) {
+            e.preventDefault();
+            handleSwatchClick($(this), 'shopglut-buttons-container');
+        });
+
+        // Handle color swatch clicks
+        $(document.body).on('click', '.shopglut-color-swatch:not(.out-of-stock)', function(e) {
+            e.preventDefault();
+            handleSwatchClick($(this), 'shopglut-color-swatches-container');
+        });
+
+        // Handle image swatch clicks
+        $(document.body).on('click', '.shopglut-image-swatch:not(.out-of-stock)', function(e) {
+            e.preventDefault();
+            handleSwatchClick($(this), 'shopglut-image-swatches-container');
+        });
+
+        // Handle dropdown change events
+        $(document.body).on('change', '.shopglut-swatch-dropdown', function(e) {
+            var $select = $(this);
+            var value = $select.val();
+            var attribute = $select.data('attribute');
+
+            if (!value) {
+                return;
+            }
+
+            // Prevent infinite loop - check if this is not our own dropdown
+            if ($select.hasClass('shopglut-swatch-dropdown')) {
+                // Find the variation form
+                var $form = $select.closest('.variations_form');
+
+                if ($form.length) {
+                    // Update WooCommerce's variation select (excluding our dropdown)
+                    var $wcSelect = $form.find('select[name="' + attribute + '"]').not('.shopglut-swatch-dropdown');
+                    if ($wcSelect.length && $wcSelect.val() !== value) {
+                        $wcSelect.val(value).trigger('change');
+                    }
+                }
+            }
+        });
+
+        // Sync WooCommerce select changes to our custom swatches
+        $(document).on('change', '.variations_form select', function(e) {
+            var $select = $(this);
+            var value = $select.val();
+            var attribute = $select.attr('name');
+
+            // Skip if this is our own dropdown (prevent infinite loop)
+            if ($select.hasClass('shopglut-swatch-dropdown')) {
+                return;
+            }
+
+            // Update button swatches
+            $('.shopglut-swatch-button[data-attribute="' + attribute + '"]').removeClass('selected');
+            if (value) {
+                $('.shopglut-swatch-button[data-attribute="' + attribute + '"][data-value="' + value + '"]').addClass('selected');
+            }
+
+            // Update color swatches
+            $('.shopglut-color-swatch[data-attribute="' + attribute + '"]').removeClass('selected');
+            if (value) {
+                $('.shopglut-color-swatch[data-attribute="' + attribute + '"][data-value="' + value + '"]').addClass('selected');
+            }
+
+            // Update image swatches
+            $('.shopglut-image-swatch[data-attribute="' + attribute + '"]').removeClass('selected');
+            if (value) {
+                $('.shopglut-image-swatch[data-attribute="' + attribute + '"][data-value="' + value + '"]').addClass('selected');
+            }
+
+            // Update dropdowns without triggering change event (prevent infinite loop)
+            var $dropdown = $('.shopglut-swatch-dropdown[data-attribute="' + attribute + '"]');
+            if ($dropdown.length && $dropdown.val() !== value) {
+                // Use prop to set value without triggering change event
+                $dropdown.prop('value', value);
+            }
+        });
+
+        // Update swatches availability based on selected variations
+        $(document).on('woocommerce_variation_has_changed', '.variations_form', function() {
+            var $form = $(this);
+
+            // Get current form data
+            var currentAttributes = {};
+            $form.find('.variations select').each(function() {
+                var name = $(this).attr('name');
+                var value = $(this).val() || '';
+                currentAttributes[name] = value;
+            });
+
+            // Helper function to check if a variation combination is valid
+            function isVariationAvailable(attributes) {
+                var variations = $form.data('product_variations');
+                if (!variations) {
+                    return true; // Can't determine, assume available
+                }
+
+                for (var i = 0; i < variations.length; i++) {
+                    var variation = variations[i];
+                    var isMatch = true;
+                    var hasAllAttributes = true;
+
+                    for (var attr in attributes) {
+                        if (attributes[attr] === '') {
+                            continue;
+                        }
+                        if (!variation.attributes[attr]) {
+                            hasAllAttributes = false;
+                            break;
+                        }
+                        if (variation.attributes[attr] !== attributes[attr]) {
+                            isMatch = false;
+                            break;
+                        }
+                    }
+
+                    if (isMatch && hasAllAttributes && variation.is_in_stock && variation.is_purchasable) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            // Update button availability
+            $form.find('.shopglut-swatch-button').each(function() {
+                var $swatch = $(this);
+                var value = $swatch.data('value');
+                var attribute = $swatch.data('attribute');
+
+                if ($swatch.hasClass('disabled')) {
+                    return; // Already disabled by server
+                }
+
+                var testAttributes = $.extend({}, currentAttributes);
+                testAttributes[attribute] = value;
+
+                if (isVariationAvailable(testAttributes)) {
+                    $swatch.removeClass('unavailable');
+                } else {
+                    $swatch.addClass('unavailable');
+                }
+            });
+
+            // Update color swatch availability
+            $form.find('.shopglut-color-swatch').each(function() {
+                var $swatch = $(this);
+                var value = $swatch.data('value');
+                var attribute = $swatch.data('attribute');
+
+                if ($swatch.hasClass('out-of-stock')) {
+                    return; // Already disabled by server
+                }
+
+                var testAttributes = $.extend({}, currentAttributes);
+                testAttributes[attribute] = value;
+
+                if (isVariationAvailable(testAttributes)) {
+                    $swatch.removeClass('unavailable').css('opacity', '');
+                } else {
+                    $swatch.addClass('unavailable').css('opacity', '0.3');
+                }
+            });
+
+            // Update image swatch availability
+            $form.find('.shopglut-image-swatch').each(function() {
+                var $swatch = $(this);
+                var value = $swatch.data('value');
+                var attribute = $swatch.data('attribute');
+
+                if ($swatch.hasClass('out-of-stock')) {
+                    return; // Already disabled by server
+                }
+
+                var testAttributes = $.extend({}, currentAttributes);
+                testAttributes[attribute] = value;
+
+                if (isVariationAvailable(testAttributes)) {
+                    $swatch.removeClass('unavailable').css('opacity', '');
+                } else {
+                    $swatch.addClass('unavailable').css('opacity', '0.3');
+                }
+            });
+        });
+
+        // Tooltip functionality for swatches
+        function showTooltip($element, text, position) {
+            var $tooltip = $('<div class="shopglut-swatch-tooltip">' + text + '</div>');
+            $element.append($tooltip);
+
+            setTimeout(function() {
+                var offset = $element.offset();
+                var width = $element.outerWidth();
+                var height = $element.outerHeight();
+                var tooltipWidth = $tooltip.outerWidth();
+                var tooltipHeight = $tooltip.outerHeight();
+
+                var css = {};
+                switch (position) {
+                    case 'top':
+                        css = {
+                            'bottom': (height + 8) + 'px',
+                            'left': (width / 2 - tooltipWidth / 2) + 'px'
+                        };
+                        break;
+                    case 'bottom':
+                        css = {
+                            'top': (height + 8) + 'px',
+                            'left': (width / 2 - tooltipWidth / 2) + 'px'
+                        };
+                        break;
+                    case 'left':
+                        css = {
+                            'right': (width + 8) + 'px',
+                            'top': (height / 2 - tooltipHeight / 2) + 'px'
+                        };
+                        break;
+                    case 'right':
+                        css = {
+                            'left': (width + 8) + 'px',
+                            'top': (height / 2 - tooltipHeight / 2) + 'px'
+                        };
+                        break;
+                }
+
+                $tooltip.css(css);
+            }, 10);
+        }
+
+        $(document).on('mouseenter', '[data-tooltip]', function() {
+            var $element = $(this);
+            var tooltipText = $element.data('tooltip');
+            var tooltipPosition = $element.data('tooltip-position') || 'top';
+
+            // Remove any existing tooltip
+            $element.find('.shopglut-swatch-tooltip').remove();
+
+            showTooltip($element, tooltipText, tooltipPosition);
+        });
+
+        $(document).on('mouseleave', '[data-tooltip]', function() {
+            $(this).find('.shopglut-swatch-tooltip').remove();
+        });
+
+        // Initialize swatches on page load
+        if ($('.variations_form').length) {
+            // Trigger initial availability check
+            setTimeout(function() {
+                $('.variations_form').trigger('woocommerce_variation_has_changed');
+            }, 100);
+        }
+
+        // Price display update functionality
+        function updateVariationPriceDisplay() {
+            // Don't update price during reset
+            if (isResetting) {
+                return;
+            }
+
+            var $form = $('.variations_form');
+
+            if (!$form.length) {
+                return;
+            }
+
+            // Get current variation data
+            var currentAttributes = {};
+            $form.find('.variations select').each(function() {
+                var name = $(this).attr('name');
+                var value = $(this).val() || '';
+                currentAttributes[name] = value;
+            });
+
+            // Find matching variation
+            var variations = $form.data('product_variations');
+            if (!variations) {
+                return;
+            }
+
+            var matchingVariation = null;
+            for (var i = 0; i < variations.length; i++) {
+                var variation = variations[i];
+                var isMatch = true;
+                var hasAllAttributes = true;
+
+                for (var attr in currentAttributes) {
+                    if (currentAttributes[attr] === '') {
+                        hasAllAttributes = false;
+                        break;
+                    }
+                    if (!variation.attributes[attr] || variation.attributes[attr] !== currentAttributes[attr]) {
+                        isMatch = false;
+                        break;
+                    }
+                }
+
+                if (isMatch && hasAllAttributes) {
+                    matchingVariation = variation;
+                    break;
+                }
+            }
+
+            // Update price display for each price element
+            $('.shopglut-variation-price').each(function() {
+                var $priceEl = $(this);
+                var attributeName = $priceEl.data('attribute');
+                var isGlobalPrice = $priceEl.hasClass('shopglut-global-price');
+
+                if (matchingVariation && matchingVariation.display_price) {
+                    var priceHtml = matchingVariation.price_html || '';
+                    if (!priceHtml && matchingVariation.price_html) {
+                        priceHtml = matchingVariation.price_html;
+                    }
+
+                    // If no HTML, format the price ourselves
+                    if (!priceHtml && matchingVariation.display_price) {
+                        // Use WooCommerce's formatting if available
+                        if (typeof accounting !== 'undefined') {
+                            priceHtml = '<span class="amount">' + accounting.formatMoney(matchingVariation.display_price, {
+                                symbol: woocommerce_params && woocommerce_params.currency_format_symbol ? woocommerce_params.currency_format_symbol : '$',
+                                format: '%s%v',
+                                precision: woocommerce_params && woocommerce_params.currency_format_num_decimals ? woocommerce_params.currency_format_num_decimals : 2
+                            }) + '</span>';
+                        } else {
+                            // Fallback simple formatting
+                            priceHtml = '$' + matchingVariation.display_price.toFixed(2);
+                        }
+                    }
+
+                    // For global price, always show when there's a matching variation
+                    // For per-attribute prices, show when that attribute has a value
+                    if (isGlobalPrice) {
+                        $priceEl.html(priceHtml).show();
+                    } else {
+                        // Check if this attribute has a value selected
+                        var attrName = 'attribute_' + attributeName;
+                        var hasValue = currentAttributes[attrName] && currentAttributes[attrName] !== '';
+                        if (hasValue) {
+                            $priceEl.html(priceHtml).show();
+                        } else {
+                            $priceEl.html('');
+                        }
+                    }
+                } else {
+                    // No matching variation - clear price
+                    if (isGlobalPrice) {
+                        // Only clear if all attributes are selected
+                        var allSelected = true;
+                        for (var attr in currentAttributes) {
+                            if (!currentAttributes[attr] || currentAttributes[attr] === '') {
+                                allSelected = false;
+                                break;
+                            }
+                        }
+                        if (allSelected) {
+                            $priceEl.html('');
+                        }
+                    } else {
+                        // Check if this attribute has a value selected
+                        var attrName = 'attribute_' + attributeName;
+                        var hasValue = currentAttributes[attrName] && currentAttributes[attrName] !== '';
+                        if (!hasValue) {
+                            $priceEl.html('');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update price when variation changes
+        $(document).on('woocommerce_variation_has_changed', '.variations_form', function() {
+            updateVariationPriceDisplay();
+        });
+
+        // Update price when swatch is clicked
+        $(document).on('click', '.shopglut-swatch-button, .shopglut-color-swatch, .shopglut-image-swatch', function() {
+            setTimeout(function() {
+                updateVariationPriceDisplay();
+            }, 50);
+        });
+
+        // Update price when dropdown changes
+        $(document).on('change', '.shopglut-swatch-dropdown', function() {
+            setTimeout(function() {
+                updateVariationPriceDisplay();
+            }, 50);
+        });
+
+        // Clear button functionality
+        $(document).on('click', '.shopglut-reset-variations', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var $button = $(this);
+
+            // Set resetting flag to prevent price updates
+            isResetting = true;
+
+            // Find the variation form - try multiple methods
+            var $form = $button.closest('.variations_form');
+
+            // If not found directly, try finding through actions container
+            if (!$form.length) {
+                var $actionsContainer = $button.closest('.shopglut-swatches-actions');
+                if ($actionsContainer.length) {
+                    // Form is likely before the actions container
+                    $form = $actionsContainer.prevAll('.variations_form').first();
+                    if (!$form.length) {
+                        $form = $actionsContainer.siblings('.variations_form').first();
+                    }
+                    if (!$form.length) {
+                        $form = $actionsContainer.parent().find('.variations_form').first();
+                    }
+                }
+            }
+
+            // Last resort - find first variations form on page
+            if (!$form.length) {
+                $form = $('.variations_form').first();
+            }
+
+            if ($form.length) {
+                // Reset all WooCommerce variation selects WITHOUT triggering change
+                $form.find('.variations select').val('').each(function() {
+                    // Use prop to avoid triggering change event
+                    $(this).prop('selectedIndex', 0);
+                });
+
+                // Reset all swatch selections
+                $form.find('.shopglut-swatch-button, .shopglut-color-swatch, .shopglut-image-swatch').removeClass('selected');
+
+                // Reset all dropdowns
+                $form.find('.shopglut-swatch-dropdown').prop('selectedIndex', 0);
+
+                // Clear price displays immediately
+                $('.shopglut-variation-price').html('');
+
+                // Also hide WooCommerce's default variation price if visible
+                $form.find('.woocommerce-variation-price').hide();
+
+                // Trigger WooCommerce reset event
+                $form.trigger('reset_data');
+
+                // Clear resetting flag after a delay to allow all events to complete
+                setTimeout(function() {
+                    isResetting = false;
+                    // Double-check price is cleared
+                    $('.shopglut-variation-price').html('');
+                }, 100);
+            } else {
+                // Form not found, reset flag immediately
+                isResetting = false;
+            }
+
+            return false;
+        });
+
+        // Log initialization
+        if (window.console) {
+            console.log('ShopGlut Product Swatches initialized');
+        }
+    });
+
+    // Add tooltip styles dynamically
+    $('<style>')
+        .prop('type', 'text/css')
+        .html('.shopglut-swatch-tooltip {' +
+            'position: absolute;' +
+            'background: #1f2937;' +
+            'color: #ffffff;' +
+            'padding: 6px 12px;' +
+            'border-radius: 4px;' +
+            'font-size: 12px;' +
+            'white-space: nowrap;' +
+            'z-index: 1000;' +
+            'pointer-events: none;' +
+            'box-shadow: 0 2px 8px rgba(0,0,0,0.15);' +
+            '}' +
+            '.shopglut-swatch-tooltip::after {' +
+            'content: "";' +
+            'position: absolute;' +
+            'border: 6px solid transparent;' +
+            '}' +
+            '[data-tooltip-position="top"] .shopglut-swatch-tooltip::after {' +
+            'bottom: 100%;' +
+            'left: 50%;' +
+            'transform: translateX(-50%);' +
+            'border-top-color: #1f2937;' +
+            '}' +
+            '[data-tooltip-position="bottom"] .shopglut-swatch-tooltip::after {' +
+            'top: 100%;' +
+            'left: 50%;' +
+            'transform: translateX(-50%);' +
+            'border-bottom-color: #1f2937;' +
+            '}')
+        .appendTo('head');
+
+})(jQuery);

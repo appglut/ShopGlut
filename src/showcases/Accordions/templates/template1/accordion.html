@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Accordion with Icons</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        .template1-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .template1-title {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: 0;
+        }
+
+        .template1-accordion-container {
+            padding: 20px;
+        }
+
+        .template1-accordion-item {
+            margin-bottom: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .template1-accordion-header {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 16px;
+            color: #333;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .template1-accordion-header:hover {
+            background: #f5f5f5;
+        }
+
+        .template1-accordion-header.active {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .template1-accordion-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .template1-accordion-title i {
+            font-size: 18px;
+            color: #667eea;
+        }
+
+        .template1-accordion-icon {
+            transition: transform 0.3s ease;
+            color: #667eea;
+        }
+
+        .template1-accordion-header.active .template1-accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .template1-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .template1-accordion-content.active {
+            max-height: 500px;
+            padding: 0 20px 20px 52px;
+        }
+
+        .template1-accordion-text {
+            color: #666;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .template1-container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+
+            .template1-title {
+                padding: 20px;
+                font-size: 24px;
+            }
+
+            .template1-accordion-header {
+                padding: 15px;
+                font-size: 14px;
+            }
+
+            .template1-accordion-content.active {
+                padding: 0 15px 15px 47px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="template1-container">
+        <h1 class="template1-title">Product Accordion</h1>
+
+        <div class="template1-accordion-container">
+            <!-- Accordion Item 1 -->
+            <div class="template1-accordion-item">
+                <button class="template1-accordion-header active" onclick="toggleAccordion(this)">
+                    <span class="template1-accordion-title">
+                        <i class="fas fa-laptop"></i>
+                        <span>Laptop Pro</span>
+                    </span>
+                    <i class="fas fa-chevron-down template1-accordion-icon"></i>
+                </button>
+                <div class="template1-accordion-content active">
+                    <div class="template1-accordion-text">
+                        Experience the ultimate computing power with our Premium Laptop Pro. Featuring the latest Intel processor, 16GB RAM, and a stunning 4K display, this laptop is designed for professionals who demand excellence. Perfect for graphic design, video editing, and intensive multitasking.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordion Item 2 -->
+            <div class="template1-accordion-item">
+                <button class="template1-accordion-header" onclick="toggleAccordion(this)">
+                    <span class="template1-accordion-title">
+                        <i class="fas fa-headphones"></i>
+                        <span>Audio Pro</span>
+                    </span>
+                    <i class="fas fa-chevron-down template1-accordion-icon"></i>
+                </button>
+                <div class="template1-accordion-content">
+                    <div class="template1-accordion-text">
+                        Immerse yourself in crystal-clear audio with our Wireless Headphones Max. Active noise cancellation, 30-hour battery life, and premium comfort make these the perfect companion for music lovers, travelers, and professionals who need focus in noisy environments.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordion Item 3 -->
+            <div class="template1-accordion-item">
+                <button class="template1-accordion-header" onclick="toggleAccordion(this)">
+                    <span class="template1-accordion-title">
+                        <i class="fas fa-clock"></i>
+                        <span>Smart Watch</span>
+                    </span>
+                    <i class="fas fa-chevron-down template1-accordion-icon"></i>
+                </button>
+                <div class="template1-accordion-content">
+                    <div class="template1-accordion-text">
+                        Stay connected and track your fitness goals with the Smart Watch Ultra. Features include heart rate monitoring, GPS tracking, water resistance, and a vibrant AMOLED display. Compatible with both iOS and Android devices.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordion Item 4 -->
+            <div class="template1-accordion-item">
+                <button class="template1-accordion-header" onclick="toggleAccordion(this)">
+                    <span class="template1-accordion-title">
+                        <i class="fas fa-battery-full"></i>
+                        <span>Power Bank</span>
+                    </span>
+                    <i class="fas fa-chevron-down template1-accordion-icon"></i>
+                </button>
+                <div class="template1-accordion-content">
+                    <div class="template1-accordion-text">
+                        Never run out of battery with our high-capacity Portable Power Bank. 20,000mAh capacity can charge your smartphone up to 5 times. Fast charging technology and multiple ports make it essential for travelers and busy professionals.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Accordion functionality is handled by inline onclick, but we can add keyboard support here
+            const headers = document.querySelectorAll('.template1-accordion-header');
+
+            headers.forEach(header => {
+                header.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleAccordion(this);
+                    }
+                });
+            });
+        });
+
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const isActive = header.classList.contains('active');
+
+            // Close all accordion items
+            const allHeaders = document.querySelectorAll('.template1-accordion-header');
+            const allContents = document.querySelectorAll('.template1-accordion-content');
+
+            allHeaders.forEach(h => h.classList.remove('active'));
+            allContents.forEach(c => c.classList.remove('active'));
+
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                header.classList.add('active');
+                content.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

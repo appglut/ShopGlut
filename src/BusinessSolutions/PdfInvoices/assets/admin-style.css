@@ -1,0 +1,205 @@
+.shopglut-pdf-invoices-meta {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+.shopglut-pdf-invoices-meta h4 {
+    margin-top: 0;
+    color: #23282d;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.shopglut-pdf-invoices-meta .form-field {
+    margin: 10px 0;
+}
+
+.shopglut-pdf-invoices-meta .form-field label {
+    display: inline-block;
+    width: 150px;
+    font-weight: 600;
+    color: #555;
+}
+
+.shopglut-pdf-invoices-meta .form-field input {
+    width: 200px;
+}
+
+.shopglut-pdf-actions {
+    margin-top: 10px;
+}
+
+.shopglut-pdf-actions .button {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.invoice-printed-mark {
+    color: #46b450;
+    font-weight: bold;
+}
+
+.shopglut-invoice-column {
+    width: 120px;
+}
+
+.shopglut-invoice-date-column {
+    width: 100px;
+}
+
+/* Order list columns */
+.column-invoice_number,
+.column-invoice_date {
+    width: 120px;
+}
+
+/* Bulk actions styling */
+.bulkactions select option[value^="download_"] {
+    font-weight: bold;
+}
+
+/* Settings page enhancements */
+.shopglut_pdf_invoices_settings .csf-field {
+    margin-bottom: 20px;
+}
+
+.shopglut_pdf_invoices_settings .csf-field-title {
+    font-weight: 600;
+    color: #23282d;
+}
+
+.shopglut_pdf_invoices_settings .csf-field-subtitle {
+    color: #666;
+    font-style: italic;
+    font-size: 13px;
+}
+
+/* Template preview */
+.template-preview {
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.template-preview.selected {
+    border-color: #0073aa;
+    box-shadow: 0 2px 8px rgba(0,115,170,0.3);
+}
+
+.template-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 2px;
+}
+
+.template-preview h4 {
+    margin: 10px 0 5px 0;
+    color: #23282d;
+}
+
+/* Color picker enhancements */
+.wp-color-picker-field {
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* Test mode notice */
+.test-mode-notice {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin: 15px 0;
+    color: #856404;
+}
+
+.test-mode-notice .dashicons {
+    color: #f39c12;
+    margin-right: 8px;
+}
+
+/* Debug mode styling */
+.debug-mode-active {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+/* UBL settings */
+.ubl-tax-mapping {
+    background: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.ubl-tax-mapping-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.ubl-tax-mapping-row select {
+    margin: 0 10px;
+    min-width: 150px;
+}
+
+/* Advanced features */
+.danger-zone {
+    background: #f8d7da;
+    border: 2px solid #dc3545;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.danger-zone h3 {
+    color: #721c24;
+    margin-top: 0;
+}
+
+.danger-zone .button {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+
+.danger-zone .button:hover {
+    background: #c82333;
+    border-color: #bd2130;
+}
+
+/* Responsive design */
+@media (max-width: 782px) {
+    .shopglut-pdf-invoices-meta .form-field label {
+        display: block;
+        width: auto;
+        margin-bottom: 5px;
+    }
+    
+    .shopglut-pdf-invoices-meta .form-field input {
+        width: 100%;
+    }
+    
+    .shopglut-pdf-actions .button {
+        display: block;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    
+    .addresses {
+        flex-direction: column;
+    }
+    
+    .addresses > div {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}

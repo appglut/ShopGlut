@@ -1,0 +1,184 @@
+/* My Account PDF Download Buttons */
+.woocommerce-account .woocommerce-orders-table .order-invoice,
+.woocommerce-account .woocommerce-orders-table .packing-slip,
+.woocommerce-account .woocommerce-orders-table .ubl-invoice {
+    text-align: center;
+}
+
+.woocommerce-account .woocommerce-orders-table .button {
+    padding: 6px 12px;
+    font-size: 12px;
+    line-height: 1.4;
+    border-radius: 3px;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.woocommerce-account .invoice-download-button {
+    background: #2271b1;
+    color: #fff;
+    border: 1px solid #2271b1;
+}
+
+.woocommerce-account .invoice-download-button:hover {
+    background: #135e96;
+    border-color: #135e96;
+    color: #fff;
+}
+
+.woocommerce-account .packing-slip-download-button {
+    background: #72aee6;
+    color: #fff;
+    border: 1px solid #72aee6;
+}
+
+.woocommerce-account .packing-slip-download-button:hover {
+    background: #4f94d4;
+    border-color: #4f94d4;
+    color: #fff;
+}
+
+.woocommerce-account .ubl-download-button {
+    background: #50575e;
+    color: #fff;
+    border: 1px solid #50575e;
+}
+
+.woocommerce-account .ubl-download-button:hover {
+    background: #3c434a;
+    border-color: #3c434a;
+    color: #fff;
+}
+
+/* Order details page buttons */
+.woocommerce-order .order-info .order-downloads {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+.woocommerce-order .order-downloads h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.woocommerce-order .order-downloads .download-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.woocommerce-order .order-downloads .button {
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+}
+
+/* Loading states */
+.pdf-generating {
+    opacity: 0.6;
+    pointer-events: none;
+    position: relative;
+}
+
+.pdf-generating::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #ccc;
+    border-top-color: #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .woocommerce-account .woocommerce-orders-table .order-invoice,
+    .woocommerce-account .woocommerce-orders-table .packing-slip,
+    .woocommerce-account .woocommerce-orders-table .ubl-invoice {
+        text-align: left;
+    }
+    
+    .woocommerce-order .order-downloads .download-links {
+        flex-direction: column;
+    }
+    
+    .woocommerce-order .order-downloads .button {
+        flex: none;
+        width: 100%;
+    }
+}
+
+/* Print styles */
+@media print {
+    .order-downloads {
+        display: none;
+    }
+}
+
+/* Error states */
+.pdf-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* Success states */
+.pdf-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* Accessibility improvements */
+.button:focus {
+    outline: 2px solid #005fcc;
+    outline-offset: 2px;
+}
+
+.screen-reader-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .woocommerce-account .invoice-download-button,
+    .woocommerce-account .packing-slip-download-button,
+    .woocommerce-account .ubl-download-button {
+        border-width: 2px;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .woocommerce-order .order-downloads {
+        background: #2d3748;
+        color: #e2e8f0;
+    }
+    
+    .woocommerce-order .order-downloads h3 {
+        color: #e2e8f0;
+    }
+}

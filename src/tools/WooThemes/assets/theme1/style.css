@@ -1,0 +1,269 @@
+/* Modern Store Theme - Header and Footer Styles */
+
+/* Header Customizations */
+.site-header,
+header.site-header,
+#masthead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    box-shadow: 0 2px 20px rgba(102, 126, 234, 0.3);
+    border-bottom: none !important;
+    position: relative;
+    z-index: 999;
+}
+
+.site-header::before,
+header.site-header::before,
+#masthead::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+    z-index: -1;
+}
+
+/* Site Logo and Title */
+.site-branding .site-title a,
+.site-title a,
+.logo a {
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 24px;
+    text-decoration: none;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.site-description,
+.site-tagline {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Navigation Menu */
+.main-navigation ul li a,
+.primary-menu a,
+.nav-menu a,
+#primary-menu a {
+    color: #ffffff !important;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 15px 20px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    border-radius: 6px;
+    margin: 0 2px;
+}
+
+.main-navigation ul li a:hover,
+.primary-menu a:hover,
+.nav-menu a:hover,
+#primary-menu a:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* WooCommerce Header Elements */
+.woocommerce-mini-cart,
+.cart-contents,
+.header-cart {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
+    border-radius: 25px;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.woocommerce-mini-cart:hover,
+.cart-contents:hover,
+.header-cart:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* My Account Link */
+.my-account-link,
+.header-account {
+    color: #ffffff !important;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Footer Customizations */
+.site-footer,
+footer.site-footer,
+#colophon,
+.footer {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
+    color: #ecf0f1 !important;
+    padding: 60px 0 20px;
+    border-top: 4px solid #667eea;
+    position: relative;
+}
+
+.site-footer::before,
+footer.site-footer::before,
+#colophon::before,
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+/* Footer Widgets */
+.footer-widgets,
+.widget-area {
+    margin-bottom: 40px;
+}
+
+.footer-widgets .widget-title,
+.widget-area .widget-title,
+.site-footer h1,
+.site-footer h2,
+.site-footer h3,
+.site-footer h4 {
+    color: #ffffff !important;
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 18px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-widgets .widget-title::after,
+.widget-area .widget-title::after,
+.site-footer h1::after,
+.site-footer h2::after,
+.site-footer h3::after,
+.site-footer h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: #667eea;
+}
+
+/* Footer Links */
+.site-footer a,
+.footer a {
+    color: #bdc3c7 !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.site-footer a:hover,
+.footer a:hover {
+    color: #667eea !important;
+    text-decoration: underline;
+}
+
+/* Footer Text */
+.site-footer p,
+.footer p,
+.site-info {
+    color: #95a5a6 !important;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Copyright Area */
+.site-info,
+.copyright,
+.footer-bottom {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px 0;
+    margin-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+/* Social Media Icons */
+.social-links a,
+.footer-social a {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff !important;
+    padding: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    line-height: 21px;
+}
+
+.social-links a:hover,
+.footer-social a:hover {
+    background: #667eea;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .site-header,
+    header.site-header,
+    #masthead {
+        padding: 15px 0;
+    }
+    
+    .site-branding .site-title a,
+    .site-title a {
+        font-size: 20px;
+    }
+    
+    .main-navigation ul li a {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    
+    .site-footer,
+    footer.site-footer,
+    #colophon {
+        padding: 40px 0 20px;
+    }
+}
+
+/* Animation Effects */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.site-header,
+header.site-header,
+#masthead {
+    animation: slideDown 0.6s ease-out;
+}
+
+/* Custom Theme Additions */
+.woocommerce-store-notice {
+    background: #667eea !important;
+    color: #ffffff !important;
+}
+
+.woocommerce-breadcrumb {
+    background: rgba(102, 126, 234, 0.1);
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}

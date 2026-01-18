@@ -1,0 +1,153 @@
+/**
+ * ShopGlut Notification System - Centralized Styles
+ * Handles all notification display styles for both admin and frontend
+ * Version: 1.0.0
+ */
+
+/* ============================================
+   Base Notification Styles
+   ============================================ */
+
+.shopglut-notification,
+.shopglut-frontend-notification {
+	position: fixed;
+	min-width: 280px;
+	max-width: 400px;
+	padding: 16px 20px;
+	background: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	font-size: 14px;
+	line-height: 1.5;
+	z-index: 999999;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(20px);
+	transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+
+/* Admin position (bottom-right) - default */
+.shopglut-notification {
+	bottom: 20px;
+	right: 20px;
+}
+
+/* Frontend position (top-right) */
+.shopglut-frontend-notification {
+	top: 30px;
+	right: 30px;
+}
+
+/* Show state */
+.shopglut-notification.show,
+.shopglut-frontend-notification.show {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+
+/* ============================================
+   Notification Types
+   ============================================ */
+
+/* Success */
+.shopglut-notification.success,
+.shopglut-frontend-notification.success,
+.shopglut-notification-success,
+.shopglut-frontend-notification-success {
+	background: #4CAF50;
+	color: #ffffff;
+	border-left: 4px solid #388E3C;
+}
+
+/* Error */
+.shopglut-notification.error,
+.shopglut-frontend-notification.error,
+.shopglut-notification-error,
+.shopglut-frontend-notification-error {
+	background: #ef4444;
+	color: #ffffff;
+	border-left: 4px solid #dc2626;
+}
+
+/* Info */
+.shopglut-notification.info,
+.shopglut-frontend-notification.info,
+.shopglut-notification-info,
+.shopglut-frontend-notification-info {
+	background: #3b82f6;
+	color: #ffffff;
+	border-left: 4px solid #2563eb;
+}
+
+/* Warning */
+.shopglut-notification.warning,
+.shopglut-frontend-notification.warning,
+.shopglut-notification-warning,
+.shopglut-frontend-notification-warning {
+	background: #f59e0b;
+	color: #ffffff;
+	border-left: 4px solid #d97706;
+}
+
+/* ============================================
+   Close Button
+   ============================================ */
+
+.shopglut-notification .close-notification,
+.shopglut-frontend-notification .close-notification {
+	position: absolute;
+	top: 8px;
+	right: 10px;
+	width: 24px;
+	height: 24px;
+	padding: 0;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	font-size: 20px;
+	line-height: 1;
+	color: inherit;
+	opacity: 0.6;
+	transition: opacity 0.2s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.shopglut-notification .close-notification:hover,
+.shopglut-frontend-notification .close-notification:hover {
+	opacity: 1;
+}
+
+/* ============================================
+   Responsive Styles
+   ============================================ */
+
+@media (max-width: 768px) {
+	.shopglut-notification,
+	.shopglut-frontend-notification {
+		left: 10px;
+		right: 10px;
+		min-width: auto;
+		max-width: none;
+		bottom: 10px;
+		top: auto;
+	}
+
+	.shopglut-frontend-notification {
+		top: 10px;
+		bottom: auto;
+	}
+}
+
+/* ============================================
+   Email Customizer Specific Override
+   ============================================ */
+
+.shopglut-notification.error {
+	background: #ef4444;
+	color: #ffffff;
+}

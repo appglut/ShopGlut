@@ -1,0 +1,190 @@
+/* Woo Themes Admin Styles */
+
+.themes-grid {
+    margin-top: 30px;
+    gap: 20px !important;
+}
+
+.theme-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.theme-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15) !important;
+}
+
+.theme-screenshot {
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+}
+
+.theme-screenshot img {
+    transition: transform 0.3s ease;
+}
+
+.theme-card:hover .theme-screenshot img {
+    transform: scale(1.05);
+}
+
+.active-badge {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 163, 42, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 163, 42, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 163, 42, 0);
+    }
+}
+
+.theme-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.theme-actions .button {
+    flex: 1;
+    text-align: center;
+    min-width: 100px;
+}
+
+.activate-theme:disabled {
+    background: #00a32a !important;
+    color: white !important;
+    cursor: not-allowed;
+}
+
+/* Theme Customizer Styles */
+.theme-customizer {
+    gap: 30px !important;
+}
+
+.customizer-controls {
+    background: #ffffff;
+    padding: 25px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    height: fit-content;
+}
+
+.control-group {
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    border-left: 3px solid #0073aa;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.control-group input[type="color"] {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.control-group input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.2);
+}
+
+.theme-preview {
+    background: #ffffff;
+    padding: 25px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.preview-frame {
+    border-radius: 8px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect width="10" height="10" fill="%23f0f0f0"/><rect x="10" y="10" width="10" height="10" fill="%23f0f0f0"/></svg>');
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .theme-customizer {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .themes-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    .theme-actions {
+        flex-direction: column;
+    }
+    
+    .theme-actions .button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    .customizer-controls,
+    .theme-preview {
+        padding: 15px;
+    }
+}
+
+/* Loading States */
+.activate-theme.loading {
+    position: relative;
+    color: transparent !important;
+}
+
+.activate-theme.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Success Messages */
+.theme-success-message {
+    background: #d4edda;
+    color: #155724;
+    padding: 10px 15px;
+    border-radius: 4px;
+    border: 1px solid #c3e6cb;
+    margin: 15px 0;
+}
+
+.theme-error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 10px 15px;
+    border-radius: 4px;
+    border: 1px solid #f5c6cb;
+    margin: 15px 0;
+}

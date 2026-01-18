@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WooCommerce Product Variations - 30 Design Styles</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            font-size: 42px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .designs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            color: white;
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .design-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: none            transition: transform 0.3s ease;
+        }
+        
+        .design-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .design-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .premium-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+        
+        .free-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+        
+        /* Design 1: Classic Dropdown */
+        .shopglut-product-swatches-template1.variation-1 select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-top: 8px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        
+        .shopglut-product-swatches-template1.variation-1 select:hover {
+            border-color: #667eea;
+        }
+        
+        /* Design 2: Button Grid */
+        .shopglut-product-swatches-template2.variation-2 .options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template2.variation-2 .option-btn {
+            padding: 12px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .shopglut-product-swatches-template2.variation-2 .option-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+        
+        .shopglut-product-swatches-template2.variation-2 .option-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        /* Design 3: Color Swatches */
+        .shopglut-product-swatches-template3.variation-3 .color-swatches {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .shopglut-product-swatches-template3.variation-3 .swatch {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .shopglut-product-swatches-template3.variation-3 .swatch:hover {
+            transform: scale(1.1);
+        }
+        
+        .shopglut-product-swatches-template3.variation-3 .swatch.active {
+            border-color: #333;
+            box-shadow: 0 0 0 2px white, 0 0 0 4px #333;
+        }
+        
+        /* Design 4: Radio Cards */
+        .shopglut-product-swatches-template4.variation-4 .radio-cards {
+            display: grid;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template4.variation-4 .radio-card {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .shopglut-product-swatches-template4.variation-4 .radio-card:hover {
+            background: #f8f9ff;
+            border-color: #667eea;
+        }
+        
+        .shopglut-product-swatches-template4.variation-4 .radio-card.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        /* Design 5: Image Thumbnails */
+        .shopglut-product-swatches-template5.variation-5 .thumbnails {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template5.variation-5 .thumbnail {
+            aspect-ratio: 1;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .shopglut-product-swatches-template5.variation-5 .thumbnail:hover {
+            transform: scale(1.05);
+        }
+        
+        .shopglut-product-swatches-template5.variation-5 .thumbnail.active {
+            border-color: #333;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        /* Design 6: Pill Buttons */
+        .shopglut-product-swatches-template6.variation-6 .pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template6.variation-6 .pill {
+            padding: 10px 20px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+            font-weight: 500;
+        }
+        
+        .shopglut-product-swatches-template6.variation-6 .pill:hover {
+            background: #f8f9ff;
+            border-color: #667eea;
+        }
+        
+        .shopglut-product-swatches-template6.variation-6 .pill.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        /* Design 7: Box Selection with Images */
+        .shopglut-product-swatches-template7.variation-7 .box-selection {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template7.variation-7 .box-item {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .shopglut-product-swatches-template7.variation-7 .box-item:hover {
+            border-color: #667eea;
+            transform: scale(1.02);
+        }
+        
+        .shopglut-product-swatches-template7.variation-7 .box-item.selected {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .shopglut-product-swatches-template7.variation-7 .box-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .shopglut-product-swatches-template7.variation-7 .box-label {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        /* Design 8: Toggle Switch */
+        .shopglut-product-swatches-template8.variation-8 .toggles {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template8.variation-8 .toggle-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .shopglut-product-swatches-template8.variation-8 .toggle {
+            width: 60px;
+            height: 30px;
+            background: #ddd;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .shopglut-product-swatches-template8.variation-8 .toggle.active {
+            background: #667eea;
+        }
+        
+        .shopglut-product-swatches-template8.variation-8 .toggle::after {
+            content: '';
+            width: 26px;
+            height: 26px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: left 0.3s;
+        }
+        
+        .shopglut-product-swatches-template8.variation-8 .toggle.active::after {
+            left: 32px;
+        }
+        
+        /* Design 9: Premium - Checkbox Grid */
+        .shopglut-product-swatches-template9.variation-9 .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template9.variation-9 .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .shopglut-product-swatches-template9.variation-9 .checkbox-item:hover {
+            background: #f8f9ff;
+            border-color: #667eea;
+        }
+        
+        .shopglut-product-swatches-template9.variation-9 .checkbox-item.checked {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .shopglut-product-swatches-template9.variation-9 .checkbox-box {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .shopglut-product-swatches-template9.variation-9 .checkbox-item.checked .checkbox-box {
+            background: white;
+            border-color: white;
+        }
+        
+        .shopglut-product-swatches-template9.variation-9 .checkbox-item.checked .checkbox-box::after {
+            content: '✓';
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        /* Design 10: Premium - Star Rating */
+        .shopglut-product-swatches-template10.variation-10 .rating-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template10.variation-10 .rating-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .shopglut-product-swatches-template10.variation-10 .rating-item:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+        
+        .shopglut-product-swatches-template10.variation-10 .rating-item.selected {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .shopglut-product-swatches-template10.variation-10 .stars {
+            display: flex;
+            gap: 4px;
+            color: #ffc107;
+            font-size: 18px;
+        }
+        
+        /* Design 11: Premium - Icon Buttons */
+        .shopglut-product-swatches-template11.variation-11 .icon-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template11.variation-11 .icon-btn {
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .shopglut-product-swatches-template11.variation-11 .icon-btn:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .shopglut-product-swatches-template11.variation-11 .icon-btn.active {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+        
+        .shopglut-product-swatches-template11.variation-11 .icon {
+            font-size: 28px;
+        }
+        
+        /* Design 12: Premium - Bordered List */
+        .shopglut-product-swatches-template12.variation-12 .bordered-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-top: 10px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .shopglut-product-swatches-template12.variation-12 .list-item {
+            padding: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .shopglut-product-swatches-template12.variation-12 .list-item:last-child {
+            border-bottom: none;
+        }
+        
+        .shopglut-product-swatches-template12.variation-12 .list-item:hover {
+            background: #f8f9ff;
+            padding-left: 25px;
+        }
+        
+        .shopglut-product-swatches-template12.variation-12 .list-item.selected {
+            background: #667eea;
+            color: white;
+        }
+        
+        .shopglut-product-swatches-template12.variation-12 .price {
+            font-weight: 600;
+        }
+        
+        /* Design 13: Premium - Badge Selector */
+        .shopglut-product-swatches-template13.variation-13 .badge-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template13.variation-13 .badge {
+            padding: 10px 20px;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            background: white;
+        }
+        
+        .shopglut-product-swatches-template13.variation-13 .badge:hover {
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+        
+        .shopglut-product-swatches-template13.variation-13 .badge.selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+        
+        .shopglut-product-swatches-template13.variation-13 .badge.selected::after {
+            content: '✓';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #28a745;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        /* Design 14: Premium - Tag Style */
+        .shopglut-product-swatches-template14.variation-14 .tag-style {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template14.variation-14 .tag {
+            padding: 8px 16px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            padding-right: 35px;
+        }
+        
+        .shopglut-product-swatches-template14.variation-14 .tag::after {
+            content: '×';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .shopglut-product-swatches-template14.variation-14 .tag:hover {
+            background: #e0e0e0;
+        }
+        
+        .shopglut-product-swatches-template14.variation-14 .tag.selected {
+            background: #667eea;
+            color: white;
+        }
+        
+        .shopglut-product-swatches-template14.variation-14 .tag.selected::after {
+            opacity: 1;
+        }
+        
+        /* Design 15: Premium - Table Selection */
+        .shopglut-product-swatches-template15.variation-15 .table-selection {
+            margin-top: 10px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .shopglut-product-swatches-template15.variation-15 .table-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .shopglut-product-swatches-template15.variation-15 .table-row:last-child {
+            border-bottom: none;
+        }
+        
+        .shopglut-product-swatches-template15.variation-15 .table-header {
+            background: #f8f9ff;
+            font-weight: 600;
+            cursor: default;
+        }
+        
+        .shopglut-product-swatches-template15.variation-15 .table-row:not(.table-header):hover {
+            background: #f8f9ff;
+        }
+        
+        .shopglut-product-swatches-template15.variation-15 .table-row.selected {
+            background: #667eea;
+            color: white;
+        }
+        
+        /* Design 16: Premium - Horizontal Tabs */
+        .shopglut-product-swatches-template16.variation-16 .horizontal-tabs {
+            margin-top: 10px;
+            display: flex;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        .shopglut-product-swatches-template16.variation-16 .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            font-weight: 500;
+        }
+        
+        .shopglut-product-swatches-template16.variation-16 .tab:hover {
+            background: #f8f9ff;
+        }
+        
+        .shopglut-product-swatches-template16.variation-16 .tab.active {
+            border-bottom-color: #667eea;
+            color: #667eea;
+        }
+        
+        .shopglut-product-swatches-template16.variation-16 .tab-content {
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        /* Design 17: Premium - Timeline Style */
+        .shopglut-product-swatches-template17.variation-17 .timeline {
+            margin-top: 20px;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .shopglut-product-swatches-template17.variation-17 .timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: #ddd;
+        }
+        
+        .shopglut-product-swatches-template17.variation-17 .timeline-item {
+            position: relative;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .shopglut-product-swatches-template17.variation-17 .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -23px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background: white;
+            border: 3px solid #ddd;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .shopglut-product-swatches-template17.variation-17 .timeline-item:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .shopglut-product-swatches-template17.variation-17 .timeline-item.selected {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .shopglut-product-swatches-template17.variation-17 .timeline-item.selected::before {
+            background: #667eea;
+            border-color: #667eea;
+        }
+        
+        /* Design 18: Premium - Split Button Group */
+        .shopglut-product-swatches-template18.variation-18 .split-group {
+            margin-top: 10px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+        }
+        
+        .shopglut-product-swatches-template18.variation-18 .split-btn {
+            flex: 1;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            border-right: 1px solid #ddd;
+            background: white;
+        }
+        
+        .shopglut-product-swatches-template18.variation-18 .split-btn:last-child {
+            border-right: none;
+        }
+        
+        .shopglut-product-swatches-template18.variation-18 .split-btn:hover {
+            background: #f8f9ff;
+        }
+        
+        .shopglut-product-swatches-template18.variation-18 .split-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        /* Design 19: Premium - Card with Details */
+        .shopglut-product-swatches-template19.variation-19 .detail-cards {
+            display: grid;
+            gap: 12px;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template19.variation-19 .detail-card {
+            padding: 18px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .shopglut-product-swatches-template19.variation-19 .detail-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .shopglut-product-swatches-template19.variation-19 .detail-card.selected {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .shopglut-product-swatches-template19.variation-19 .card-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .shopglut-product-swatches-template19.variation-19 .card-description {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .shopglut-product-swatches-template19.variation-19 .card-price {
+            margin-top: 10px;
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        /* Design 20: Premium - Chip Selection */
+        .shopglut-product-swatches-template20.variation-20 .chip-selection {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template20.variation-20 .chip {
+            padding: 10px 18px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+        }
+        
+        .shopglut-product-swatches-template20.variation-20 .chip:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .shopglut-product-swatches-template20.variation-20 .chip.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .shopglut-product-swatches-template20.variation-20 .chip-icon {
+            font-size: 16px;
+        }
+        
+        /* Design 21: Premium - Slider with Labels */
+        .shopglut-product-swatches-template21.variation-21 .slider-labels {
+            margin-top: 20px;
+        }
+        
+        .shopglut-product-swatches-template21.variation-21 input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
+        
+        .shopglut-product-swatches-template21.variation-21 input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #667eea;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .shopglut-product-swatches-template21.variation-21 input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #667eea;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .shopglut-product-swatches-template21.variation-21 .slider-labels-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template21.variation-21 .slider-label {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .shopglut-product-swatches-template21.variation-21 .slider-value {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        /* Design 22: Premium - Progress Steps */
+        .shopglut-product-swatches-template22.variation-22 .progress-steps {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .shopglut-product-swatches-template22.variation-22 .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            right: 40px;
+            height: 2px;
+            background: #ddd;
+            z-index: 0;
+        }
+        
+        .shopglut-product-swatches-template22.variation-22 .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            z-index: 1;
+            position: relative;
+        }
+        
+        .shopglut-product-swatches-template22.variation-22 .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .shopglut-product-swatches-template22.variation-22 .step:hover .step-circle {
+            border-color: #667eea;
+        }
+        
+        .shopglut-product-swatches-template22.variation-22 .step.active .step-circle {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .shopglut-product-swatches-template22.variation-22 .step.completed .step-circle {
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+        
+        .shopglut-product-swatches-template22.variation-22 .step-label {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        /* Design 23: Premium - Dropdown with Icons */
+        .shopglut-product-swatches-template23.variation-23 .dropdown-container {
+            position: relative;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template23.variation-23 .dropdown-button {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            transition: all 0.3s;
+        }
+        
+        .shopglut-product-swatches-template23.variation-23 .dropdown-button:hover {
+            border-color: #667eea;
+        }
+        
+        .shopglut-product-swatches-template23.variation-23 .dropdown-selected {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .shopglut-product-swatches-template23.variation-23 .dropdown-icon {
+            font-size: 20px;
+        }
+        
+        /* Design 24: Premium - Vertical Button Group */
+        .shopglut-product-swatches-template24.variation-24 .vertical-group {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .shopglut-product-swatches-template24.variation-24 .vertical-btn {
+            padding: 15px 20px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .shopglut-product-swatches-template24.variation-24 .vertical-btn:last-child {
+            border-bottom: none;
+        }
+        
+        .shopglut-product-swatches-template24.variation-24 .vertical-btn:hover {
+            background: #f8f9ff;
+            padding-left: 30px;
+        }
+        
+        .shopglut-product-swatches-template24.variation-24 .vertical-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .shopglut-product-swatches-template24.variation-24 .btn-arrow {
+            transition: transform 0.3s;
+        }
+        
+        .shopglut-product-swatches-template24.variation-24 .vertical-btn:hover .btn-arrow {
+            transform: translateX(5px);
+        }
+        
+        /* Design 25: Premium - Card Grid with Hover */
+        .shopglut-product-swatches-template25.variation-25 .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template25.variation-25 .grid-card {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shopglut-product-swatches-template25.variation-25 .grid-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #f8f9ff;
+            transition: left 0.3s;
+            z-index: 0;
+        }
+        
+        .shopglut-product-swatches-template25.variation-25 .grid-card:hover::before {
+            left: 0;
+        }
+        
+        .shopglut-product-swatches-template25.variation-25 .grid-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .shopglut-product-swatches-template25.variation-25 .grid-card.selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+        
+        .shopglut-product-swatches-template25.variation-25 .card-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .shopglut-product-swatches-template25.variation-25 .card-emoji {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .shopglut-product-swatches-template25.variation-25 .card-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .shopglut-product-swatches-template25.variation-25 .card-price {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .shopglut-product-swatches-template25.variation-25 .grid-card.selected .card-price {
+            color: white;
+        }
+        
+        /* Design 26: Premium - Comparison Cards */
+        .shopglut-product-swatches-template26.variation-26 .comparison-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template26.variation-26 .comparison-card {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .shopglut-product-swatches-template26.variation-26 .comparison-card:hover {
+            border-color: #667eea;
+            transform: scale(1.03);
+        }
+        
+        .shopglut-product-swatches-template26.variation-26 .comparison-card.selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+        
+        .shopglut-product-swatches-template26.variation-26 .comparison-card.selected .popular-badge {
+            background: white;
+            color: #667eea;
+        }
+        
+        .shopglut-product-swatches-template26.variation-26 .popular-badge {
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .shopglut-product-swatches-template26.variation-26 .card-plan {
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .shopglut-product-swatches-template26.variation-26 .card-features {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        
+        .shopglut-product-swatches-template26.variation-26 .card-features li {
+            padding: 5px 0;
+        }
+        
+        .shopglut-product-swatches-template26.variation-26 .card-features li::before {
+            content: '✓ ';
+            margin-right: 5px;
+        }
+        
+        /* Design 27: Premium - Range Price Selector */
+        .shopglut-product-swatches-template27.variation-27 .range-price {
+            margin-top: 20px;
+        }
+        
+        .shopglut-product-swatches-template27.variation-27 .price-inputs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .shopglut-product-swatches-template27.variation-27 .price-input-group {
+            flex: 1;
+        }
+        
+        .shopglut-product-swatches-template27.variation-27 .price-input-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .shopglut-product-swatches-template27.variation-27 .price-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .shopglut-product-swatches-template27.variation-27 .price-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .shopglut-product-swatches-template27.variation-27 .price-slider {
+            position: relative;
+            height: 6px;
+            background: #ddd;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .shopglut-product-swatches-template27.variation-27 .price-progress {
+            position: absolute;
+            height: 100%;
+            background: #667eea;
+            border-radius: 5px;
+            left: 25%;
+            right: 25%;
+        }
+        
+        /* Design 28: Premium - Multi-Select Boxes */
+        .shopglut-product-swatches-template28.variation-28 .multi-select-boxes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template28.variation-28 .select-box {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .shopglut-product-swatches-template28.variation-28 .select-box:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .shopglut-product-swatches-template28.variation-28 .select-box.selected {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .shopglut-product-swatches-template28.variation-28 .checkbox-square {
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            margin-top: 2px;
+        }
+        
+        .shopglut-product-swatches-template28.variation-28 .select-box.selected .checkbox-square {
+            background: #667eea;
+            border-color: #667eea;
+        }
+        
+        .shopglut-product-swatches-template28.variation-28 .select-box.selected .checkbox-square::after {
+            content: '✓';
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .shopglut-product-swatches-template28.variation-28 .box-content {
+            flex: 1;
+        }
+        
+        .shopglut-product-swatches-template28.variation-28 .box-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .shopglut-product-swatches-template28.variation-28 .box-description {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        /* Design 29: Premium - Quantity Button Matrix */
+        .shopglut-product-swatches-template29.variation-29 .quantity-matrix {
+            margin-top: 10px;
+        }
+        
+        .shopglut-product-swatches-template29.variation-29 .matrix-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .shopglut-product-swatches-template29.variation-29 .matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+        
+        .shopglut-product-swatches-template29.variation-29 .quantity-btn {
+            aspect-ratio: 1;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .shopglut-product-swatches-template29.variation-29 .quantity-btn:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+            transform: scale(1.05);
+        }
+        
+        .shopglut-product-swatches-template29.variation-29 .quantity-btn.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .shopglut-product-swatches-template29.variation-29 .custom-input {
+            grid-column: span 2;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .shopglut-product-swatches-template29.variation-29 .custom-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        /* Design 30: Premium - Pyramid Selection */
+        .shopglut-product-swatches-template30.variation-30 .pyramid-selection {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .shopglut-product-swatches-template30.variation-30 .pyramid-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .shopglut-product-swatches-template30.variation-30 .pyramid-item {
+            padding: 15px 25px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            background: white;
+            position: relative;
+        }
+        
+        .shopglut-product-swatches-template30.variation-30 .pyramid-item:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .shopglut-product-swatches-template30.variation-30 .pyramid-item.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .shopglut-product-swatches-template30.variation-30 .pyramid-item.selected::after {
+            content: '⭐';
+            position: absolute;
+            top: -15px;
+            right: -10px;
+            font-size: 20px;
+        }
+        
+        .shopglut-product-swatches-template30.variation-30 .pyramid-subtitle {
+            font-size: 11px;
+            font-weight: normal;
+            opacity: 0.8;
+            margin-top: 3px;
+        }
+        
+        .label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WooCommerce Product Variations - 30 Design Styles</h1>
+        
+        <div class="section-title">FREE DESIGNS (1-8)</div>
+        <div class="designs-grid">
+            <!-- Design 1: Classic Dropdown -->
+            <div class="design-card shopglut-product-swatches-template1 variation-1">
+                <div class="design-title">1. Classic Dropdown <span class="free-badge">FREE</span></div>
+                <div class="label">Select Size:</div>
+                <select>
+                    <option>Select an option</option>
+                    <option>Small</option>
+                    <option>Medium</option>
+                    <option>Large</option>
+                    <option>X-Large</option>
+                </select>
+            </div>
+            
+            <!-- Design 2: Button Grid -->
+            <div class="design-card shopglut-product-swatches-template2 variation-2">
+                <div class="design-title">2. Button Grid <span class="free-badge">FREE</span></div>
+                <div class="label">Select Size:</div>
+                <div class="options">
+                    <button class="option-btn">XS</button>
+                    <button class="option-btn active">S</button>
+                    <button class="option-btn">M</button>
+                    <button class="option-btn">L</button>
+                    <button class="option-btn">XL</button>
+                    <button class="option-btn">XXL</button>
+                </div>
+            </div>
+            
+            <!-- Design 3: Color Swatches -->
+            <div class="design-card shopglut-product-swatches-template3 variation-3">
+                <div class="design-title">3. Color Swatches <span class="free-badge">FREE</span></div>
+                <div class="label">Select Color:</div>
+                <div class="color-swatches">
+                    <div class="swatch active" style="background: #ff6b6b;"></div>
+                    <div class="swatch" style="background: #4ecdc4;"></div>
+                    <div class="swatch" style="background: #45b7d1;"></div>
+                    <div class="swatch" style="background: #f9ca24;"></div>
+                    <div class="swatch" style="background: #6c5ce7;"></div>
+                </div>
+            </div>
+            
+            <!-- Design 4: Radio Cards -->
+            <div class="design-card shopglut-product-swatches-template4 variation-4">
+                <div class="design-title">4. Radio Cards <span class="free-badge">FREE</span></div>
+                <div class="label">Select Material:</div>
+                <div class="radio-cards">
+                    <div class="radio-card active">
+                        <span>● Cotton - $29.99</span>
+                    </div>
+                    <div class="radio-card">
+                        <span>○ Polyester - $24.99</span>
+                    </div>
+                    <div class="radio-card">
+                        <span>○ Silk - $49.99</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 5: Image Thumbnails -->
+            <div class="design-card shopglut-product-swatches-template5 variation-5">
+                <div class="design-title">5. Image Thumbnails <span class="free-badge">FREE</span></div>
+                <div class="label">Select Style:</div>
+                <div class="thumbnails">
+                    <div class="thumbnail active">A</div>
+                    <div class="thumbnail">B</div>
+                    <div class="thumbnail">C</div>
+                    <div class="thumbnail">D</div>
+                </div>
+            </div>
+            
+            <!-- Design 6: Pill Buttons -->
+            <div class="design-card shopglut-product-swatches-template6 variation-6">
+                <div class="design-title">6. Pill Buttons <span class="free-badge">FREE</span></div>
+                <div class="label">Select Size:</div>
+                <div class="pills">
+                    <button class="pill">Small</button>
+                    <button class="pill active">Medium</button>
+                    <button class="pill">Large</button>
+                    <button class="pill">X-Large</button>
+                </div>
+            </div>
+            
+            <!-- Design 7: Box Selection with Images -->
+            <div class="design-card shopglut-product-swatches-template7 variation-7">
+                <div class="design-title">7. Box Selection <span class="free-badge">FREE</span></div>
+                <div class="label">Select Delivery:</div>
+                <div class="box-selection">
+                    <div class="box-item selected">
+                        <div class="box-icon">📦</div>
+                        <div class="box-label">Standard<br>$5.99</div>
+                    </div>
+                    <div class="box-item">
+                        <div class="box-icon">🚀</div>
+                        <div class="box-label">Express<br>$12.99</div>
+                    </div>
+                    <div class="box-item">
+                        <div class="box-icon">🏪</div>
+                        <div class="box-label">Store Pickup<br>Free</div>
+                    </div>
+                    <div class="box-item">
+                        <div class="box-icon">🌍</div>
+                        <div class="box-label">International<br>$25.99</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 8: Toggle Switch -->
+            <div class="design-card shopglut-product-swatches-template8 variation-8">
+                <div class="design-title">8. Toggle Switches <span class="free-badge">FREE</span></div>
+                <div class="label">Add-ons:</div>
+                <div class="toggles">
+                    <div class="toggle-item">
+                        <span>Gift Wrapping (+$5)</span>
+                        <div class="toggle active"></div>
+                    </div>
+                    <div class="toggle-item">
+                        <span>Express Shipping (+$10)</span>
+                        <div class="toggle"></div>
+                    </div>
+                    <div class="toggle-item">
+                        <span>Insurance (+$3)</span>
+                        <div class="toggle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-title">PREMIUM DESIGNS (9-30)</div>
+        <div class="designs-grid">
+            <!-- Design 9: Premium - Checkbox Grid -->
+            <div class="design-card shopglut-product-swatches-template9 variation-9">
+                <div class="design-title">9. Checkbox Grid <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Features:</div>
+                <div class="checkbox-grid">
+                    <div class="checkbox-item checked">
+                        <div class="checkbox-box"></div>
+                        <span>Fast Shipping</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span>Gift Wrap</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox-box"></div>
+                        <span>Insurance</span>
+                    </div>
+                    <div class="checkbox-item checked">
+                        <div class="checkbox-box"></div>
+                        <span>Tracking</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 10: Premium - Star Rating -->
+            <div class="design-card shopglut-product-swatches-template10 variation-10">
+                <div class="design-title">10. Star Rating Selector <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Quality Level:</div>
+                <div class="rating-options">
+                    <div class="rating-item">
+                        <div class="stars">★★★★★</div>
+                        <span>Premium Quality</span>
+                    </div>
+                    <div class="rating-item selected">
+                        <div class="stars">★★★★☆</div>
+                        <span>Standard Quality</span>
+                    </div>
+                    <div class="rating-item">
+                        <div class="stars">★★★☆☆</div>
+                        <span>Basic Quality</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 11: Premium - Icon Buttons -->
+            <div class="design-card shopglut-product-swatches-template11 variation-11">
+                <div class="design-title">11. Icon Buttons <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Delivery Method:</div>
+                <div class="icon-buttons">
+                    <button class="icon-btn active">
+                        <div class="icon">🚚</div>
+                        <div>Standard</div>
+                    </button>
+                    <button class="icon-btn">
+                        <div class="icon">✈️</div>
+                        <div>Express</div>
+                    </button>
+                    <button class="icon-btn">
+                        <div class="icon">🏪</div>
+                        <div>Pickup</div>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Design 12: Premium - Bordered List -->
+            <div class="design-card shopglut-product-swatches-template12 variation-12">
+                <div class="design-title">12. Bordered List <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Subscription:</div>
+                <div class="bordered-list">
+                    <div class="list-item">
+                        <span>Monthly Plan</span>
+                        <span class="price">$9.99/mo</span>
+                    </div>
+                    <div class="list-item selected">
+                        <span>Yearly Plan</span>
+                        <span class="price">$99.99/yr</span>
+                    </div>
+                    <div class="list-item">
+                        <span>Lifetime Access</span>
+                        <span class="price">$299.99</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 13: Premium - Badge Selector -->
+            <div class="design-card shopglut-product-swatches-template13 variation-13">
+                <div class="design-title">13. Badge Selector <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Tags:</div>
+                <div class="badge-selector">
+                    <button class="badge selected">New Arrival</button>
+                    <button class="badge">Best Seller</button>
+                    <button class="badge selected">Sale</button>
+                    <button class="badge">Featured</button>
+                    <button class="badge">Limited</button>
+                </div>
+            </div>
+            
+            <!-- Design 14: Premium - Tag Style -->
+            <div class="design-card shopglut-product-swatches-template14 variation-14">
+                <div class="design-title">14. Tag Style <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Categories:</div>
+                <div class="tag-style">
+                    <button class="tag selected">Electronics</button>
+                    <button class="tag">Clothing</button>
+                    <button class="tag selected">Books</button>
+                    <button class="tag">Sports</button>
+                    <button class="tag">Home</button>
+                </div>
+            </div>
+            
+            <!-- Design 15: Premium - Table Selection -->
+            <div class="design-card shopglut-product-swatches-template15 variation-15">
+                <div class="design-title">15. Table Selection <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Plan:</div>
+                <div class="table-selection">
+                    <div class="table-row table-header">
+                        <div>Plan Name</div>
+                        <div>Users</div>
+                        <div>Price</div>
+                    </div>
+                    <div class="table-row">
+                        <div>Starter</div>
+                        <div>1-5</div>
+                        <div>$19/mo</div>
+                    </div>
+                    <div class="table-row selected">
+                        <div>Business</div>
+                        <div>5-20</div>
+                        <div>$49/mo</div>
+                    </div>
+                    <div class="table-row">
+                        <div>Enterprise</div>
+                        <div>20+</div>
+                        <div>$99/mo</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 16: Premium - Horizontal Tabs -->
+            <div class="design-card shopglut-product-swatches-template16 variation-16">
+                <div class="design-title">16. Horizontal Tabs <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Category:</div>
+                <div class="horizontal-tabs">
+                    <div class="tab">Electronics</div>
+                    <div class="tab active">Fashion</div>
+                    <div class="tab">Home</div>
+                    <div class="tab">Sports</div>
+                </div>
+                <div class="tab-content">
+                    Content for Fashion category
+                </div>
+            </div>
+            
+            <!-- Design 17: Premium - Timeline Style -->
+            <div class="design-card shopglut-product-swatches-template17 variation-17">
+                <div class="design-title">17. Timeline Style <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Warranty:</div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>1 Year Warranty</strong> - $0
+                    </div>
+                    <div class="timeline-item selected">
+                        <strong>2 Year Warranty</strong> - $29
+                    </div>
+                    <div class="timeline-item">
+                        <strong>3 Year Warranty</strong> - $49
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 18: Premium - Split Button Group -->
+            <div class="design-card shopglut-product-swatches-template18 variation-18">
+                <div class="design-title">18. Split Button Group <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Format:</div>
+                <div class="split-group">
+                    <button class="split-btn">PDF</button>
+                    <button class="split-btn active">EPUB</button>
+                    <button class="split-btn">MOBI</button>
+                    <button class="split-btn">TXT</button>
+                </div>
+            </div>
+            
+            <!-- Design 19: Premium - Card with Details -->
+            <div class="design-card shopglut-product-swatches-template19 variation-19">
+                <div class="design-title">19. Detailed Cards <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Plan:</div>
+                <div class="detail-cards">
+                    <div class="detail-card">
+                        <div class="card-title">Basic Plan</div>
+                        <div class="card-description">Perfect for individuals and small projects</div>
+                        <div class="card-price">$19.99/month</div>
+                    </div>
+                    <div class="detail-card selected">
+                        <div class="card-title">Pro Plan</div>
+                        <div class="card-description">Ideal for professionals and teams</div>
+                        <div class="card-price">$49.99/month</div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="card-title">Enterprise Plan</div>
+                        <div class="card-description">Custom solutions for large organizations</div>
+                        <div class="card-price">Contact Sales</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 20: Premium - Chip Selection -->
+            <div class="design-card shopglut-product-swatches-template20 variation-20">
+                <div class="design-title">20. Chip Selection <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Features:</div>
+                <div class="chip-selection">
+                    <button class="chip selected">
+                        <span class="chip-icon">✓</span>
+                        <span>Wi-Fi</span>
+                    </button>
+                    <button class="chip">
+                        <span class="chip-icon">✓</span>
+                        <span>Bluetooth</span>
+                    </button>
+                    <button class="chip selected">
+                        <span class="chip-icon">✓</span>
+                        <span>GPS</span>
+                    </button>
+                    <button class="chip">
+                        <span class="chip-icon">✓</span>
+                        <span>NFC</span>
+                    </button>
+                    <button class="chip">
+                        <span class="chip-icon">✓</span>
+                        <span>5G</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Design 21: Premium - Slider with Labels -->
+            <div class="design-card shopglut-product-swatches-template21 variation-21">
+                <div class="design-title">21. Slider with Labels <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Storage:</div>
+                <div class="slider-labels">
+                    <input type="range" min="0" max="4" value="2" step="1">
+                    <div class="slider-labels-row">
+                        <span class="slider-label">64GB</span>
+                        <span class="slider-label">128GB</span>
+                        <span class="slider-label">256GB</span>
+                        <span class="slider-label">512GB</span>
+                        <span class="slider-label">1TB</span>
+                    </div>
+                    <div class="slider-value">256GB Selected</div>
+                </div>
+            </div>
+            
+            <!-- Design 22: Premium - Progress Steps -->
+            <div class="design-card shopglut-product-swatches-template22 variation-22">
+                <div class="design-title">22. Progress Steps <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Membership Level:</div>
+                <div class="progress-steps">
+                    <div class="step completed">
+                        <div class="step-circle">✓</div>
+                        <div class="step-label">Bronze</div>
+                    </div>
+                    <div class="step active">
+                        <div class="step-circle">2</div>
+                        <div class="step-label">Silver</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-circle">3</div>
+                        <div class="step-label">Gold</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-circle">4</div>
+                        <div class="step-label">Platinum</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 23: Premium - Dropdown with Icons -->
+            <div class="design-card shopglut-product-swatches-template23 variation-23">
+                <div class="design-title">23. Dropdown with Icons <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Payment Method:</div>
+                <div class="dropdown-container">
+                    <div class="dropdown-button">
+                        <div class="dropdown-selected">
+                            <span class="dropdown-icon">💳</span>
+                            <span>Credit Card</span>
+                        </div>
+                        <span>▼</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 24: Premium - Vertical Button Group -->
+            <div class="design-card shopglut-product-swatches-template24 variation-24">
+                <div class="design-title">24. Vertical Button Group <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Warranty:</div>
+                <div class="vertical-group">
+                    <button class="vertical-btn">
+                        <span>1 Year Basic - $0</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                    <button class="vertical-btn active">
+                        <span>2 Year Extended - $29</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                    <button class="vertical-btn">
+                        <span>3 Year Premium - $59</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                    <button class="vertical-btn">
+                        <span>Lifetime Protection - $99</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Design 25: Premium - Card Grid with Hover -->
+            <div class="design-card shopglut-product-swatches-template25 variation-25">
+                <div class="design-title">25. Card Grid with Hover <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Bundle:</div>
+                <div class="card-grid">
+                    <div class="grid-card">
+                        <div class="card-content">
+                            <div class="card-emoji">📱</div>
+                            <div class="card-title">Basic</div>
+                            <div class="card-price">$29.99</div>
+                        </div>
+                    </div>
+                    <div class="grid-card selected">
+                        <div class="card-content">
+                            <div class="card-emoji">💼</div>
+                            <div class="card-title">Pro</div>
+                            <div class="card-price">$49.99</div>
+                        </div>
+                    </div>
+                    <div class="grid-card">
+                        <div class="card-content">
+                            <div class="card-emoji">👑</div>
+                            <div class="card-title">Premium</div>
+                            <div class="card-price">$79.99</div>
+                        </div>
+                    </div>
+                    <div class="grid-card">
+                        <div class="card-content">
+                            <div class="card-emoji">🚀</div>
+                            <div class="card-title">Ultimate</div>
+                            <div class="card-price">$99.99</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 26: Premium - Comparison Cards -->
+            <div class="design-card shopglut-product-swatches-template26 variation-26">
+                <div class="design-title">26. Comparison Cards <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Hosting Plan:</div>
+                <div class="comparison-cards">
+                    <div class="comparison-card">
+                        <div class="card-plan">Basic</div>
+                        <div style="font-size: 24px; font-weight: 600; margin: 10px 0;">$9.99</div>
+                        <ul class="card-features">
+                            <li>10GB Storage</li>
+                            <li>1 Domain</li>
+                            <li>Email Support</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-card selected">
+                        <span class="popular-badge">POPULAR</span>
+                        <div class="card-plan">Pro</div>
+                        <div style="font-size: 24px; font-weight: 600; margin: 10px 0;">$29.99</div>
+                        <ul class="card-features">
+                            <li>50GB Storage</li>
+                            <li>5 Domains</li>
+                            <li>Priority Support</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-card">
+                        <div class="card-plan">Business</div>
+                        <div style="font-size: 24px; font-weight: 600; margin: 10px 0;">$59.99</div>
+                        <ul class="card-features">
+                            <li>Unlimited Storage</li>
+                            <li>Unlimited Domains</li>
+                            <li>24/7 Phone Support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 27: Premium - Range Price Selector -->
+            <div class="design-card shopglut-product-swatches-template27 variation-27">
+                <div class="design-title">27. Range Price Selector <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Price Range:</div>
+                <div class="range-price">
+                    <div class="price-inputs">
+                        <div class="price-input-group">
+                            <div class="price-input-label">Min Price</div>
+                            <input type="text" class="price-input" value="$100" readonly>
+                        </div>
+                        <div class="price-input-group">
+                            <div class="price-input-label">Max Price</div>
+                            <input type="text" class="price-input" value="$500" readonly>
+                        </div>
+                    </div>
+                    <div class="price-slider">
+                        <div class="price-progress"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 28: Premium - Multi-Select Boxes -->
+            <div class="design-card shopglut-product-swatches-template28 variation-28">
+                <div class="design-title">28. Multi-Select Boxes <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Add-ons:</div>
+                <div class="multi-select-boxes">
+                    <div class="select-box selected">
+                        <div class="checkbox-square"></div>
+                        <div class="box-content">
+                            <div class="box-title">Extended Warranty</div>
+                            <div class="box-description">3 years coverage (+$49)</div>
+                        </div>
+                    </div>
+                    <div class="select-box">
+                        <div class="checkbox-square"></div>
+                        <div class="box-content">
+                            <div class="box-title">Premium Support</div>
+                            <div class="box-description">Priority assistance (+$29)</div>
+                        </div>
+                    </div>
+                    <div class="select-box selected">
+                        <div class="checkbox-square"></div>
+                        <div class="box-content">
+                            <div class="box-title">Gift Packaging</div>
+                            <div class="box-description">Luxury box wrap (+$15)</div>
+                        </div>
+                    </div>
+                    <div class="select-box">
+                        <div class="checkbox-square"></div>
+                        <div class="box-content">
+                            <div class="box-title">Rush Delivery</div>
+                            <div class="box-description">Next day shipping (+$25)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 29: Premium - Quantity Button Matrix -->
+            <div class="design-card shopglut-product-swatches-template29 variation-29">
+                <div class="design-title">29. Quantity Button Matrix <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Quantity:</div>
+                <div class="quantity-matrix">
+                    <div class="matrix-label">Choose from preset quantities or enter custom amount</div>
+                    <div class="matrix-grid">
+                        <button class="quantity-btn">1</button>
+                        <button class="quantity-btn">5</button>
+                        <button class="quantity-btn selected">10</button>
+                        <button class="quantity-btn">25</button>
+                        <button class="quantity-btn">50</button>
+                        <button class="quantity-btn">100</button>
+                        <button class="quantity-btn">250</button>
+                        <button class="quantity-btn">500</button>
+                        <input type="number" class="custom-input" placeholder="Custom">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Design 30: Premium - Pyramid Selection -->
+            <div class="design-card shopglut-product-swatches-template30 variation-30">
+                <div class="design-title">30. Pyramid Selection <span class="premium-badge">PREMIUM</span></div>
+                <div class="label">Select Service Tier:</div>
+                <div class="pyramid-selection">
+                    <div class="pyramid-row">
+                        <div class="pyramid-item selected">
+                            <div>Premium</div>
+                            <div class="pyramid-subtitle">Best Value</div>
+                        </div>
+                    </div>
+                    <div class="pyramid-row">
+                        <div class="pyramid-item">
+                            <div>Standard</div>
+                            <div class="pyramid-subtitle">Most Popular</div>
+                        </div>
+                        <div class="pyramid-item">
+                            <div>Plus</div>
+                            <div class="pyramid-subtitle">Enhanced</div>
+                        </div>
+                    </div>
+                    <div class="pyramid-row">
+                        <div class="pyramid-item">Basic</div>
+                        <div class="pyramid-item">Starter</div>
+                        <div class="pyramid-item">Lite</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

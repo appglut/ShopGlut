@@ -1,0 +1,96 @@
+/**
+ * ShopGlut Mega Menu Admin Styles
+ */
+
+/* Admin page specific styles */
+.shopglut-admin-contents {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.subheading {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+/* Mega menu container */
+.mega-menu-container {
+    margin-top: 20px;
+}
+
+/* Override for admin color picker */
+.wp-color-result {
+    width: 100% !important;
+    height: 36px !important;
+}
+
+/* Loading spinner */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #007cba;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Success message */
+.success-message {
+    background: #d4edda;
+    color: #155724;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 10px 0;
+    border: 1px solid #c3e6cb;
+}
+
+/* Error message */
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 10px 0;
+    border: 1px solid #f5c6cb;
+}
+
+/* Template preview responsive */
+@media (max-width: 768px) {
+    .template-preview-area {
+        min-height: 150px !important;
+    }
+
+    .setting-row.three-cols {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+}
+
+/* Accessibility improvements */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
+/* Focus styles for accessibility */
+.modal-close:focus,
+.button:focus,
+input:focus,
+select:focus {
+    outline: 2px solid #007cba;
+    outline-offset: 2px;
+}

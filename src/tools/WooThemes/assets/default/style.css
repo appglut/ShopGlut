@@ -1,0 +1,197 @@
+/* Default Theme - Minimal Header and Footer Styles */
+
+/* Header Customizations */
+.site-header,
+header.site-header,
+#masthead {
+    background: #ffffff !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #e9ecef !important;
+    position: relative;
+    z-index: 999;
+    padding: 15px 0;
+}
+
+/* Site Logo and Title */
+.site-branding .site-title a,
+.site-title a,
+.logo a {
+    color: #333333 !important;
+    font-weight: 600;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.site-description,
+.site-tagline {
+    color: #666666 !important;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Navigation Menu */
+.main-navigation ul li a,
+.primary-menu a,
+.nav-menu a,
+#primary-menu a {
+    color: #333333 !important;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.main-navigation ul li a:hover,
+.primary-menu a:hover,
+.nav-menu a:hover,
+#primary-menu a:hover {
+    color: #0073aa !important;
+    background: none !important;
+}
+
+/* WooCommerce Header Elements */
+.woocommerce-mini-cart,
+.cart-contents,
+.header-cart {
+    background: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 4px;
+    color: #333333 !important;
+    border: 1px solid #dee2e6;
+}
+
+.woocommerce-mini-cart:hover,
+.cart-contents:hover,
+.header-cart:hover {
+    background: #e9ecef;
+    color: #333333 !important;
+}
+
+/* My Account Link */
+.my-account-link,
+.header-account {
+    color: #333333 !important;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+}
+
+.my-account-link:hover,
+.header-account:hover {
+    background: #e9ecef;
+    color: #333333 !important;
+}
+
+/* Footer Customizations */
+.site-footer,
+footer.site-footer,
+#colophon,
+.footer {
+    background: #6c757d !important;
+    color: #ffffff !important;
+    padding: 40px 0 20px;
+    border-top: none;
+    position: relative;
+}
+
+/* Footer Widgets */
+.footer-widgets,
+.widget-area {
+    margin-bottom: 30px;
+}
+
+.footer-widgets .widget-title,
+.widget-area .widget-title,
+.site-footer h1,
+.site-footer h2,
+.site-footer h3,
+.site-footer h4 {
+    color: #ffffff !important;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+/* Footer Links */
+.site-footer a,
+.footer a {
+    color: #adb5bd !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.site-footer a:hover,
+.footer a:hover {
+    color: #ffffff !important;
+    text-decoration: underline;
+}
+
+/* Footer Text */
+.site-footer p,
+.footer p,
+.site-info {
+    color: #adb5bd !important;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Copyright Area */
+.site-info,
+.copyright,
+.footer-bottom {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px 0;
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+/* Social Media Icons */
+.social-links a,
+.footer-social a {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff !important;
+    padding: 10px;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0 3px;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover,
+.footer-social a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .site-header,
+    header.site-header,
+    #masthead {
+        padding: 10px 0;
+    }
+    
+    .site-branding .site-title a,
+    .site-title a {
+        font-size: 20px;
+    }
+    
+    .main-navigation ul li a {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+    
+    .site-footer,
+    footer.site-footer,
+    #colophon {
+        padding: 30px 0 15px;
+    }
+}
+
+/* Default theme identifier */
+body.shopglut-default-theme {
+    --shopglut-theme: 'default';
+}

@@ -1,0 +1,522 @@
+/**
+ * ShopGlut Gallery Shortcode Styles
+ *
+ * @package Shopglut
+ * @subpackage GalleryShortcode
+ * @since 1.0.0
+ */
+
+/* Main Gallery Container */
+.shopglut-gallery {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Gallery Layouts */
+.shopglut-gallery-grid .shopglut-gallery-items {
+    display: grid;
+    gap: var(--gallery-gap, 20px);
+}
+
+.shopglut-gallery-cols-1 .shopglut-gallery-items {
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.shopglut-gallery-cols-2 .shopglut-gallery-items {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.shopglut-gallery-cols-3 .shopglut-gallery-items {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.shopglut-gallery-cols-4 .shopglut-gallery-items {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.shopglut-gallery-cols-5 .shopglut-gallery-items {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.shopglut-gallery-cols-6 .shopglut-gallery-items {
+    grid-template-columns: repeat(6, 1fr);
+}
+
+/* Spacing Variants */
+.shopglut-gallery-none .shopglut-gallery-items {
+    gap: 0;
+}
+
+.shopglut-gallery-small .shopglut-gallery-items {
+    gap: 10px;
+}
+
+.shopglut-gallery-medium .shopglut-gallery-items {
+    gap: 20px;
+}
+
+.shopglut-gallery-large .shopglut-gallery-items {
+    gap: 30px;
+}
+
+/* Gallery Items */
+.shopglut-gallery-item {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.shopglut-gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.shopglut-gallery-item-inner {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Gallery Images */
+.shopglut-gallery-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding-top: 100%; /* 1:1 aspect ratio */
+}
+
+.shopglut-gallery-image-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+}
+
+.shopglut-gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Hover Effects */
+.shopglut-gallery-hover-zoom .shopglut-gallery-item:hover .shopglut-gallery-image {
+    transform: scale(1.1);
+}
+
+.shopglut-gallery-hover-fade .shopglut-gallery-item:hover .shopglut-gallery-image {
+    opacity: 0.8;
+}
+
+.shopglut-gallery-hover-slide .shopglut-gallery-item:hover .shopglut-gallery-image {
+    transform: translateY(-10px);
+}
+
+/* Gallery Overlays */
+.shopglut-gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.shopglut-gallery-item:hover .shopglut-gallery-overlay {
+    opacity: 1;
+}
+
+.shopglut-gallery-overlay-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+}
+
+.shopglut-add-to-cart,
+.shopglut-view-details {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #0073aa;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.shopglut-add-to-cart:hover,
+.shopglut-view-details:hover {
+    background: #005a87;
+    color: white;
+    text-decoration: none;
+}
+
+/* Badges */
+.shopglut-gallery-sale-badge,
+.shopglut-gallery-featured-badge {
+    position: absolute;
+    top: 10px;
+    z-index: 2;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.shopglut-gallery-sale-badge {
+    left: 10px;
+    background: #ff4757;
+    color: white;
+}
+
+.shopglut-gallery-featured-badge {
+    right: 10px;
+    background: #ffa502;
+    color: white;
+}
+
+/* Gallery Content */
+.shopglut-gallery-content {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.shopglut-gallery-category {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.shopglut-gallery-title {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.shopglut-gallery-title a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.shopglut-gallery-title a:hover {
+    color: #0073aa;
+    text-decoration: none;
+}
+
+.shopglut-gallery-rating {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.shopglut-rating-count {
+    font-size: 12px;
+    color: #666;
+}
+
+.shopglut-gallery-price {
+    margin-top: auto;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Filters */
+.shopglut-gallery-filters {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.shopglut-gallery-filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.shopglut-filter-btn {
+    padding: 8px 16px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.shopglut-filter-btn:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.shopglut-filter-btn.active {
+    background: #0073aa;
+    border-color: #0073aa;
+    color: white;
+}
+
+.shopglut-filter-count {
+    opacity: 0.7;
+    font-size: 12px;
+}
+
+/* Pagination */
+.shopglut-gallery-pagination {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.shopglut-pagination-links {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 5px;
+}
+
+.shopglut-pagination-item {
+    display: inline-block;
+}
+
+.shopglut-pagination-item span,
+.shopglut-pagination-item a {
+    display: inline-block;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #495057;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.shopglut-pagination-item a:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+    color: #495057;
+    text-decoration: none;
+}
+
+.shopglut-pagination-item .current {
+    background: #0073aa;
+    border-color: #0073aa;
+    color: white;
+}
+
+/* Load More Button */
+.shopglut-gallery-load-more {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.shopglut-load-more-btn {
+    padding: 12px 24px;
+    background: #0073aa;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+    position: relative;
+}
+
+.shopglut-load-more-btn:hover {
+    background: #005a87;
+}
+
+.shopglut-load-more-btn:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+}
+
+.shopglut-loading-spinner {
+    margin-left: 8px;
+}
+
+/* Carousel Styles */
+.shopglut-gallery-carousel {
+    padding: 0 40px;
+    position: relative;
+}
+
+.shopglut-gallery-carousel .swiper-slide {
+    height: auto;
+}
+
+.shopglut-gallery-carousel .swiper-button-next,
+.shopglut-gallery-carousel .swiper-button-prev {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-top: -20px;
+}
+
+.shopglut-gallery-carousel .swiper-button-next::after,
+.shopglut-gallery-carousel .swiper-button-prev::after {
+    font-size: 16px;
+}
+
+.shopglut-gallery-carousel .swiper-pagination {
+    bottom: -30px;
+}
+
+.shopglut-gallery-carousel .swiper-pagination-bullet {
+    background: #ccc;
+    opacity: 1;
+}
+
+.shopglut-gallery-carousel .swiper-pagination-bullet-active {
+    background: #0073aa;
+}
+
+/* Isotope Animation */
+.shopglut-gallery-isotope .shopglut-gallery-item {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.shopglut-gallery-isotope .shopglut-gallery-item.isotope-hidden {
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+/* Animation Classes */
+.shopglut-gallery-animate-fadeIn .shopglut-gallery-item {
+    opacity: 0;
+    animation: fadeIn 0.6s ease forwards;
+}
+
+.shopglut-gallery-animate-slideUp .shopglut-gallery-item {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* No Products Message */
+.shopglut-gallery-no-products {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6c757d;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .shopglut-gallery-cols-tablet-1 .shopglut-gallery-items {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .shopglut-gallery-cols-tablet-2 .shopglut-gallery-items {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .shopglut-gallery-cols-tablet-3 .shopglut-gallery-items {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .shopglut-gallery-cols-tablet-4 .shopglut-gallery-items {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .shopglut-gallery-cols-mobile-1 .shopglut-gallery-items {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .shopglut-gallery-cols-mobile-2 .shopglut-gallery-items {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .shopglut-gallery-filter-buttons {
+        gap: 8px;
+    }
+
+    .shopglut-filter-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .shopglut-gallery-content {
+        padding: 15px;
+    }
+
+    .shopglut-gallery-title {
+        font-size: 15px;
+    }
+
+    .shopglut-gallery-price {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .shopglut-gallery-carousel {
+        padding: 0 30px;
+    }
+
+    .shopglut-gallery-filters {
+        margin-bottom: 20px;
+    }
+
+    .shopglut-gallery-filter-buttons {
+        justify-content: flex-start;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 10px;
+    }
+
+    .shopglut-gallery-pagination {
+        margin-top: 20px;
+    }
+
+    .shopglut-pagination-links {
+        gap: 3px;
+    }
+
+    .shopglut-pagination-item span,
+    .shopglut-pagination-item a {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+}

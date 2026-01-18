@@ -1,0 +1,420 @@
+/**
+ * Product Custom Field Styles
+ */
+
+/* Base styles for all custom fields */
+.shopglut-custom-field {
+    margin: 15px 0;
+    clear: both;
+}
+
+.shopglut-custom-field * {
+    box-sizing: border-box;
+}
+
+/* Textarea Field Designs */
+
+.shopglut-design-simple_text .shopglut-simple-text {
+    line-height: 1.6;
+    color: #333;
+    font-size: 14px;
+}
+
+.shopglut-design-simple_list .shopglut-simple-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.shopglut-design-simple_list .shopglut-simple-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 20px;
+}
+
+.shopglut-design-simple_list .shopglut-simple-list li:before {
+    content: "▪";
+    position: absolute;
+    left: 0;
+    color: #0073aa;
+    font-weight: bold;
+}
+
+.shopglut-design-simple_list .shopglut-simple-list li:last-child {
+    border-bottom: none;
+}
+
+.shopglut-design-bullet_points .shopglut-bullet-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.shopglut-design-bullet_points .shopglut-bullet-points li {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: flex-start;
+}
+
+.shopglut-design-bullet_points .shopglut-bullet-points .bullet {
+    color: #0073aa;
+    font-size: 18px;
+    margin-right: 10px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.shopglut-design-bullet_points .shopglut-bullet-points li:last-child {
+    border-bottom: none;
+}
+
+.shopglut-design-numbered_list .shopglut-numbered-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: shopglut-counter;
+}
+
+.shopglut-design-numbered_list .shopglut-numbered-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: flex-start;
+    counter-increment: shopglut-counter;
+}
+
+.shopglut-design-numbered_list .shopglut-numbered-list .number {
+    background: #0073aa;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.shopglut-design-numbered_list .shopglut-numbered-list li:last-child {
+    border-bottom: none;
+}
+
+.shopglut-design-paragraphs .shopglut-paragraphs {
+    line-height: 1.7;
+    color: #444;
+}
+
+.shopglut-design-paragraphs .shopglut-paragraphs p {
+    margin-bottom: 15px;
+}
+
+.shopglut-design-paragraphs .shopglut-paragraphs p:last-child {
+    margin-bottom: 0;
+}
+
+.shopglut-design-cards .shopglut-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.shopglut-design-cards .shopglut-card {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.shopglut-design-cards .shopglut-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.shopglut-design-features_grid .shopglut-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+.shopglut-design-features_grid .shopglut-feature-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 4px solid #28a745;
+}
+
+.shopglut-design-features_grid .feature-icon {
+    background: #28a745;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.shopglut-design-features_grid .feature-text {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
+}
+
+/* Radio Field Designs */
+
+.shopglut-design-basic_radio .shopglut-basic-radio {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.shopglut-design-basic_radio .radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.shopglut-design-basic_radio .radio-label:hover {
+    background-color: #f0f0f0;
+}
+
+.shopglut-design-basic_radio input[type="radio"] {
+    margin-right: 10px;
+    margin-top: 0;
+}
+
+.shopglut-design-button_group .shopglut-button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.shopglut-design-button_group .button-label {
+    cursor: pointer;
+}
+
+.shopglut-design-button_group input[type="radio"] {
+    display: none;
+}
+
+.shopglut-design-button_group .button-text {
+    display: inline-block;
+    padding: 10px 18px;
+    background: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #495057;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.shopglut-design-button_group input[type="radio"]:checked + .button-text {
+    background: #0073aa;
+    border-color: #0073aa;
+    color: white;
+}
+
+.shopglut-design-button_group .button-label:hover .button-text {
+    border-color: #0073aa;
+    color: #0073aa;
+}
+
+.shopglut-design-card_selection .shopglut-card-selection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.shopglut-design-card_selection .card-label {
+    cursor: pointer;
+}
+
+.shopglut-design-card_selection input[type="radio"] {
+    display: none;
+}
+
+.shopglut-design-card_selection .card {
+    padding: 20px 15px;
+    background: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #495057;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shopglut-design-card_selection input[type="radio"]:checked + .card {
+    background: #0073aa;
+    border-color: #0073aa;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,115,170,0.3);
+}
+
+.shopglut-design-card_selection .card-label:hover .card {
+    border-color: #0073aa;
+    color: #0073aa;
+}
+
+.shopglut-design-toggle_switch .shopglut-toggle-switch {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.shopglut-design-toggle_switch .switch-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 8px;
+    background: #f8f9fa;
+    border: 2px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.shopglut-design-toggle_switch input[type="radio"] {
+    display: none;
+}
+
+.shopglut-design-toggle_switch .switch-slider {
+    width: 44px;
+    height: 24px;
+    background: #ccc;
+    border-radius: 12px;
+    position: relative;
+    margin-right: 15px;
+    transition: background 0.3s ease;
+}
+
+.shopglut-design-toggle_switch .switch-slider:before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.shopglut-design-toggle_switch input[type="radio"]:checked + .switch-slider {
+    background: #28a745;
+}
+
+.shopglut-design-toggle_switch input[type="radio"]:checked + .switch-slider:before {
+    transform: translateX(20px);
+}
+
+.shopglut-design-toggle_switch input[type="radio"]:checked ~ .switch-text {
+    color: #28a745;
+    font-weight: 600;
+}
+
+.shopglut-design-toggle_switch .switch-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #495057;
+    transition: color 0.3s ease;
+}
+
+.shopglut-design-toggle_switch .switch-label:hover {
+    border-color: #28a745;
+    background: #f0fff4;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .shopglut-design-cards .shopglut-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .shopglut-design-features_grid .shopglut-features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .shopglut-design-card_selection .shopglut-card-selection {
+        grid-template-columns: 1fr;
+    }
+
+    .shopglut-design-button_group .shopglut-button-group {
+        flex-direction: column;
+    }
+
+    .shopglut-custom-field {
+        margin: 10px 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .shopglut-design-features_grid .shopglut-feature-item {
+        padding: 12px;
+    }
+
+    .shopglut-design-card_selection .card {
+        padding: 15px 10px;
+        min-height: 60px;
+        font-size: 13px;
+    }
+
+    .shopglut-design-button_group .button-text {
+        padding: 8px 15px;
+        font-size: 13px;
+    }
+}
+
+/* Animation classes */
+.shopglut-custom-field {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Delay animation for multiple fields */
+.shopglut-custom-field:nth-child(1) { animation-delay: 0.1s; }
+.shopglut-custom-field:nth-child(2) { animation-delay: 0.2s; }
+.shopglut-custom-field:nth-child(3) { animation-delay: 0.3s; }
+.shopglut-custom-field:nth-child(4) { animation-delay: 0.4s; }

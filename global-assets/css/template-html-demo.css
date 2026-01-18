@@ -1,0 +1,935 @@
+/**
+ * Template HTML Demo Preview Styles
+ * Shared CSS for all PreBuilt Layout Template modules
+ * Used by: Single Product, Cart, Order Complete, My Account
+ */
+
+/* ===================================
+   WORDPRESS DEFAULT HEADING OVERRIDES
+   Prevent WordPress admin styles from affecting template preview
+   =================================== */
+
+/* Very specific overrides for WordPress admin heading conflicts
+   These must have higher specificity than WordPress admin CSS
+   IMPORTANT: Do not use padding/margin/line-height resets as they interfere with template styles */
+
+/* Override #poststuff h2 { font-size: 15px; } */
+#poststuff .single-product-template3 h2,
+#poststuff .single-product-template1 h2,
+#poststuff .single-product-template2 h2,
+#poststuff .shopglut-single-product h2,
+#poststuff .shopglut-single-template2 h2,
+.wrap .single-product-template3 h2,
+.wrap .single-product-template1 h2,
+.wrap .single-product-template2 h2,
+.wrap .shopglut-single-product h2,
+.wrap .shopglut-single-template2 h2,
+.postbox .inside .single-product-template3 h2,
+.postbox .inside .single-product-template1 h2,
+.postbox .inside .single-product-template2 h2,
+.postbox .inside .shopglut-single-product h2,
+.postbox .inside .shopglut-single-template2 h2,
+.shopg-template-gallery .html-preview-background h2,
+.shopg-template-gallery .html-preview-background .single-product-template3 h2,
+.shopg-template-gallery .html-preview-background .single-product-template1 h2,
+.shopg-template-gallery .html-preview-background .single-product-template2 h2,
+.shopg-template-gallery .html-preview-background .shopglut-single-product h2,
+.shopg-template-gallery .html-preview-background .shopglut-single-template2 h2,
+.html-demo-full-view h2,
+.html-demo-full-view .single-product-template3 h2,
+.html-demo-full-view .single-product-template1 h2,
+.html-demo-full-view .single-product-template2 h2,
+.html-demo-full-view .shopglut-single-product h2,
+.html-demo-full-view .shopglut-single-template2 h2 {
+	font-size: 22px !important;
+}
+
+/* Override #poststuff h2, h3 { font-size: 14px; } */
+#poststuff .single-product-template3 h3,
+#poststuff .single-product-template1 h3,
+#poststuff .single-product-template2 h3,
+#poststuff .shopglut-single-product h3,
+#poststuff .shopglut-single-template2 h3,
+.wrap .single-product-template3 h3,
+.wrap .single-product-template1 h3,
+.wrap .single-product-template2 h3,
+.wrap .shopglut-single-product h3,
+.wrap .shopglut-single-template2 h3,
+.postbox .inside .single-product-template3 h3,
+.postbox .inside .single-product-template1 h3,
+.postbox .inside .single-product-template2 h3,
+.postbox .inside .shopglut-single-product h3,
+.postbox .inside .shopglut-single-template2 h3,
+.shopg-template-gallery .html-preview-background h3,
+.shopg-template-gallery .html-preview-background .single-product-template3 h3,
+.shopg-template-gallery .html-preview-background .single-product-template1 h3,
+.shopg-template-gallery .html-preview-background .single-product-template2 h3,
+.shopg-template-gallery .html-preview-background .shopglut-single-product h3,
+.shopg-template-gallery .html-preview-background .shopglut-single-template2 h3,
+.html-demo-full-view h3,
+.html-demo-full-view .single-product-template3 h3,
+.html-demo-full-view .single-product-template1 h3,
+.html-demo-full-view .single-product-template2 h3,
+.html-demo-full-view .shopglut-single-product h3,
+.html-demo-full-view .shopglut-single-template2 h3 {
+	font-size: initial !important;
+}
+
+/* Override .wrap h1 { font-size: 23px; font-weight: 400; } */
+#poststuff .single-product-template3 h1,
+#poststuff .single-product-template1 h1,
+#poststuff .single-product-template2 h1,
+#poststuff .shopglut-single-product h1,
+#poststuff .shopglut-single-template2 h1,
+.wrap .single-product-template3 h1,
+.wrap .single-product-template1 h1,
+.wrap .single-product-template2 h1,
+.wrap .shopglut-single-product h1,
+.wrap .shopglut-single-template2 h1,
+.postbox .inside .single-product-template3 h1,
+.postbox .inside .single-product-template1 h1,
+.postbox .inside .single-product-template2 h1,
+.postbox .inside .shopglut-single-product h1,
+.postbox .inside .shopglut-single-template2 h1,
+.shopg-template-gallery .html-preview-background h1,
+.shopg-template-gallery .html-preview-background .single-product-template3 h1,
+.shopg-template-gallery .html-preview-background .single-product-template1 h1,
+.shopg-template-gallery .html-preview-background .single-product-template2 h1,
+.shopg-template-gallery .html-preview-background .shopglut-single-product h1,
+.shopg-template-gallery .html-preview-background .shopglut-single-template2 h1,
+.html-demo-full-view h1,
+.html-demo-full-view .single-product-template3 h1,
+.html-demo-full-view .single-product-template1 h1,
+.html-demo-full-view .single-product-template2 h1,
+.html-demo-full-view .shopglut-single-product h1,
+.html-demo-full-view .shopglut-single-template2 h1 {
+	font-size: 28px !important;
+	font-weight: 500 !important;
+}
+
+/* Apply same to h4, h5, h6 for consistency */
+#poststuff .single-product-template3 h4,
+#poststuff .single-product-template3 h5,
+#poststuff .single-product-template3 h6,
+.wrap .single-product-template3 h4,
+.wrap .single-product-template3 h5,
+.wrap .single-product-template3 h6,
+.shopg-template-gallery .html-preview-background h4,
+.shopg-template-gallery .html-preview-background h5,
+.shopg-template-gallery .html-preview-background h6,
+.html-demo-full-view h4,
+.html-demo-full-view h5,
+.html-demo-full-view h6 {
+	font-size: initial !important;
+	font-weight: initial !important;
+}
+
+/* ===================================
+   GENERAL TEMPLATE GALLERY STYLES
+   =================================== */
+
+/* Template Preview Cards */
+.shopg-template-gallery .shopg-template-preview {
+	border: 2px solid #e1e5e9;
+	border-radius: 16px;
+	margin: 20px;
+	padding: 0;
+	background: #fff;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+	transition: all 0.3s ease;
+	overflow: hidden;
+	position: relative;
+}
+
+.shopg-template-gallery .shopg-template-preview:hover {
+	border-color: #2271b1;
+	box-shadow: 0 12px 35px rgba(34,113,177,0.15), 0 5px 15px rgba(0,0,0,0.08);
+	transform: translateY(-4px);
+}
+
+.shopg-template-gallery .shopg-template-preview:hover::before {
+	background: linear-gradient(90deg, #667eea 0%, #2271b1 100%);
+}
+
+/* Template Header */
+.shopg-template-gallery .template-header {
+	padding: 22px 20px 18px 20px;
+	border-bottom: 1px solid rgba(255,255,255,0.1);
+	background: linear-gradient(135deg, #2271b1 0%, #2a80b8 100%);
+	color: white;
+	position: relative;
+}
+
+.shopg-template-gallery .template-header h2 {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 600;
+	text-align: left;
+	color:#fff;
+	text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Template Content Area */
+.shopg-template-gallery .template-content.product-demo {
+	padding: 10px;
+	background: #fafafa;
+	height: 320px;
+	position: relative;
+}
+
+/* Image Preview Containers */
+.shopg-template-gallery .template-image-container {
+	position: relative;
+	overflow: hidden;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	border: 1px solid #e8e8e8;
+}
+
+.shopg-template-gallery .template-image-container:hover {
+	box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+	border-color: rgba(102, 126, 234, 0.3);
+}
+
+.shopg-template-gallery .template-preview-image {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	object-position: center;
+	transition: all 0.3s ease;
+	opacity: 0;
+	padding: 8px;
+	box-sizing: border-box;
+}
+
+.shopg-template-gallery .template-preview-image.loaded {
+	opacity: 1;
+}
+
+/* Loading Placeholder */
+.shopg-template-gallery .image-loading-placeholder {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1;
+	transition: opacity 0.3s ease;
+}
+
+.shopg-template-gallery .image-loading-placeholder.hidden {
+	opacity: 0;
+	pointer-events: none;
+}
+
+/* Image Overlay */
+.shopg-template-gallery .image-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.6);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: all 0.3s ease;
+	border-radius: 8px;
+}
+
+.shopg-template-gallery .template-image-container:hover .image-overlay {
+	opacity: 1;
+}
+
+.shopg-template-gallery .expand-icon-container {
+	background: rgba(255, 255, 255, 0.95);
+	border-radius: 50%;
+	padding: 10px;
+	backdrop-filter: blur(10px);
+	border: 2px solid rgba(255, 255, 255, 0.8);
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.shopg-template-gallery .expand-icon-container:hover {
+	background: rgba(255, 255, 255, 1);
+	transform: scale(1.1);
+}
+
+/* Choose Template Button */
+.shopg-template-gallery .choose-template-btn {
+	width: 100%;
+	padding: 16px;
+	background: linear-gradient(135deg, #2271b1 0%, #1e5f8f 100%);
+	color: white;
+	border: none;
+	border-radius: 0 0 14px 14px;
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 14px;
+	transition: all 0.3s ease;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	position: relative;
+	overflow: hidden;
+}
+
+.shopg-template-gallery .choose-template-btn::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+	transition: left 0.5s ease;
+}
+
+.shopg-template-gallery .choose-template-btn:hover {
+	background: linear-gradient(135deg, #1e5f8f 0%, #1a4e78 100%);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(34,113,177,0.3);
+}
+
+.shopg-template-gallery .choose-template-btn:hover::before {
+	left: 100%;
+}
+
+/* Modal Styles */
+.shopglut-template-modal-image-modal {
+	position: fixed !important;
+	top: 0 !important;
+	left: 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+	background: rgba(0, 0, 0, 0.9) !important;
+	z-index: 999999 !important;
+	display: none !important;
+	align-items: center !important;
+	justify-content: center !important;
+}
+
+.shopglut-template-modal-modal-content {
+	background: white !important;
+	border-radius: 12px !important;
+	max-width: 95% !important;
+	max-height: 95% !important;
+	width: 95% !important;
+	height: auto !important;
+	position: relative !important;
+	overflow: auto !important;
+	box-shadow: 0 20px 60px rgba(0,0,0,0.5) !important;
+	animation: modalSlideIn 0.3s ease-out !important;
+	z-index: 1000000 !important;
+	display: flex !important;
+	flex-direction: column !important;
+}
+
+@keyframes modalSlideIn {
+	from {
+		transform: scale(0.8) translateY(20px);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1) translateY(0);
+		opacity: 1;
+	}
+}
+
+.shopglut-template-modal-close-modal {
+	position: absolute !important;
+	top: 20px !important;
+	right: 25px !important;
+	font-size: 32px !important;
+	font-weight: bold !important;
+	color: #555 !important;
+	cursor: pointer !important;
+	z-index: 1000001 !important;
+	background: rgba(255, 255, 255, 0.95) !important;
+	border-radius: 50% !important;
+	width: 45px !important;
+	height: 45px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+	transition: all 0.3s ease !important;
+	backdrop-filter: blur(10px) !important;
+}
+
+.shopglut-template-modal-close-modal:hover {
+	background: rgba(255, 255, 255, 1);
+	transform: scale(1.1);
+	color: #333;
+}
+
+.shopglut-template-modal-modal-body {
+	padding: 25px;
+	max-height: calc(95vh - 80px);
+	overflow-y: auto !important;
+	flex: 1;
+}
+
+.shopglut-template-modal-modal-image {
+	max-width: 100%;
+	max-height: 85vh;
+	border-radius: 8px;
+	box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* ===================================
+   HTML DEMO PREVIEW STYLES
+   =================================== */
+
+/* HTML Demo Preview Container */
+.shopg-template-gallery .template-html-container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background: #ffffff;
+	border-radius: 6px;
+	overflow: hidden;
+	border: 1px solid #e5e7eb;
+}
+
+/* Background: Scaled HTML Preview */
+.shopg-template-gallery .html-preview-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	pointer-events: none;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.shopg-template-gallery .html-preview-background::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 50%;
+	pointer-events: none;
+	z-index: 1;
+}
+
+/* Module-specific scaling */
+.shopg-template-gallery .html-preview-background .shopglut-single-product {
+	transform: scale(0.62);
+	transform-origin: top center;
+	width: 217%;
+}
+
+.shopg-template-gallery .html-preview-background .shopglut-cart-page {
+	transform: scale(0.50);
+	transform-origin: top center;
+	width: 200%;
+}
+
+.shopg-template-gallery .html-preview-background .shopglut-ordercomplete-page {
+	transform: scale(0.62);
+	transform-origin: top center;
+	width: 161%;
+}
+
+.shopg-template-gallery .html-preview-background .shopglut-account-page {
+	transform: scale(0.62);
+	transform-origin: top center;
+	width: 161%;
+}
+
+
+/* Container widths */
+.shopg-template-gallery .html-preview-background .shopglut-single-product-container,
+.shopg-template-gallery .html-preview-background .shopglut-cart-container,
+.shopg-template-gallery .html-preview-background .shopglut-ordercomplete-container,
+.shopg-template-gallery .html-preview-background .shopglut-account-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	width: 100%;
+}
+
+/* Fix container query issues for cart */
+.shopg-template-gallery .html-preview-background .shopglut-cart.template1 {
+	container-type: normal !important;
+	width: 100% !important;
+}
+
+/* Ensure cart items display properly */
+.shopg-template-gallery .html-preview-background .cart-items-wrapper,
+.shopg-template-gallery .html-preview-background .cart-summary-wrapper {
+	display: block !important;
+}
+
+/* Overlay with Button */
+.shopg-template-gallery .html-preview-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(3px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease;
+	opacity: 0;
+	z-index: 2;
+}
+
+.shopg-template-gallery .template-html-container:hover .html-preview-overlay {
+	opacity: 1;
+}
+
+/* View Demo Button */
+.shopg-template-gallery .demo-view-btn {
+	background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+	color: #667eea;
+	border: 2px solid rgba(102, 126, 234, 0.2);
+	padding: 18px 42px;
+	border-radius: 50px;
+	font-size: 16px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	box-shadow: 0 8px 25px rgba(102, 126, 234, 0.25), 0 3px 10px rgba(0, 0, 0, 0.1);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	position: relative;
+	overflow: hidden;
+}
+
+.shopg-template-gallery .demo-view-btn::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+	transition: left 0.5s ease;
+}
+
+.shopg-template-gallery .demo-view-btn:hover {
+	transform: translateY(-3px) scale(1.02);
+	box-shadow: 0 15px 40px rgba(102, 126, 234, 0.35), 0 5px 15px rgba(0, 0, 0, 0.15);
+	border-color: #667eea;
+	background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+}
+
+.shopg-template-gallery .demo-view-btn:hover::before {
+	left: 100%;
+}
+
+.shopg-template-gallery .demo-view-btn:active {
+	transform: translateY(-1px) scale(1.01);
+}
+
+.shopg-template-gallery .demo-view-btn svg {
+	width: 22px;
+	height: 22px;
+}
+
+/* Full demo modal styles */
+.shopglut-html-demo-modal-content {
+	max-width: 98% !important;
+	max-height: 95vh !important;
+	width: 1400px !important;
+	display: flex !important;
+	flex-direction: column !important;
+}
+
+.shopglut-html-demo-modal-content .shopglut-template-modal-modal-body {
+	padding: 0 !important;
+	overflow-y: auto !important;
+	display: flex !important;
+	flex-direction: column !important;
+	max-height: 98vh !important;
+}
+
+.shopglut-html-demo-modal-content.shopglut-template-modal-modal-content {
+	background: #f5f5f5 !important;
+}
+
+/* Modal Header */
+.html-demo-header {
+	background: white;
+	padding: 20px 25px;
+	border-bottom: 2px solid #e5e7eb;
+	flex-shrink: 0;
+}
+
+.html-demo-header-title {
+	margin: 0;
+	font-size: 20px;
+	font-weight: 700;
+	color: #111827;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.html-demo-header-title svg {
+	stroke: #667eea;
+}
+
+.html-demo-header-subtitle {
+	margin: 5px 0 0 0;
+	font-size: 14px;
+	color: #6b7280;
+	font-weight: 400;
+}
+
+/* Modal Content */
+.html-demo-full-view {
+	width: 100%;
+	flex: 1;
+	overflow-y: auto !important;
+	overflow-x: hidden;
+	padding: 20px;
+}
+
+/* Custom scrollbar for demo modal */
+.html-demo-full-view::-webkit-scrollbar {
+	width: 12px;
+}
+
+.html-demo-full-view::-webkit-scrollbar-track {
+	background: #f1f1f1;
+	border-radius: 10px;
+	margin: 5px 0;
+}
+
+.html-demo-full-view::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius: 10px;
+	border: 2px solid #f1f1f1;
+}
+
+.html-demo-full-view::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+/* Module-specific containers in modal */
+.html-demo-full-view .shopglut-single-product-container,
+.html-demo-full-view .shopglut-cart-container,
+.html-demo-full-view .shopglut-ordercomplete-container,
+.html-demo-full-view .shopglut-account-container {
+	pointer-events: auto;
+	background: white;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+	padding: 20px;
+	min-height: 100%;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+	.shopg-template-gallery .html-preview-background .shopglut-single-product {
+		transform: scale(0.40);
+		width: 250%;
+	}
+
+	.shopg-template-gallery .html-preview-background .shopglut-cart-page {
+		transform: scale(0.35);
+		width: 285%;
+	}
+
+	.shopg-template-gallery .html-preview-background .shopglut-ordercomplete-page {
+		transform: scale(0.40);
+		width: 250%;
+	}
+
+	.shopg-template-gallery .html-preview-background .shopglut-account-page {
+		transform: scale(0.40);
+		width: 250%;
+	}
+
+	.shopg-template-gallery .demo-view-btn {
+		padding: 14px 32px;
+		font-size: 15px;
+	}
+
+	.shopg-template-gallery .demo-view-btn svg {
+		width: 20px;
+		height: 20px;
+	}
+
+	.shopglut-html-demo-modal-content {
+		width: 95% !important;
+		max-height: 92vh !important;
+	}
+
+	.shopglut-html-demo-modal-content .shopglut-template-modal-modal-body {
+		max-height: calc(92vh - 70px) !important;
+		overflow-y: auto !important;
+	}
+
+	.html-demo-header {
+		padding: 15px 20px;
+	}
+
+	.html-demo-header-title {
+		font-size: 18px;
+	}
+
+	.html-demo-header-subtitle {
+		font-size: 13px;
+	}
+
+	.html-demo-full-view {
+		padding: 15px;
+	}
+
+	.html-demo-full-view .shopglut-single-product-container,
+	.html-demo-full-view .shopglut-cart-container,
+	.html-demo-full-view .shopglut-ordercomplete-container,
+	.html-demo-full-view .shopglut-account-container {
+		padding: 15px;
+	}
+}
+
+@media (max-width: 480px) {
+	.shopg-template-gallery .html-preview-background .shopglut-single-product {
+		transform: scale(0.35);
+		width: 285%;
+	}
+
+	.shopg-template-gallery .html-preview-background .shopglut-cart-page {
+		transform: scale(0.28);
+		width: 357%;
+	}
+
+	.shopg-template-gallery .html-preview-background .shopglut-ordercomplete-page {
+		transform: scale(0.35);
+		width: 285%;
+	}
+
+	.shopg-template-gallery .html-preview-background .shopglut-account-page {
+		transform: scale(0.35);
+		width: 285%;
+	}
+
+	.shopg-template-gallery .demo-view-btn {
+		padding: 12px 24px;
+		font-size: 13px;
+		gap: 8px;
+	}
+
+	.shopg-template-gallery .demo-view-btn svg {
+		width: 18px;
+		height: 18px;
+	}
+
+	.shopglut-html-demo-modal-content {
+		max-height: 90vh !important;
+	}
+
+	.shopglut-html-demo-modal-content .shopglut-template-modal-modal-body {
+		max-height: calc(90vh - 60px) !important;
+	}
+
+	.html-demo-header {
+		padding: 12px 15px;
+	}
+
+	.html-demo-header-title {
+		font-size: 16px;
+	}
+
+	.html-demo-header-title svg {
+		width: 20px;
+		height: 20px;
+	}
+
+	.html-demo-header-subtitle {
+		font-size: 12px;
+	}
+
+	.html-demo-full-view {
+		padding: 10px;
+	}
+
+	.html-demo-full-view .shopglut-single-product-container,
+	.html-demo-full-view .shopglut-cart-container,
+	.html-demo-full-view .shopglut-ordercomplete-container,
+	.html-demo-full-view .shopglut-account-container {
+		padding: 10px;
+	}
+}
+
+/* ===================================
+   RESPONSIVE STYLES
+   =================================== */
+
+@media (max-width: 768px) {
+	.shopg-template-gallery .template-content.product-demo {
+		height: 250px;
+	}
+
+	.shopg-template-gallery .shopg-template-preview {
+		margin: 10px;
+	}
+
+	.shopg-template-gallery .html-preview-background .shopglut-single-product {
+		transform: scale(0.40);
+		width: 250%;
+	}
+
+	.shopg-template-gallery .html-preview-background .shopglut-cart-page {
+		transform: scale(0.35);
+		width: 285%;
+	}
+
+	.shopg-template-gallery .html-preview-background .shopglut-ordercomplete-page {
+		transform: scale(0.40);
+		width: 250%;
+	}
+
+	.shopg-template-gallery .html-preview-background .shopglut-account-page {
+		transform: scale(0.40);
+		width: 250%;
+	}
+
+	.shopg-template-gallery .demo-view-btn {
+		padding: 14px 32px;
+		font-size: 15px;
+	}
+
+	.shopg-template-gallery .demo-view-btn svg {
+		width: 20px;
+		height: 20px;
+	}
+
+	.shopglut-html-demo-modal-content {
+		width: 95% !important;
+		max-height: 92vh !important;
+	}
+
+	.shopglut-html-demo-modal-content .shopglut-template-modal-modal-body {
+		max-height: calc(92vh - 70px) !important;
+		overflow-y: auto !important;
+	}
+
+	.html-demo-header {
+		padding: 15px 20px;
+	}
+
+	.html-demo-header-title {
+		font-size: 18px;
+	}
+
+	.html-demo-header-subtitle {
+		font-size: 13px;
+	}
+
+	.html-demo-full-view {
+		padding: 15px;
+	}
+
+	.html-demo-full-view .shopglut-single-product-container,
+	.html-demo-full-view .shopglut-cart-container,
+	.html-demo-full-view .shopglut-ordercomplete-container,
+	.html-demo-full-view .shopglut-account-container {
+		padding: 15px;
+	}
+}
+
+@media (max-width: 480px) {
+	.shopg-template-gallery .template-content.product-demo {
+		height: 200px;
+	}
+
+	.shopg-template-gallery .template-header {
+		padding: 15px;
+	}
+
+	.shopg-template-gallery .template-header h2 {
+		font-size: 14px;
+	}
+
+	.shopg-template-gallery .html-preview-background .shopglut-single-product {
+		transform: scale(0.35);
+		width: 285%;
+	}
+
+	.shopg-template-gallery .html-preview-background .shopglut-cart-page {
+		transform: scale(0.28);
+		width: 357%;
+	}
+
+	.shopg-template-gallery .html-preview-background .shopglut-ordercomplete-page {
+		transform: scale(0.35);
+		width: 285%;
+	}
+
+	.shopg-template-gallery .html-preview-background .shopglut-account-page {
+		transform: scale(0.35);
+		width: 285%;
+	}
+
+	.shopg-template-gallery .demo-view-btn {
+		padding: 12px 24px;
+		font-size: 13px;
+		gap: 8px;
+	}
+
+	.shopg-template-gallery .demo-view-btn svg {
+		width: 18px;
+		height: 18px;
+	}
+
+	.shopglut-html-demo-modal-content {
+		max-height: 90vh !important;
+	}
+
+	.shopglut-html-demo-modal-content .shopglut-template-modal-modal-body {
+		max-height: calc(90vh - 60px) !important;
+	}
+
+	.html-demo-header {
+		padding: 12px 15px;
+	}
+
+	.html-demo-header-title {
+		font-size: 16px;
+	}
+
+	.html-demo-header-title svg {
+		width: 20px;
+		height: 20px;
+	}
+
+	.html-demo-header-subtitle {
+		font-size: 12px;
+	}
+
+	.html-demo-full-view {
+		padding: 10px;
+	}
+
+	.html-demo-full-view .shopglut-single-product-container,
+	.html-demo-full-view .shopglut-cart-container,
+	.html-demo-full-view .shopglut-ordercomplete-container,
+	.html-demo-full-view .shopglut-account-container {
+		padding: 10px;
+	}
+}

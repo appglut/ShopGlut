@@ -1,0 +1,310 @@
+<!-- Customization Panel with Tabs -->
+<div class="customization-panel" style="background: #fff; padding: 0; border: 1px solid #ddd; border-radius: 8px; height: fit-content; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column;">
+
+    <!-- Tab Navigation -->
+    <div class="settings-tabs" style="display: flex; border-bottom: 2px solid #eee; background: #f9f9f9;">
+        <button type="button" class="settings-tab active" data-tab="design" style="flex: 1; padding: 15px 10px; border: none; background: #fff; cursor: pointer; font-weight: 600; border-bottom: 3px solid #2271b1; color: #2271b1; transition: all 0.3s;">
+            <span class="dashicons dashicons-admin-appearance" style="font-size: 16px; width: 16px; height: 16px; vertical-align: middle; margin-right: 5px;"></span>
+            Design
+        </button>
+        <button type="button" class="settings-tab" data-tab="login-text" style="flex: 1; padding: 15px 10px; border: none; background: transparent; cursor: pointer; font-weight: 600; border-bottom: 3px solid transparent; color: #666; transition: all 0.3s;">
+            <span class="dashicons dashicons-lock" style="font-size: 16px; width: 16px; height: 16px; vertical-align: middle; margin-right: 5px;"></span>
+            Login
+        </button>
+        <button type="button" class="settings-tab" data-tab="register-text" style="flex: 1; padding: 15px 10px; border: none; background: transparent; cursor: pointer; font-weight: 600; border-bottom: 3px solid transparent; color: #666; transition: all 0.3s;">
+            <span class="dashicons dashicons-edit" style="font-size: 16px; width: 16px; height: 16px; vertical-align: middle; margin-right: 5px;"></span>
+            Register
+        </button>
+    </div>
+
+    <!-- Tab Content Container -->
+    <div class="settings-tab-content" style="flex: 1; overflow-y: auto; padding: 25px;">
+
+        <!-- Design Tab -->
+        <div class="tab-panel active" id="design-panel">
+            <h3 style="margin-top: 0; color: #23282d; font-size: 18px;">Design & Layout</h3>
+
+            <!-- Colors Section -->
+            <div class="settings-group" style="margin-bottom: 25px; padding: 15px; background: #f9f9f9; border-radius: 6px;">
+                <h4 style="margin: 0 0 15px 0; color: #2271b1; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">Colors</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Primary Color</label>
+                        <input type="color" name="primary_color" value="<?php echo esc_attr($custom_settings['primary_color']); ?>" style="width: 100%; height: 40px; cursor: pointer; border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Secondary Color</label>
+                        <input type="color" name="secondary_color" value="<?php echo esc_attr($custom_settings['secondary_color']); ?>" style="width: 100%; height: 40px; cursor: pointer; border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Background</label>
+                        <input type="color" name="background_color" value="<?php echo esc_attr($custom_settings['background_color']); ?>" style="width: 100%; height: 40px; cursor: pointer; border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Text Color</label>
+                        <input type="color" name="text_color" value="<?php echo esc_attr($custom_settings['text_color']); ?>" style="width: 100%; height: 40px; cursor: pointer; border-radius: 4px;">
+                    </div>
+                    <div style="grid-column: 1 / -1;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Input Border Color</label>
+                        <input type="color" name="input_border_color" value="<?php echo esc_attr($custom_settings['input_border_color']); ?>" style="width: 100%; height: 40px; cursor: pointer; border-radius: 4px;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typography Section -->
+            <div class="settings-group" style="margin-bottom: 25px; padding: 15px; background: #f9f9f9; border-radius: 6px;">
+                <h4 style="margin: 0 0 15px 0; color: #2271b1; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">Typography</h4>
+                <div style="margin-bottom: 12px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Font Family</label>
+                    <select name="font_family" style="width: 100%; padding: 8px; font-size: 13px; border-radius: 4px;">
+                        <option value="inherit" <?php selected($custom_settings['font_family'], 'inherit'); ?>>Default</option>
+                        <option value="'Arial', sans-serif" <?php selected($custom_settings['font_family'], "'Arial', sans-serif"); ?>>Arial</option>
+                        <option value="'Helvetica', sans-serif" <?php selected($custom_settings['font_family'], "'Helvetica', sans-serif"); ?>>Helvetica</option>
+                        <option value="'Georgia', serif" <?php selected($custom_settings['font_family'], "'Georgia', serif"); ?>>Georgia</option>
+                        <option value="'Times New Roman', serif" <?php selected($custom_settings['font_family'], "'Times New Roman', serif"); ?>>Times New Roman</option>
+                    </select>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Body Font Size</label>
+                        <select name="font_size" style="width: 100%; padding: 8px; font-size: 13px; border-radius: 4px;">
+                            <option value="14px" <?php selected($custom_settings['font_size'], '14px'); ?>>Small (14px)</option>
+                            <option value="16px" <?php selected($custom_settings['font_size'], '16px'); ?>>Medium (16px)</option>
+                            <option value="18px" <?php selected($custom_settings['font_size'], '18px'); ?>>Large (18px)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Heading Size</label>
+                        <select name="heading_font_size" style="width: 100%; padding: 8px; font-size: 13px; border-radius: 4px;">
+                            <option value="20px" <?php selected($custom_settings['heading_font_size'], '20px'); ?>>Small (20px)</option>
+                            <option value="24px" <?php selected($custom_settings['heading_font_size'], '24px'); ?>>Medium (24px)</option>
+                            <option value="28px" <?php selected($custom_settings['heading_font_size'], '28px'); ?>>Large (28px)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layout Section -->
+            <div class="settings-group" style="margin-bottom: 25px; padding: 15px; background: #f9f9f9; border-radius: 6px;">
+                <h4 style="margin: 0 0 15px 0; color: #2271b1; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">Layout & Spacing</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Form Width</label>
+                        <select name="form_width" style="width: 100%; padding: 8px; font-size: 13px; border-radius: 4px;">
+                            <option value="300px" <?php selected($custom_settings['form_width'], '300px'); ?>>Narrow (300px)</option>
+                            <option value="400px" <?php selected($custom_settings['form_width'], '400px'); ?>>Medium (400px)</option>
+                            <option value="500px" <?php selected($custom_settings['form_width'], '500px'); ?>>Wide (500px)</option>
+                            <option value="600px" <?php selected($custom_settings['form_width'], '600px'); ?>>Extra Wide (600px)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Border Radius</label>
+                        <select name="border_radius" style="width: 100%; padding: 8px; font-size: 13px; border-radius: 4px;">
+                            <option value="0px" <?php selected($custom_settings['border_radius'], '0px'); ?>>None</option>
+                            <option value="4px" <?php selected($custom_settings['border_radius'], '4px'); ?>>Small (4px)</option>
+                            <option value="8px" <?php selected($custom_settings['border_radius'], '8px'); ?>>Medium (8px)</option>
+                            <option value="16px" <?php selected($custom_settings['border_radius'], '16px'); ?>>Large (16px)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Input Padding</label>
+                        <select name="input_padding" style="width: 100%; padding: 8px; font-size: 13px; border-radius: 4px;">
+                            <option value="8px" <?php selected($custom_settings['input_padding'], '8px'); ?>>Compact (8px)</option>
+                            <option value="12px" <?php selected($custom_settings['input_padding'], '12px'); ?>>Normal (12px)</option>
+                            <option value="16px" <?php selected($custom_settings['input_padding'], '16px'); ?>>Comfortable (16px)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Button Padding</label>
+                        <select name="button_padding" style="width: 100%; padding: 8px; font-size: 13px; border-radius: 4px;">
+                            <option value="10px" <?php selected($custom_settings['button_padding'], '10px'); ?>>Compact (10px)</option>
+                            <option value="15px" <?php selected($custom_settings['button_padding'], '15px'); ?>>Normal (15px)</option>
+                            <option value="20px" <?php selected($custom_settings['button_padding'], '20px'); ?>>Large (20px)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Text Tab -->
+        <div class="tab-panel" id="login-text-panel" style="display: none;">
+            <h3 style="margin-top: 0; color: #23282d; font-size: 18px;">Login Form Customization</h3>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div style="grid-column: 1 / -1;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 13px;">Login Title</label>
+                    <input type="text" name="login_title" value="<?php echo esc_attr($custom_settings['login_title']); ?>" style="width: 100%; padding: 8px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Username Label</label>
+                    <input type="text" name="login_username_label" value="<?php echo esc_attr($custom_settings['login_username_label']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Username Placeholder</label>
+                    <input type="text" name="login_username_placeholder" value="<?php echo esc_attr($custom_settings['login_username_placeholder']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Password Label</label>
+                    <input type="text" name="login_password_label" value="<?php echo esc_attr($custom_settings['login_password_label']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Password Placeholder</label>
+                    <input type="text" name="login_password_placeholder" value="<?php echo esc_attr($custom_settings['login_password_placeholder']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+
+                <div style="grid-column: 1 / -1;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Remember Me Label</label>
+                    <input type="text" name="login_remember_label" value="<?php echo esc_attr($custom_settings['login_remember_label']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+
+                <div style="grid-column: 1 / -1;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Button Text</label>
+                    <input type="text" name="login_button_text" value="<?php echo esc_attr($custom_settings['login_button_text']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+
+                <div style="grid-column: 1 / -1;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Forgot Password Text</label>
+                    <input type="text" name="login_forgot_text" value="<?php echo esc_attr($custom_settings['login_forgot_text']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+
+                <div style="grid-column: 1 / -1;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Register Link Text</label>
+                    <input type="text" name="login_register_link_text" value="<?php echo esc_attr($custom_settings['login_register_link_text']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Register Text Tab -->
+        <div class="tab-panel" id="register-text-panel" style="display: none;">
+            <h3 style="margin-top: 0; color: #23282d; font-size: 18px;">Register Form Customization</h3>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div style="grid-column: 1 / -1;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 13px;">Register Title</label>
+                    <input type="text" name="register_title" value="<?php echo esc_attr($custom_settings['register_title']); ?>" style="width: 100%; padding: 8px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Full Name Label</label>
+                    <input type="text" name="register_name_label" value="<?php echo esc_attr($custom_settings['register_name_label']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Full Name Placeholder</label>
+                    <input type="text" name="register_name_placeholder" value="<?php echo esc_attr($custom_settings['register_name_placeholder']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Email Label</label>
+                    <input type="text" name="register_email_label" value="<?php echo esc_attr($custom_settings['register_email_label']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Email Placeholder</label>
+                    <input type="text" name="register_email_placeholder" value="<?php echo esc_attr($custom_settings['register_email_placeholder']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Username Label</label>
+                    <input type="text" name="register_username_label" value="<?php echo esc_attr($custom_settings['register_username_label']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Username Placeholder</label>
+                    <input type="text" name="register_username_placeholder" value="<?php echo esc_attr($custom_settings['register_username_placeholder']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Password Label</label>
+                    <input type="text" name="register_password_label" value="<?php echo esc_attr($custom_settings['register_password_label']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Password Placeholder</label>
+                    <input type="text" name="register_password_placeholder" value="<?php echo esc_attr($custom_settings['register_password_placeholder']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Confirm Password Label</label>
+                    <input type="text" name="register_confirm_password_label" value="<?php echo esc_attr($custom_settings['register_confirm_password_label']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Confirm Password Placeholder</label>
+                    <input type="text" name="register_confirm_password_placeholder" value="<?php echo esc_attr($custom_settings['register_confirm_password_placeholder']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+
+                <div style="grid-column: 1 / -1;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Terms & Conditions Text</label>
+                    <input type="text" name="register_terms_text" value="<?php echo esc_attr($custom_settings['register_terms_text']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+
+                <div style="grid-column: 1 / -1;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Button Text</label>
+                    <input type="text" name="register_button_text" value="<?php echo esc_attr($custom_settings['register_button_text']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+
+                <div style="grid-column: 1 / -1;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 12px;">Login Link Text</label>
+                    <input type="text" name="register_login_link_text" value="<?php echo esc_attr($custom_settings['register_login_link_text']); ?>" style="width: 100%; padding: 6px; font-size: 13px; border-radius: 4px; border: 1px solid #ddd;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Footer with Buttons -->
+    <div style="padding: 20px; border-top: 2px solid #eee; background: #f9f9f9;">
+        <button type="button" class="button button-primary button-large" onclick="saveCustomization()" style="width: 100%; margin-bottom: 10px; height: 44px; font-size: 14px;">
+            <span class="dashicons dashicons-yes" style="vertical-align: middle; margin-right: 5px;"></span>
+            Save Customization
+        </button>
+        <button type="button" class="button button-large" onclick="resetToDefault()" style="width: 100%; height: 40px;">
+            <span class="dashicons dashicons-image-rotate" style="vertical-align: middle; margin-right: 5px;"></span>
+            Reset to Default
+        </button>
+    </div>
+</div>
+
+<style>
+.settings-tab:hover {
+    background: #f0f0f0 !important;
+}
+
+.settings-tab.active {
+    background: #fff !important;
+    border-bottom-color: #2271b1 !important;
+    color: #2271b1 !important;
+}
+
+.settings-tab-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.settings-tab-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.settings-tab-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.settings-tab-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+</style>
+
+<script>
+jQuery(document).ready(function($) {
+    // Tab switching
+    $('.settings-tab').on('click', function() {
+        var tab = $(this).data('tab');
+
+        // Update tab buttons
+        $('.settings-tab').removeClass('active');
+        $(this).addClass('active');
+
+        // Show/hide tab panels
+        $('.tab-panel').hide();
+        $('#' + tab + '-panel').show();
+    });
+});
+</script>

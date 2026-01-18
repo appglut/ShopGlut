@@ -1,0 +1,106 @@
+/**
+ * ShopGlut Filters Frontend Styles
+ */
+
+/* Pagination Styles */
+.shopglut-pagination {
+    margin: 2em 0;
+    text-align: center;
+    clear: both;
+}
+
+.shopglut-pagination .page-numbers {
+    list-style: none;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.shopglut-pagination .page-numbers li {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.shopglut-pagination .page-numbers a,
+.shopglut-pagination .page-numbers .current {
+    display: inline-block;
+    padding: 8px 12px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #0073aa;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    min-width: 40px;
+    text-align: center;
+}
+
+.shopglut-pagination .page-numbers .current {
+    background-color: #0073aa;
+    color: #fff;
+    border-color: #0073aa;
+}
+
+.shopglut-pagination .page-numbers a:hover {
+    background-color: #e3f2fd;
+    border-color: #0073aa;
+    color: #005a87;
+}
+
+.shopglut-pagination .page-numbers .current:hover {
+    background-color: #005a87;
+    border-color: #005a87;
+}
+
+/* Loading Overlay */
+.shopglut-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.shopglut-loading-overlay .spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #0073aa;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: shopglut-spin 1s linear infinite;
+}
+
+@keyframes shopglut-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Product container with loading state */
+.products.loading {
+    position: relative;
+    min-height: 200px;
+}
+
+/* Filter container basic styles */
+.shopglut-filter-container {
+    margin-bottom: 2em;
+}
+
+/* Responsive pagination */
+@media (max-width: 768px) {
+    .shopglut-pagination .page-numbers li {
+        margin: 0 2px;
+    }
+
+    .shopglut-pagination .page-numbers a,
+    .shopglut-pagination .page-numbers .current {
+        padding: 6px 10px;
+        min-width: 35px;
+        font-size: 14px;
+    }
+}

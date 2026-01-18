@@ -1,0 +1,10 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#f8f9fa"/>
+  <rect width="400" height="80" fill="#ffffff" stroke="#d4a574" stroke-width="3"/>
+  <text x="200" y="45" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#2c3e50">Classic Shop</text>
+  <rect x="20" y="100" width="360" height="140" fill="#ffffff" stroke="#dee2e6" stroke-width="1"/>
+  <text x="200" y="175" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#495057">Classic & Elegant Design</text>
+  <rect width="400" height="60" y="240" fill="#2c3e50"/>
+  <rect width="400" height="3" y="240" fill="#d4a574"/>
+  <text x="200" y="275" text-anchor="middle" font-family="Georgia, serif" font-size="12" fill="#ecf0f1">Classic Footer with Gold Accent</text>
+</svg>

@@ -1,0 +1,1061 @@
+/**
+ * ShopGlut Mini Cart Styles
+ * @package ShopGlut
+ */
+
+/* ===================================
+   Floating Cart Icon - Professional Design
+   =================================== */
+.shopglut-floating-cart {
+    position: fixed;
+    z-index: 999999;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.shopglut-floating-cart.position-right {
+    right: var(--sg-floating-position-side, 30px);
+}
+
+.shopglut-floating-cart.position-left {
+    left: var(--sg-floating-position-side, 30px);
+}
+
+.shopglut-floating-cart {
+    bottom: var(--sg-floating-position-bottom, 30px);
+}
+
+.shopglut-floating-cart-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: var(--sg-floating-bg-color, #2271b1);
+    color: var(--sg-floating-icon-color, #ffffff);
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.shopglut-floating-cart:hover .shopglut-floating-cart-icon {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.shopglut-floating-cart-icon i {
+    font-size: var(--sg-floating-icon-size, 24px);
+}
+
+.shopglut-floating-cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    min-width: 26px;
+    height: 26px;
+    background: var(--sg-badge-bg-color, #ff4444);
+    color: var(--sg-badge-text-color, #ffffff);
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 0 6px;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(255, 68, 68, 0.3);
+    animation: pulse 2s infinite;
+    z-index: 2;
+}
+
+/* Pulse animation for badge */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(255, 68, 68, 0.3);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 2px 12px rgba(255, 68, 68, 0.5);
+    }
+}
+
+/* Hide empty badge */
+.shopglut-floating-cart-badge:empty {
+    display: none;
+}
+
+/* ===================================
+   Loading States & Animations
+   =================================== */
+.shopglut-cart-loading {
+    position: relative;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.shopglut-cart-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid var(--sg-primary-color, #2271b1);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Cart item animation */
+.shopglut-cart-item {
+    animation: slideInFromRight 0.3s ease-out;
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Remove animation */
+.shopglut-cart-item.removing {
+    animation: slideOutToRight 0.3s ease-in forwards;
+}
+
+@keyframes slideOutToRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* Notification styles */
+.shopglut-cart-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--sg-primary-color, #2271b1);
+    color: white;
+    padding: 16px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10000000;
+    animation: slideDown 0.3s ease-out;
+    max-width: 300px;
+}
+
+.shopglut-cart-notification.error {
+    background: var(--sg-remove_button_color, #ff4444);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Cart share button styling */
+.shopglut-cart-share-button {
+    background: var(--sg-primary-color, #2271b1);
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.shopglut-cart-share-button:hover {
+    background: var(--sg-button_hover_color, #135e96);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.shopglut-cart-share-button:active {
+    transform: translateY(0);
+}
+
+/* ===================================
+   Navigation Menu Cart Integration
+   =================================== */
+.shopglut-menu-cart-item {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.shopglut-menu-cart {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.shopglut-menu-cart:hover {
+    color: var(--sg-primary-color, #2271b1);
+    text-decoration: none;
+}
+
+.shopglut-menu-cart svg,
+.shopglut-menu-cart i {
+    font-size: 18px;
+    margin-right: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.shopglut-menu-cart-count {
+    background: var(--sg-badge-bg-color, #ff4444);
+    color: var(--sg-badge-text-color, #ffffff);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 5px;
+    border-radius: 8px;
+    min-width: 18px;
+    height: 18px;
+    text-align: center;
+    line-height: 1;
+    margin-left: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* ===================================
+   Cart Sidebar/Drawer - Professional Design
+   =================================== */
+.shopglut-mini-cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(2px);
+}
+
+.shopglut-mini-cart-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.shopglut-mini-cart-sidebar {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: var(--sg-cart-width, 420px);
+    max-width: 95vw;
+    background: var(--sg-bg-color, #ffffff);
+    z-index: 9999999;
+    display: flex;
+    flex-direction: column;
+    box-shadow:
+        0 0 40px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(0, 0, 0, 0.1);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Position and Animations */
+.shopglut-mini-cart-sidebar.position-right {
+    right: 0;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shopglut-mini-cart-sidebar.position-left {
+    left: 0;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shopglut-mini-cart-sidebar.active {
+    transform: translateX(0);
+}
+
+/* Fade Animation */
+.shopglut-mini-cart-sidebar.animation-fade {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.shopglut-mini-cart-sidebar.animation-fade.active {
+    opacity: 1;
+}
+
+/* Scale Animation */
+.shopglut-mini-cart-sidebar.animation-scale {
+    transform: scale(0.9) translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.shopglut-mini-cart-sidebar.animation-scale.active {
+    transform: scale(1) translateX(0);
+}
+
+/* Enhanced Animation Combinations */
+.shopglut-mini-cart-sidebar.animation-slide.position-right {
+    transform: translateX(120%);
+}
+
+.shopglut-mini-cart-sidebar.animation-slide.position-left {
+    transform: translateX(-120%);
+}
+
+/* Smooth backdrop */
+.shopglut-mini-cart-sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    z-index: 1;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .shopglut-mini-cart-sidebar {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .shopglut-mini-cart-sidebar.position-right,
+    .shopglut-mini-cart-sidebar.position-left {
+        transform: translateX(100%);
+    }
+
+    .shopglut-mini-cart-sidebar.position-left {
+        transform: translateX(-100%);
+    }
+}
+
+/* ===================================
+   Cart Header - Professional Design
+   =================================== */
+.shopglut-cart-header {
+    background: var(--sg-sidebar-header-bg, #2271b1);
+    color: var(--sg-sidebar-header-text, #ffffff);
+    padding: 24px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Header gradient overlay */
+.shopglut-cart-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+}
+
+.shopglut-cart-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: -0.02em;
+}
+
+.shopglut-cart-count {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 20px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.shopglut-cart-close {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: inherit;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 2;
+}
+
+.shopglut-cart-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.shopglut-cart-close:active {
+    transform: scale(0.95);
+}
+
+/* Cart icon in header */
+.shopglut-cart-header h3::before {
+    content: '🛒';
+    font-size: 18px;
+    filter: grayscale(0) brightness(1.5);
+}
+
+/* ===================================
+   Cart Items - Professional Design
+   =================================== */
+.shopglut-cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background: var(--sg-bg-color, #ffffff);
+    min-height: 200px;
+    max-height: calc(100vh - 300px);
+}
+
+/* Custom scrollbar - Much wider and more visible */
+.shopglut-cart-items::-webkit-scrollbar {
+    width: 16px !important;
+}
+
+.shopglut-cart-items::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1) !important;
+    border-radius: 8px;
+    margin: 4px;
+}
+
+.shopglut-cart-items::-webkit-scrollbar-thumb {
+    background: var(--sg-primary-color, #2271b1) !important;
+    border-radius: 8px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    transition: all 0.3s ease;
+    min-height: 40px;
+}
+
+.shopglut-cart-items::-webkit-scrollbar-thumb:hover {
+    background: var(--sg-button_hover_color, #135e96) !important;
+}
+
+/* Firefox scrollbar */
+.shopglut-cart-items {
+    scrollbar-width: thick;
+    scrollbar-color: var(--sg-primary-color, #2271b1) rgba(0, 0, 0, 0.1);
+}
+
+.shopglut-cart-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--sg-text-color, #333333);
+    background: var(--sg-bg-color, #ffffff);
+}
+
+.shopglut-cart-empty i {
+    font-size: 64px;
+    color: #e0e0e0;
+    margin-bottom: 20px;
+    display: block;
+    opacity: 0.6;
+}
+
+.shopglut-cart-empty p {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+    font-weight: 400;
+}
+
+.shopglut-cart-item {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    border: 1px solid var(--sg-cart-item-border, #e0e0e0);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    background: var(--sg-bg-color, #ffffff);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.shopglut-cart-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--sg-primary-color, #2271b1), transparent);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+.shopglut-cart-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: var(--sg-primary-color, #2271b1);
+}
+
+.shopglut-cart-item:hover::before {
+    transform: scaleX(1);
+}
+
+.shopglut-cart-item-image {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f8f9fa;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.shopglut-cart-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.shopglut-cart-item:hover .shopglut-cart-item-image img {
+    transform: scale(1.05);
+}
+
+.shopglut-cart-item-details {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.shopglut-cart-item-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--sg-text-color, #333333);
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+.shopglut-cart-item-name a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.shopglut-cart-item-name a:hover {
+    color: var(--sg-primary-color, #2271b1);
+}
+
+.shopglut-cart-item-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--sg-primary-color, #2271b1);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+}
+
+.shopglut-cart-item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.shopglut-quantity-controls {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--sg-border-color, #e0e0e0);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--sg-bg-color, #ffffff);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.shopglut-quantity-btn {
+    background: var(--sg-primary-color, #2271b1);
+    border: none;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    font-size: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.shopglut-quantity-btn:hover {
+    background: var(--sg-button-hover-color, #135e96);
+    transform: scale(1.05);
+}
+
+.shopglut-quantity-btn:active {
+    transform: scale(0.95);
+}
+
+.shopglut-quantity-btn i {
+    transition: transform 0.2s;
+}
+
+.shopglut-quantity-btn:hover i {
+    transform: scale(1.1);
+}
+
+.shopglut-quantity-input {
+    width: 45px;
+    height: 32px;
+    border: none;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sg-text-color, #333333);
+    background: transparent;
+}
+
+.shopglut-cart-item-remove {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 68, 68, 0.1);
+    border: none;
+    color: var(--sg-remove_button_color, #ff4444);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.shopglut-cart-item-remove:hover {
+    background: var(--sg-remove_button_color, #ff4444);
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.shopglut-cart-item-remove:active {
+    transform: scale(0.95);
+}
+
+/* ===================================
+   Cart Footer - Professional Design
+   =================================== */
+.shopglut-cart-footer {
+    padding: 24px 20px;
+    border-top: 1px solid var(--sg-border-color, #e0e0e0);
+    flex-shrink: 0;
+    background: var(--sg-bg-color, #ffffff);
+    position: relative;
+}
+
+/* Footer gradient separator */
+.shopglut-cart-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--sg-border-color, #e0e0e0), transparent);
+}
+
+.shopglut-cart-subtotal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 16px 20px;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.shopglut-cart-subtotal-label {
+    font-weight: 600;
+    color: var(--sg-text-color, #333333);
+    font-size: 16px;
+    letter-spacing: -0.01em;
+}
+
+.shopglut-cart-subtotal-amount {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--sg-primary-color, #2271b1);
+    letter-spacing: -0.02em;
+}
+
+.shopglut-cart-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.shopglut-cart-button-primary,
+.shopglut-checkout-button {
+    width: 100%;
+    padding: 16px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    background: var(--sg-checkout-button-bg, #2271b1);
+    color: var(--sg-checkout-button-text, #ffffff);
+    box-shadow: 0 4px 12px rgba(34, 113, 177, 0.2);
+    position: relative;
+    overflow: hidden;
+    letter-spacing: -0.01em;
+}
+
+/* Button shine effect */
+.shopglut-cart-button-primary::before,
+.shopglut-checkout-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.shopglut-cart-button-primary:hover::before,
+.shopglut-checkout-button:hover::before {
+    left: 100%;
+}
+
+.shopglut-cart-button-primary:hover,
+.shopglut-checkout-button:hover {
+    background: var(--sg-button_hover_color, #135e96);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(34, 113, 177, 0.3);
+}
+
+.shopglut-cart-button-primary:active,
+.shopglut-checkout-button:active {
+    transform: translateY(0);
+}
+
+.shopglut-cart-button-secondary,
+.shopglut-view-cart-button,
+.shopglut-continue-shopping {
+    width: 100%;
+    padding: 14px 24px;
+    border: 2px solid var(--sg-border-color, #e0e0e0);
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    background: transparent;
+    color: var(--sg-text-color, #333333);
+    position: relative;
+    overflow: hidden;
+}
+
+.shopglut-cart-button-secondary:hover,
+.shopglut-view-cart-button:hover {
+    border-color: var(--sg-primary-color, #2271b1);
+    color: var(--sg-primary-color, #2271b1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.shopglut-continue-shopping:hover {
+    background: var(--sg-primary-color, #2271b1);
+    color: #ffffff;
+    border-color: var(--sg-primary-color, #2271b1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.shopglut-cart-button-secondary:active,
+.shopglut-view-cart-button:active,
+.shopglut-continue-shopping:active {
+    transform: translateY(0);
+}
+
+/* ===================================
+   Shipping Calculator
+   =================================== */
+.shopglut-shipping-calculator {
+    margin: 15px 0;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 6px;
+}
+
+.shopglut-shipping-calculator h4 {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sg-text-color, #333333);
+}
+
+.shopglut-shipping-calculator input,
+.shopglut-shipping-calculator select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--sg-border-color, #e0e0e0);
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+/* ===================================
+   Cart Share
+   =================================== */
+.shopglut-cart-share {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--sg-border-color, #e0e0e0);
+}
+
+.shopglut-cart-share-button {
+    width: 100%;
+    padding: 12px;
+    background: #f0f0f0;
+    border: 1px solid var(--sg-border-color, #e0e0e0);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sg-text-color, #333333);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.shopglut-cart-share-button:hover {
+    background: var(--sg-primary-color, #2271b1);
+    color: #fff;
+    border-color: var(--sg-primary-color, #2271b1);
+}
+
+.shopglut-cart-share-form {
+    margin-top: 15px;
+    display: none;
+}
+
+.shopglut-cart-share-form.active {
+    display: block;
+}
+
+.shopglut-cart-share-form input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--sg-border-color, #e0e0e0);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.shopglut-cart-share-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--sg-border-color, #e0e0e0);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 80px;
+}
+
+.shopglut-cart-share-send {
+    width: 100%;
+    padding: 12px;
+    background: var(--sg-primary-color, #2271b1);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.shopglut-cart-share-send:hover {
+    background: var(--sg-button-hover-color, #135e96);
+}
+
+/* ===================================
+   Menu Cart Icon
+   =================================== */
+.shopglut-menu-cart {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.shopglut-menu-cart-icon {
+    font-size: 20px;
+}
+
+.shopglut-menu-cart-count {
+    background: var(--sg-badge-bg-color, #ff4444);
+    color: var(--sg-badge-text-color, #ffffff);
+    border-radius: 10px;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: 600;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* ===================================
+   Responsive
+   =================================== */
+@media (max-width: 768px) {
+    .shopglut-mini-cart-sidebar {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .shopglut-floating-cart {
+        bottom: 20px;
+    }
+
+    .shopglut-floating-cart.position-right {
+        right: 20px;
+    }
+
+    .shopglut-floating-cart.position-left {
+        left: 20px;
+    }
+}
+
+/* ===================================
+   Loading State
+   =================================== */
+.shopglut-cart-loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.shopglut-cart-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    margin: -12px 0 0 -12px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--sg-primary-color, #2271b1);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===================================
+   Notifications
+   =================================== */
+.shopglut-cart-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #fff;
+    color: #333;
+    padding: 15px 20px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 99999999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 300px;
+    animation: slideInRight 0.3s ease;
+}
+
+.shopglut-cart-notification.success {
+    border-left: 4px solid #4caf50;
+    background: #f8fff8;
+    color: #2e7d32;
+}
+
+.shopglut-cart-notification.error {
+    border-left: 4px solid #f44336;
+    background: #fff8f8;
+    color: #c62828;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

@@ -1,0 +1,277 @@
+/* ShopGlut Mega Menu Frontend Styles */
+
+/* Base Mega Menu Styles */
+.shopglut-mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.shopglut-mega-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Menu Item Triggers */
+.shopglut-mega-menu-trigger {
+    position: relative;
+}
+
+.shopglut-mega-menu-trigger > a {
+    position: relative;
+}
+
+/* Grid Layout Styles */
+.shopglut-mega-menu.grid-layout {
+    display: grid;
+    padding: 20px;
+    gap: 30px;
+}
+
+.shopglut-mega-menu.grid-layout.columns-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.shopglut-mega-menu.grid-layout.columns-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.shopglut-mega-menu.grid-layout.columns-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.shopglut-mega-menu.grid-layout.columns-5 {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+/* Category Styles */
+.mega-menu-category {
+    text-align: center;
+}
+
+.mega-menu-category-title {
+    display: block;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.mega-menu-category-title:hover {
+    color: #007cba;
+}
+
+.mega-menu-category-image {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 10px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.mega-menu-category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mega-menu-subcategories {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mega-menu-subcategories li {
+    margin-bottom: 8px;
+}
+
+.mega-menu-subcategories a {
+    color: inherit;
+    text-decoration: none;
+    font-size: 14px;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+    display: block;
+}
+
+.mega-menu-subcategories a:hover {
+    opacity: 1;
+}
+
+/* Product Count */
+.mega-menu-product-count {
+    font-size: 12px;
+    opacity: 0.6;
+    margin-left: 4px;
+}
+
+/* Horizontal Dropdown Layout */
+.shopglut-mega-menu.horizontal-dropdown {
+    min-width: 600px;
+    padding: 20px;
+}
+
+.shopglut-mega-menu.horizontal-dropdown .mega-menu-section {
+    float: left;
+    width: 25%;
+    padding-right: 20px;
+}
+
+.shopglut-mega-menu.horizontal-dropdown .mega-menu-section:last-child {
+    padding-right: 0;
+}
+
+/* Vertical Sidebar Layout */
+.shopglut-mega-menu.vertical-sidebar {
+    min-width: 300px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+.mega-menu-vertical-trigger {
+    position: relative;
+}
+
+.mega-menu-vertical-content {
+    padding: 15px;
+}
+
+.mega-menu-vertical-category {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+
+.mega-menu-vertical-category:last-child {
+    border-bottom: none;
+}
+
+/* Animations */
+.shopglut-mega-menu.animation-fade {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.shopglut-mega-menu.animation-slide {
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.shopglut-mega-menu.animation-none {
+    transition: none;
+}
+
+/* Hover Effects */
+.shopglut-mega-menu .mega-menu-category:hover .mega-menu-category-title {
+    transform: translateY(-2px);
+}
+
+.shopglut-mega-menu .mega-menu-category-image:hover img {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .shopglut-mega-menu {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        overflow-y: auto;
+        transform: none;
+        transition: left 0.3s ease;
+    }
+
+    .shopglut-mega-menu.active {
+        left: 0;
+    }
+
+    .shopglut-mega-menu.grid-layout {
+        grid-template-columns: 1fr !important;
+        padding: 15px;
+    }
+
+    .shopglut-mega-menu.horizontal-dropdown .mega-menu-section {
+        float: none;
+        width: 100%;
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+}
+
+/* Overlay for mobile */
+.shopglut-mega-menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 9998;
+}
+
+@media (max-width: 768px) {
+    .shopglut-mega-menu-overlay.active {
+        display: block;
+    }
+}
+
+/* Loading State */
+.mega-menu-loading {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+.mega-menu-loading::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
+    border-top-color: #007cba;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Accessibility */
+.shopglut-mega-menu-trigger:focus .shopglut-mega-menu,
+.shopglut-mega-menu-trigger:focus-within .shopglut-mega-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Skip to content link for accessibility */
+.skip-to-mega-menu {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #007cba;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 10000;
+}
+
+.skip-to-mega-menu:focus {
+    top: 6px;
+}

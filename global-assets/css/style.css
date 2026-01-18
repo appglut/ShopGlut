@@ -1,0 +1,2337 @@
+/* The Modal (background) */
+
+body.shopglut-admin {
+  overflow-x: hidden;
+}
+
+.shopg_layout_modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 999999;
+  /* Sit on top */
+  padding-top: 10px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+/* Modal Content */
+.shopg_layout_modal .modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 98%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+.shopg_layout_modal .modal-header h2 {
+  color: #fff;
+}
+
+.disable-link {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+
+}
+
+.disable-link-module {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+
+}
+
+.disabled-nav-link {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    top: -10px;
+    opacity: 0;
+  }
+
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animatetop {
+  from {
+    top: -10px;
+    opacity: 0;
+  }
+
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+/* The Close Button */
+.shopg_layout_modal .shop-layouts-compare-modal-close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+.shopg_layout_modal .shop-layouts-compare-modal-close:hover,
+.shopg_layout_modal .shop-layouts-compare-modal-close:focus {
+  color: #aaaaaa;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.shopg_layout_modal .modal-header {
+  padding: 2px 16px;
+  background-color: #2365a5;
+  color: white;
+}
+
+.shopg_layout_modal .modal-body {
+  padding: 2px 16px;
+}
+
+.shopg_layout_modal .modal-footer {
+  padding: 5px 16px;
+  background-color: #2365a5;
+  color: white;
+}
+
+.shopglut-admin #screen-meta-links {
+  display: none;
+}
+
+.shopglut-admin .notice.notice-warning.update-nag {
+  display: none;
+}
+
+.shopglut-admin .updated,
+.shopglut-admin .notice {
+  display: none !important;
+}
+
+/* styles.css */
+#shopg-layout-admin-settings {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 100%;
+}
+
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  transition: opacity 0.5s ease;
+}
+
+.loader-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.loader-image {
+  width: 80%;
+  height: 80%;
+  position: relative;
+  z-index: 1;
+  animation: breathe 1.7s ease-in-out infinite;
+}
+
+.loader-dash-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 3px dashed #0668c4;
+  border-radius: 50%;
+  animation: rotate 6.4s linear infinite;
+  transform-origin: center center;
+  z-index: 0;
+}
+
+.loader-text {
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #0668c4;
+  background-color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  animation: breathe 1.7s ease-in-out infinite;
+  width: 80%;
+  max-width: 120px;
+}
+
+@keyframes breathe {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.shopg-inside-loader {
+  display: none;
+}
+
+.shopg-inside-loader-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+  background-color: rgba(255, 255, 255, 0.897);
+  transition: opacity 0.5s ease;
+}
+
+.shopg-inside-loader-container {
+  position: relative;
+  /* This ensures child elements are positioned correctly */
+  width: 100px;
+  /* Adjust the width according to your icon size */
+  height: 100px;
+  /* Adjust the height according to your icon size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shopg-inside-loader-image {
+  width: 80%;
+  /* Adjust the size of your icon image */
+  height: 80%;
+  position: relative;
+  animation: breathe 1.7s ease-in-out infinite;
+  z-index: 1;
+  /* Ensure the image is above the dash circle */
+}
+
+.shopg-inside-loader-dash-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 3px dashed #0668c4;
+  /* Adjust the border color and thickness */
+  border-radius: 50%;
+  animation: rotate 6.4s linear infinite;
+  transform-origin: center center;
+  z-index: 0;
+  /* Ensure the dash circle is below the image */
+}
+
+#shopg-shoplayout-container #no-product-found {
+  padding-left: 10px;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes breathe {
+
+  0%,
+  100% {
+    transform: scale(0.98);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+#shopg-showcase-loading {
+  position: fixed;
+  top: 0;
+  left: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+  background-color: #fff;
+  z-index: 99;
+  overflow: hidden;
+  clear: both;
+}
+
+@keyframes rotate {
+
+  /* Rotate the image from 0 to 360 degrees */
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#showcase-loading-image {
+  z-index: 100;
+  align-items: center;
+  animation: rotate 10s linear infinite;
+}
+
+/**** Modal ****/
+/* Modal styling */
+/* Background overlay for modal */
+/* Modal overlay */
+.agshopglut-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0 0 0 / 22%);
+  /* Adjust transparency here */
+  z-index: 1000;
+  /* Behind modal but above other content */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease;
+}
+
+.agshopglut-modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal container */
+.agshopglut-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 800px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1010;
+  padding: 0;
+  overflow: hidden;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease;
+  /* Control the duration here */
+}
+
+.agshopglut-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal content styling */
+.agshopglut-modal .modal-content {
+  padding: 20px;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+/* Close button */
+.agshopglut-modal .modal-content .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.agshopglut-modal .modal-content .close:hover {
+  color: #e74c3c;
+  /* Hover color */
+}
+
+/* Title styling */
+.agshopglut-modal .modal-content h3 {
+  margin-top: 0;
+  font-size: 1.5em;
+  text-align: center;
+  color: #333;
+}
+
+/* Centering buttons inside modal */
+.agshopglut-modal .terms-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Style term items and images */
+.agshopglut-modal .term-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.agshopglut-modal .term-item label {
+  font-weight: bold;
+  color: #333;
+}
+
+.agshopglut-modal .term-item .wp-picker-container {
+  padding-right: 45px;
+}
+
+/* Image preview styling */
+.agshopglut-modal .image-preview img {
+  max-width: 125px;
+  max-height: 85px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Button styling */
+.agshopglut-modal .button {
+  padding: 8px 12px;
+  font-size: 0.9em;
+  color: #fff;
+  background-color: #0073aa;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.agshopglut-modal .button:hover {
+  background-color: #005177;
+  color: white;
+}
+
+.agshopglut-modal .remove-image {
+  background-color: #dc3545;
+}
+
+.agshopglut-modal .remove-image:hover {
+  background-color: #c82333;
+}
+
+.agshopglut-modal .save_images_message.success_message {
+  display: none;
+  position: relative;
+  left: 50%;
+  margin-bottom: 10px;
+  background-color: #d4edda;
+  /* Light green background */
+  color: #155724;
+  /* Dark green text */
+  border: 1px solid #c3e6cb;
+  /* Border matching background */
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  transform: translateX(-50%);
+  z-index: 1050;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.5s ease, top 0.5s ease;
+}
+
+/* Save button styling */
+.agshopglut-modal #save_filter_images {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  font-weight: bold;
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.agshopglut-modal #save_filter_images:hover {
+  background-color: #218838;
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+  .agshopglut-modal {
+    width: 95%;
+    max-width: 100%;
+  }
+
+  .agshopglut-modal .modal-content h3 {
+    font-size: 1.25em;
+  }
+}
+
+/**** Modal End ******/
+
+.shopglut-shoplayouts #post-body.columns-2 {
+  margin-right: 10px !important;
+}
+
+#shopg-shoplayout-container {
+  float: right;
+  width: 74%;
+  max-width: 2500px;
+  position: relative;
+}
+
+#post-body.columns-2 #shopg-shoplayout-settings {
+  float: left;
+  width: 25%;
+  max-width: 1200px;
+}
+
+#shopg-product-layout-container {
+  float: right;
+  width: 62%;
+  max-width: 2500px;
+  position: relative;
+}
+
+#shopg-cart-layout-container {
+  float: right;
+  width: 74%;
+  max-width: 2500px;
+  position: relative;
+}
+
+#shopg-singleProduct-layout-container {
+  float: right;
+  width: 72%;
+  max-width: 2500px;
+  position: relative;
+}
+
+#shopg-cart-layout-container.collapsed {
+  width: 85%;
+}
+
+#shopg-singleProduct-layout-container.collapsed {
+  width: 85%;
+}
+
+/* Responsive styles for shopg-cart-layout-container */
+@media screen and (max-width: 1600px) {
+  #shopg-cart-layout-container {
+    width: 72%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  #shopg-cart-layout-container {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  #shopg-cart-layout-container {
+    width: 65.5%;
+    float: none;
+    clear: both;
+    margin-left: 30%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  #shopg-cart-layout-container {
+    width: 100%;
+    float: none;
+    clear: both;
+    margin-left: 0;
+  }
+}
+
+/* Responsive styles for shopg-singleProduct-layout-container */
+@media screen and (max-width: 1600px) {
+  #shopg-singleProduct-layout-container {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  #shopg-singleProduct-layout-container {
+    width: 65.5%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  #shopg-singleProduct-layout-container {
+    width: 65%;
+    float: none;
+    clear: both;
+    margin-left: 33%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  #shopg-singleProduct-layout-container {
+    width: 100%;
+    float: none;
+    clear: both;
+    margin-left: 0;
+  }
+
+  #post-body.columns-2 #shopg-product-layout-settings {
+    width: 100%;
+    max-width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}
+
+.cart_settings .shopglut_layout_contents
+ {
+    display: flex;
+    padding: 5px 0px 3px 0px;
+    margin: 0 auto;
+    width: 1200px;
+}
+
+
+.agl-tabbed-contents.agl-tabbed-contents-cart-column-section {
+    padding: 15px;
+}
+
+#shopg-product-layout-container.collapsed {
+  width: 96%;
+}
+
+#post-body.columns-2 #shopg-product-layout-settings {
+  float: left;
+  width: 35%;
+  max-width: 1200px;
+  margin-right: 30px;
+}
+
+#shopg-product-layout-settings {
+  width: 300px;
+  height: 200px;
+  display: flex;
+  transition: transform 0.3s ease;
+
+}
+
+
+
+
+
+
+
+
+
+
+#shopg-cart-layout-settings,
+#shopg-ordercomplete-layout-settings {
+  width: 300px;
+  height: 200px;
+  display: flex;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+
+
+
+#shopg_single_product_settings .agl-field-tabbed .agl-tabbed-content>.agl-field {
+  padding: 0px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+div#shopg_single_product_settings {
+  margin-bottom: 7vh;
+}
+
+#shopg_single_product_settings .agl-field.agl-field-tabbed.product-tab-section {
+  margin-bottom: 100px;
+}
+
+/* Add this to ensure proper positioning */
+#shopg-product-layout-settings.postbox-container {
+  position: relative;
+}
+
+#shopg-product-layout-settings.collapsed {
+  transform: translateX(-280px);
+  width: 2% !important;
+  margin-right: 15px !important;
+}
+
+
+
+#poststuff #post-body.columns-2 #shopg-product-layout-settings #side-sortables {
+  width: 100%;
+}
+
+#poststuff #post-body.columns-2 #shopg-shoplayout-settings #side-sortables {
+  margin-right: 15px;
+  width: initial !important;
+}
+
+#agwoo_options_settings.postbox {
+  width: initial !important;
+  min-width: initial !important;
+}
+
+.shopg-admin-edit-panel .notice {
+  display: none;
+}
+
+/* product design */
+.shopglut-product-settings-layout {
+  display: flex;
+}
+
+/* Container for the entire product layout */
+.shopglut-product-layout {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Style for each product layout container */
+.product-layout {
+  width: 48%;
+  /* Adjust the width as needed, leaving some space for margins */
+  margin: 1%;
+  /* Adjust the margin as needed */
+  box-sizing: border-box;
+}
+
+/* Style for each product design div */
+.product-design {
+  display: inline-block;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  background-color: #fff;
+  margin-bottom: 15px;
+}
+
+/* Style for product title */
+.product-design .product-title {
+  font-size: 16px;
+  margin: 0px;
+}
+
+.product-design .product-title a {
+  text-decoration: none;
+}
+
+.product-design .product-category {
+  font-size: 15px;
+  margin: 0px;
+}
+
+.product-design .product-category a {
+  text-decoration: none;
+}
+
+/* Style for product image */
+.product-image img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+}
+
+/* Style for product info (price, description, etc.) */
+
+/* Style for product price */
+.product-price {
+  font-weight: bold;
+  color: green;
+}
+
+/* Style for product description */
+.product-description {
+  margin-top: 10px;
+  color: #555;
+}
+
+/* Style for product add to cart button */
+.product-add-to-cart a {
+  display: block;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+/* Hover effect for add to cart button */
+.product-add-to-cart a:hover {
+  background-color: #0056b3;
+}
+
+/* Style for create layout button */
+.create-layout {
+  text-align: center;
+}
+
+.create-layout input {
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Hover effect for create layout button */
+.create-layout input:hover {
+  background-color: #218838;
+}
+
+.wrap.shopglut-admin-contents {
+  padding-left: 15px;
+  padding-top: 8px;
+}
+
+.wrap.shopglut-admin-contents.shoplayouts-templates {
+  text-align: left;
+  padding-left: 0px;
+  margin-left: 0px;
+  margin-right: 15px;
+}
+
+.wrap.shopglut-admin-contents.shortcode-showcase {
+  text-align: center;
+  padding-left: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 0px;
+  padding-right: 20px;
+  margin-top: 8px;
+}
+
+.shortcode-showcase h1 {
+  padding-top: 4px;
+}
+
+.shoplayouts-templates h1,
+.shortcode-showcase h1 {
+  font-weight: 600;
+  text-align: center;
+}
+
+.shopg_templates_layouts.col-3 .template_design_layouts {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.shopg_templates_layouts .template_design_layouts {
+  display: grid;
+}
+
+.shopg_template_title {
+  text-align: left;
+}
+
+.shopg_template_title h2 {
+  margin: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.shopg_templates_layouts.choose-template {
+  padding: 15px;
+  padding-top: 0px;
+  background: #fbfbfb;
+  margin: 5px;
+  margin-bottom: 25px;
+  border: 2px solid #d0d0d0;
+}
+
+.shopg-create-layout {
+  text-align: center;
+}
+
+.shopg-create-layout .btn.btn-green {
+  background: #219e48;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/*--- Page Header ---*/
+.shopglut-admin .shopglut-page-header .shopglut-page-header-banner {
+  background-color: #7340b0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  width: 100%;
+  padding: 15px;
+  padding-bottom: 0px;
+}
+
+.shopglut-admin .shopglut-page-header .shopglut-page-header-banner.shopglut-pro {
+  padding: 15px 15px 0;
+}
+
+.shopglut-admin .shopglut-page-header .wrap {
+  padding-left: 20px;
+  margin: 0 20px 0 2px;
+}
+
+.wp-admin.shopglut-admin #wpcontent {
+  padding: 0;
+}
+
+.shopglut-admin .shopglut-page-header .shopglut-page-header-banner__logo {
+  padding: 0 0 15px;
+  display: block;
+}
+
+.shopglut-admin .shopglut-page-header .shopglut-page-header-banner__logo img {
+  width: 150px;
+  height: auto;
+  float: left;
+  margin-top: 25px;
+  padding-left: 15px;
+}
+
+.shopglut-admin .shopglut-page-header .shopglut-page-header-banner__helplinks {
+  float: right;
+  padding: 20px 20px 20px;
+}
+
+.shopglut-admin .shopglut-page-header .shopglut-page-header-banner__helplinks a {
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+}
+
+.shopglut-admin .shopglut-page-header .shopglut-page-header-banner__helplinks a.shopglut-active {
+  background: #fff;
+  padding: 5px;
+  color: #0068b3;
+  border-radius: 4px;
+}
+
+.shopglut-admin .shopglut-page-header .shopglut-page-header-banner__helplinks>span {
+  padding-right: 15px;
+}
+
+.shopglut-admin div#screen-meta-links {
+  position: absolute;
+  right: 0;
+  z-index: 9;
+}
+
+.shopglut-admin .shopglut-page-header .shopglut-nav-tab-wrapper {
+  padding: 0;
+  margin: 10px 16px 0;
+  border-bottom: 0;
+}
+
+.shopglut-admin .shopglut-page-header .shopglut-nav-tab-wrapper .shopglut-nav-tab {
+  display: block;
+  font-weight: 500;
+  padding: 5px 12px;
+  padding-bottom: 10px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0;
+}
+
+.shopglut-admin .shopglut-page-header .shopglut-nav-tab-wrapper .shopglut-nav-tab.shopglut-nav-active {
+  background-color: #fff;
+  color: #2d3559;
+  border-color: #fff;
+  border-radius: 4px 4px 0 0;
+  padding-bottom: 8px;
+  padding-top: 7px;
+}
+
+.shopglut-admin .shopglut-page-header-banner.shopglut-not-pro {
+  padding-bottom: 0;
+}
+
+.shopglut-admin .shopglut-page-header .shopglut-no-submenu .shopglut-nav-tab-wrapper {
+  margin-top: 0;
+}
+
+.shopglut-admin .shopglut-page-header-banner .shopglut-header-menus {
+  margin-top: 10px;
+}
+
+.shopglut-admin .shopglut-page-header .shopglut-page-header-wrap+.wrap h2 {
+  font-size: 21px;
+  font-weight: 500;
+}
+
+.shopglut-admin .shopglut-page-header .shopglut-page-header-wrap .subsubsub {
+  background: #fff;
+  font-size: 14px;
+  padding: 0 32px;
+  margin-top: 0;
+  float: none;
+  text-align: left;
+}
+
+.shopglut-admin .shopglut-page-header .shopglut-page-header-wrap .subsubsub a {
+  color: #1d2327;
+  display: block;
+  font-weight: 600;
+  padding: 8px 12px;
+}
+
+.shopglut-admin .shopglut-page-header .shopglut-page-header-wrap .subsubsub a.shopglut-current {
+  color: #0068b3;
+}
+
+.shopglut-admin .shopglut-page-header.wp-core-ui .wrap a.shopglut-link {
+  display: block;
+  margin-top: 10px;
+  font-size: 1em;
+}
+
+.shopglut-admin .shopglut-page-header.wp-core-ui .wrap a.shopglut-link svg {
+  width: 1.2em;
+  margin: 0 0.2em 0;
+  height: 1.4em;
+  vertical-align: middle;
+  fill: currentcolor;
+}
+
+.shopglut-admin .ppview .pp-alert-notice,
+.shopglut-admin .profile-php .pp-alert-success {
+  background: #fff;
+  border: 1px solid #c3c4c7;
+  border-left-width: 4px;
+  box-shadow: rgba(0, 0, 0, 0.04) 0 1px 1px 0;
+  margin: 5px 2px;
+  padding: 1px 12px;
+  border-left-color: #d63638;
+}
+
+.shopglut-admin .profile-php .pp-alert-success {
+  border-left-color: #72aee6;
+  padding: 8px 10px;
+}
+
+.shopglut-admin .ppview .pp-alert-notice-info {
+  border-left-color: #72aee6;
+}
+
+.shopglut-admin .ppview .pp-alert-notice p,
+.shopglut-admin .profile-php .pp2fa-up-notice p {
+  margin: 0.5em 0;
+  padding: 2px;
+}
+
+.shopglut-admin .profile-php .ppmyac-2fa-recovery-codes-wrap pre {
+  background: #fff;
+  max-width: 150px;
+  border: 1px solid #c3c4c7;
+  width: 100%;
+  text-align: center;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  line-height: 1.8;
+  overflow: auto;
+}
+
+.shopglut-admin .shopglut-page-header .subscription_plan .manage-column.column-name {
+  width: 25%;
+}
+
+.shopglut-admin .shopglut-page-header .subscription_plan .manage-column.column-status {
+  width: 10%;
+}
+
+.shopglut-admin .shopglut-page-header .subscription_plan .manage-column.column-checkout_url {
+  width: 20%;
+}
+
+.shopglut-admin .shopglut-page-header .ppview .postbox .shopglut-subscription-plan-payment-links input {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/*--- End Page Header ---*/
+
+.shopglut-admin .layout_settings {
+  margin: 0px;
+  padding-top: 6px;
+  padding-left: 10px;
+}
+
+.shopglut-admin .shopg-filter-admin-page.layout_settings {
+  padding: 0px;
+}
+
+.shopglut-admin .shopg-filter-admin-page {
+  background: #f5f5f5;
+}
+
+.ddpb-container {
+  display: flex;
+}
+
+.ddpb-sidebar {
+  width: 20%;
+  background-color: #f4f4f4;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ddpb-elements {
+  flex-grow: 1;
+}
+
+.ddpb-element {
+  background-color: #e2e2e2;
+  margin: 10px 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.ddpb-editor {
+  width: 80%;
+  min-height: 10px;
+  border: 2px dashed #ccc;
+  margin-left: 10px;
+  padding: 10px;
+}
+
+.ddpb-settings {
+  margin-top: 20px;
+}
+
+.ddpb-settings-content {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.ddpb-placeholder {
+  background: #f0f0f0;
+  border: 2px dashed #ccc;
+  margin: 10px 0;
+  height: 50px;
+}
+
+.ddpb-row {
+  display: flex;
+  margin: 10px 0;
+}
+
+.ddpb-column {
+  flex: 1;
+  border: 1px dashed #ccc;
+  padding: 10px;
+  margin: 5px;
+  min-height: 100px;
+}
+
+#shop-layouts-quick-view-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Shared Styles for #shopg-layout-admin-settings and #shopg_shop_contents */
+
+/* Table Header Styling */
+#shopg-layout-admin-settings .shop-layouts-compare-modal table.comparison-table th h2,
+#shopg_shop_contents .shop-layouts-compare-modal table.comparison-table th h2 {
+  margin: 0px;
+  font-size: 17px;
+  padding: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Button Styling */
+#shopg-layout-admin-settings button.shopg-shop-remove-compare,
+#shopg_shop_contents button.shopg-shop-remove-compare {
+  padding: 6px;
+  font-size: 12px;
+  background: #e5e5e5;
+  color: #000;
+  font-weight: bold;
+  border: 1px solid #939393;
+}
+
+/* Modal Styling */
+#shopg-layout-admin-settings .shop-layouts-compare-modal,
+#shopg_shop_contents .shop-layouts-compare-modal,
+.shopglut-slider-wrapper .shop-layouts-compare-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  max-width: 950px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: none;
+  overflow-x: auto;
+  overflow-y: auto;
+  height: 92vh;
+}
+
+/* Modal Content Padding */
+#shopg-layout-admin-settings .modal-content,
+#shopg_shop_contents .modal-content {
+  padding: 20px;
+  padding-bottom: 16px;
+}
+
+/* Close Button Styling */
+#shopg-layout-admin-settings .shop-layouts-compare-modal .shop-layouts-compare-modal-close,
+#shopg_shop_contents .shop-layouts-compare-modal .shop-layouts-compare-modal-close,
+.shopglut-slider-wrapper .shop-layouts-compare-modal .shop-layouts-compare-modal-close {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Loading Icon Alignment */
+#shopg-layout-admin-settings .shop-layouts-compare-modal .loading-icon,
+#shopg_shop_contents .shop-layouts-compare-modal .loading-icon {
+  text-align: center;
+}
+
+/* Loading Icon Image Size */
+#shopg-layout-admin-settings .shop-layouts-compare-modal .loading-icon img,
+#shopg_shop_contents .shop-layouts-compare-modal .loading-icon img {
+  width: 50px;
+  height: 50px;
+}
+
+/* Comparison Table Styling */
+#shopg-layout-admin-settings .shop-layouts-compare-modal .comparison-table,
+#shopg_shop_contents .shop-layouts-compare-modal .comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+/* Table Cells Styling */
+#shopg-layout-admin-settings .shop-layouts-compare-modal .comparison-table th,
+#shopg_shop_contents .shop-layouts-compare-modal .comparison-table th,
+#shopg-layout-admin-settings .shop-layouts-compare-modal .comparison-table td,
+#shopg_shop_contents .shop-layouts-compare-modal .comparison-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+/* Table Header Background */
+#shopg-layout-admin-settings .shop-layouts-compare-modal .comparison-table th,
+#shopg_shop_contents .shop-layouts-compare-modal .comparison-table th {
+  background-color: #fbfbfb;
+  min-width: 150px;
+}
+
+/* Notification container styling */
+#shopg-notification-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  /* Ensure it's above other elements */
+}
+
+/* General notification styling */
+#shopg-notification-container .notification {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  display: none;
+  /* Initially hidden */
+  position: relative;
+  right: -300px;
+  /* Off-screen position for sliding effect */
+  color: #333;
+  /* Default text color */
+}
+
+#shopg-notification-container .notification.wishlist-added {
+  background-color: #1bb13f;
+  border-color: #c3e6cb;
+  color: #ffffff;
+}
+
+#shopg-notification-container .notification.wishlist-removed {
+  background-color: #e93d3d;
+  border-color: #f5c6cb;
+  color: #ffffff;
+}
+
+/* Quick View Container */
+.product-quick-view {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+/* Product Images */
+.product-quick-view .product-images {
+  flex: 1;
+  max-width: 50%;
+  padding-right: 20px;
+}
+
+/* Product Summary */
+.product-quick-view .product-summary {
+  flex: 1;
+  max-width: 50%;
+  padding-left: 20px;
+}
+
+/* Product Title */
+.product-quick-view .product-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Price */
+.product-quick-view .price {
+  font-size: 22px;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+/* Rating */
+.product-quick-view .rating {
+  margin-bottom: 10px;
+}
+
+/* Description */
+.product-quick-view .description {
+  margin-bottom: 20px;
+}
+
+/* Product Meta */
+#shop-layouts-quick-view-modal .product-quick-view .product-meta {
+  margin-bottom: 20px;
+}
+
+#shop-layouts-quick-view-modal .product-quick-view .product-meta a {
+  text-decoration: none;
+}
+
+/* Add to Cart Button */
+.product-quick-view .add-to-cart {
+  margin-top: 20px;
+}
+
+/* Optional: Customize the add-to-cart button */
+.product-quick-view .add-to-cart button.single_add_to_cart_button {
+  background-color: #0071a1;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.product-quick-view .add-to-cart button.single_add_to_cart_button:hover {
+  background-color: #005880;
+}
+
+.quick-view-content {
+  background-color: #fff;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  top: 100px;
+}
+
+.shop-layouts-quick-view-modal-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.shop-layouts-quick-view-modal-close:hover,
+.shop-layouts-quick-view-modal-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Pagination Container */
+.shopglut-pagination-container {
+  text-align: center;
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Pagination Wrapper */
+.shopglut-pagination-container #numbering-pagination {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  /* Space between page links */
+}
+
+/* Common Styles for Pagination Links */
+.shopglut-pagination-container #numbering-pagination .page-numbers {
+  display: inline-block;
+  padding: 7px 16px;
+  font-size: 16px;
+  color: #333;
+  /* Text color */
+  background-color: #f8f8f8;
+  /* Background color */
+  border: 1px solid #ddd;
+  /* Border color */
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+.shopglut-pagination-container #numbering-pagination .page-numbers:hover {
+  background-color: #007bff;
+  /* Highlight color */
+  color: #fff;
+  /* Text color on hover */
+  border-color: #007bff;
+  /* Border color on hover */
+}
+
+/* Active Page (Current Page) */
+.shopglut-pagination-container #numbering-pagination .page-numbers.current {
+  background-color: #007bff;
+  /* Active background color */
+  color: #fff;
+  /* Active text color */
+  border-color: #007bff;
+  font-weight: bold;
+  cursor: default;
+}
+
+/* Next Arrow */
+.shopglut-pagination-container #numbering-pagination .page-numbers.next {
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .shopglut-pagination-container #numbering-pagination .page-numbers {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+}
+
+/* Pagination Container */
+.shopglut-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Pagination Links */
+.shopglut-pagination a {
+  text-decoration: none;
+  color: #333;
+  padding: 10px 15px;
+  margin: 0 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hover and Active Styles */
+.shopglut-pagination a:hover {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+.shopglut-pagination a.current {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+/* Load More Button */
+.shopglut-pagination-load-more .load-more-button {
+  padding: 10px 20px;
+  font-weight: bold;
+  background-color: #007bff;
+  color: #fff;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.shopglut-pagination-load-more .load-more-button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Previous/Next Only Pagination */
+.shopglut-pagination-prev-next a {
+  font-weight: bold;
+  background-color: #f8f9fa;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.shopglut-pagination-prev-next a:hover {
+  background-color: #007bff;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.shopglut_wishlist_container {
+  display: flex;
+}
+
+.shopglut_wishlist_container .shopglut_wishlist {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* ===================================
+   FILTER STYLES - MOVED TO UNIFIED FILE
+   =================================== */
+/*
+ * All filter-related styles have been moved to:
+ * /wp-content/plugins/shopglut/src/enhancements/Filters/assets/css/shopglut-filters-unified.css
+ *
+ * This prevents conflicts and provides a single source of truth for filter styling.
+ */
+
+/* ===================================
+   FILTER STYLES - MOVED TO UNIFIED FILE
+   =================================== */
+/*
+ * All filter-related styles have been moved to:
+ * /wp-content/plugins/shopglut/src/enhancements/Filters/assets/css/shopglut-filters-unified.css
+ *
+ * This prevents conflicts and provides a single source of truth for filter styling.
+ */
+
+#shopg_single_product_settings .agl-field-switcher .agl--switcher {
+  float: left;
+  margin-left: 10px;
+}
+
+/* Lock Modal Styles */
+.shopglut-lock-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.shopglut-lock-modal .modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 1.75rem auto;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Modal Container */
+.shopglut-lock-modal-content {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transform: scale(0.95);
+  transition: transform 0.3s ease-out;
+}
+
+.modal.show .shopglut-lock-modal-content {
+  transform: scale(1);
+}
+
+/* Modal Header */
+.modal-header {
+  background: #f5f5f5;
+  color: white;
+  border-bottom: none;
+  padding: 1.5rem;
+  position: relative;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.close {
+  color: rgba(255, 255, 255, 0.8);
+  opacity: 1;
+  position: absolute;
+  right: 0.1rem;
+  top: 15%;
+  transform: translateY(-50%);
+  transition: all 0.2sease;
+  background: #e9e9e9;
+  padding: 5px;
+}
+
+.close:hover {
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+  background: #d8d8d8;
+}
+
+/* Modal Body */
+.modal-body {
+  padding: 2rem;
+  background: #f8f9fa;
+}
+
+.shopglut-lock-section p {
+  color: #6c757d;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Form Elements */
+.shopglut-email-lock-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Submit Button */
+.shopglut-subscribe-button {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.shopglut-subscribe-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+/* Loading Animation */
+.shopglut-lock-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.2em;
+  color: #3498db;
+}
+
+.shopglut-lock-loading p {
+  color: #2c3e50;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+/* Response Messages */
+.response-message {
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+  text-align: center;
+  opacity: 1;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.response-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 575.98px) {
+  .modal-dialog {
+    margin: 0.5rem;
+  }
+
+  .modal-body {
+    padding: 1.5rem;
+  }
+
+  .modal-title {
+    font-size: 1.25rem;
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Filter reset styles moved to unified CSS file */
+
+
+/* .agl-depend-hidden {
+  display: none !important;
+} */
+
+/* ===============================================
+   FOCUS STYLES - Remove ugly blue borders
+   =============================================== */
+
+
+
+/* Active states for tabs */
+.wp-admin .nav-tab.nav-tab-active,
+.shopglut-admin .nav-tab.nav-tab-active,
+.shopglut-tab.active,
+.shopglut-module-tab.active,
+.shopglut-settings-tab.active,
+.shopglut-editor-tab.active,
+.shopglut-admin-tab.active {
+    background-color: #fff !important;
+    border-bottom-color: #fff !important;
+    outline: none !important;
+}
+
+/* Additional fix for color picker and other form elements */
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none !important;
+    border-color: #007cba !important;
+    box-shadow: 0 0 0 1px #007cba !important;
+}
+
+/* Browser-specific fixes for blue outline/border */
+*:focus {
+    outline: none !important;
+}
+
+/* Override focus styles for chosen input */
+.chosen-search-input:focus,
+.chosen-container-active .chosen-choices li.search-field input[type="text"]:focus {
+    outline: none !important;
+    border-color: #ccc !important;
+    box-shadow: none !important;
+}
+
+/* Firefox specific */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0 !important;
+    outline: none !important;
+}
+
+
+
+/* Edge specific */
+@supports (-ms-ime-align: auto) {
+    button:focus,
+    input:focus,
+    select:focus,
+    a:focus {
+        outline: none !important;
+    }
+}
+
+
+
+
+
+/* Module Manager Styles */
+.shopglut-module-card {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.shopglut-module-card.shopglut-loading {
+    opacity: 0.7;
+    pointer-events: none;
+    /* Maintain layout stability during loading */
+    position: relative;
+    /* Remove problematic width rules that cause collapse */
+}
+
+/* Ensure grid items maintain their dimensions during loading */
+.shopglut-module-card.shopglut-loading .grid-item {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: inherit;
+}
+
+/* Prevent grid container layout shifts during module loading */
+.shopg-woo-builder .grid-container .shopglut-module-card {
+    display: block;
+    position: relative;
+    /* Ensure consistent sizing */
+    box-sizing: border-box;
+}
+
+/* Prevent shrinking during loading state */
+.shopg-woo-builder .grid-container .shopglut-module-card.shopglut-loading {
+    flex-basis: auto;
+    flex-shrink: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* High specificity rule to ensure inline styles work */
+.shopg-woo-builder .grid-container .shopglut-module-card[style*="width"] {
+    flex-basis: auto !important;
+}
+
+/* Dimension preservation class */
+.shopglut-module-card.shopglut-preserve-dimensions {
+    position: relative !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+}
+
+.shopglut-module-card.shopglut-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 10;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.shopglut-module-switcher {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10; /* Higher z-index to ensure it's always on top */
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 2px;
+}
+
+.shopglut-module-disabled .shopglut-module-switcher {
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(231, 76, 60, 0.3);
+    border: 2px solid #e74c3c;
+    transform: scale(1.1); /* Make it slightly larger on disabled modules */
+}
+
+.shopglut-module-disabled .shopglut-module-switcher::after {
+    content: 'Enable';
+    position: absolute;
+    top: -25px;
+    right: -5px;
+    background: #e74c3c;
+    color: white;
+    padding: 2px 6px;
+    font-size: 10px;
+    border-radius: 2px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.shopglut-module-disabled:hover .shopglut-module-switcher::after {
+    opacity: 1;
+}
+
+/* Toggle Switch Styles */
+.shopglut-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.shopglut-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.shopglut-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.shopglut-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .shopglut-slider {
+    background-color: #4CAF50;
+}
+
+input:focus + .shopglut-slider {
+    box-shadow: 0 0 1px #4CAF50;
+}
+
+input:checked + .shopglut-slider:before {
+    transform: translateX(26px);
+}
+
+.shopglut-slider.round {
+    border-radius: 24px;
+}
+
+.shopglut-slider.round:before {
+    border-radius: 50%;
+}
+
+/* Module Disabled State */
+.shopglut-module-disabled {
+    opacity: 1;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.3);
+    border-radius: 8px;
+}
+
+.shopglut-module-disabled .shopg-woo-builder.grid-item {
+    position: relative;
+    background-color: #f8f8f8;
+    border: 3px solid #e74c3c !important;
+    border-style: solid;
+    filter: none;
+    overflow: visible;
+}
+
+/* DISABLED indicator at bottom-right */
+.shopglut-module-disabled .shopg-woo-builder.grid-item::after {
+    content: 'DISABLED';
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: #e74c3c;
+    color: #fff;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 3px;
+    z-index: 10;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+
+/* Keep disabled module content fully readable */
+.shopglut-module-disabled .shopg-woo-builder.grid-item h3 {
+    color: #333 !important;
+    text-decoration: none;
+}
+
+.shopglut-module-disabled .shopg-woo-builder.grid-item i {
+    color: #555 !important;
+}
+
+.shopglut-module-disabled .shopg-woo-builder.grid-item .description {
+    color: #666 !important;
+}
+
+/* Add a subtle disabled state indicator */
+
+.disable-link {
+    pointer-events: none;
+    cursor: default;
+}
+
+/* Notification Styles - Centralized
+ * All notification styles are now in shopglut-notification.css
+ * to avoid duplication across modules and templates.
+ * @see global-assets/css/shopglut-notification.css
+ */
+
+/* Disabled Module Notice */
+.shopglut-disabled-module-notice {
+    margin: 20px 0;
+}
+
+.shopglut-disabled-module-notice .notice h3 {
+    margin-top: 0;
+}
+
+/* Disabled Tab State */
+.shopglut-tab-disabled {
+    color: #dc3232;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.nav-tab .shopglut-tab-disabled {
+    opacity: 0.7;
+}
+
+/* Global Shopglut Button and Link Styles - Fix for WordPress Admin Override */
+/* Global button fix for all WordPress admin buttons in Shopglut */
+.wrap .button-primary,
+.wrap a.button-primary,
+.shopglut-admin-contents .button-primary,
+.shopglut-admin-contents a.button-primary,
+.shopglut-page-header .button-primary,
+.shopglut-page-header a.button-primary {
+    background: #2271b1 !important;
+    background-color: #2271b1 !important;
+    border-color: #2271b1 !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    outline: none !important;
+}
+
+
+
+/* Fix for navigation links */
+.wrap .nav-tab,
+.wrap a.nav-tab,
+.shopglut-admin-contents .nav-tab,
+.shopglut-admin-contents a.nav-tab {
+    background: #f1f1f1 !important;
+    background-color: #f1f1f1 !important;
+    border-color: #c3c4c7 !important;
+    color: #646970 !important;
+    text-decoration: none !important;
+    outline: none !important;
+}
+
+
+
+/* Active nav tabs */
+.wrap .nav-tab-active,
+.wrap a.nav-tab-active,
+.shopglut-admin-contents .nav-tab-active,
+.shopglut-admin-contents a.nav-tab-active,
+.shopglut-page-header .nav-tab-active,
+.shopglut-page-header a.nav-tab-active,
+.shopglut-nav-active,
+.shopglut-nav-tab-wrapper .shopglut-nav-active {
+    background: #fff !important;
+    background-color: #fff !important;
+    border-bottom-color: #fff !important;
+    color: #1d2327 !important;
+    text-decoration: none !important;
+    outline: none !important;
+}
+
+/* Custom Shopglut buttons */
+.wrap .shopglut-wishlist-button,
+.wrap a.shopglut-wishlist-button,
+.shopglut-admin-contents .shopglut-wishlist-button,
+.shopglut-admin-contents a.shopglut-wishlist-button {
+    display: inline-block !important;
+    background: #2271b1 !important;
+    background-color: #2271b1 !important;
+    color: #fff !important;
+    padding: 15px 35px !important;
+    border-radius: 8px !important;
+    text-decoration: none !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 15px rgba(34, 113, 177, 0.4) !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+    cursor: pointer !important;
+    outline: none !important;
+}
+
+
+.wrap .shopglut-wishlist-button span,
+.wrap a.shopglut-wishlist-button span,
+.shopglut-admin-contents .shopglut-wishlist-button span,
+.shopglut-admin-contents a.shopglut-wishlist-button span {
+    margin-right: 8px !important;
+    color: #fff !important;
+}
+
+/* Toggle Button Styles */
+#post-body {
+    position: relative;
+}
+
+.shopg-layout-settings-wrapper {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.shopg-layout-settings-wrapper.hidden {
+    width: 0 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+}
+
+.shopg-layout-settings-wrapper.hidden > * {
+    display: none;
+}
+
+#toggle-settings-button {
+    position: absolute;
+    left: 358px;
+    top: 200px;
+    transform: translateY(-50%) rotate(-90deg);
+    background: #097dab;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    z-index: 9999;
+    border-radius: 3px;
+    font-size: 14px;
+    transform-origin: center;
+    opacity: 1;
+    visibility: visible;
+    white-space: nowrap;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+#toggle-settings-button:hover {
+    background: #075a87;
+}
+
+.shopg-layout-settings-wrapper.hidden ~ #toggle-settings-button,
+.shopg-layout-settings-wrapper.collapsed ~ #toggle-settings-button {
+    position: fixed;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    opacity: 1;
+    visibility: visible;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.shopg-layout-container,
+.shopg-admin-edit-panel {
+    transition: width 0.3s ease, max-width 0.3s ease;
+}
+
+.shopg-layout-container.expanded,
+.shopg-layout-container.collapsed,
+.shopg-admin-edit-panel.collapsed {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+}
+
+/* When settings wrapper is collapsed, hide its content */
+.shopg-layout-settings-wrapper.collapsed .inside,
+.shopg-layout-settings-wrapper.collapsed .agshopglut-metabox,
+.shopg-layout-settings-wrapper.collapsed h2,
+.shopg-layout-settings-wrapper.collapsed .postbox {
+    display: none !important;
+}
+
+/* Collapse settings wrapper to 0 width when hidden */
+.postbox-container.shopg-layout-settings-wrapper.collapsed {
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Shopglut Copy Notification */
+.shopglut-copy-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 999999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease-in-out;
+}
+
+.shopglut-copy-notification.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Shortcode table input styling */
+.shortcode_shopg_table {
+    cursor: pointer;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 6px 10px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: #2271b1;
+    width: 100%;
+    max-width: 350px;
+    transition: all 0.2s ease;
+}
+
+.shortcode_shopg_table:hover {
+    background-color: #e9f5ff;
+    border-color: #2271b1;
+}
+
+.shortcode_shopg_table:focus {
+    outline: none;
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+}

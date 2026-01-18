@@ -1,0 +1,470 @@
+/* ==========================================
+   SHOPGLUT WISHLIST RTL (RIGHT-TO-LEFT) STYLES
+   ========================================== */
+
+/* Base RTL Container */
+.shopglut-rtl {
+    direction: rtl;
+    text-align: right;
+}
+
+/* Tab Navigation RTL */
+.shopglut-rtl .shoglut-wishlist-tabs .tab-titles {
+    justify-content: flex-end;
+}
+
+.shopglut-rtl .shoglut-wishlist-tabs .tab-titles .tab-title {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.shopglut-rtl .shoglut-wishlist-tabs .tab-titles .tab-title:first-child {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 0;
+}
+
+.shopglut-rtl .shoglut-wishlist-tabs .tab-titles .tab-title:last-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 0;
+}
+
+/* Table RTL */
+.shopglut-rtl .shopglut-wishlist-table {
+    direction: rtl;
+}
+
+.shopglut-rtl .shopglut-wishlist-table th,
+.shopglut-rtl .shopglut-wishlist-table td {
+    text-align: right;
+}
+
+.shopglut-rtl .shopglut-wishlist-table th:first-child,
+.shopglut-rtl .shopglut-wishlist-table td:first-child {
+    text-align: center;
+}
+
+.shopglut-rtl .shopglut-wishlist-table th:last-child,
+.shopglut-rtl .shopglut-wishlist-table td:last-child {
+    text-align: center;
+}
+
+/* Action Buttons RTL */
+.shopglut-rtl .wishlist-action-buttons {
+    justify-content: flex-start;
+}
+
+.shopglut-rtl .wishlist-action-buttons .shopglutw-subscribe-notification-btn::before {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+.shopglut-rtl .wishlist-action-buttons .btn-print-wishlist::before {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+/* Controls RTL */
+.shopglut-rtl .shopglut-wishlist-controls .wishlist-controls-row {
+    direction: rtl;
+}
+
+.shopglut-rtl .shopglut-wishlist-controls .wishlist-sort,
+.shopglut-rtl .shopglut-wishlist-controls .wishlist-filter {
+    flex-direction: row-reverse;
+}
+
+.shopglut-rtl .shopglut-wishlist-controls .wishlist-bulk-actions {
+    flex-direction: row-reverse;
+}
+
+/* Modal RTL */
+.shopglut-rtl #shopgMovetoListModal {
+    direction: rtl;
+}
+
+.shopglut-rtl #shopgMovetoListContainer {
+    text-align: right;
+}
+
+.shopglut-rtl #shopgMovetoListModal button[onclick] {
+    right: auto;
+    left: -23px;
+}
+
+.shopglut-rtl #shopgMovetoListModal #checkboxList label {
+    flex-direction: row-reverse;
+}
+
+.shopglut-rtl #shopgMovetoListModal #checkboxList input[type="checkbox"] {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+.shopglut-rtl #shopgMovetoListModal #checkboxList .delete-list {
+    margin-left: 0;
+    margin-right: 8px;
+}
+
+/* Social Share RTL */
+.shopglut-rtl .shopglut-social-share {
+    text-align: left;
+}
+
+.shopglut-rtl .shopglut-social-share span {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+/* Notification RTL */
+.shopglut-rtl #shopglut-wishlist-notification {
+    float: left;
+}
+
+.shopglut-rtl #shopglut-wishlist-notification .success-added {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+.shopglut-rtl #shopglut-wishlist-notification .wishlist-removed {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+.shopglut-rtl #shopglut-wishlist-notification .success-added i {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+/* Counter RTL */
+.shopglut-rtl .shopglut-wishlist-counter {
+    flex-direction: row-reverse;
+}
+
+.shopglut-rtl .counter-bubble {
+    margin-left: 0;
+    margin-right: 4px;
+}
+
+/* Popular Items RTL */
+.shopglut-rtl .popular-items-grid {
+    direction: rtl;
+}
+
+.shopglut-rtl .popular-item-details {
+    text-align: right;
+}
+
+.shopglut-rtl .popular-item-actions {
+    direction: rtl;
+}
+
+.shopglut-rtl .popularity-badge {
+    right: auto;
+    left: 8px;
+}
+
+/* QR Code Modal RTL */
+.shopglut-rtl .shopglut-modal-header {
+    flex-direction: row-reverse;
+}
+
+.shopglut-rtl .shopglut-modal-close {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.shopglut-rtl .url-input-group {
+    flex-direction: row-reverse;
+}
+
+.shopglut-rtl .share-buttons {
+    flex-direction: row-reverse;
+}
+
+/* Shared Wishlist RTL */
+.shopglut-rtl .shopglut-shared-wishlist {
+    direction: rtl;
+}
+
+.shopglut-rtl .shared-wishlist-notice {
+    flex-direction: row-reverse;
+}
+
+.shopglut-rtl .shared-wishlist-notice i {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+.shopglut-rtl .shared-product-card {
+    direction: rtl;
+}
+
+.shopglut-rtl .shared-product-info {
+    flex-direction: row-reverse;
+}
+
+.shopglut-rtl .shared-product-info .product-details {
+    text-align: right;
+}
+
+/* GDPR Modal RTL */
+.shopglut-rtl .shopglut-gdpr-modal {
+    direction: rtl;
+}
+
+.shopglut-rtl .shopglut-gdpr-content {
+    text-align: right;
+}
+
+.shopglut-rtl .shopglut-gdpr-actions {
+    flex-direction: row-reverse;
+}
+
+/* Mobile RTL Adjustments */
+@media (max-width: 768px) {
+    .shopglut-rtl .shopglut-wishlist-table td {
+        padding-left: 0;
+        padding-right: 40%;
+    }
+    
+    .shopglut-rtl .shopglut-wishlist-table td:before {
+        left: auto;
+        right: 0;
+        text-align: right;
+    }
+    
+    .shopglut-rtl .shopglut-wishlist-table td:first-child {
+        right: 10px;
+        left: auto;
+    }
+    
+    .shopglut-rtl .tab-titles {
+        text-align: right;
+    }
+    
+    .shopglut-rtl .wishlist-action-buttons {
+        align-items: stretch;
+    }
+    
+    .shopglut-rtl .popular-items-grid {
+        direction: rtl;
+    }
+    
+    .shopglut-rtl .shopglut-social-share {
+        text-align: center;
+    }
+    
+    .shopglut-rtl #shopglut-wishlist-notification {
+        right: 20px;
+        left: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .shopglut-rtl .shopglut-wishlist-table td {
+        padding-right: 45%;
+    }
+    
+    .shopglut-rtl .shopglut-wishlist-table td:before {
+        width: 40%;
+    }
+    
+    .shopglut-rtl .shopglut-gdpr-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Form Elements RTL */
+.shopglut-rtl input[type="text"],
+.shopglut-rtl input[type="number"],
+.shopglut-rtl select,
+.shopglut-rtl textarea {
+    direction: rtl;
+    text-align: right;
+}
+
+.shopglut-rtl .quantity {
+    text-align: center;
+}
+
+/* Button Icons RTL */
+.shopglut-rtl .add-to-cart-btn::before {
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+.shopglut-rtl .remove-btn::before {
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+.shopglut-rtl .checkout-link::before {
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+/* Loading Animation RTL */
+.shopglut-rtl .loading::after {
+    right: 50%;
+    left: auto;
+    margin-right: -10px;
+    margin-left: 0;
+}
+
+/* Dropdown RTL */
+.shopglut-rtl .wishlist-sort select,
+.shopglut-rtl .wishlist-filter select {
+    background-position: left 8px center;
+    padding-left: 30px;
+    padding-right: 8px;
+}
+
+/* Checkbox RTL */
+.shopglut-rtl input[type="checkbox"] {
+    margin-left: 8px;
+    margin-right: 0;
+}
+
+/* Text Direction Override */
+.shopglut-rtl .date-added,
+.shopglut-rtl .product-price,
+.shopglut-rtl .stock-status {
+    direction: ltr;
+    text-align: right;
+}
+
+/* Print RTL */
+@media print {
+    .shopglut-rtl .shopglut-wishlist-table {
+        direction: rtl;
+    }
+    
+    .shopglut-rtl .shopglut-wishlist-table th,
+    .shopglut-rtl .shopglut-wishlist-table td {
+        text-align: right;
+    }
+    
+    .shopglut-rtl .popular-items-grid {
+        direction: rtl;
+    }
+}
+
+/* High Contrast RTL */
+@media (prefers-contrast: high) {
+    .shopglut-rtl .shopglut-wishlist-table th,
+    .shopglut-rtl .shopglut-wishlist-table td {
+        border-left: 2px solid #000;
+        border-right: none;
+    }
+    
+    .shopglut-rtl .shopglut-wishlist-table th:first-child,
+    .shopglut-rtl .shopglut-wishlist-table td:first-child {
+        border-left: none;
+    }
+    
+    .shopglut-rtl .shopglut-wishlist-table th:last-child,
+    .shopglut-rtl .shopglut-wishlist-table td:last-child {
+        border-right: 2px solid #000;
+    }
+}
+
+/* Dark Mode RTL */
+@media (prefers-color-scheme: dark) {
+    .shopglut-rtl .shopglut-wishlist-table th,
+    .shopglut-rtl .shopglut-wishlist-table td {
+        border-left: 1px solid #4a5568;
+        border-right: none;
+    }
+    
+    .shopglut-rtl .shopglut-wishlist-table th:first-child,
+    .shopglut-rtl .shopglut-wishlist-table td:first-child {
+        border-left: none;
+    }
+    
+    .shopglut-rtl .shopglut-wishlist-table th:last-child,
+    .shopglut-rtl .shopglut-wishlist-table td:last-child {
+        border-right: 1px solid #4a5568;
+    }
+}
+
+/* Animation RTL */
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.shopglut-rtl .shopglut-wishlist-table tr {
+    animation: slideInRight 0.3s ease-out;
+}
+
+.shopglut-rtl .popular-item {
+    animation: slideInLeft 0.3s ease-out;
+}
+
+/* Responsive RTL Grid */
+.shopglut-rtl .wishlist-controls-row {
+    flex-direction: row-reverse;
+}
+
+.shopglut-rtl .wishlist-bulk-actions {
+    order: -1;
+}
+
+.shopglut-rtl .wishlist-sort {
+    order: 1;
+}
+
+.shopglut-rtl .wishlist-filter {
+    order: 2;
+}
+
+/* Focus RTL */
+.shopglut-rtl button:focus,
+.shopglut-rtl select:focus,
+.shopglut-rtl input:focus {
+    outline-offset: -2px;
+}
+
+/* Accessibility RTL */
+.shopglut-rtl [aria-label] {
+    direction: rtl;
+}
+
+.shopglut-rtl .sr-only {
+    direction: rtl;
+}
+
+/* RTL Language Specific */
+.shopglut-rtl:lang(ar) {
+    font-family: 'Noto Sans Arabic', 'Tahoma', sans-serif;
+}
+
+.shopglut-rtl:lang(he) {
+    font-family: 'Noto Sans Hebrew', 'David', serif;
+}
+
+.shopglut-rtl:lang(fa) {
+    font-family: 'Noto Sans Persian', 'Tahoma', sans-serif;
+}
+
+.shopglut-rtl:lang(ur) {
+    font-family: 'Noto Sans Urdu', 'Noto Sans Arabic', sans-serif;
+}
