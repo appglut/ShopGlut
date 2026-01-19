@@ -425,6 +425,10 @@ class template1Style {
         // Generate CSS
         $css .= "/* Settings-based Dynamic CSS for Template1 */\n";
 
+        // Enforce minimum font sizes to prevent invisible text (12px minimum)
+        $font_size = max(intval($font_size), 12);
+        $label_font_size = max(intval($label_font_size), 12);
+
         // Dropdown styles
         $css .= ".shopglut-swatch-dropdown, .shopglut-swatches-wrapper select, .shopglut-product-swatches-template1 select {\n";
         $css .= "    background-color: " . esc_attr($background) . " !important;\n";

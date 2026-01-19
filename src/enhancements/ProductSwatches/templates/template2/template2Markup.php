@@ -46,7 +46,10 @@ class template2Markup {
 	 * Render demo swatches for admin preview
 	 */
 	private function render_demo_swatches($layout_id) {
-		$settings = $this->get_layout_settings($layout_id);
+		// Get layout data including assigned attributes
+		$layout_data = $this->get_layout_data($layout_id);
+		$settings = isset($layout_data['settings']) ? $layout_data['settings'] : array();
+		$assigned_attribute = isset($layout_data['assigned_attribute']) ? $layout_data['assigned_attribute'] : '';
 
 		// Get button default settings
 		$button_default = isset($settings['button_default_section']) ? $settings['button_default_section'] : array();
@@ -89,32 +92,38 @@ class template2Markup {
 			intval($padding_x)
 		);
 
-		?>
-		<!-- Simple Demo: Button Swatches -->
-		<div class="shopglut-swatches-demo">
-			<h3 style="margin-bottom: 20px; color: #2271b1;">Template 2: Button Swatches</h3>
-			<p style="margin-bottom: 20px; color: #666;">Button style for product variations with hover and active states.</p>
+		// Get actual attribute terms from the assigned attribute
+		global $product;
+		$attribute_data = $this->get_assigned_attribute_terms($product, $assigned_attribute);
 
+		// If no attributes found, fall back to demo data
+		if (empty($attribute_data)) {
+			$attribute_data = array(
+				'label' => 'Color:',
+				'options' => array(
+					array('slug' => 'red', 'name' => 'Red'),
+					array('slug' => 'blue', 'name' => 'Blue'),
+					array('slug' => 'green', 'name' => 'Green'),
+				)
+			);
+		}
+
+		?>
+		<!-- Button Swatches Preview -->
+		<div class="shopglut-swatches-demo">
 			<div class="shopglut-swatches-wrapper shopglut-template2">
 				<!-- Label -->
 				<label class="shopglut-attribute-label" style="color:<?php echo esc_attr($label_color); ?>;font-size:<?php echo intval($label_font_size); ?>px;font-weight:600;display:block;margin-bottom:12px;">
-					Color:
+					<?php echo esc_html($attribute_data['label']); ?>
 				</label>
 
 				<!-- Buttons Container -->
 				<div class="shopglut-buttons-container" style="display:grid;grid-template-columns:repeat(<?php echo intval($columns); ?>,1fr);gap:<?php echo intval($gap); ?>px;">
-					<button type="button" class="shopglut-swatch-button" data-value="red" style="<?php echo esc_attr($button_style); ?>">
-						Red
-					</button>
-					<button type="button" class="shopglut-swatch-button selected" data-value="blue" style="<?php echo esc_attr($button_style); ?>">
-						Blue
-					</button>
-					<button type="button" class="shopglut-swatch-button" data-value="green" style="<?php echo esc_attr($button_style); ?>">
-						Green
-					</button>
-					<button type="button" class="shopglut-swatch-button" data-value="black" style="<?php echo esc_attr($button_style); ?>">
-						Black
-					</button>
+					<?php foreach ($attribute_data['options'] as $index => $option): ?>
+						<button type="button" class="shopglut-swatch-button<?php echo $index === 1 ? ' selected' : ''; ?>" data-value="<?php echo esc_attr($option['slug']); ?>" style="<?php echo esc_attr($button_style); ?>">
+							<?php echo esc_html($option['name']); ?>
+						</button>
+					<?php endforeach; ?>
 				</div>
 			</div>
 
@@ -134,6 +143,226 @@ class template2Markup {
 			</style>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Get terms for the assigned attribute
+	 *
+	 * @param \WC_Product $product Product object
+	 * @param string $assigned_attribute The assigned attribute slug (e.g., 'pa_size')
+	 * @return array Attribute data with label and options
+	 */
+	private function get_assigned_attribute_terms($product, $assigned_attribute) {
+		if (empty($assigned_attribute)) {
+			error_log('template2Markup: No assigned attribute provided');
+			return array();
+		}
+
+		if (!$product) {
+			error_log('template2Markup: No product found for preview');
+			return array();
+		}
+
+		// Normalize attribute name
+		$attribute = $assigned_attribute;
+		if (strpos($attribute, 'pa_') !== 0) {
+			$attribute = 'pa_' . $attribute;
+		}
+
+		error_log('template2Markup: Looking for attribute: ' . $attribute);
+
+		// Get the label for this attribute
+		$label = wc_attribute_label($attribute);
+
+		// Get all terms for this taxonomy
+		$terms = get_terms(array(
+			'taxonomy' => $attribute,
+			'hide_empty' => false,
+		));
+
+		error_log('template2Markup: Found ' . count($terms) . ' terms for ' . $attribute);
+
+		if (empty($terms) || is_wp_error($terms)) {
+			error_log('template2Markup: No terms found or error for ' . $attribute);
+			return array();
+		}
+
+		$options = array();
+		foreach ($terms as $term) {
+			$options[] = array(
+				'slug' => $term->slug,
+				'name' => $term->name,
+			);
+		}
+
+		error_log('template2Markup: Returning ' . count($options) . ' options for ' . $label);
+
+		return array(
+			'label' => $label . ':',
+			'options' => $options,
+		);
+	}
+
+	/**
+	 * Get product attributes for preview
+	 *
+	 * @param \WC_Product $product Product object
+	 * @return array Attribute data with label and options
+	 */
+	private function get_product_attributes_for_preview($product) {
+		// Debug logging
+		if (!$product) {
+			error_log('template2Markup: No product found for preview');
+			return array();
+		}
+
+		if (!method_exists($product, 'is_type') || !$product->is_type('variable')) {
+			error_log('template2Markup: Product is not variable type: ' . get_class($product));
+			return array();
+		}
+
+		$attributes = $product->get_attributes();
+
+		if (empty($attributes)) {
+			error_log('template2Markup: Product has no attributes');
+			return array();
+		}
+
+		error_log('template2Markup: Found ' . count($attributes) . ' attributes');
+
+		// Find the first variation attribute (try taxonomy first, then custom)
+		foreach ($attributes as $attr_key => $attribute) {
+			// Check if this is a variation attribute
+			$is_variation = method_exists($attribute, 'get_variation') ? $attribute->get_variation() : false;
+
+			if (!$is_variation) {
+				continue;
+			}
+
+			error_log('template2Markup: Processing attribute: ' . $attr_key . ', is_taxonomy: ' . ($attribute->is_taxonomy() ? 'yes' : 'no'));
+
+			// Handle taxonomy-based attributes
+			if ($attribute->is_taxonomy()) {
+				$taxonomy = $attribute->get_taxonomy();
+				$label = wc_attribute_label($taxonomy);
+
+				// Get terms for this taxonomy
+				$terms = get_terms(array(
+					'taxonomy' => $taxonomy,
+					'hide_empty' => false,
+				));
+
+				error_log('template2Markup: Taxonomy ' . $taxonomy . ' has ' . count($terms) . ' terms');
+
+				$options = array();
+				foreach ($terms as $term) {
+					$options[] = array(
+						'slug' => $term->slug,
+						'name' => $term->name,
+					);
+				}
+
+				if (!empty($options)) {
+					error_log('template2Markup: Returning ' . count($options) . ' options for taxonomy ' . $taxonomy);
+					return array(
+						'label' => $label . ':',
+						'options' => $options,
+					);
+				}
+			}
+			// Handle custom product attributes (non-taxonomy)
+			else {
+				$label = $attribute->get_name();
+				$options = $attribute->get_options();
+
+				error_log('template2Markup: Custom attribute ' . $label . ' has ' . count($options) . ' options');
+
+				if (!empty($options)) {
+					$formatted_options = array();
+					foreach ($options as $option) {
+						// Create slug from option name (for custom attributes, value is the name)
+						$slug = sanitize_title($option);
+						$formatted_options[] = array(
+							'slug' => $slug,
+							'name' => $option,
+						);
+					}
+
+					error_log('template2Markup: Returning ' . count($formatted_options) . ' options for custom attribute ' . $label);
+					return array(
+						'label' => $label . ':',
+						'options' => $formatted_options,
+					);
+				}
+			}
+		}
+
+		error_log('template2Markup: No valid variation attributes found');
+		return array();
+	}
+
+	/**
+	 * Get layout data from database including settings and assigned attribute
+	 *
+	 * @param int $layout_id Layout ID
+	 * @return array Layout data with settings and assigned_attribute
+	 */
+	private function get_layout_data($layout_id) {
+		global $wpdb;
+
+		if (!$layout_id) {
+			return array('settings' => array(), 'assigned_attribute' => '');
+		}
+
+		$table_name = \Shopglut\ShopGlutDatabase::table_product_swatches();
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+		$layout = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT layout_settings, layout_template, assigned_attributes FROM `{$table_name}` WHERE id = %d",
+				$layout_id
+			)
+		);
+
+		if (!$layout) {
+			return array('settings' => array(), 'assigned_attribute' => '');
+		}
+
+		$template = $layout->layout_template ?? 'template2';
+		$layout_settings = maybe_unserialize($layout->layout_settings);
+
+		// Extract assigned attribute
+		$assigned_attribute = '';
+		if (!empty($layout->assigned_attributes)) {
+			$assigned = json_decode($layout->assigned_attributes, true);
+			if (is_array($assigned) && !empty($assigned)) {
+				$assigned_attribute = $assigned[0]; // Get first assigned attribute
+			}
+		}
+
+		error_log('template2Markup: Layout ID ' . $layout_id . ' has assigned attribute: ' . $assigned_attribute);
+
+		// Try to extract template settings
+		$keys = array(
+			'shopg_product_swatches_settings_' . $template,
+			'shopg_productswatches_settings_' . $template,
+		);
+
+		$settings = array();
+		foreach ($keys as $key) {
+			if (isset($layout_settings[$key])) {
+				$settings = $layout_settings[$key];
+				if (isset($settings['product-swatches-settings'])) {
+					$settings = $settings['product-swatches-settings'];
+				}
+				break;
+			}
+		}
+
+		return array(
+			'settings' => $settings,
+			'assigned_attribute' => $assigned_attribute,
+		);
 	}
 
 	/**

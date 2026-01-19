@@ -70,6 +70,28 @@ $all_fields1 = array(
         'title' => __('Appearance Settings', 'shopglut'),
         'tabs' => array(
 
+                    // ==================== VISIBILITY ====================
+                    array(
+                        'title' => __('Visibility', 'shopglut'),
+                        'icon' => 'fas fa-eye',
+                        'fields' => array(
+                            array(
+                                'id' => 'show_dropdown',
+                                'type' => 'switcher',
+                                'title' => __('Show Dropdown', 'shopglut'),
+                                'desc' => __('Enable to display the dropdown select on frontend', 'shopglut'),
+                                'default' => true,
+                            ),
+                            array(
+                                'id' => 'show_label',
+                                'type' => 'switcher',
+                                'title' => __('Show Label', 'shopglut'),
+                                'desc' => __('Enable to display the attribute label on frontend', 'shopglut'),
+                                'default' => true,
+                            ),
+                        ),
+                    ),
+
                     // ==================== DROPDOWN STYLE ====================
                     array(
                         'title' => __('Dropdown', 'shopglut'),
@@ -136,6 +158,27 @@ $all_fields1 = array(
                                         'step' => 5,
                                         'default' => 100,
                                     ),
+                                    array(
+                                        'id' => 'swatch_dropdown_min_height',
+                                        'type' => 'slider',
+                                        'title' => __('Min Height', 'shopglut'),
+                                        'unit' => 'px',
+                                        'min' => 30,
+                                        'max' => 60,
+                                        'step' => 1,
+                                        'default' => 40,
+                                    ),
+                                    array(
+                                        'id' => 'swatch_dropdown_max_width',
+                                        'type' => 'slider',
+                                        'title' => __('Max Width', 'shopglut'),
+                                        'unit' => 'px',
+                                        'min' => 200,
+                                        'max' => 600,
+                                        'step' => 10,
+                                        'default' => 600,
+                                        'desc' => __('Set 0 for no limit', 'shopglut'),
+                                    ),
                                 ),
                             ),
                             // Typography
@@ -173,10 +216,35 @@ $all_fields1 = array(
                                         'default' => '400',
                                     ),
                                     array(
+                                        'id' => 'swatch_dropdown_line_height',
+                                        'type' => 'slider',
+                                        'title' => __('Line Height', 'shopglut'),
+                                        'unit' => 'em',
+                                        'min' => 10,
+                                        'max' => 25,
+                                        'step' => 1,
+                                        'default' => 14,
+                                        'desc' => __('Line height as /10 of em (e.g., 14 = 1.4em)', 'shopglut'),
+                                    ),
+                                    array(
                                         'id' => 'swatch_dropdown_placeholder_color',
                                         'type' => 'color',
                                         'title' => __('Placeholder Color', 'shopglut'),
                                         'default' => '#9ca3af',
+                                    ),
+                                    array(
+                                        'id' => 'swatch_dropdown_font_family',
+                                        'type' => 'select',
+                                        'title' => __('Font Family', 'shopglut'),
+                                        'options' => array(
+                                            'inherit' => __('Inherit', 'shopglut'),
+                                            'Arial, sans-serif' => __('Arial', 'shopglut'),
+                                            'Georgia, serif' => __('Georgia', 'shopglut'),
+                                            '"Times New Roman", serif' => __('Times New Roman', 'shopglut'),
+                                            '"Courier New", monospace' => __('Courier New', 'shopglut'),
+                                            'Verdana, sans-serif' => __('Verdana', 'shopglut'),
+                                        ),
+                                        'default' => 'inherit',
                                     ),
                                 ),
                             ),
@@ -191,6 +259,12 @@ $all_fields1 = array(
                                         'type' => 'color',
                                         'title' => __('Focus Border Color', 'shopglut'),
                                         'default' => '#2271b1',
+                                    ),
+                                    array(
+                                        'id' => 'swatch_dropdown_focus_background',
+                                        'type' => 'color',
+                                        'title' => __('Focus Background', 'shopglut'),
+                                        'default' => '#ffffff',
                                     ),
                                     array(
                                         'id' => 'swatch_dropdown_focus_shadow',
@@ -210,6 +284,42 @@ $all_fields1 = array(
                                         'type' => 'color',
                                         'title' => __('Hover Border Color', 'shopglut'),
                                         'default' => '#2271b1',
+                                    ),
+                                    array(
+                                        'id' => 'swatch_dropdown_option_hover_bg',
+                                        'type' => 'color',
+                                        'title' => __('Option Hover Background', 'shopglut'),
+                                        'default' => '#f3f4f6',
+                                    ),
+                                    array(
+                                        'id' => 'swatch_dropdown_option_hover_color',
+                                        'type' => 'color',
+                                        'title' => __('Option Hover Text Color', 'shopglut'),
+                                        'default' => '#1f2937',
+                                    ),
+                                ),
+                            ),
+                            // Arrow Icon
+                            array(
+                                'id' => 'swatch_dropdown_arrow_section',
+                                'type' => 'fieldset',
+                                'title' => __('Arrow Icon', 'shopglut'),
+                                'fields' => array(
+                                    array(
+                                        'id' => 'swatch_dropdown_arrow_color',
+                                        'type' => 'color',
+                                        'title' => __('Arrow Color', 'shopglut'),
+                                        'default' => '#6b7280',
+                                    ),
+                                    array(
+                                        'id' => 'swatch_dropdown_arrow_size',
+                                        'type' => 'slider',
+                                        'title' => __('Arrow Size', 'shopglut'),
+                                        'unit' => 'px',
+                                        'min' => 8,
+                                        'max' => 16,
+                                        'step' => 1,
+                                        'default' => 12,
                                     ),
                                 ),
                             ),

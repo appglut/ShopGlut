@@ -12,6 +12,37 @@
         // Flag to prevent price updates during reset
         var isResetting = false;
 
+        // Function to check if any swatches are selected and show/hide clear button
+        function updateClearButtonVisibility() {
+            var $form = $('.variations_form').first();
+            if (!$form.length) {
+                return;
+            }
+
+            var hasSelection = false;
+            $form.find('.shopglut-swatch-button.selected, .shopglut-color-swatch.selected, .shopglut-image-swatch.selected').each(function() {
+                hasSelection = true;
+                return false; // Break loop
+            });
+
+            // Also check if any dropdown has a value selected
+            if (!hasSelection) {
+                $form.find('.shopglut-swatch-dropdown').each(function() {
+                    if ($(this).val() && $(this).val() !== '') {
+                        hasSelection = true;
+                        return false; // Break loop
+                    }
+                });
+            }
+
+            var $resetButton = $form.find('.shopglut-reset-variations');
+            if (hasSelection) {
+                $resetButton.show();
+            } else {
+                $resetButton.hide();
+            }
+        }
+
         // Common handler for all swatch types
         function handleSwatchClick($swatch, wrapperClass) {
             var $wrapper = $swatch.closest('.' + wrapperClass);
@@ -44,6 +75,9 @@
                     $select.val(value).trigger('change');
                 }
             }
+
+            // Update clear button visibility
+            updateClearButtonVisibility();
         }
 
         // Handle button swatch clicks
@@ -86,6 +120,9 @@
                         $wcSelect.val(value).trigger('change');
                     }
                 }
+
+                // Update clear button visibility
+                updateClearButtonVisibility();
             }
         });
 

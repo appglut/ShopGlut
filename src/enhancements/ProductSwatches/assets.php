@@ -93,7 +93,7 @@ class ProductSwatchesAssets {
         }
 
         // Enqueue admin JS with color picker dependency
-        if (file_exists(__DIR__ . '/assets/productSwatchesLayoutss.js')) {
+        if (file_exists(__DIR__ . '/assets/productSwatchesLayouts.js')) {
             wp_enqueue_script(
                 'shopglut-product-swatches-admin',
                 $plugin_url . 'assets/productSwatchesLayouts.js',

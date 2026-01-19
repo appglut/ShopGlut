@@ -41,7 +41,8 @@
       "Bash(awk:*)",
       "Bash(node --check:*)",
       "Bash(git checkout:*)",
-      "Bash(wp option get:*)"
+      "Bash(wp option get:*)",
+      "Bash(wp cache flush:*)"
     ]
   }
 }

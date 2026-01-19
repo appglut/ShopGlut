@@ -40,7 +40,8 @@
       "Bash(while read f)",
       "Bash(awk:*)",
       "Bash(node --check:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(wp option get:*)"
     ]
   }
 }

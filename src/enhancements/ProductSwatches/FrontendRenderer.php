@@ -293,6 +293,10 @@ class FrontendRenderer {
 	 */
 	private function render_template1($args, $settings) {
 		// Extract settings with defaults
+		// Always show dropdown and label for now - visibility settings can be controlled via position "none"
+		$show_dropdown = true;
+		$show_label = true;
+
 		$dropdown_bg = isset($settings['swatch_dropdown_container_section']['swatch_dropdown_background'])
 			? $settings['swatch_dropdown_container_section']['swatch_dropdown_background']
 			: '#ffffff';
@@ -309,6 +313,18 @@ class FrontendRenderer {
 			? $settings['swatch_dropdown_container_section']['swatch_dropdown_border_radius']
 			: 6;
 
+		$dropdown_padding = isset($settings['swatch_dropdown_container_section']['swatch_dropdown_padding'])
+			? $settings['swatch_dropdown_container_section']['swatch_dropdown_padding']
+			: array('top' => '10', 'right' => '14', 'bottom' => '10', 'left' => '14', 'unit' => 'px');
+
+		$dropdown_width = isset($settings['swatch_dropdown_container_section']['swatch_dropdown_width'])
+			? $settings['swatch_dropdown_container_section']['swatch_dropdown_width']
+			: 100;
+
+		$dropdown_min_height = isset($settings['swatch_dropdown_container_section']['swatch_dropdown_min_height'])
+			? $settings['swatch_dropdown_container_section']['swatch_dropdown_min_height']
+			: 40;
+
 		$text_color = isset($settings['swatch_dropdown_typography_section']['swatch_dropdown_text_color'])
 			? $settings['swatch_dropdown_typography_section']['swatch_dropdown_text_color']
 			: '#374151';
@@ -317,6 +333,18 @@ class FrontendRenderer {
 			? $settings['swatch_dropdown_typography_section']['swatch_dropdown_font_size']
 			: 14;
 
+		$font_weight = isset($settings['swatch_dropdown_typography_section']['swatch_dropdown_font_weight'])
+			? $settings['swatch_dropdown_typography_section']['swatch_dropdown_font_weight']
+			: '400';
+
+		$line_height = isset($settings['swatch_dropdown_typography_section']['swatch_dropdown_line_height'])
+			? $settings['swatch_dropdown_typography_section']['swatch_dropdown_line_height']
+			: 14;
+
+		$font_family = isset($settings['swatch_dropdown_typography_section']['swatch_dropdown_font_family'])
+			? $settings['swatch_dropdown_typography_section']['swatch_dropdown_font_family']
+			: 'inherit';
+
 		$label_color = isset($settings['swatch_attribute_label_section']['swatch_attribute_label_color'])
 			? $settings['swatch_attribute_label_section']['swatch_attribute_label_color']
 			: '#374151';
@@ -324,6 +352,10 @@ class FrontendRenderer {
 		$label_font_size = isset($settings['swatch_attribute_label_section']['swatch_attribute_label_font_size'])
 			? $settings['swatch_attribute_label_section']['swatch_attribute_label_font_size']
 			: 14;
+
+		$label_font_weight = isset($settings['swatch_attribute_label_section']['swatch_attribute_label_font_weight'])
+			? $settings['swatch_attribute_label_section']['swatch_attribute_label_font_weight']
+			: '600';
 
 		$label_position = isset($settings['swatch_attribute_label_section']['swatch_attribute_label_position'])
 			? $settings['swatch_attribute_label_section']['swatch_attribute_label_position']
@@ -335,12 +367,16 @@ class FrontendRenderer {
 
 		echo '<div class="shopglut-swatches-wrapper shopglut-template1">';
 
-		// Render label
-		if (!empty($attribute_label)) {
+		// Render label if enabled
+		if ($show_label && !empty($attribute_label)) {
+			// Enforce minimum font size for label
+			$label_font_size = max(intval($label_font_size), 12); // Min 12px
+
 			$label_style = sprintf(
-				'color:%s;font-size:%dpx;font-weight:600;%s',
+				'color:%s;font-size:%dpx;font-weight:%s;%s',
 				esc_attr($label_color),
 				intval($label_font_size),
+				esc_attr($label_font_weight),
 				$label_position === 'stacked' ? 'display:block;margin-bottom:8px;' : 'display:inline-block;margin-right:10px;vertical-align:middle;'
 			);
 			echo '<label class="shopglut-attribute-label" style="' . esc_attr($label_style) . '">' . esc_html($attribute_label) . '</label>';
@@ -349,27 +385,49 @@ class FrontendRenderer {
 			}
 		}
 
-		// Render dropdown
-		$select_style = sprintf(
-			'background-color:%s;border:%dpx solid %s;border-radius:%dpx;color:%s;font-size:%dpx;padding:10px 14px;min-height:40px;',
-			esc_attr($dropdown_bg),
-			intval($dropdown_border_width),
-			esc_attr($dropdown_border),
-			intval($dropdown_radius),
-			esc_attr($text_color),
-			intval($font_size)
-		);
+		// Render dropdown if enabled
+		if ($show_dropdown) {
+			$padding_top = isset($dropdown_padding['top']) ? $dropdown_padding['top'] : '10';
+			$padding_right = isset($dropdown_padding['right']) ? $dropdown_padding['right'] : '14';
+			$padding_bottom = isset($dropdown_padding['bottom']) ? $dropdown_padding['bottom'] : '10';
+			$padding_left = isset($dropdown_padding['left']) ? $dropdown_padding['left'] : '14';
 
-		echo '<select class="shopglut-swatch-dropdown" name="' . esc_attr($select_name) . '" data-attribute="' . esc_attr($select_name) . '" style="' . esc_attr($select_style) . '">';
-		echo '<option value="">' . esc_html__('Choose an option', 'shopglut') . '</option>';
+			// Enforce minimum values to prevent invisible/unusable elements
+			$font_size = max(intval($font_size), 12); // Min 12px
+			$line_height = max(intval($line_height), 14); // Min 1.4em
+			$dropdown_min_height = max(intval($dropdown_min_height), 40); // Min 40px
 
-		foreach ($args['options'] as $option_slug) {
-			$term = get_term_by('slug', $option_slug, $args['attribute']);
-			$option_name = $term ? $term->name : ucwords(str_replace('-', ' ', $option_slug));
-			echo '<option value="' . esc_attr($option_slug) . '">' . esc_html($option_name) . '</option>';
+			$select_style = sprintf(
+				'background-color:%s;border:%dpx solid %s;border-radius:%dpx;color:%s;font-size:%dpx;font-weight:%s;font-family:%s;line-height:%.1fem;padding:%spx %spx;min-height:%spx;width:%s%%;',
+				esc_attr($dropdown_bg),
+				intval($dropdown_border_width),
+				esc_attr($dropdown_border),
+				intval($dropdown_radius),
+				esc_attr($text_color),
+				intval($font_size),
+				esc_attr($font_weight),
+				esc_attr($font_family),
+				intval($line_height) / 10,
+				intval($padding_top),
+				intval($padding_right),
+				intval($padding_bottom),
+				intval($padding_left),
+				intval($dropdown_min_height),
+				intval($dropdown_width)
+			);
+
+			echo '<select class="shopglut-swatch-dropdown" name="' . esc_attr($select_name) . '" data-attribute="' . esc_attr($select_name) . '" style="' . esc_attr($select_style) . '">';
+			echo '<option value="">' . esc_html__('Choose an option', 'shopglut') . '</option>';
+
+			foreach ($args['options'] as $option_slug) {
+				$term = get_term_by('slug', $option_slug, $args['attribute']);
+				$option_name = $term ? $term->name : ucwords(str_replace('-', ' ', $option_slug));
+				echo '<option value="' . esc_attr($option_slug) . '">' . esc_html($option_name) . '</option>';
+			}
+
+			echo '</select>';
 		}
 
-		echo '</select>';
 		echo '</div>';
 	}
 
@@ -659,7 +717,7 @@ class FrontendRenderer {
 		$clear_font_size = isset($clear_settings['font_size']) ? intval($clear_settings['font_size']) : 14;
 
 		$clear_style = sprintf(
-			'color:%s;font-size:%dpx;font-weight:500;text-decoration:underline;cursor:pointer;',
+			'color:%s;font-size:%dpx;font-weight:500;text-decoration:underline;cursor:pointer;display:none;', // Added display:none to hide by default
 			esc_attr($clear_color),
 			$clear_font_size
 		);

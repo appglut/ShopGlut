@@ -213,6 +213,9 @@ class dataManage {
             $layout_id = isset( $_GET['layout_id'] ) ? absint( sanitize_text_field( wp_unslash( $_GET['layout_id'] ) ) ) : 1;
         }
 
+        // Set up product context for preview to show actual product attributes
+        $this->setup_preview_product_context();
+
         // Get layout data from database
         global $wpdb;
         $table_name = \Shopglut\ShopGlutDatabase::table_product_swatches();
