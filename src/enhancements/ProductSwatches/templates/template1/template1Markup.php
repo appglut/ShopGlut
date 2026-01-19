@@ -62,7 +62,10 @@ class template1Markup {
 	 * Render demo swatches for admin preview
 	 */
 	private function render_demo_swatches($layout_id) {
-		$settings = $this->get_layout_settings($layout_id);
+		// Get layout data including assigned attributes (same approach as template2)
+		$layout_data = $this->get_layout_data($layout_id);
+		$settings = isset($layout_data['settings']) ? $layout_data['settings'] : array();
+		$assigned_attribute = isset($layout_data['assigned_attribute']) ? $layout_data['assigned_attribute'] : '';
 
 		// Get settings with proper minimums to prevent invisible text
 		$dropdown_bg = $this->get_nested_setting($settings, 'swatch_dropdown_container_section', 'swatch_dropdown_background', '#ffffff');
@@ -76,9 +79,9 @@ class template1Markup {
 		$label_color = $this->get_nested_setting($settings, 'swatch_attribute_label_section', 'swatch_attribute_label_color', '#374151');
 		$label_font_size = $this->get_nested_setting($settings, 'swatch_attribute_label_section', 'swatch_attribute_label_font_size', 14, 12); // Min 12px
 
-		// Get actual product attributes from global product
+		// Get actual attribute terms from the assigned attribute (same approach as template2)
 		global $product;
-		$attribute_data = $this->get_product_attributes_for_preview($product);
+		$attribute_data = $this->get_assigned_attribute_terms($product, $assigned_attribute);
 
 		// If no attributes found, fall back to demo data
 		if (empty($attribute_data)) {
@@ -92,21 +95,21 @@ class template1Markup {
 			);
 		}
 
-		// Enforce minimum font sizes to prevent invisible text (12px minimum)
-		$font_size = max(intval($font_size), 12);
-		$label_font_size = max(intval($label_font_size), 12);
+		// Enforce minimum font sizes for demo display (better visibility)
+		$font_size = max(intval($font_size), 14); // Min 14px for demo
+		$label_font_size = max(intval($label_font_size), 14); // Min 14px for demo
 
 		?>
 		<!-- Simple Demo: Dropdown Swatch -->
-		<div class="shopglut-swatches-demo">
-			<div class="shopglut-swatches-wrapper shopglut-template1">
+		<div class="shopglut-swatches-demo" style="display:flex;align-items:center;justify-content:center;padding:30px;background:#f9fafb;border-radius:8px;">
+			<div class="shopglut-swatches-wrapper shopglut-template1" style="width:100%;max-width:400px;text-align:center;">
 				<!-- Label -->
-				<label class="shopglut-attribute-label" style="color:<?php echo esc_attr($label_color); ?>;font-size:<?php echo intval($label_font_size); ?>px;font-weight:600;display:block;margin-bottom:8px;">
+				<label class="shopglut-attribute-label" style="color:<?php echo esc_attr($label_color); ?>;font-size:<?php echo intval($label_font_size); ?>px;font-weight:600;display:block;margin-bottom:12px;">
 					<?php echo esc_html($attribute_data['label']); ?>
 				</label>
 
 				<!-- Dropdown -->
-				<select class="shopglut-swatch-dropdown" disabled style="background-color:<?php echo esc_attr($dropdown_bg); ?>;border:<?php echo intval($dropdown_border_width); ?>px solid <?php echo esc_attr($dropdown_border); ?>;border-radius:<?php echo intval($dropdown_radius); ?>px;color:<?php echo esc_attr($text_color); ?>;font-size:<?php echo intval($font_size); ?>px;padding:10px 14px;min-height:40px;min-width:200px;">
+				<select class="shopglut-swatch-dropdown" disabled style="background-color:<?php echo esc_attr($dropdown_bg); ?>;border:<?php echo intval($dropdown_border_width); ?>px solid <?php echo esc_attr($dropdown_border); ?>;border-radius:<?php echo intval($dropdown_radius); ?>px;color:<?php echo esc_attr($text_color); ?>;font-size:<?php echo intval($font_size); ?>px;padding:12px 16px;min-height:46px;width:100%;cursor:not-allowed;opacity:0.8;">
 					<option value="">Choose an option</option>
 					<?php foreach ($attribute_data['options'] as $option): ?>
 						<option value="<?php echo esc_attr($option['slug']); ?>">
@@ -123,9 +126,10 @@ class template1Markup {
 	 * Get product attributes for preview
 	 *
 	 * @param \WC_Product $product Product object
+	 * @param int $layout_id Layout ID for admin preview
 	 * @return array Attribute data with label and options
 	 */
-	private function get_product_attributes_for_preview($product) {
+	private function get_product_attributes_for_preview($product, $layout_id = 0) {
 		// First try to get from actual product
 		if ($product && method_exists($product, 'is_type') && $product->is_type('variable')) {
 			$attributes = $product->get_attributes();
@@ -192,8 +196,6 @@ class template1Markup {
 		}
 
 		// No product found, try to get from assigned attributes in database
-		// Get the current layout_id from the request
-		$layout_id = isset($_GET['layout_id']) ? intval($_GET['layout_id']) : 0;
 		if ($layout_id) {
 			$assigned_attrs = $this->get_assigned_attributes_for_layout($layout_id);
 			if (!empty($assigned_attrs)) {
@@ -243,6 +245,7 @@ class template1Markup {
 	 */
 	private function get_assigned_attributes_for_layout($layout_id) {
 		if (!$layout_id) {
+			error_log('template1Markup: No layout_id provided');
 			return array();
 		}
 
@@ -258,15 +261,18 @@ class template1Markup {
 		);
 
 		if (!$layout) {
+			error_log('template1Markup: No layout found for id ' . $layout_id);
 			return array();
 		}
 
 		$assigned = maybe_unserialize($layout->assigned_attributes);
 
 		if (!is_array($assigned)) {
+			error_log('template1Markup: assigned_attributes is not an array for layout ' . $layout_id . ': ' . print_r($layout->assigned_attributes, true));
 			return array();
 		}
 
+		error_log('template1Markup: Found assigned attributes for layout ' . $layout_id . ': ' . implode(', ', $assigned));
 		return $assigned;
 	}
 
@@ -311,6 +317,120 @@ class template1Markup {
 				}
 				return $settings;
 			}
+		}
+
+		return array();
+	}
+
+	/**
+	 * Get layout data from database including settings and assigned attribute
+	 *
+	 * @param int $layout_id Layout ID
+	 * @return array Layout data with settings and assigned_attribute
+	 */
+	private function get_layout_data($layout_id) {
+		global $wpdb;
+
+		if (!$layout_id) {
+			return array('settings' => array(), 'assigned_attribute' => '');
+		}
+
+		$table_name = \Shopglut\ShopGlutDatabase::table_product_swatches();
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+		$layout = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT layout_settings, layout_template, assigned_attributes FROM `{$table_name}` WHERE id = %d",
+				$layout_id
+			)
+		);
+
+		if (!$layout) {
+			return array('settings' => array(), 'assigned_attribute' => '');
+		}
+
+		$template = $layout->layout_template ?? 'template1';
+		$layout_settings = maybe_unserialize($layout->layout_settings);
+
+		// Extract assigned attribute
+		$assigned_attribute = '';
+		if (!empty($layout->assigned_attributes)) {
+			$assigned = json_decode($layout->assigned_attributes, true);
+			if (is_array($assigned) && !empty($assigned)) {
+				$assigned_attribute = $assigned[0]; // Get first assigned attribute
+			}
+		}
+
+		// Try to extract template settings
+		$keys = array(
+			'shopg_product_swatches_settings_' . $template,
+			'shopg_productswatches_settings_' . $template,
+		);
+
+		$settings = array();
+		foreach ($keys as $key) {
+			if (isset($layout_settings[$key])) {
+				$settings = $layout_settings[$key];
+				if (isset($settings['product-swatches-settings'])) {
+					$settings = $settings['product-swatches-settings'];
+				}
+				break;
+			}
+		}
+
+		return array(
+			'settings' => $settings,
+			'assigned_attribute' => $assigned_attribute,
+		);
+	}
+
+	/**
+	 * Get terms for the assigned attribute
+	 *
+	 * @param \WC_Product $product Product object
+	 * @param string $assigned_attribute The assigned attribute slug (e.g., 'pa_color')
+	 * @return array Attribute data with label and options
+	 */
+	private function get_assigned_attribute_terms($product, $assigned_attribute) {
+		if (empty($assigned_attribute)) {
+			return array();
+		}
+
+		// Make sure it has pa_ prefix
+		if (strpos($assigned_attribute, 'pa_') !== 0) {
+			$assigned_attribute = 'pa_' . $assigned_attribute;
+		}
+
+		// Check if this taxonomy exists
+		if (!taxonomy_exists($assigned_attribute)) {
+			return array();
+		}
+
+		$label = wc_attribute_label($assigned_attribute);
+
+		// Get terms for this taxonomy
+		$terms = get_terms(array(
+			'taxonomy' => $assigned_attribute,
+			'hide_empty' => false,
+		));
+
+		if (empty($terms) || is_wp_error($terms)) {
+			return array();
+		}
+
+		$options = array();
+		foreach ($terms as $term) {
+			$options[] = array(
+				'slug' => $term->slug,
+				'name' => $term->name,
+			);
+		}
+
+		if (!empty($options)) {
+			return array(
+				'label' => $label . ':',
+				'options' => $options,
+			);
 		}
 
 		return array();

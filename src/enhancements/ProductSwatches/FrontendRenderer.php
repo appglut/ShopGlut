@@ -606,13 +606,22 @@ class FrontendRenderer {
 		$price_settings = isset($global_settings['price_display']) ? $global_settings['price_display'] : array();
 		$price_enabled = isset($price_settings['enable']) ? filter_var($price_settings['enable'], FILTER_VALIDATE_BOOLEAN) : false;
 
+		// Check if clear button is enabled
+		$clear_settings = isset($global_settings['clear_button']) ? $global_settings['clear_button'] : array();
+		$clear_enabled = isset($clear_settings['enable']) ? filter_var($clear_settings['enable'], FILTER_VALIDATE_BOOLEAN) : false;
+
 		// Only return if nothing custom is active
-		if (!$has_custom_layouts && empty($variations_form) && !$price_enabled) {
+		if (!$has_custom_layouts && empty($variations_form) && !$price_enabled && !$clear_enabled) {
 			return;
 		}
 
 		?>
 		<style>
+			/* Hide clear button by default - JavaScript will remove this class when there are selections */
+			.shopglut-reset-hidden {
+				display: none !important;
+			}
+
 			<?php if ($has_custom_layouts): ?>
 				/* Hide WooCommerce's default labels when custom swatches are active */
 				.variations .label,
@@ -717,12 +726,13 @@ class FrontendRenderer {
 		$clear_font_size = isset($clear_settings['font_size']) ? intval($clear_settings['font_size']) : 14;
 
 		$clear_style = sprintf(
-			'color:%s;font-size:%dpx;font-weight:500;text-decoration:underline;cursor:pointer;display:none;', // Added display:none to hide by default
+			'color:%s;font-size:%dpx;font-weight:500;text-decoration:underline;cursor:pointer;',
 			esc_attr($clear_color),
 			$clear_font_size
 		);
 
-		return '<a href="#" class="shopglut-reset-variations" style="' . esc_attr($clear_style) . '">' . esc_html($clear_text) . '</a>';
+		// Add CSS class to hide by default - JavaScript will remove this class when there are selections
+		return '<a href="#" class="shopglut-reset-variations shopglut-reset-hidden" style="' . esc_attr($clear_style) . '">' . esc_html($clear_text) . '</a>';
 	}
 
 	/**

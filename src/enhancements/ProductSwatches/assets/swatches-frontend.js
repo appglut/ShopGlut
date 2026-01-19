@@ -37,9 +37,9 @@
 
             var $resetButton = $form.find('.shopglut-reset-variations');
             if (hasSelection) {
-                $resetButton.show();
+                $resetButton.removeClass('shopglut-reset-hidden');
             } else {
-                $resetButton.hide();
+                $resetButton.addClass('shopglut-reset-hidden');
             }
         }
 
@@ -335,6 +335,9 @@
             setTimeout(function() {
                 $('.variations_form').trigger('woocommerce_variation_has_changed');
             }, 100);
+
+            // Hide clear button initially (no selections yet)
+            updateClearButtonVisibility();
         }
 
         // Price display update functionality
@@ -532,11 +535,16 @@
                     isResetting = false;
                     // Double-check price is cleared
                     $('.shopglut-variation-price').html('');
+                    // Hide clear button after reset
+                    updateClearButtonVisibility();
                 }, 100);
             } else {
                 // Form not found, reset flag immediately
                 isResetting = false;
             }
+
+            // Hide clear button immediately after reset
+            $button.addClass('shopglut-reset-hidden');
 
             return false;
         });
