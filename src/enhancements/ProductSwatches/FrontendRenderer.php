@@ -27,13 +27,16 @@ class FrontendRenderer {
 		// Enqueue frontend scripts/styles
 		add_action('wp_enqueue_scripts', [$this, 'enqueue_assets']);
 
+		// Add global styles to head instead of inline in form
+		add_action('wp_head', [$this, 'output_global_styles']);
+
 		// Override WooCommerce clear button with custom one
 		add_filter('woocommerce_reset_variations_link', [$this, 'custom_clear_button']);
 
 		// Output custom price element and hide WooCommerce's default variation price
 		add_action('woocommerce_single_variation', [$this, 'output_custom_variation_price'], 5);
 
-		// Apply variations form styling (including hiding default price)
+		// Apply variations form styling (minimal inline styles only)
 		add_action('woocommerce_before_variations_form', [$this, 'apply_form_styling']);
 	}
 
@@ -578,11 +581,14 @@ class FrontendRenderer {
 	}
 
 	/**
-	 * Apply variations form styling from global settings
+	 * Output global styles to wp_head instead of inline
 	 */
-	public function apply_form_styling() {
-		global $product;
+	public function output_global_styles() {
+		if (!is_product()) {
+			return;
+		}
 
+		global $product;
 		if (!$product || !$product->is_type('variable')) {
 			return;
 		}
@@ -610,16 +616,37 @@ class FrontendRenderer {
 		$clear_settings = isset($global_settings['clear_button']) ? $global_settings['clear_button'] : array();
 		$clear_enabled = isset($clear_settings['enable']) ? filter_var($clear_settings['enable'], FILTER_VALIDATE_BOOLEAN) : false;
 
-		// Only return if nothing custom is active
+		// Get actions position settings
+		$actions_position = isset($global_settings['actions_position']) ? $global_settings['actions_position'] : array();
+		$position_type = isset($actions_position['position_type']) ? $actions_position['position_type'] : 'same_line';
+		$alignment = isset($actions_position['alignment']) ? $actions_position['alignment'] : 'left';
+		$items_spacing = isset($actions_position['items_spacing']) ? intval($actions_position['items_spacing']) : 15;
+
+		// Get hover colors for clear button
+		$hover_color = isset($clear_settings['hover_color']) ? $clear_settings['hover_color'] : '#135e96';
+		$hover_background = isset($clear_settings['hover_background']) ? $clear_settings['hover_background'] : 'rgba(34, 113, 177, 0.05)';
+		$transform_scale = isset($clear_settings['transform_scale']) ? intval($clear_settings['transform_scale']) : 100;
+
+		// Only output if needed
 		if (!$has_custom_layouts && empty($variations_form) && !$price_enabled && !$clear_enabled) {
 			return;
 		}
 
 		?>
+		<!-- ShopGlut Product Swatches Global Styles -->
 		<style>
 			/* Hide clear button by default - JavaScript will remove this class when there are selections */
 			.shopglut-reset-hidden {
 				display: none !important;
+			}
+
+			/* Clear button hover effect */
+			.shopglut-reset-variations:hover {
+				color: <?php echo esc_attr($hover_color); ?> !important;
+				background-color: <?php echo esc_attr($hover_background); ?> !important;
+				<?php if ($transform_scale > 100): ?>
+				transform: scale(<?php echo floatval($transform_scale) / 100; ?>);
+				<?php endif; ?>
 			}
 
 			<?php if ($has_custom_layouts): ?>
@@ -638,6 +665,32 @@ class FrontendRenderer {
 				/* Hide WooCommerce's default variation price when custom price is enabled */
 				.woocommerce-variation-price {
 					display: none !important;
+				}
+			<?php endif; ?>
+
+			/* Actions container styling based on position settings */
+			.shopglut-actions-container {
+				display: flex;
+				align-items: center;
+				gap: <?php echo intval($items_spacing); ?>px;
+				<?php if ($position_type === 'new_line'): ?>
+					flex-direction: row;
+					width: 100%;
+					margin-top: 15px;
+					<?php if ($alignment === 'center'): ?>
+						justify-content: center;
+					<?php elseif ($alignment === 'right'): ?>
+						justify-content: flex-end;
+					<?php else: ?>
+						justify-content: flex-start;
+					<?php endif; ?>
+				<?php endif; ?>
+			}
+
+			/* Price position adjustment */
+			<?php if ($price_enabled && isset($price_settings['position']) && $price_settings['position'] === 'after_clear'): ?>
+				.shopglut-actions-container {
+					flex-direction: row-reverse;
 				}
 			<?php endif; ?>
 
@@ -696,9 +749,32 @@ class FrontendRenderer {
 						vertical-align: <?php echo esc_attr($variations_form['vertical_align']); ?> !important;
 					}
 				<?php endif; ?>
+
+				<?php if (isset($variations_form['cell_padding_bottom']) && $variations_form['cell_padding_bottom'] !== ''): ?>
+					/* Override WooCommerce default table cell padding-bottom */
+					.woocommerce table.variations tr td,
+					.woocommerce table.variations tr th {
+						padding-bottom: <?php echo intval($variations_form['cell_padding_bottom']); ?>px !important;
+					}
+				<?php endif; ?>
+
+				<?php if (isset($variations_form['form_margin_bottom']) && $variations_form['form_margin_bottom'] !== ''): ?>
+					/* Override WooCommerce default variations form margin-bottom */
+					.woocommerce div.product form.cart .variations {
+						margin-bottom: <?php echo intval($variations_form['form_margin_bottom']); ?>px !important;
+					}
+				<?php endif; ?>
 			<?php endif; ?>
 		</style>
 		<?php
+	}
+
+	/**
+	 * Apply variations form styling from global settings
+	 */
+	public function apply_form_styling() {
+		// Minimal inline styles - most styles are now in wp_head
+		// This hook is kept for potential future use if needed
 	}
 
 	/**
@@ -716,23 +792,152 @@ class FrontendRenderer {
 		$clear_enabled = isset($clear_settings['enable']) ? filter_var($clear_settings['enable'], FILTER_VALIDATE_BOOLEAN) : false;
 
 		if (!$clear_enabled) {
-			// Return empty to hide default, or return original if you want default
+			// Return empty to hide default
 			return '';
 		}
 
-		// Get settings values
+		// Get settings values with defaults
 		$clear_text = isset($clear_settings['text']) ? $clear_settings['text'] : 'Clear';
+
+		// Typography
 		$clear_color = isset($clear_settings['color']) ? $clear_settings['color'] : '#2271b1';
 		$clear_font_size = isset($clear_settings['font_size']) ? intval($clear_settings['font_size']) : 14;
+		$clear_font_weight = isset($clear_settings['font_weight']) ? $clear_settings['font_weight'] : '500';
+		$clear_font_family = isset($clear_settings['font_family']) ? $clear_settings['font_family'] : 'inherit';
+		$text_transform = isset($clear_settings['text_transform']) ? $clear_settings['text_transform'] : 'none';
+		$text_decoration = isset($clear_settings['text_decoration']) ? $clear_settings['text_decoration'] : 'underline';
+		$letter_spacing = isset($clear_settings['letter_spacing']) ? floatval($clear_settings['letter_spacing']) : 0;
+		$line_height = isset($clear_settings['line_height']) ? intval($clear_settings['line_height']) : 14;
+		$text_align = isset($clear_settings['text_align']) ? $clear_settings['text_align'] : 'left';
 
+		// Icon
+		$show_icon = isset($clear_settings['show_icon']) ? filter_var($clear_settings['show_icon'], FILTER_VALIDATE_BOOLEAN) : false;
+		$icon = isset($clear_settings['icon']) ? $clear_settings['icon'] : 'fas fa-undo';
+		$icon_position = isset($clear_settings['icon_position']) ? $clear_settings['icon_position'] : 'left';
+		$icon_spacing = isset($clear_settings['icon_spacing']) ? intval($clear_settings['icon_spacing']) : 5;
+
+		// Background & Border
+		$background_color = isset($clear_settings['background_color']) ? $clear_settings['background_color'] : 'transparent';
+		$border_color = isset($clear_settings['border_color']) ? $clear_settings['border_color'] : 'transparent';
+		$border_width = isset($clear_settings['border_width']) ? intval($clear_settings['border_width']) : 0;
+		$border_radius = isset($clear_settings['border_radius']) ? intval($clear_settings['border_radius']) : 4;
+		$border_style = isset($clear_settings['border_style']) ? $clear_settings['border_style'] : 'solid';
+
+		// Shadow
+		$enable_shadow = isset($clear_settings['enable_shadow']) ? filter_var($clear_settings['enable_shadow'], FILTER_VALIDATE_BOOLEAN) : false;
+		$shadow_horizontal = isset($clear_settings['shadow_horizontal']) ? intval($clear_settings['shadow_horizontal']) : 0;
+		$shadow_vertical = isset($clear_settings['shadow_vertical']) ? intval($clear_settings['shadow_vertical']) : 2;
+		$shadow_blur = isset($clear_settings['shadow_blur']) ? intval($clear_settings['shadow_blur']) : 4;
+		$shadow_spread = isset($clear_settings['shadow_spread']) ? intval($clear_settings['shadow_spread']) : 0;
+		$shadow_color = isset($clear_settings['shadow_color']) ? $clear_settings['shadow_color'] : 'rgba(0, 0, 0, 0.1)';
+		$shadow_inset = isset($clear_settings['shadow_inset']) ? filter_var($clear_settings['shadow_inset'], FILTER_VALIDATE_BOOLEAN) : false;
+
+		// Size & Display
+		$min_width = isset($clear_settings['min_width']) ? intval($clear_settings['min_width']) : 0;
+		$max_width = isset($clear_settings['max_width']) ? intval($clear_settings['max_width']) : 0;
+		$min_height = isset($clear_settings['min_height']) ? intval($clear_settings['min_height']) : 0;
+		$display = isset($clear_settings['display']) ? $clear_settings['display'] : 'inline-block';
+
+		// Transition & Animation
+		$transition_duration = isset($clear_settings['transition_duration']) ? floatval($clear_settings['transition_duration']) : 0.2;
+		$transition_timing = isset($clear_settings['transition_timing']) ? $clear_settings['transition_timing'] : 'ease';
+		$transform_scale = isset($clear_settings['transform_scale']) ? intval($clear_settings['transform_scale']) : 100;
+
+		// Padding
+		$padding = isset($clear_settings['padding']) ? $clear_settings['padding'] : array('top' => '6', 'right' => '12', 'bottom' => '6', 'left' => '12', 'unit' => 'px');
+		$padding_top = isset($padding['top']) ? $padding['top'] : '6';
+		$padding_right = isset($padding['right']) ? $padding['right'] : '12';
+		$padding_bottom = isset($padding['bottom']) ? $padding['bottom'] : '6';
+		$padding_left = isset($padding['left']) ? $padding['left'] : '12';
+
+		// Margins
+		$margin_left = isset($clear_settings['margin_left']) ? intval($clear_settings['margin_left']) : 15;
+		$margin_right = isset($clear_settings['margin_right']) ? intval($clear_settings['margin_right']) : 0;
+		$margin_top = isset($clear_settings['margin_top']) ? intval($clear_settings['margin_top']) : 0;
+		$margin_bottom = isset($clear_settings['margin_bottom']) ? intval($clear_settings['margin_bottom']) : 0;
+
+		// Build shadow CSS
+		$shadow_css = '';
+		if ($enable_shadow) {
+			$inset = $shadow_inset ? 'inset ' : '';
+			$shadow_css = sprintf(
+				'box-shadow:%s%dpx %dpx %dpx %dpx %s;',
+				$inset,
+				$shadow_horizontal,
+				$shadow_vertical,
+				$shadow_blur,
+				$shadow_spread,
+				$shadow_color
+			);
+		}
+
+		// Build size CSS
+		$size_css = '';
+		if ($min_width > 0) {
+			$size_css .= sprintf('min-width:%dpx;', $min_width);
+		}
+		if ($max_width > 0) {
+			$size_css .= sprintf('max-width:%dpx;', $max_width);
+		}
+		if ($min_height > 0) {
+			$size_css .= sprintf('min-height:%dpx;', $min_height);
+		}
+
+		// Build inline styles
 		$clear_style = sprintf(
-			'color:%s;font-size:%dpx;font-weight:500;text-decoration:underline;cursor:pointer;',
+			'color:%s;font-size:%dpx;font-weight:%s;font-family:%s;text-transform:%s;text-decoration:%s;letter-spacing:%.2fpx;line-height:%.1fem;text-align:%s;background-color:%s;border:%dpx %s %s;border-radius:%dpx;padding:%dpx %dpx %dpx %dpx;margin:%dpx %dpx %dpx %dpx;cursor:pointer;transition:all %.1fs %s;display:%s;%s%s',
 			esc_attr($clear_color),
-			$clear_font_size
+			intval($clear_font_size),
+			esc_attr($clear_font_weight),
+			esc_attr($clear_font_family),
+			esc_attr($text_transform),
+			esc_attr($text_decoration),
+			$letter_spacing,
+			intval($line_height) / 10,
+			esc_attr($text_align),
+			esc_attr($background_color),
+			intval($border_width),
+			esc_attr($border_style),
+			esc_attr($border_color),
+			intval($border_radius),
+			intval($padding_top),
+			intval($padding_right),
+			intval($padding_bottom),
+			intval($padding_left),
+			intval($margin_top),
+			intval($margin_right),
+			intval($margin_bottom),
+			intval($margin_left),
+			$transition_duration,
+			esc_attr($transition_timing),
+			esc_attr($display),
+			$shadow_css,
+			$size_css
 		);
 
+		// Generate unique ID for this button
+		$button_id = 'shopglut-clear-' . uniqid();
+
+		// Get hover colors for CSS
+		$hover_color = isset($clear_settings['hover_color']) ? $clear_settings['hover_color'] : '#135e96';
+		$hover_background = isset($clear_settings['hover_background']) ? $clear_settings['hover_background'] : 'rgba(34, 113, 177, 0.05)';
+		$hover_scale = $transform_scale > 100 ? sprintf('transform:scale(%.2f);', $transform_scale / 100) : '';
+
+		// Build button content with icon
+		$button_content = esc_html($clear_text);
+		if ($show_icon) {
+			$icon_html = sprintf('<i class="%s" style="margin-%s:%dpx;"></i>', esc_attr($icon), $icon_position === 'left' ? 'right' : 'left', $icon_spacing);
+			if ($icon_position === 'left') {
+				$button_content = $icon_html . esc_html($clear_text);
+			} else {
+				$button_content = esc_html($clear_text) . $icon_html;
+			}
+		}
+
 		// Add CSS class to hide by default - JavaScript will remove this class when there are selections
-		return '<a href="#" class="shopglut-reset-variations shopglut-reset-hidden" style="' . esc_attr($clear_style) . '">' . esc_html($clear_text) . '</a>';
+		$output = '<a href="#" id="' . esc_attr($button_id) . '" class="shopglut-reset-variations shopglut-reset-hidden" style="' . esc_attr($clear_style) . '" data-hover-scale="' . esc_attr($hover_scale) . '">' . $button_content . '</a>';
+
+		return $output;
 	}
 
 	/**
@@ -751,16 +956,108 @@ class FrontendRenderer {
 			return;
 		}
 
-		// Get settings values
+		// Get settings values with defaults
+		// Typography
 		$price_color = isset($price_settings['color']) ? $price_settings['color'] : '#2271b1';
-		$price_font_size = isset($price_settings['font_size']) ? intval($price_settings['font_size']) : 16;
-		$price_font_weight = isset($price_settings['font_weight']) ? $price_settings['font_weight'] : '600';
+		$price_font_size = isset($price_settings['font_size']) ? intval($price_settings['font_size']) : 22;
+		$price_font_weight = isset($price_settings['font_weight']) ? $price_settings['font_weight'] : '500';
+		$price_font_family = isset($price_settings['font_family']) ? $price_settings['font_family'] : 'inherit';
+		$line_height = isset($price_settings['line_height']) ? intval($price_settings['line_height']) : 14;
+		$text_transform = isset($price_settings['text_transform']) ? $price_settings['text_transform'] : 'none';
+		$letter_spacing = isset($price_settings['letter_spacing']) ? floatval($price_settings['letter_spacing']) : 0;
+		$text_align = isset($price_settings['text_align']) ? $price_settings['text_align'] : 'left';
+		$font_style = isset($price_settings['font_style']) ? $price_settings['font_style'] : 'normal';
 
+		// Background & Border
+		$background_color = isset($price_settings['background_color']) ? $price_settings['background_color'] : 'transparent';
+		$border_color = isset($price_settings['border_color']) ? $price_settings['border_color'] : 'transparent';
+		$border_width = isset($price_settings['border_width']) ? intval($price_settings['border_width']) : 0;
+		$border_radius = isset($price_settings['border_radius']) ? intval($price_settings['border_radius']) : 4;
+		$border_style = isset($price_settings['border_style']) ? $price_settings['border_style'] : 'solid';
+
+		// Shadow
+		$enable_shadow = isset($price_settings['enable_shadow']) ? filter_var($price_settings['enable_shadow'], FILTER_VALIDATE_BOOLEAN) : false;
+		$shadow_horizontal = isset($price_settings['shadow_horizontal']) ? intval($price_settings['shadow_horizontal']) : 0;
+		$shadow_vertical = isset($price_settings['shadow_vertical']) ? intval($price_settings['shadow_vertical']) : 2;
+		$shadow_blur = isset($price_settings['shadow_blur']) ? intval($price_settings['shadow_blur']) : 4;
+		$shadow_spread = isset($price_settings['shadow_spread']) ? intval($price_settings['shadow_spread']) : 0;
+		$shadow_color = isset($price_settings['shadow_color']) ? $price_settings['shadow_color'] : 'rgba(0, 0, 0, 0.1)';
+		$shadow_inset = isset($price_settings['shadow_inset']) ? filter_var($price_settings['shadow_inset'], FILTER_VALIDATE_BOOLEAN) : false;
+
+		// Size & Display
+		$min_width = isset($price_settings['min_width']) ? intval($price_settings['min_width']) : 0;
+		$max_width = isset($price_settings['max_width']) ? intval($price_settings['max_width']) : 0;
+		$min_height = isset($price_settings['min_height']) ? intval($price_settings['min_height']) : 0;
+		$display = isset($price_settings['display']) ? $price_settings['display'] : 'inline-block';
+
+		// Padding
+		$padding = isset($price_settings['padding']) ? $price_settings['padding'] : array('top' => '4', 'right' => '8', 'bottom' => '4', 'left' => '8', 'unit' => 'px');
+		$padding_top = isset($padding['top']) ? $padding['top'] : '4';
+		$padding_right = isset($padding['right']) ? $padding['right'] : '8';
+		$padding_bottom = isset($padding['bottom']) ? $padding['bottom'] : '4';
+		$padding_left = isset($padding['left']) ? $padding['left'] : '8';
+
+		// Margins
+		$margin_left = isset($price_settings['margin_left']) ? intval($price_settings['margin_left']) : 0;
+		$margin_right = isset($price_settings['margin_right']) ? intval($price_settings['margin_right']) : 15;
+		$margin_top = isset($price_settings['margin_top']) ? intval($price_settings['margin_top']) : 12;
+		$margin_bottom = isset($price_settings['margin_bottom']) ? intval($price_settings['margin_bottom']) : 0;
+
+		// Build shadow CSS
+		$shadow_css = '';
+		if ($enable_shadow) {
+			$inset = $shadow_inset ? 'inset ' : '';
+			$shadow_css = sprintf(
+				'box-shadow:%s%dpx %dpx %dpx %dpx %s;',
+				$inset,
+				$shadow_horizontal,
+				$shadow_vertical,
+				$shadow_blur,
+				$shadow_spread,
+				$shadow_color
+			);
+		}
+
+		// Build size CSS
+		$size_css = '';
+		if ($min_width > 0) {
+			$size_css .= sprintf('min-width:%dpx;', $min_width);
+		}
+		if ($max_width > 0) {
+			$size_css .= sprintf('max-width:%dpx;', $max_width);
+		}
+		if ($min_height > 0) {
+			$size_css .= sprintf('min-height:%dpx;', $min_height);
+		}
+
+		// Build inline styles
 		$price_style = sprintf(
-			'color:%s;font-size:%dpx;font-weight:%s;',
+			'color:%s;font-size:%dpx;font-weight:%s;font-family:%s;line-height:%.1fem;text-transform:%s;letter-spacing:%.2fpx;text-align:%s;font-style:%s;background-color:%s;border:%dpx %s %s;border-radius:%dpx;padding:%dpx %dpx %dpx %dpx;margin:%dpx %dpx %dpx %dpx;display:%s;%s%s',
 			esc_attr($price_color),
-			$price_font_size,
-			esc_attr($price_font_weight)
+			intval($price_font_size),
+			esc_attr($price_font_weight),
+			esc_attr($price_font_family),
+			intval($line_height) / 10,
+			esc_attr($text_transform),
+			$letter_spacing,
+			esc_attr($text_align),
+			esc_attr($font_style),
+			esc_attr($background_color),
+			intval($border_width),
+			esc_attr($border_style),
+			esc_attr($border_color),
+			intval($border_radius),
+			intval($padding_top),
+			intval($padding_right),
+			intval($padding_bottom),
+			intval($padding_left),
+			intval($margin_top),
+			intval($margin_right),
+			intval($margin_bottom),
+			intval($margin_left),
+			esc_attr($display),
+			$shadow_css,
+			$size_css
 		);
 
 		// Output empty span that will be populated by JavaScript

@@ -338,7 +338,57 @@
 
             // Hide clear button initially (no selections yet)
             updateClearButtonVisibility();
+
+            // Wrap actions (clear button and price) in a container for proper positioning
+            wrapActionsContainer();
         }
+
+        // Wrap actions (clear button and price) in a container for proper positioning
+        function wrapActionsContainer() {
+            var $form = $('.variations_form').first();
+            if (!$form.length) {
+                return;
+            }
+
+            // Check if already wrapped
+            if ($form.find('.shopglut-actions-container').length) {
+                return;
+            }
+
+            // Find the clear button and price
+            var $resetButton = $form.find('.shopglut-reset-variations');
+            var $priceElement = $form.find('.shopglut-variation-price.shopglut-global-price');
+
+            // Only wrap if we have at least one element
+            if ($resetButton.length || $priceElement.length) {
+                // Create actions container
+                var $actionsContainer = $('<div class="shopglut-actions-container"></div>');
+
+                // Insert container after the variations table
+                var $variationsTable = $form.find('.variations');
+                if ($variationsTable.length) {
+                    $actionsContainer.insertAfter($variationsTable);
+                } else {
+                    // Fallback: insert at end of form
+                    $actionsContainer.appendTo($form);
+                }
+
+                // Move clear button to container
+                if ($resetButton.length) {
+                    $resetButton.appendTo($actionsContainer);
+                }
+
+                // Move price element to container
+                if ($priceElement.length) {
+                    $priceElement.appendTo($actionsContainer);
+                }
+            }
+        }
+
+        // Re-wrap actions container when needed
+        $(document).on('woocommerce_variation_has_changed', '.variations_form', function() {
+            wrapActionsContainer();
+        });
 
         // Price display update functionality
         function updateVariationPriceDisplay() {

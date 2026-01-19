@@ -30,14 +30,28 @@ class template1Style {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             border-radius: 16px;
             padding: 40px;
-            min-height: 200px;
+            min-height: 300px;
             box-shadow: inset 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Swatches Demo Wrapper */
+        /* Swatches Demo Wrapper - Centered */
         .shopglut-swatches-demo {
-            max-width: 500px;
+            max-width: 450px;
+            width: 100%;
             margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Demo center override for proper alignment */
+        .shopglut-demo-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
         }
 
         /* Attribute Label */

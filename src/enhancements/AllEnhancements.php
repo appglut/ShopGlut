@@ -1106,8 +1106,188 @@ class AllEnhancements {
 								<tr>
 									<th><?php esc_html_e('Left Margin', 'shopglut'); ?></th>
 									<td>
-										<input type="number" id="shopglut_clear_button_margin_left" class="small-text" value="<?php echo esc_attr(isset($clear_button['margin']) ? $clear_button['margin'] : 10); ?>" min="0" max="30">
+										<input type="number" id="shopglut_clear_button_margin_left" class="small-text" value="<?php echo esc_attr(isset($clear_button['margin_left']) ? $clear_button['margin_left'] : 15); ?>" min="0" max="30">
 										<span class="unit">px</span>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Font Family', 'shopglut'); ?></th>
+									<td>
+										<select id="shopglut_clear_button_font_family">
+											<option value="inherit" <?php selected(isset($clear_button['font_family']) ? $clear_button['font_family'] : 'inherit', 'inherit'); ?>><?php esc_html_e('Inherit', 'shopglut'); ?></option>
+											<option value="Arial, sans-serif" <?php selected(isset($clear_button['font_family']) ? $clear_button['font_family'] : 'inherit', 'Arial, sans-serif'); ?>><?php esc_html_e('Arial', 'shopglut'); ?></option>
+											<option value="Georgia, serif" <?php selected(isset($clear_button['font_family']) ? $clear_button['font_family'] : 'inherit', 'Georgia, serif'); ?>><?php esc_html_e('Georgia', 'shopglut'); ?></option>
+											<option value="'Times New Roman', serif" <?php selected(isset($clear_button['font_family']) ? $clear_button['font_family'] : 'inherit', '"Times New Roman", serif'); ?>><?php esc_html_e('Times New Roman', 'shopglut'); ?></option>
+											<option value="Verdana, sans-serif" <?php selected(isset($clear_button['font_family']) ? $clear_button['font_family'] : 'inherit', 'Verdana, sans-serif'); ?>><?php esc_html_e('Verdana', 'shopglut'); ?></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Font Weight', 'shopglut'); ?></th>
+									<td>
+										<select id="shopglut_clear_button_font_weight">
+											<option value="300" <?php selected(isset($clear_button['font_weight']) ? $clear_button['font_weight'] : '500', '300'); ?>><?php esc_html_e('Light', 'shopglut'); ?></option>
+											<option value="400" <?php selected(isset($clear_button['font_weight']) ? $clear_button['font_weight'] : '500', '400'); ?>><?php esc_html_e('Normal', 'shopglut'); ?></option>
+											<option value="500" <?php selected(isset($clear_button['font_weight']) ? $clear_button['font_weight'] : '500', '500'); ?>><?php esc_html_e('Medium', 'shopglut'); ?></option>
+											<option value="600" <?php selected(isset($clear_button['font_weight']) ? $clear_button['font_weight'] : '500', '600'); ?>><?php esc_html_e('Semi Bold', 'shopglut'); ?></option>
+											<option value="700" <?php selected(isset($clear_button['font_weight']) ? $clear_button['font_weight'] : '500', '700'); ?>><?php esc_html_e('Bold', 'shopglut'); ?></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Text Transform', 'shopglut'); ?></th>
+									<td>
+										<select id="shopglut_clear_button_text_transform">
+											<option value="none" <?php selected(isset($clear_button['text_transform']) ? $clear_button['text_transform'] : 'none', 'none'); ?>><?php esc_html_e('None', 'shopglut'); ?></option>
+											<option value="uppercase" <?php selected(isset($clear_button['text_transform']) ? $clear_button['text_transform'] : 'none', 'uppercase'); ?>><?php esc_html_e('Uppercase', 'shopglut'); ?></option>
+											<option value="lowercase" <?php selected(isset($clear_button['text_transform']) ? $clear_button['text_transform'] : 'none', 'lowercase'); ?>><?php esc_html_e('Lowercase', 'shopglut'); ?></option>
+											<option value="capitalize" <?php selected(isset($clear_button['text_transform']) ? $clear_button['text_transform'] : 'none', 'capitalize'); ?>><?php esc_html_e('Capitalize', 'shopglut'); ?></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Text Decoration', 'shopglut'); ?></th>
+									<td>
+										<select id="shopglut_clear_button_text_decoration">
+											<option value="none" <?php selected(isset($clear_button['text_decoration']) ? $clear_button['text_decoration'] : 'underline', 'none'); ?>><?php esc_html_e('None', 'shopglut'); ?></option>
+											<option value="underline" <?php selected(isset($clear_button['text_decoration']) ? $clear_button['text_decoration'] : 'underline', 'underline'); ?>><?php esc_html_e('Underline', 'shopglut'); ?></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Letter Spacing', 'shopglut'); ?></th>
+									<td>
+										<input type="number" id="shopglut_clear_button_letter_spacing" class="small-text" value="<?php echo esc_attr(isset($clear_button['letter_spacing']) ? $clear_button['letter_spacing'] : 0); ?>" min="0" max="5" step="0.1">
+										<span class="unit">px</span>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Line Height', 'shopglut'); ?></th>
+									<td>
+										<input type="number" id="shopglut_clear_button_line_height" class="small-text" value="<?php echo esc_attr(isset($clear_button['line_height']) ? $clear_button['line_height'] : 14); ?>" min="10" max="25">
+										<span class="unit">px</span>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Text Align', 'shopglut'); ?></th>
+									<td>
+										<select id="shopglut_clear_button_text_align">
+											<option value="left" <?php selected(isset($clear_button['text_align']) ? $clear_button['text_align'] : 'left', 'left'); ?>><?php esc_html_e('Left', 'shopglut'); ?></option>
+											<option value="center" <?php selected(isset($clear_button['text_align']) ? $clear_button['text_align'] : 'left', 'center'); ?>><?php esc_html_e('Center', 'shopglut'); ?></option>
+											<option value="right" <?php selected(isset($clear_button['text_align']) ? $clear_button['text_align'] : 'left', 'right'); ?>><?php esc_html_e('Right', 'shopglut'); ?></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Background Color', 'shopglut'); ?></th>
+									<td>
+										<input type="color" id="shopglut_clear_button_background_color" value="<?php echo esc_attr(isset($clear_button['background_color']) ? $clear_button['background_color'] : 'transparent'); ?>">
+										<p class="description"><?php esc_html_e('Background color of the button', 'shopglut'); ?></p>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Border Color', 'shopglut'); ?></th>
+									<td>
+										<input type="color" id="shopglut_clear_button_border_color" value="<?php echo esc_attr(isset($clear_button['border_color']) ? $clear_button['border_color'] : 'transparent'); ?>">
+										<p class="description"><?php esc_html_e('Border color', 'shopglut'); ?></p>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Border Width', 'shopglut'); ?></th>
+									<td>
+										<input type="number" id="shopglut_clear_button_border_width" class="small-text" value="<?php echo esc_attr(isset($clear_button['border_width']) ? $clear_button['border_width'] : 0); ?>" min="0" max="3">
+										<span class="unit">px</span>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Border Radius', 'shopglut'); ?></th>
+									<td>
+										<input type="number" id="shopglut_clear_button_border_radius" class="small-text" value="<?php echo esc_attr(isset($clear_button['border_radius']) ? $clear_button['border_radius'] : 4); ?>" min="0" max="20">
+										<span class="unit">px</span>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Border Style', 'shopglut'); ?></th>
+									<td>
+										<select id="shopglut_clear_button_border_style">
+											<option value="solid" <?php selected(isset($clear_button['border_style']) ? $clear_button['border_style'] : 'solid', 'solid'); ?>><?php esc_html_e('Solid', 'shopglut'); ?></option>
+											<option value="dashed" <?php selected(isset($clear_button['border_style']) ? $clear_button['border_style'] : 'solid', 'dashed'); ?>><?php esc_html_e('Dashed', 'shopglut'); ?></option>
+											<option value="dotted" <?php selected(isset($clear_button['border_style']) ? $clear_button['border_style'] : 'solid', 'dotted'); ?>><?php esc_html_e('Dotted', 'shopglut'); ?></option>
+											<option value="double" <?php selected(isset($clear_button['border_style']) ? $clear_button['border_style'] : 'solid', 'double'); ?>><?php esc_html_e('Double', 'shopglut'); ?></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Padding', 'shopglut'); ?></th>
+									<td>
+										<div class="shopglut-padding-box-wrapper">
+											<div class="shopglut-padding-box">
+												<div class="shopglut-padding-field">
+													<label for="shopglut_clear_button_padding_top"><?php esc_html_e('Top', 'shopglut'); ?></label>
+													<input type="number" id="shopglut_clear_button_padding_top" class="small-text" value="<?php echo esc_attr(isset($clear_button['padding']['top']) ? $clear_button['padding']['top'] : 6); ?>" min="0" max="30">
+													<span class="unit">px</span>
+												</div>
+												<div class="shopglut-padding-row">
+													<div class="shopglut-padding-field">
+														<label for="shopglut_clear_button_padding_left"><?php esc_html_e('Left', 'shopglut'); ?></label>
+														<input type="number" id="shopglut_clear_button_padding_left" class="small-text" value="<?php echo esc_attr(isset($clear_button['padding']['left']) ? $clear_button['padding']['left'] : 12); ?>" min="0" max="30">
+														<span class="unit">px</span>
+													</div>
+													<div class="shopglut-padding-field">
+														<label for="shopglut_clear_button_padding_right"><?php esc_html_e('Right', 'shopglut'); ?></label>
+														<input type="number" id="shopglut_clear_button_padding_right" class="small-text" value="<?php echo esc_attr(isset($clear_button['padding']['right']) ? $clear_button['padding']['right'] : 12); ?>" min="0" max="30">
+														<span class="unit">px</span>
+													</div>
+												</div>
+												<div class="shopglut-padding-field">
+													<label for="shopglut_clear_button_padding_bottom"><?php esc_html_e('Bottom', 'shopglut'); ?></label>
+													<input type="number" id="shopglut_clear_button_padding_bottom" class="small-text" value="<?php echo esc_attr(isset($clear_button['padding']['bottom']) ? $clear_button['padding']['bottom'] : 6); ?>" min="0" max="30">
+													<span class="unit">px</span>
+												</div>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Right Margin', 'shopglut'); ?></th>
+									<td>
+										<input type="number" id="shopglut_clear_button_margin_right" class="small-text" value="<?php echo esc_attr(isset($clear_button['margin_right']) ? $clear_button['margin_right'] : 0); ?>" min="0" max="30">
+										<span class="unit">px</span>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Top Margin', 'shopglut'); ?></th>
+									<td>
+										<input type="number" id="shopglut_clear_button_margin_top" class="small-text" value="<?php echo esc_attr(isset($clear_button['margin_top']) ? $clear_button['margin_top'] : 0); ?>" min="0" max="30">
+										<span class="unit">px</span>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Bottom Margin', 'shopglut'); ?></th>
+									<td>
+										<input type="number" id="shopglut_clear_button_margin_bottom" class="small-text" value="<?php echo esc_attr(isset($clear_button['margin_bottom']) ? $clear_button['margin_bottom'] : 0); ?>" min="0" max="30">
+										<span class="unit">px</span>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Hover Color', 'shopglut'); ?></th>
+									<td>
+										<input type="color" id="shopglut_clear_button_hover_color" value="<?php echo esc_attr(isset($clear_button['hover_color']) ? $clear_button['hover_color'] : '#135e96'); ?>">
+										<p class="description"><?php esc_html_e('Text color on hover', 'shopglut'); ?></p>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Hover Background', 'shopglut'); ?></th>
+									<td>
+										<input type="color" id="shopglut_clear_button_hover_background" value="<?php echo esc_attr(isset($clear_button['hover_background']) ? $clear_button['hover_background'] : 'rgba(34, 113, 177, 0.05)'); ?>">
+										<p class="description"><?php esc_html_e('Background color on hover', 'shopglut'); ?></p>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Transition Duration', 'shopglut'); ?></th>
+									<td>
+										<input type="number" id="shopglut_clear_button_transition_duration" class="small-text" value="<?php echo esc_attr(isset($clear_button['transition_duration']) ? $clear_button['transition_duration'] : 0.2); ?>" min="0" max="2" step="0.1">
+										<span class="unit">s</span>
 									</td>
 								</tr>
 							</table>
@@ -1172,7 +1352,155 @@ class AllEnhancements {
 								<tr>
 									<th><?php esc_html_e('Top Margin', 'shopglut'); ?></th>
 									<td>
-										<input type="number" id="shopglut_price_margin_top" class="small-text" value="<?php echo esc_attr(isset($price_display['margin']) ? $price_display['margin'] : 8); ?>" min="0" max="20">
+										<input type="number" id="shopglut_price_margin_top" class="small-text" value="<?php echo esc_attr(isset($price_display['margin_top']) ? $price_display['margin_top'] : 12); ?>" min="0" max="30">
+										<span class="unit">px</span>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Font Family', 'shopglut'); ?></th>
+									<td>
+										<select id="shopglut_price_font_family">
+											<option value="inherit" <?php selected(isset($price_display['font_family']) ? $price_display['font_family'] : 'inherit', 'inherit'); ?>><?php esc_html_e('Inherit', 'shopglut'); ?></option>
+											<option value="Arial, sans-serif" <?php selected(isset($price_display['font_family']) ? $price_display['font_family'] : 'inherit', 'Arial, sans-serif'); ?>><?php esc_html_e('Arial', 'shopglut'); ?></option>
+											<option value="Georgia, serif" <?php selected(isset($price_display['font_family']) ? $price_display['font_family'] : 'inherit', 'Georgia, serif'); ?>><?php esc_html_e('Georgia', 'shopglut'); ?></option>
+											<option value="'Times New Roman', serif" <?php selected(isset($price_display['font_family']) ? $price_display['font_family'] : 'inherit', '"Times New Roman", serif'); ?>><?php esc_html_e('Times New Roman', 'shopglut'); ?></option>
+											<option value="Verdana, sans-serif" <?php selected(isset($price_display['font_family']) ? $price_display['font_family'] : 'inherit', 'Verdana, sans-serif'); ?>><?php esc_html_e('Verdana', 'shopglut'); ?></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Line Height', 'shopglut'); ?></th>
+									<td>
+										<input type="number" id="shopglut_price_line_height" class="small-text" value="<?php echo esc_attr(isset($price_display['line_height']) ? $price_display['line_height'] : 14); ?>" min="10" max="25">
+										<span class="unit">px</span>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Text Transform', 'shopglut'); ?></th>
+									<td>
+										<select id="shopglut_price_text_transform">
+											<option value="none" <?php selected(isset($price_display['text_transform']) ? $price_display['text_transform'] : 'none', 'none'); ?>><?php esc_html_e('None', 'shopglut'); ?></option>
+											<option value="uppercase" <?php selected(isset($price_display['text_transform']) ? $price_display['text_transform'] : 'none', 'uppercase'); ?>><?php esc_html_e('Uppercase', 'shopglut'); ?></option>
+											<option value="lowercase" <?php selected(isset($price_display['text_transform']) ? $price_display['text_transform'] : 'none', 'lowercase'); ?>><?php esc_html_e('Lowercase', 'shopglut'); ?></option>
+											<option value="capitalize" <?php selected(isset($price_display['text_transform']) ? $price_display['text_transform'] : 'none', 'capitalize'); ?>><?php esc_html_e('Capitalize', 'shopglut'); ?></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Letter Spacing', 'shopglut'); ?></th>
+									<td>
+										<input type="number" id="shopglut_price_letter_spacing" class="small-text" value="<?php echo esc_attr(isset($price_display['letter_spacing']) ? $price_display['letter_spacing'] : 0); ?>" min="0" max="5" step="0.1">
+										<span class="unit">px</span>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Text Align', 'shopglut'); ?></th>
+									<td>
+										<select id="shopglut_price_text_align">
+											<option value="left" <?php selected(isset($price_display['text_align']) ? $price_display['text_align'] : 'left', 'left'); ?>><?php esc_html_e('Left', 'shopglut'); ?></option>
+											<option value="center" <?php selected(isset($price_display['text_align']) ? $price_display['text_align'] : 'left', 'center'); ?>><?php esc_html_e('Center', 'shopglut'); ?></option>
+											<option value="right" <?php selected(isset($price_display['text_align']) ? $price_display['text_align'] : 'left', 'right'); ?>><?php esc_html_e('Right', 'shopglut'); ?></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Font Style', 'shopglut'); ?></th>
+									<td>
+										<select id="shopglut_price_font_style">
+											<option value="normal" <?php selected(isset($price_display['font_style']) ? $price_display['font_style'] : 'normal', 'normal'); ?>><?php esc_html_e('Normal', 'shopglut'); ?></option>
+											<option value="italic" <?php selected(isset($price_display['font_style']) ? $price_display['font_style'] : 'normal', 'italic'); ?>><?php esc_html_e('Italic', 'shopglut'); ?></option>
+											<option value="oblique" <?php selected(isset($price_display['font_style']) ? $price_display['font_style'] : 'normal', 'oblique'); ?>><?php esc_html_e('Oblique', 'shopglut'); ?></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Background Color', 'shopglut'); ?></th>
+									<td>
+										<input type="color" id="shopglut_price_background_color" value="<?php echo esc_attr(isset($price_display['background_color']) ? $price_display['background_color'] : 'transparent'); ?>">
+										<p class="description"><?php esc_html_e('Background color of the price', 'shopglut'); ?></p>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Border Color', 'shopglut'); ?></th>
+									<td>
+										<input type="color" id="shopglut_price_border_color" value="<?php echo esc_attr(isset($price_display['border_color']) ? $price_display['border_color'] : 'transparent'); ?>">
+										<p class="description"><?php esc_html_e('Border color', 'shopglut'); ?></p>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Border Width', 'shopglut'); ?></th>
+									<td>
+										<input type="number" id="shopglut_price_border_width" class="small-text" value="<?php echo esc_attr(isset($price_display['border_width']) ? $price_display['border_width'] : 0); ?>" min="0" max="3">
+										<span class="unit">px</span>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Border Radius', 'shopglut'); ?></th>
+									<td>
+										<input type="number" id="shopglut_price_border_radius" class="small-text" value="<?php echo esc_attr(isset($price_display['border_radius']) ? $price_display['border_radius'] : 4); ?>" min="0" max="20">
+										<span class="unit">px</span>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Border Style', 'shopglut'); ?></th>
+									<td>
+										<select id="shopglut_price_border_style">
+											<option value="solid" <?php selected(isset($price_display['border_style']) ? $price_display['border_style'] : 'solid', 'solid'); ?>><?php esc_html_e('Solid', 'shopglut'); ?></option>
+											<option value="dashed" <?php selected(isset($price_display['border_style']) ? $price_display['border_style'] : 'solid', 'dashed'); ?>><?php esc_html_e('Dashed', 'shopglut'); ?></option>
+											<option value="dotted" <?php selected(isset($price_display['border_style']) ? $price_display['border_style'] : 'solid', 'dotted'); ?>><?php esc_html_e('Dotted', 'shopglut'); ?></option>
+											<option value="double" <?php selected(isset($price_display['border_style']) ? $price_display['border_style'] : 'solid', 'double'); ?>><?php esc_html_e('Double', 'shopglut'); ?></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Padding', 'shopglut'); ?></th>
+									<td>
+										<div class="shopglut-padding-box-wrapper">
+											<div class="shopglut-padding-box">
+												<div class="shopglut-padding-field">
+													<label for="shopglut_price_padding_top"><?php esc_html_e('Top', 'shopglut'); ?></label>
+													<input type="number" id="shopglut_price_padding_top" class="small-text" value="<?php echo esc_attr(isset($price_display['padding']['top']) ? $price_display['padding']['top'] : 4); ?>" min="0" max="30">
+													<span class="unit">px</span>
+												</div>
+												<div class="shopglut-padding-row">
+													<div class="shopglut-padding-field">
+														<label for="shopglut_price_padding_left"><?php esc_html_e('Left', 'shopglut'); ?></label>
+														<input type="number" id="shopglut_price_padding_left" class="small-text" value="<?php echo esc_attr(isset($price_display['padding']['left']) ? $price_display['padding']['left'] : 8); ?>" min="0" max="30">
+														<span class="unit">px</span>
+													</div>
+													<div class="shopglut-padding-field">
+														<label for="shopglut_price_padding_right"><?php esc_html_e('Right', 'shopglut'); ?></label>
+														<input type="number" id="shopglut_price_padding_right" class="small-text" value="<?php echo esc_attr(isset($price_display['padding']['right']) ? $price_display['padding']['right'] : 8); ?>" min="0" max="30">
+														<span class="unit">px</span>
+													</div>
+												</div>
+												<div class="shopglut-padding-field">
+													<label for="shopglut_price_padding_bottom"><?php esc_html_e('Bottom', 'shopglut'); ?></label>
+													<input type="number" id="shopglut_price_padding_bottom" class="small-text" value="<?php echo esc_attr(isset($price_display['padding']['bottom']) ? $price_display['padding']['bottom'] : 4); ?>" min="0" max="30">
+													<span class="unit">px</span>
+												</div>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Left Margin', 'shopglut'); ?></th>
+									<td>
+										<input type="number" id="shopglut_price_margin_left" class="small-text" value="<?php echo esc_attr(isset($price_display['margin_left']) ? $price_display['margin_left'] : 0); ?>" min="0" max="30">
+										<span class="unit">px</span>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Right Margin', 'shopglut'); ?></th>
+									<td>
+										<input type="number" id="shopglut_price_margin_right" class="small-text" value="<?php echo esc_attr(isset($price_display['margin_right']) ? $price_display['margin_right'] : 15); ?>" min="0" max="30">
+										<span class="unit">px</span>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Bottom Margin', 'shopglut'); ?></th>
+									<td>
+										<input type="number" id="shopglut_price_margin_bottom" class="small-text" value="<?php echo esc_attr(isset($price_display['margin_bottom']) ? $price_display['margin_bottom'] : 0); ?>" min="0" max="30">
 										<span class="unit">px</span>
 									</td>
 								</tr>
@@ -1283,6 +1611,22 @@ class AllEnhancements {
 											<option value="bottom" <?php selected(isset($global_swatches_settings['variations_form']['vertical_align']) ? $global_swatches_settings['variations_form']['vertical_align'] : '', 'bottom'); ?>><?php esc_html_e('Bottom', 'shopglut'); ?></option>
 										</select>
 										<p class="description"><?php esc_html_e('Vertical alignment of content in table cells', 'shopglut'); ?></p>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Table Cell Padding Bottom', 'shopglut'); ?></th>
+									<td>
+										<input type="number" id="shopglut_variations_cell_padding_bottom" class="small-text" value="<?php echo esc_attr(isset($global_swatches_settings['variations_form']['cell_padding_bottom']) ? $global_swatches_settings['variations_form']['cell_padding_bottom'] : ''); ?>" min="0" max="50" step="1" placeholder="">
+										<span class="unit">px</span>
+										<p class="description"><?php esc_html_e('Override padding-bottom for table cells (td, th). Leave empty to use WooCommerce default (var(--wp--style--block-gap)).', 'shopglut'); ?></p>
+									</td>
+								</tr>
+								<tr>
+									<th><?php esc_html_e('Form Margin Bottom', 'shopglut'); ?></th>
+									<td>
+										<input type="number" id="shopglut_variations_form_margin_bottom" class="small-text" value="<?php echo esc_attr(isset($global_swatches_settings['variations_form']['form_margin_bottom']) ? $global_swatches_settings['variations_form']['form_margin_bottom'] : ''); ?>" min="0" max="100" step="1" placeholder="">
+										<span class="unit">px</span>
+										<p class="description"><?php esc_html_e('Override margin-bottom for the variations form (div.product form.cart .variations). Leave empty to use WooCommerce default (1em).', 'shopglut'); ?></p>
 									</td>
 								</tr>
 							</table>
@@ -1930,31 +2274,6 @@ class AllEnhancements {
 				var $spinner = $('.save-spinner');
 				var $message = $('.save-message');
 
-				// Collect settings
-				var settings = {
-					shopglut_enable_clear_button: $('#shopglut_enable_clear_button').is(':checked') ? 1 : 0,
-					shopglut_clear_button_text: $('#shopglut_clear_button_text').val(),
-					shopglut_clear_button_color: $('#shopglut_clear_button_color').val(),
-					shopglut_clear_button_font_size: $('#shopglut_clear_button_font_size').val(),
-					shopglut_clear_button_margin_left: $('#shopglut_clear_button_margin_left').val(),
-					shopglut_enable_variation_price: $('#shopglut_enable_variation_price').is(':checked') ? 1 : 0,
-					shopglut_price_display_position: $('#shopglut_price_display_position').val(),
-					shopglut_price_color: $('#shopglut_price_color').val(),
-					shopglut_price_font_size: $('#shopglut_price_font_size').val(),
-					shopglut_price_font_weight: $('#shopglut_price_font_weight').val(),
-					shopglut_price_margin_top: $('#shopglut_price_margin_top').val(),
-					shopglut_actions_position: $('#shopglut_actions_position').val(),
-					// Variations form styling
-					shopglut_variations_margin_bottom: $('#shopglut_variations_margin_bottom').val(),
-					shopglut_variations_padding_top: $('#shopglut_variations_padding_top').val(),
-					shopglut_variations_padding_right: $('#shopglut_variations_padding_right').val(),
-					shopglut_variations_padding_bottom: $('#shopglut_variations_padding_bottom').val(),
-					shopglut_variations_padding_left: $('#shopglut_variations_padding_left').val(),
-					shopglut_variations_row_height: $('#shopglut_variations_row_height').val(),
-					shopglut_variations_remove_borders: $('#shopglut_variations_remove_borders').is(':checked') ? 1 : 0,
-					shopglut_variations_vertical_align: $('#shopglut_variations_vertical_align').val(),
-				};
-
 				$button.prop('disabled', true);
 				$spinner.show();
 				$message.removeClass('success error').text('');
@@ -1964,36 +2283,69 @@ class AllEnhancements {
 					type: 'POST',
 					data: {
 						action: 'shopglut_save_global_swatches_settings',
+						// Clear Button - Basic
 						clear_button_enable: $('#shopglut_enable_clear_button').is(':checked') ? 1 : 0,
 						clear_button_text: $('#shopglut_clear_button_text').val(),
 						clear_button_color: $('#shopglut_clear_button_color').val(),
-						clear_button_bg_color: $('#shopglut_clear_button_bg_color').val(),
-						clear_button_bg_color_hover: $('#shopglut_clear_button_bg_color_hover').val(),
+						clear_button_font_size: $('#shopglut_clear_button_font_size').val(),
+						clear_button_margin_left: $('#shopglut_clear_button_margin_left').val(),
+						// Clear Button - Typography
+						clear_button_font_family: $('#shopglut_clear_button_font_family').val(),
+						clear_button_font_weight: $('#shopglut_clear_button_font_weight').val(),
+						clear_button_text_transform: $('#shopglut_clear_button_text_transform').val(),
+						clear_button_text_decoration: $('#shopglut_clear_button_text_decoration').val(),
+						clear_button_letter_spacing: $('#shopglut_clear_button_letter_spacing').val(),
+						clear_button_line_height: $('#shopglut_clear_button_line_height').val(),
+						clear_button_text_align: $('#shopglut_clear_button_text_align').val(),
+						// Clear Button - Background & Border
+						clear_button_background_color: $('#shopglut_clear_button_background_color').val(),
 						clear_button_border_color: $('#shopglut_clear_button_border_color').val(),
 						clear_button_border_width: $('#shopglut_clear_button_border_width').val(),
-						clear_button_font_size: $('#shopglut_clear_button_font_size').val(),
-						clear_button_font_weight: $('#shopglut_clear_button_font_weight').val(),
 						clear_button_border_radius: $('#shopglut_clear_button_border_radius').val(),
+						clear_button_border_style: $('#shopglut_clear_button_border_style').val(),
+						// Clear Button - Padding
 						clear_button_padding_top: $('#shopglut_clear_button_padding_top').val(),
 						clear_button_padding_right: $('#shopglut_clear_button_padding_right').val(),
 						clear_button_padding_bottom: $('#shopglut_clear_button_padding_bottom').val(),
 						clear_button_padding_left: $('#shopglut_clear_button_padding_left').val(),
-						clear_button_margin: $('#shopglut_clear_button_margin_left').val(),
+						// Clear Button - Margins
+						clear_button_margin_right: $('#shopglut_clear_button_margin_right').val(),
+						clear_button_margin_top: $('#shopglut_clear_button_margin_top').val(),
+						clear_button_margin_bottom: $('#shopglut_clear_button_margin_bottom').val(),
+						// Clear Button - Hover & Transition
+						clear_button_hover_color: $('#shopglut_clear_button_hover_color').val(),
+						clear_button_hover_background: $('#shopglut_clear_button_hover_background').val(),
+						clear_button_transition_duration: $('#shopglut_clear_button_transition_duration').val(),
+						// Price Display - Basic
 						price_enable: $('#shopglut_enable_variation_price').is(':checked') ? 1 : 0,
 						price_position: $('#shopglut_price_display_position').val(),
 						price_color: $('#shopglut_price_color').val(),
-						price_bg_color: $('#shopglut_price_bg_color').val(),
-						price_bg_color_hover: $('#shopglut_price_bg_color_hover').val(),
-						price_border_color: $('#shopglut_price_border_color').val(),
-						price_border_width: $('#shopglut_price_border_width').val(),
 						price_font_size: $('#shopglut_price_font_size').val(),
 						price_font_weight: $('#shopglut_price_font_weight').val(),
+						price_margin_top: $('#shopglut_price_margin_top').val(),
+						// Price Display - Typography
+						price_font_family: $('#shopglut_price_font_family').val(),
+						price_line_height: $('#shopglut_price_line_height').val(),
+						price_text_transform: $('#shopglut_price_text_transform').val(),
+						price_letter_spacing: $('#shopglut_price_letter_spacing').val(),
+						price_text_align: $('#shopglut_price_text_align').val(),
+						price_font_style: $('#shopglut_price_font_style').val(),
+						// Price Display - Background & Border
+						price_background_color: $('#shopglut_price_background_color').val(),
+						price_border_color: $('#shopglut_price_border_color').val(),
+						price_border_width: $('#shopglut_price_border_width').val(),
 						price_border_radius: $('#shopglut_price_border_radius').val(),
+						price_border_style: $('#shopglut_price_border_style').val(),
+						// Price Display - Padding
 						price_padding_top: $('#shopglut_price_padding_top').val(),
 						price_padding_right: $('#shopglut_price_padding_right').val(),
 						price_padding_bottom: $('#shopglut_price_padding_bottom').val(),
 						price_padding_left: $('#shopglut_price_padding_left').val(),
-						price_margin: $('#shopglut_price_margin_top').val(),
+						// Price Display - Margins
+						price_margin_left: $('#shopglut_price_margin_left').val(),
+						price_margin_right: $('#shopglut_price_margin_right').val(),
+						price_margin_bottom: $('#shopglut_price_margin_bottom').val(),
+						// Actions Position
 						actions_position: $('#shopglut_actions_position').val(),
 						// Variations form styling
 						variations_margin_bottom: $('#shopglut_variations_margin_bottom').val(),
@@ -2004,6 +2356,8 @@ class AllEnhancements {
 						variations_row_height: $('#shopglut_variations_row_height').val(),
 						variations_remove_borders: $('#shopglut_variations_remove_borders').is(':checked') ? 1 : 0,
 						variations_vertical_align: $('#shopglut_variations_vertical_align').val(),
+						variations_cell_padding_bottom: $('#shopglut_variations_cell_padding_bottom').val(),
+						variations_form_margin_bottom: $('#shopglut_variations_form_margin_bottom').val(),
 						nonce: '<?php echo wp_create_nonce('shopglut_global_settings'); ?>'
 					},
 					success: function(response) {
@@ -2029,7 +2383,7 @@ class AllEnhancements {
 
 			// Initialize color pickers for global settings
 			if ($.fn.wpColorPicker) {
-				$('#shopglut_clear_button_color, #shopglut_clear_button_bg_color, #shopglut_clear_button_bg_color_hover, #shopglut_clear_button_border_color, #shopglut_price_color, #shopglut_price_bg_color, #shopglut_price_bg_color_hover, #shopglut_price_border_color').wpColorPicker();
+				$('#shopglut_clear_button_color, #shopglut_clear_button_background_color, #shopglut_clear_button_border_color, #shopglut_clear_button_hover_color, #shopglut_clear_button_hover_background, #shopglut_price_color, #shopglut_price_background_color, #shopglut_price_border_color').wpColorPicker();
 			}
 
 			// Handle reset settings button

@@ -379,20 +379,82 @@ class AttributeSwatchesManager {
 			wp_send_json_error(array('message' => __('Permission denied', 'shopglut')));
 		}
 
-		// Clear Button settings
+		// Clear Button - Basic settings
 		$clear_button_enable = isset($_POST['clear_button_enable']) ? rest_sanitize_boolean($_POST['clear_button_enable']) : true;
 		$clear_button_text = isset($_POST['clear_button_text']) ? sanitize_text_field(wp_unslash($_POST['clear_button_text'])) : 'Clear';
 		$clear_button_color = isset($_POST['clear_button_color']) ? sanitize_hex_color($_POST['clear_button_color']) : '#2271b1';
 		$clear_button_font_size = isset($_POST['clear_button_font_size']) ? absint($_POST['clear_button_font_size']) : 14;
-		$clear_button_margin = isset($_POST['clear_button_margin']) ? absint($_POST['clear_button_margin']) : 10;
+		$clear_button_margin_left = isset($_POST['clear_button_margin_left']) ? absint($_POST['clear_button_margin_left']) : 15;
 
-		// Price Display settings
+		// Clear Button - Typography
+		$clear_button_font_family = isset($_POST['clear_button_font_family']) ? sanitize_text_field(wp_unslash($_POST['clear_button_font_family'])) : 'inherit';
+		$clear_button_font_weight = isset($_POST['clear_button_font_weight']) ? sanitize_text_field(wp_unslash($_POST['clear_button_font_weight'])) : '500';
+		$clear_button_text_transform = isset($_POST['clear_button_text_transform']) ? sanitize_text_field(wp_unslash($_POST['clear_button_text_transform'])) : 'none';
+		$clear_button_text_decoration = isset($_POST['clear_button_text_decoration']) ? sanitize_text_field(wp_unslash($_POST['clear_button_text_decoration'])) : 'underline';
+		$clear_button_letter_spacing = isset($_POST['clear_button_letter_spacing']) ? floatval($_POST['clear_button_letter_spacing']) : 0;
+		$clear_button_line_height = isset($_POST['clear_button_line_height']) ? absint($_POST['clear_button_line_height']) : 14;
+		$clear_button_text_align = isset($_POST['clear_button_text_align']) ? sanitize_text_field(wp_unslash($_POST['clear_button_text_align'])) : 'left';
+
+		// Clear Button - Background & Border
+		$clear_button_background_color = isset($_POST['clear_button_background_color']) ? sanitize_text_field(wp_unslash($_POST['clear_button_background_color'])) : 'transparent';
+		$clear_button_border_color = isset($_POST['clear_button_border_color']) ? sanitize_text_field(wp_unslash($_POST['clear_button_border_color'])) : 'transparent';
+		$clear_button_border_width = isset($_POST['clear_button_border_width']) ? absint($_POST['clear_button_border_width']) : 0;
+		$clear_button_border_radius = isset($_POST['clear_button_border_radius']) ? absint($_POST['clear_button_border_radius']) : 4;
+		$clear_button_border_style = isset($_POST['clear_button_border_style']) ? sanitize_text_field(wp_unslash($_POST['clear_button_border_style'])) : 'solid';
+
+		// Clear Button - Padding
+		$clear_button_padding = array(
+			'top' => isset($_POST['clear_button_padding_top']) ? absint($_POST['clear_button_padding_top']) : 6,
+			'right' => isset($_POST['clear_button_padding_right']) ? absint($_POST['clear_button_padding_right']) : 12,
+			'bottom' => isset($_POST['clear_button_padding_bottom']) ? absint($_POST['clear_button_padding_bottom']) : 6,
+			'left' => isset($_POST['clear_button_padding_left']) ? absint($_POST['clear_button_padding_left']) : 12,
+		);
+
+		// Clear Button - Margins
+		$clear_button_margin_right = isset($_POST['clear_button_margin_right']) ? absint($_POST['clear_button_margin_right']) : 0;
+		$clear_button_margin_top = isset($_POST['clear_button_margin_top']) ? absint($_POST['clear_button_margin_top']) : 0;
+		$clear_button_margin_bottom = isset($_POST['clear_button_margin_bottom']) ? absint($_POST['clear_button_margin_bottom']) : 0;
+
+		// Clear Button - Hover & Transition
+		$clear_button_hover_color = isset($_POST['clear_button_hover_color']) ? sanitize_hex_color($_POST['clear_button_hover_color']) : '#135e96';
+		$clear_button_hover_background = isset($_POST['clear_button_hover_background']) ? sanitize_text_field(wp_unslash($_POST['clear_button_hover_background'])) : 'rgba(34, 113, 177, 0.05)';
+		$clear_button_transition_duration = isset($_POST['clear_button_transition_duration']) ? floatval($_POST['clear_button_transition_duration']) : 0.2;
+
+		// Price Display - Basic settings
 		$price_enable = isset($_POST['price_enable']) ? rest_sanitize_boolean($_POST['price_enable']) : true;
 		$price_position = isset($_POST['price_position']) ? sanitize_text_field(wp_unslash($_POST['price_position'])) : 'after_clear_button';
 		$price_color = isset($_POST['price_color']) ? sanitize_hex_color($_POST['price_color']) : '#2271b1';
 		$price_font_size = isset($_POST['price_font_size']) ? absint($_POST['price_font_size']) : 16;
 		$price_font_weight = isset($_POST['price_font_weight']) ? sanitize_text_field(wp_unslash($_POST['price_font_weight'])) : '600';
-		$price_margin = isset($_POST['price_margin']) ? absint($_POST['price_margin']) : 8;
+		$price_margin_top = isset($_POST['price_margin_top']) ? absint($_POST['price_margin_top']) : 12;
+
+		// Price Display - Typography
+		$price_font_family = isset($_POST['price_font_family']) ? sanitize_text_field(wp_unslash($_POST['price_font_family'])) : 'inherit';
+		$price_line_height = isset($_POST['price_line_height']) ? absint($_POST['price_line_height']) : 14;
+		$price_text_transform = isset($_POST['price_text_transform']) ? sanitize_text_field(wp_unslash($_POST['price_text_transform'])) : 'none';
+		$price_letter_spacing = isset($_POST['price_letter_spacing']) ? floatval($_POST['price_letter_spacing']) : 0;
+		$price_text_align = isset($_POST['price_text_align']) ? sanitize_text_field(wp_unslash($_POST['price_text_align'])) : 'left';
+		$price_font_style = isset($_POST['price_font_style']) ? sanitize_text_field(wp_unslash($_POST['price_font_style'])) : 'normal';
+
+		// Price Display - Background & Border
+		$price_background_color = isset($_POST['price_background_color']) ? sanitize_text_field(wp_unslash($_POST['price_background_color'])) : 'transparent';
+		$price_border_color = isset($_POST['price_border_color']) ? sanitize_text_field(wp_unslash($_POST['price_border_color'])) : 'transparent';
+		$price_border_width = isset($_POST['price_border_width']) ? absint($_POST['price_border_width']) : 0;
+		$price_border_radius = isset($_POST['price_border_radius']) ? absint($_POST['price_border_radius']) : 4;
+		$price_border_style = isset($_POST['price_border_style']) ? sanitize_text_field(wp_unslash($_POST['price_border_style'])) : 'solid';
+
+		// Price Display - Padding
+		$price_padding = array(
+			'top' => isset($_POST['price_padding_top']) ? absint($_POST['price_padding_top']) : 4,
+			'right' => isset($_POST['price_padding_right']) ? absint($_POST['price_padding_right']) : 8,
+			'bottom' => isset($_POST['price_padding_bottom']) ? absint($_POST['price_padding_bottom']) : 4,
+			'left' => isset($_POST['price_padding_left']) ? absint($_POST['price_padding_left']) : 8,
+		);
+
+		// Price Display - Margins
+		$price_margin_left = isset($_POST['price_margin_left']) ? absint($_POST['price_margin_left']) : 0;
+		$price_margin_right = isset($_POST['price_margin_right']) ? absint($_POST['price_margin_right']) : 15;
+		$price_margin_bottom = isset($_POST['price_margin_bottom']) ? absint($_POST['price_margin_bottom']) : 0;
 
 		// Actions position setting
 		$actions_position = isset($_POST['actions_position']) ? sanitize_text_field(wp_unslash($_POST['actions_position'])) : 'new_line';
@@ -421,6 +483,13 @@ class AttributeSwatchesManager {
 		if (isset($_POST['variations_vertical_align']) && $_POST['variations_vertical_align'] !== '') {
 			$variations_form['vertical_align'] = sanitize_text_field(wp_unslash($_POST['variations_vertical_align']));
 		}
+		// New fields for WooCommerce CSS overrides
+		if (isset($_POST['variations_cell_padding_bottom']) && $_POST['variations_cell_padding_bottom'] !== '') {
+			$variations_form['cell_padding_bottom'] = absint($_POST['variations_cell_padding_bottom']);
+		}
+		if (isset($_POST['variations_form_margin_bottom']) && $_POST['variations_form_margin_bottom'] !== '') {
+			$variations_form['form_margin_bottom'] = absint($_POST['variations_form_margin_bottom']);
+		}
 
 		// Build settings array
 		$global_settings = array(
@@ -429,7 +498,31 @@ class AttributeSwatchesManager {
 				'text' => $clear_button_text,
 				'color' => $clear_button_color,
 				'font_size' => $clear_button_font_size,
-				'margin' => $clear_button_margin,
+				'margin_left' => $clear_button_margin_left,
+				// Typography
+				'font_family' => $clear_button_font_family,
+				'font_weight' => $clear_button_font_weight,
+				'text_transform' => $clear_button_text_transform,
+				'text_decoration' => $clear_button_text_decoration,
+				'letter_spacing' => $clear_button_letter_spacing,
+				'line_height' => $clear_button_line_height,
+				'text_align' => $clear_button_text_align,
+				// Background & Border
+				'background_color' => $clear_button_background_color,
+				'border_color' => $clear_button_border_color,
+				'border_width' => $clear_button_border_width,
+				'border_radius' => $clear_button_border_radius,
+				'border_style' => $clear_button_border_style,
+				// Padding
+				'padding' => $clear_button_padding,
+				// Margins
+				'margin_right' => $clear_button_margin_right,
+				'margin_top' => $clear_button_margin_top,
+				'margin_bottom' => $clear_button_margin_bottom,
+				// Hover & Transition
+				'hover_color' => $clear_button_hover_color,
+				'hover_background' => $clear_button_hover_background,
+				'transition_duration' => $clear_button_transition_duration,
 			),
 			'price_display' => array(
 				'enable' => $price_enable,
@@ -437,7 +530,26 @@ class AttributeSwatchesManager {
 				'color' => $price_color,
 				'font_size' => $price_font_size,
 				'font_weight' => $price_font_weight,
-				'margin' => $price_margin,
+				'margin_top' => $price_margin_top,
+				// Typography
+				'font_family' => $price_font_family,
+				'line_height' => $price_line_height,
+				'text_transform' => $price_text_transform,
+				'letter_spacing' => $price_letter_spacing,
+				'text_align' => $price_text_align,
+				'font_style' => $price_font_style,
+				// Background & Border
+				'background_color' => $price_background_color,
+				'border_color' => $price_border_color,
+				'border_width' => $price_border_width,
+				'border_radius' => $price_border_radius,
+				'border_style' => $price_border_style,
+				// Padding
+				'padding' => $price_padding,
+				// Margins
+				'margin_left' => $price_margin_left,
+				'margin_right' => $price_margin_right,
+				'margin_bottom' => $price_margin_bottom,
 			),
 			'actions_position' => $actions_position,
 			'variations_form' => $variations_form,

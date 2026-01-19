@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Template1 Markup - Simple Dropdown Style
+ * Template1 Markup - Dropdown Style
  */
 class template1Markup {
 
@@ -29,88 +29,78 @@ class template1Markup {
 	}
 
 	/**
-	 * Helper to get setting value with minimum validation
+	 * Helper to get setting value
 	 */
-	private function get_setting_value($settings, $key, $default = '', $min_value = null) {
-		$value = $default;
+	private function get_setting_value($settings, $key, $default = '') {
 		if (isset($settings[$key])) {
 			$value = $settings[$key];
+			if (is_array($value) && isset($value[$key])) {
+				return $value[$key];
+			}
+			return $value;
 		}
-		// Apply minimum value if numeric
-		if ($min_value !== null && is_numeric($value)) {
-			$value = max(intval($value), $min_value);
-		}
-		return $value;
-	}
-
-	/**
-	 * Helper to get nested setting value
-	 */
-	private function get_nested_setting($settings, $section, $key, $default = '', $min_value = null) {
-		$value = $default;
-		if (isset($settings[$section][$key])) {
-			$value = $settings[$section][$key];
-		}
-		// Apply minimum value if numeric
-		if ($min_value !== null && is_numeric($value)) {
-			$value = max(intval($value), $min_value);
-		}
-		return $value;
+		return $default;
 	}
 
 	/**
 	 * Render demo swatches for admin preview
 	 */
 	private function render_demo_swatches($layout_id) {
-		// Get layout data including assigned attributes (same approach as template2)
-		$layout_data = $this->get_layout_data($layout_id);
-		$settings = isset($layout_data['settings']) ? $layout_data['settings'] : array();
-		$assigned_attribute = isset($layout_data['assigned_attribute']) ? $layout_data['assigned_attribute'] : '';
+		$settings = $this->get_layout_settings($layout_id);
 
-		// Get settings with proper minimums to prevent invisible text
-		$dropdown_bg = $this->get_nested_setting($settings, 'swatch_dropdown_container_section', 'swatch_dropdown_background', '#ffffff');
-		$dropdown_border = $this->get_nested_setting($settings, 'swatch_dropdown_container_section', 'swatch_dropdown_border_color', '#d1d5db');
-		$dropdown_border_width = $this->get_nested_setting($settings, 'swatch_dropdown_container_section', 'swatch_dropdown_border_width', 1);
-		$dropdown_radius = $this->get_nested_setting($settings, 'swatch_dropdown_container_section', 'swatch_dropdown_border_radius', 6);
+		// Get dropdown settings with defaults
+		$dropdown_bg = $this->get_setting_value($settings, 'swatch_dropdown_background', '#ffffff');
+		$dropdown_border = $this->get_setting_value($settings, 'swatch_dropdown_border_color', '#d1d5db');
+		$dropdown_border_width = $this->get_setting_value($settings, 'swatch_dropdown_border_width', 1);
+		$dropdown_radius = $this->get_setting_value($settings, 'swatch_dropdown_border_radius', 6);
 
-		$text_color = $this->get_nested_setting($settings, 'swatch_dropdown_typography_section', 'swatch_dropdown_text_color', '#374151');
-		$font_size = $this->get_nested_setting($settings, 'swatch_dropdown_typography_section', 'swatch_dropdown_font_size', 14, 12); // Min 12px
+		// Get padding settings
+		$padding = $this->get_setting_value($settings, 'swatch_dropdown_padding', array('top' => '10', 'right' => '14', 'bottom' => '10', 'left' => '14', 'unit' => 'px'));
+		if (is_string($padding)) {
+			$padding = array('top' => '10', 'right' => '14', 'bottom' => '10', 'left' => '14', 'unit' => 'px');
+		}
+		$padding_top = isset($padding['top']) ? $padding['top'] : '10';
+		$padding_right = isset($padding['right']) ? $padding['right'] : '14';
+		$padding_bottom = isset($padding['bottom']) ? $padding['bottom'] : '10';
+		$padding_left = isset($padding['left']) ? $padding['left'] : '14';
 
-		$label_color = $this->get_nested_setting($settings, 'swatch_attribute_label_section', 'swatch_attribute_label_color', '#374151');
-		$label_font_size = $this->get_nested_setting($settings, 'swatch_attribute_label_section', 'swatch_attribute_label_font_size', 14, 12); // Min 12px
+		$text_color = $this->get_setting_value($settings, 'swatch_dropdown_text_color', '#374151');
+		$font_size = max(intval($this->get_setting_value($settings, 'swatch_dropdown_font_size', 14)), 15);
+		$font_weight = $this->get_setting_value($settings, 'swatch_dropdown_font_weight', '400');
+		$font_family = $this->get_setting_value($settings, 'swatch_dropdown_font_family', 'inherit');
 
-		// Get actual attribute terms from the assigned attribute (same approach as template2)
+		$label_color = $this->get_setting_value($settings, 'swatch_attribute_label_color', '#374151');
+		$label_font_size = max(intval($this->get_setting_value($settings, 'swatch_attribute_label_font_size', 14)), 15);
+		$label_font_weight = $this->get_setting_value($settings, 'swatch_attribute_label_font_weight', '600');
+
+		// Get actual attribute terms from the assigned attribute
 		global $product;
-		$attribute_data = $this->get_assigned_attribute_terms($product, $assigned_attribute);
+		$attribute_data = $this->get_assigned_attribute_terms($product, $layout_id);
 
 		// If no attributes found, fall back to demo data
 		if (empty($attribute_data)) {
 			$attribute_data = array(
-				'label' => 'Choose option:',
+				'label' => 'Color',
 				'options' => array(
-					array('slug' => 'option-1', 'name' => 'Option 1'),
-					array('slug' => 'option-2', 'name' => 'Option 2'),
-					array('slug' => 'option-3', 'name' => 'Option 3'),
+					array('slug' => 'beige', 'name' => 'Beige'),
+					array('slug' => 'green', 'name' => 'Green'),
 				)
 			);
 		}
 
-		// Enforce minimum font sizes for demo display (better visibility)
-		$font_size = max(intval($font_size), 14); // Min 14px for demo
-		$label_font_size = max(intval($label_font_size), 14); // Min 14px for demo
-
 		?>
-		<!-- Simple Demo: Dropdown Swatch -->
-		<div class="shopglut-swatches-demo" style="display:flex;align-items:center;justify-content:center;padding:30px;background:#f9fafb;border-radius:8px;">
-			<div class="shopglut-swatches-wrapper shopglut-template1" style="width:100%;max-width:400px;text-align:center;">
+		<!-- Template1 Demo: Dropdown Swatch -->
+		<div class="shopglut-swatches-demo shopglut-demo-center">
+			<div class="shopglut-swatches-wrapper shopglut-template1">
 				<!-- Label -->
-				<label class="shopglut-attribute-label" style="color:<?php echo esc_attr($label_color); ?>;font-size:<?php echo intval($label_font_size); ?>px;font-weight:600;display:block;margin-bottom:12px;">
+				<label class="shopglut-attribute-label" style="color:<?php echo esc_attr($label_color); ?>;font-size:<?php echo esc_attr($label_font_size); ?>px;font-weight:<?php echo esc_attr($label_font_weight); ?>;display:block;margin-bottom:16px;letter-spacing:0.5px;">
 					<?php echo esc_html($attribute_data['label']); ?>
+					<span class="shopglut-label-required">*</span>
 				</label>
 
 				<!-- Dropdown -->
-				<select class="shopglut-swatch-dropdown" disabled style="background-color:<?php echo esc_attr($dropdown_bg); ?>;border:<?php echo intval($dropdown_border_width); ?>px solid <?php echo esc_attr($dropdown_border); ?>;border-radius:<?php echo intval($dropdown_radius); ?>px;color:<?php echo esc_attr($text_color); ?>;font-size:<?php echo intval($font_size); ?>px;padding:12px 16px;min-height:46px;width:100%;cursor:not-allowed;opacity:0.8;">
-					<option value="">Choose an option</option>
+				<select class="shopglut-swatch-dropdown shopglut-demo-dropdown" disabled style="background-color:<?php echo esc_attr($dropdown_bg); ?>;border:<?php echo intval($dropdown_border_width); ?>px solid <?php echo esc_attr($dropdown_border); ?>;border-radius:<?php echo intval($dropdown_radius); ?>px;color:<?php echo esc_attr($text_color); ?>;font-size:<?php echo esc_attr($font_size); ?>px;font-weight:<?php echo esc_attr($font_weight); ?>;font-family:<?php echo esc_attr($font_family); ?>;padding:<?php echo intval($padding_top); ?>px <?php echo intval($padding_right); ?>px <?php echo intval($padding_bottom); ?>px <?php echo intval($padding_left); ?>px;width:100%;min-height:52px;cursor:not-allowed;opacity:0.7;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+					<option value="" disabled selected style="color:#9ca3af;">Choose an option</option>
 					<?php foreach ($attribute_data['options'] as $option): ?>
 						<option value="<?php echo esc_attr($option['slug']); ?>">
 							<?php echo esc_html($option['name']); ?>
@@ -119,204 +109,132 @@ class template1Markup {
 				</select>
 			</div>
 		</div>
+
+		<style>
+			/* Enhanced demo styling */
+			.shopglut-demo-center {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				padding: 24px;
+			}
+
+			/* Enhanced dropdown container */
+			.shopglut-demo-center .shopglut-swatches-wrapper {
+				width: 100%;
+				max-width: 380px;
+				text-align: left;
+			}
+
+			/* Enhanced label styling */
+			.shopglut-demo-center .shopglut-attribute-label {
+				position: relative;
+				padding-left: 12px;
+				display: flex;
+				align-items: center;
+				gap: 4px;
+				font-size: 16px !important;
+			}
+
+			.shopglut-demo-center .shopglut-attribute-label::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 3px;
+				height: 16px;
+				background: linear-gradient(180deg, #2271b1 0%, #135e96 100%);
+				border-radius: 2px;
+			}
+
+			.shopglut-demo-center .shopglut-label-required {
+				color: #ef4444;
+				font-size: 16px;
+				font-weight: bold;
+				margin-left: 2px;
+			}
+
+			/* Enhanced dropdown styling */
+			.shopglut-demo-center .shopglut-swatch-dropdown {
+				transition: all 0.2s ease;
+				position: relative;
+				background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3.5 5.5L7 9L10.5 5.5' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+				background-repeat: no-repeat;
+				background-position: right 14px center;
+				padding-right: 40px;
+				appearance: none;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+			}
+
+			.shopglut-demo-center .shopglut-swatch-dropdown:hover {
+				border-color: #2271b1;
+				box-shadow: 0 2px 6px rgba(34, 113, 177, 0.15);
+			}
+
+			/* Focus ring for accessibility */
+			.shopglut-demo-center .shopglut-swatch-dropdown:focus {
+				outline: none;
+				border-color: #2271b1;
+				box-shadow: 0 0 0 3px rgba(34, 113, 177, 0.1);
+			}
+		</style>
 		<?php
 	}
 
 	/**
-	 * Get product attributes for preview
+	 * Get terms for the assigned attribute
 	 *
 	 * @param \WC_Product $product Product object
-	 * @param int $layout_id Layout ID for admin preview
+	 * @param int $layout_id Layout ID
 	 * @return array Attribute data with label and options
 	 */
-	private function get_product_attributes_for_preview($product, $layout_id = 0) {
-		// First try to get from actual product
-		if ($product && method_exists($product, 'is_type') && $product->is_type('variable')) {
-			$attributes = $product->get_attributes();
+	private function get_assigned_attribute_terms($product, $layout_id) {
+		// Get layout data to find assigned attribute
+		$layout_data = $this->get_layout_data($layout_id);
+		$assigned_attribute = isset($layout_data['assigned_attribute']) ? $layout_data['assigned_attribute'] : '';
 
-			if (!empty($attributes)) {
-				// Find the first variation attribute
-				foreach ($attributes as $attr_key => $attribute) {
-					$is_variation = method_exists($attribute, 'get_variation') ? $attribute->get_variation() : false;
-
-					if (!$is_variation) {
-						continue;
-					}
-
-					// Handle taxonomy-based attributes
-					if ($attribute->is_taxonomy()) {
-						$taxonomy = $attribute->get_taxonomy();
-						$label = wc_attribute_label($taxonomy);
-
-						$terms = get_terms(array(
-							'taxonomy' => $taxonomy,
-							'hide_empty' => false,
-						));
-
-						$options = array();
-						foreach ($terms as $term) {
-							$options[] = array(
-								'slug' => $term->slug,
-								'name' => $term->name,
-							);
-						}
-
-						if (!empty($options)) {
-							return array(
-								'label' => $label . ':',
-								'options' => $options,
-							);
-						}
-					}
-					// Handle custom product attributes (non-taxonomy)
-					else {
-						$label = $attribute->get_name();
-						$options = $attribute->get_options();
-
-						if (!empty($options)) {
-							$formatted_options = array();
-							foreach ($options as $option) {
-								$slug = sanitize_title($option);
-								$formatted_options[] = array(
-									'slug' => $slug,
-									'name' => $option,
-								);
-							}
-
-							if (!empty($formatted_options)) {
-								return array(
-									'label' => $label . ':',
-									'options' => $formatted_options,
-								);
-							}
-						}
-					}
-				}
-			}
-		}
-
-		// No product found, try to get from assigned attributes in database
-		if ($layout_id) {
-			$assigned_attrs = $this->get_assigned_attributes_for_layout($layout_id);
-			if (!empty($assigned_attrs)) {
-				// Get the first assigned attribute's terms
-				foreach ($assigned_attrs as $attr_slug) {
-					// Make sure it has pa_ prefix
-					if (strpos($attr_slug, 'pa_') !== 0) {
-						$attr_slug = 'pa_' . $attr_slug;
-					}
-
-					// Check if this taxonomy exists
-					if (taxonomy_exists($attr_slug)) {
-						$label = wc_attribute_label($attr_slug);
-
-						$terms = get_terms(array(
-							'taxonomy' => $attr_slug,
-							'hide_empty' => false,
-						));
-
-						$options = array();
-						foreach ($terms as $term) {
-							$options[] = array(
-								'slug' => $term->slug,
-								'name' => $term->name,
-							);
-						}
-
-						if (!empty($options)) {
-							return array(
-								'label' => $label . ':',
-								'options' => $options,
-							);
-						}
-					}
-				}
-			}
-		}
-
-		return array();
-	}
-
-	/**
-	 * Get assigned attributes for a layout from database
-	 *
-	 * @param int $layout_id Layout ID
-	 * @return array Array of attribute slugs
-	 */
-	private function get_assigned_attributes_for_layout($layout_id) {
-		if (!$layout_id) {
-			error_log('template1Markup: No layout_id provided');
+		if (empty($assigned_attribute)) {
 			return array();
 		}
 
-		global $wpdb;
-		$table_name = \Shopglut\ShopGlutDatabase::table_product_swatches();
+		// Make sure it has pa_ prefix
+		if (strpos($assigned_attribute, 'pa_') !== 0) {
+			$assigned_attribute = 'pa_' . $assigned_attribute;
+		}
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-		$layout = $wpdb->get_row(
-			$wpdb->prepare(
-				"SELECT assigned_attributes FROM `{$table_name}` WHERE id = %d",
-				$layout_id
-			)
-		);
-
-		if (!$layout) {
-			error_log('template1Markup: No layout found for id ' . $layout_id);
+		// Check if this taxonomy exists
+		if (!taxonomy_exists($assigned_attribute)) {
 			return array();
 		}
 
-		$assigned = maybe_unserialize($layout->assigned_attributes);
+		$label = wc_attribute_label($assigned_attribute);
 
-		if (!is_array($assigned)) {
-			error_log('template1Markup: assigned_attributes is not an array for layout ' . $layout_id . ': ' . print_r($layout->assigned_attributes, true));
+		// Get terms for this taxonomy
+		$terms = get_terms(array(
+			'taxonomy' => $assigned_attribute,
+			'hide_empty' => false,
+		));
+
+		if (empty($terms) || is_wp_error($terms)) {
 			return array();
 		}
 
-		error_log('template1Markup: Found assigned attributes for layout ' . $layout_id . ': ' . implode(', ', $assigned));
-		return $assigned;
-	}
-
-	/**
-	 * Get layout settings from database
-	 */
-	private function get_layout_settings($layout_id) {
-		global $wpdb;
-
-		if (!$layout_id) {
-			return array();
+		$options = array();
+		foreach ($terms as $term) {
+			$options[] = array(
+				'slug' => $term->slug,
+				'name' => $term->name,
+			);
 		}
 
-		$table_name = \Shopglut\ShopGlutDatabase::table_product_swatches();
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
-		$layout = $wpdb->get_row(
-			$wpdb->prepare(
-				"SELECT layout_settings FROM `{$table_name}` WHERE id = %d",
-				$layout_id
-			)
-		);
-
-		if (!$layout) {
-			return array();
-		}
-
-		$layout_settings = maybe_unserialize($layout->layout_settings);
-		$template = isset($layout_settings['layout_template']) ? $layout_settings['layout_template'] : 'template1';
-
-		// Try to extract template settings
-		$keys = array(
-			'shopg_product_swatches_settings_' . $template,
-			'shopg_productswatches_settings_' . $template,
-		);
-
-		foreach ($keys as $key) {
-			if (isset($layout_settings[$key])) {
-				$settings = $layout_settings[$key];
-				if (isset($settings['product-swatches-settings'])) {
-					return $settings['product-swatches-settings'];
-				}
-				return $settings;
-			}
+		if (!empty($options)) {
+			return array(
+				'label' => $label . ':',
+				'options' => $options,
+			);
 		}
 
 		return array();
@@ -385,52 +303,46 @@ class template1Markup {
 	}
 
 	/**
-	 * Get terms for the assigned attribute
-	 *
-	 * @param \WC_Product $product Product object
-	 * @param string $assigned_attribute The assigned attribute slug (e.g., 'pa_color')
-	 * @return array Attribute data with label and options
+	 * Get layout settings from database
 	 */
-	private function get_assigned_attribute_terms($product, $assigned_attribute) {
-		if (empty($assigned_attribute)) {
+	private function get_layout_settings($layout_id) {
+		global $wpdb;
+
+		if (!$layout_id) {
 			return array();
 		}
 
-		// Make sure it has pa_ prefix
-		if (strpos($assigned_attribute, 'pa_') !== 0) {
-			$assigned_attribute = 'pa_' . $assigned_attribute;
-		}
+		$table_name = \Shopglut\ShopGlutDatabase::table_product_swatches();
 
-		// Check if this taxonomy exists
-		if (!taxonomy_exists($assigned_attribute)) {
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+		$layout = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT layout_settings, layout_template FROM `{$table_name}` WHERE id = %d",
+				$layout_id
+			)
+		);
+
+		if (!$layout) {
 			return array();
 		}
 
-		$label = wc_attribute_label($assigned_attribute);
+		$template = $layout->layout_template ?? 'template1';
+		$layout_settings = maybe_unserialize($layout->layout_settings);
 
-		// Get terms for this taxonomy
-		$terms = get_terms(array(
-			'taxonomy' => $assigned_attribute,
-			'hide_empty' => false,
-		));
+		// Try to extract template settings
+		$keys = array(
+			'shopg_product_swatches_settings_' . $template,
+			'shopg_productswatches_settings_' . $template,
+		);
 
-		if (empty($terms) || is_wp_error($terms)) {
-			return array();
-		}
-
-		$options = array();
-		foreach ($terms as $term) {
-			$options[] = array(
-				'slug' => $term->slug,
-				'name' => $term->name,
-			);
-		}
-
-		if (!empty($options)) {
-			return array(
-				'label' => $label . ':',
-				'options' => $options,
-			);
+		foreach ($keys as $key) {
+			if (isset($layout_settings[$key])) {
+				$settings = $layout_settings[$key];
+				if (isset($settings['product-swatches-settings'])) {
+					return $settings['product-swatches-settings'];
+				}
+				return $settings;
+			}
 		}
 
 		return array();

@@ -43,7 +43,9 @@
       "Bash(git checkout:*)",
       "Bash(wp option get:*)",
       "Bash(wp cache flush:*)",
-      "Bash(wp db query:*)"
+      "Bash(wp db query:*)",
+      "Bash(sudo systemctl reload:*)",
+      "Bash(sudo systemctl:*)"
     ]
   }
 }
