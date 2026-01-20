@@ -484,28 +484,82 @@ class ModuleIntegration {
 			? $page_settings['button_styling']
 			: array();
 
-		// Build inline styles
+		// Build inline styles - handle the comparison module's array structure
 		$inline_styles = '';
 		if (!empty($button_styling)) {
 			$style_parts = array();
 
-			if (isset($button_styling['background_color'])) {
-				$style_parts[] = 'background-color: ' . esc_attr($button_styling['background_color']);
+			// Background color
+			$bg_color = $get_setting_value($button_styling, 'button_background_color', '#3b82f6');
+			if (!is_array($bg_color) && !empty($bg_color)) {
+				$style_parts[] = 'background-color: ' . esc_attr($bg_color);
 			}
-			if (isset($button_styling['text_color'])) {
-				$style_parts[] = 'color: ' . esc_attr($button_styling['text_color']);
+
+			// Text color
+			$text_color = $get_setting_value($button_styling, 'button_text_color', '#ffffff');
+			if (!is_array($text_color) && !empty($text_color)) {
+				$style_parts[] = 'color: ' . esc_attr($text_color);
 			}
-			if (isset($button_styling['border_color'])) {
-				$style_parts[] = 'border-color: ' . esc_attr($button_styling['border_color']);
+
+			// Font size - can be array with 'value' key or numeric
+			if (isset($button_styling['button_font_size'])) {
+				$font_size = $button_styling['button_font_size'];
+				if (is_array($font_size)) {
+					$font_size = isset($font_size['value']) ? $font_size['value'] : (isset($font_size[0]) && is_numeric($font_size[0]) ? $font_size[0] : 16);
+				}
+				$font_size = is_numeric($font_size) ? $font_size : 16;
+				$style_parts[] = 'font-size: ' . esc_attr($font_size) . 'px';
 			}
-			if (isset($button_styling['border_width'])) {
-				$style_parts[] = 'border-width: ' . esc_attr($button_styling['border_width']) . 'px';
+
+			// Padding - can be array with top/right/bottom/left keys
+			if (isset($button_styling['button_padding'])) {
+				$padding = $button_styling['button_padding'];
+				if (is_array($padding)) {
+					$style_parts[] = sprintf(
+						'padding: %spx %spx %spx %spx',
+						esc_attr($padding['top'] ?? 10),
+						esc_attr($padding['right'] ?? 20),
+						esc_attr($padding['bottom'] ?? 10),
+						esc_attr($padding['left'] ?? 20)
+					);
+				} elseif (!empty($padding)) {
+					$style_parts[] = 'padding: ' . esc_attr($padding);
+				}
 			}
-			if (isset($button_styling['border_radius'])) {
-				$style_parts[] = 'border-radius: ' . esc_attr($button_styling['border_radius']) . 'px';
+
+			// Border radius - can be array with 'value' key or numeric
+			if (isset($button_styling['button_border_radius'])) {
+				$border_radius = $button_styling['button_border_radius'];
+				if (is_array($border_radius)) {
+					$border_radius = isset($border_radius['value']) ? $border_radius['value'] : (isset($border_radius[0]) && is_numeric($border_radius[0]) ? $border_radius[0] : 6);
+				}
+				$border_radius = is_numeric($border_radius) ? $border_radius : 6;
+				$style_parts[] = 'border-radius: ' . esc_attr($border_radius) . 'px';
 			}
-			if (isset($button_styling['padding'])) {
-				$style_parts[] = 'padding: ' . esc_attr($button_styling['padding']);
+
+			// Border settings (optional) - only add if border color or width is set
+			$has_border = false;
+			$border_color = $get_setting_value($button_styling, 'button_border_color', '');
+			if (!is_array($border_color) && !empty($border_color)) {
+				$style_parts[] = 'border-color: ' . esc_attr($border_color);
+				$has_border = true;
+			}
+
+			if (isset($button_styling['button_border_width'])) {
+				$border_width = $button_styling['button_border_width'];
+				if (is_array($border_width)) {
+					$border_width = isset($border_width['value']) ? $border_width['value'] : (isset($border_width[0]) && is_numeric($border_width[0]) ? $border_width[0] : 0);
+				}
+				$border_width = is_numeric($border_width) ? $border_width : 0;
+				if ($border_width > 0) {
+					$style_parts[] = 'border-width: ' . esc_attr($border_width) . 'px';
+					$has_border = true;
+				}
+			}
+
+			// Only add border-style if border settings exist
+			if ($has_border) {
+				$style_parts[] = 'border-style: solid';
 			}
 
 			$inline_styles = implode('; ', $style_parts);

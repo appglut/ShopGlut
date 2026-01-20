@@ -104,6 +104,12 @@
             var value = $select.val();
             var attribute = $select.data('attribute');
 
+            // Add visual feedback animation
+            $select.addClass('option-selected');
+            setTimeout(function() {
+                $select.removeClass('option-selected');
+            }, 300);
+
             if (!value) {
                 return;
             }
@@ -454,62 +460,39 @@
                 }
             }
 
-            // Add/remove variation-selected class on the product container
-            // Support multiple template types: template1, template2, template3
-            var $productContainer = $form.closest('.shopglut-single-product, .single-product-template2, .shopglut-single-product-container');
-            if (allSelected) {
-                $productContainer.addClass('variation-selected');
-
-                // Fade in the variation price and clear button with animation
-                var $priceEl = $form.find('.shopglut-variation-price');
-                var $resetBtn = $form.find('.shopglut-reset-variations');
-
-                $priceEl.removeClass('fade-in').hide().css('opacity', 0).fadeIn(300, function() {
-                    $(this).addClass('fade-in').css('opacity', 1);
-                });
-
-                $resetBtn.removeClass('fade-in').hide().css('opacity', 0).fadeIn(300, function() {
-                    $(this).addClass('fade-in').css('opacity', 1);
-                });
-            } else {
-                $productContainer.removeClass('variation-selected');
-
-                // Fade out the variation price and clear button
-                $form.find('.shopglut-variation-price').fadeOut(200);
-                $form.find('.shopglut-reset-variations').fadeOut(200);
-            }
-
-            // Find matching variation
+            // Find matching variation FIRST, before animating
             var variations = $form.data('product_variations');
-            if (!variations) {
-                return;
-            }
-
             var matchingVariation = null;
-            for (var i = 0; i < variations.length; i++) {
-                var variation = variations[i];
-                var isMatch = true;
-                var hasAllAttributes = true;
 
-                for (var attr in currentAttributes) {
-                    if (currentAttributes[attr] === '') {
-                        hasAllAttributes = false;
+            if (variations) {
+                for (var i = 0; i < variations.length; i++) {
+                    var variation = variations[i];
+                    var isMatch = true;
+                    var hasAllAttributes = true;
+
+                    for (var attr in currentAttributes) {
+                        if (currentAttributes[attr] === '') {
+                            hasAllAttributes = false;
+                            break;
+                        }
+                        if (!variation.attributes[attr] || variation.attributes[attr] !== currentAttributes[attr]) {
+                            isMatch = false;
+                            break;
+                        }
+                    }
+
+                    if (isMatch && hasAllAttributes) {
+                        matchingVariation = variation;
                         break;
                     }
-                    if (!variation.attributes[attr] || variation.attributes[attr] !== currentAttributes[attr]) {
-                        isMatch = false;
-                        break;
-                    }
-                }
-
-                if (isMatch && hasAllAttributes) {
-                    matchingVariation = variation;
-                    break;
                 }
             }
 
-            // Update price display for each price element
+            // Update price display FIRST, before animating
+            var priceFound = false;
+            var priceUpdated = false;
             $('.shopglut-variation-price').each(function() {
+                priceFound = true;
                 var $priceEl = $(this);
                 var attributeName = $priceEl.data('attribute');
                 var isGlobalPrice = $priceEl.hasClass('shopglut-global-price');
@@ -535,16 +518,55 @@
                         }
                     }
 
-                    // For global price, always show when there's a matching variation
-                    // For per-attribute prices, show when that attribute has a value
+                    // Clean up price HTML - remove strikethrough (del) and screen reader text
+                    // Keep only the current price (ins element or the price amount)
+                    if (priceHtml) {
+                        // Create a temporary element to parse the HTML
+                        var $temp = $('<div>' + priceHtml + '</div>');
+
+                        // Try to find the current price (ins element)
+                        var $currentPrice = $temp.find('ins').first();
+                        if ($currentPrice.length) {
+                            // Use the ins element content (current price)
+                            priceHtml = $currentPrice.html();
+                        } else {
+                            // No ins element, check if there's a price amount
+                            var $priceAmount = $temp.find('.woocommerce-Price-amount').first();
+                            if ($priceAmount.length) {
+                                // If there are multiple, get the last one (current price is usually last)
+                                var $allPrices = $temp.find('.woocommerce-Price-amount');
+                                if ($allPrices.length > 1) {
+                                    priceHtml = $allPrices.last().parent().html();
+                                } else {
+                                    priceHtml = $priceAmount.parent().html();
+                                }
+                            } else {
+                                // Fallback to the original HTML
+                                // Remove del elements
+                                priceHtml = priceHtml.replace(/<del[^>]*>.*?<\/del>/gi, '');
+                                // Remove screen-reader-text spans
+                                priceHtml = priceHtml.replace(/<span class="screen-reader-text">.*?<\/span>/gi, '');
+                            }
+                        }
+                    }
+
+                    // For global price, always set the HTML (but don't show yet)
+                    // For per-attribute prices, set when that attribute has a value
                     if (isGlobalPrice) {
-                        $priceEl.html(priceHtml).show();
+                        if (priceHtml) {
+                            $priceEl.html(priceHtml);
+                            priceUpdated = true;
+                            if (window.console && window.console.log) {
+                                console.log('ShopGlut: Price updated to:', priceHtml);
+                            }
+                        }
                     } else {
                         // Check if this attribute has a value selected
                         var attrName = 'attribute_' + attributeName;
                         var hasValue = currentAttributes[attrName] && currentAttributes[attrName] !== '';
                         if (hasValue) {
-                            $priceEl.html(priceHtml).show();
+                            $priceEl.html(priceHtml);
+                            priceUpdated = true;
                         } else {
                             $priceEl.html('');
                         }
@@ -553,14 +575,14 @@
                     // No matching variation - clear price
                     if (isGlobalPrice) {
                         // Only clear if all attributes are selected
-                        var allSelected = true;
+                        var allSelectedCheck = true;
                         for (var attr in currentAttributes) {
                             if (!currentAttributes[attr] || currentAttributes[attr] === '') {
-                                allSelected = false;
+                                allSelectedCheck = false;
                                 break;
                             }
                         }
-                        if (allSelected) {
+                        if (allSelectedCheck) {
                             $priceEl.html('');
                         }
                     } else {
@@ -573,6 +595,56 @@
                     }
                 }
             });
+
+            if (window.console && window.console.log) {
+                console.log('ShopGlut: Price elements found:', priceFound, 'Price updated:', priceUpdated, 'Matching variation:', matchingVariation ? matchingVariation.variation_id : 'none');
+            }
+
+            // NOW animate the elements AFTER price has been populated
+            // Add/remove variation-selected class on the product container
+            // Support multiple template types: template1, template2, template3
+            var $productContainer = $form.closest('.shopglut-single-product, .single-product-template2, .shopglut-single-product-container');
+            if (allSelected) {
+                $productContainer.addClass('variation-selected');
+
+                // Fade in the variation price and clear button with animation
+                var $priceEl = $form.find('.shopglut-variation-price');
+                var $resetBtn = $form.find('.shopglut-reset-variations');
+
+                // Remove hidden class first, then animate
+                $resetBtn.removeClass('shopglut-reset-hidden');
+
+                // Animate price element
+                $priceEl.removeClass('fade-in is-visible').css({
+                    'opacity': 0,
+                    'transform': 'translateY(-10px)',
+                    'display': 'inline-block'  // Override CSS with inline style
+                }).addClass('is-visible').animate({
+                    'opacity': 1,
+                    'transform': 'translateY(0)'
+                }, 300, function() {
+                    $(this).addClass('fade-in');
+                });
+
+                // Animate reset button
+                $resetBtn.removeClass('fade-in').css({
+                    'opacity': 0,
+                    'transform': 'translateY(-10px)'
+                }).show().animate({
+                    'opacity': 1,
+                    'transform': 'translateY(0)'
+                }, 300, function() {
+                    $(this).addClass('fade-in');
+                });
+            } else {
+                $productContainer.removeClass('variation-selected');
+
+                // Fade out the variation price and clear button
+                $form.find('.shopglut-variation-price').removeClass('is-visible').fadeOut(200);
+                $form.find('.shopglut-reset-variations').fadeOut(200, function() {
+                    $(this).addClass('shopglut-reset-hidden');
+                });
+            }
         }
 
         // Update price when variation changes

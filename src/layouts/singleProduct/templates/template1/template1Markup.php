@@ -1027,11 +1027,24 @@ class template1Markup {
 
 									<!-- Product Swatches Custom Variation Price -->
 									<?php
-									// Manually output the custom variation price element for Product Swatches module
+									// Always output the price element for template1, regardless of global settings
+									// Get global settings for styling if available
+									$price_style = '';
 									if (class_exists('\Shopglut\enhancements\ProductSwatches\FrontendRenderer')) {
 										$swatches_renderer = \Shopglut\enhancements\ProductSwatches\FrontendRenderer::get_instance();
-										// Call the price output method directly
+										// Try to call the price output method
+										ob_start();
 										$swatches_renderer->output_custom_variation_price();
+										$price_output = ob_get_clean();
+										if (!empty($price_output)) {
+											echo $price_output;
+										} else {
+											// If price output is empty (disabled in settings), create it manually
+											echo '<span class="shopglut-variation-price shopglut-global-price" style="display:inline-block;margin:5px 0;"></span>';
+										}
+									} else {
+										// Fallback if FrontendRenderer doesn't exist
+										echo '<span class="shopglut-variation-price shopglut-global-price" style="display:inline-block;margin:5px 0;"></span>';
 									}
 									?>
 
