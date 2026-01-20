@@ -1104,10 +1104,34 @@ class AllEnhancements {
 									</td>
 								</tr>
 								<tr>
-									<th><?php esc_html_e('Left Margin', 'shopglut'); ?></th>
+									<th><?php esc_html_e('Margin', 'shopglut'); ?></th>
 									<td>
-										<input type="number" id="shopglut_clear_button_margin_left" class="small-text" value="<?php echo esc_attr(isset($clear_button['margin_left']) ? $clear_button['margin_left'] : 15); ?>" min="0" max="30">
-										<span class="unit">px</span>
+										<div class="shopglut-padding-box-wrapper">
+											<div class="shopglut-padding-box">
+												<div class="shopglut-padding-field">
+													<label for="shopglut_clear_button_margin_top"><?php esc_html_e('Top', 'shopglut'); ?></label>
+													<input type="number" id="shopglut_clear_button_margin_top" class="small-text" value="<?php echo esc_attr(isset($clear_button['margin']['top']) ? $clear_button['margin']['top'] : (isset($clear_button['margin_top']) ? $clear_button['margin_top'] : 0)); ?>" min="0" max="30">
+													<span class="unit">px</span>
+												</div>
+												<div class="shopglut-padding-row">
+													<div class="shopglut-padding-field">
+														<label for="shopglut_clear_button_margin_left"><?php esc_html_e('Left', 'shopglut'); ?></label>
+														<input type="number" id="shopglut_clear_button_margin_left" class="small-text" value="<?php echo esc_attr(isset($clear_button['margin']['left']) ? $clear_button['margin']['left'] : (isset($clear_button['margin_left']) ? $clear_button['margin_left'] : 15)); ?>" min="0" max="30">
+														<span class="unit">px</span>
+													</div>
+													<div class="shopglut-padding-field">
+														<label for="shopglut_clear_button_margin_right"><?php esc_html_e('Right', 'shopglut'); ?></label>
+														<input type="number" id="shopglut_clear_button_margin_right" class="small-text" value="<?php echo esc_attr(isset($clear_button['margin']['right']) ? $clear_button['margin']['right'] : (isset($clear_button['margin_right']) ? $clear_button['margin_right'] : 0)); ?>" min="0" max="30">
+														<span class="unit">px</span>
+													</div>
+												</div>
+												<div class="shopglut-padding-field">
+													<label for="shopglut_clear_button_margin_bottom"><?php esc_html_e('Bottom', 'shopglut'); ?></label>
+													<input type="number" id="shopglut_clear_button_margin_bottom" class="small-text" value="<?php echo esc_attr(isset($clear_button['margin']['bottom']) ? $clear_button['margin']['bottom'] : (isset($clear_button['margin_bottom']) ? $clear_button['margin_bottom'] : 0)); ?>" min="0" max="30">
+													<span class="unit">px</span>
+												</div>
+											</div>
+										</div>
 									</td>
 								</tr>
 								<tr>
@@ -1246,27 +1270,6 @@ class AllEnhancements {
 												</div>
 											</div>
 										</div>
-									</td>
-								</tr>
-								<tr>
-									<th><?php esc_html_e('Right Margin', 'shopglut'); ?></th>
-									<td>
-										<input type="number" id="shopglut_clear_button_margin_right" class="small-text" value="<?php echo esc_attr(isset($clear_button['margin_right']) ? $clear_button['margin_right'] : 0); ?>" min="0" max="30">
-										<span class="unit">px</span>
-									</td>
-								</tr>
-								<tr>
-									<th><?php esc_html_e('Top Margin', 'shopglut'); ?></th>
-									<td>
-										<input type="number" id="shopglut_clear_button_margin_top" class="small-text" value="<?php echo esc_attr(isset($clear_button['margin_top']) ? $clear_button['margin_top'] : 0); ?>" min="0" max="30">
-										<span class="unit">px</span>
-									</td>
-								</tr>
-								<tr>
-									<th><?php esc_html_e('Bottom Margin', 'shopglut'); ?></th>
-									<td>
-										<input type="number" id="shopglut_clear_button_margin_bottom" class="small-text" value="<?php echo esc_attr(isset($clear_button['margin_bottom']) ? $clear_button['margin_bottom'] : 0); ?>" min="0" max="30">
-										<span class="unit">px</span>
 									</td>
 								</tr>
 								<tr>
@@ -1484,24 +1487,34 @@ class AllEnhancements {
 									</td>
 								</tr>
 								<tr>
-									<th><?php esc_html_e('Left Margin', 'shopglut'); ?></th>
+									<th><?php esc_html_e('Margin', 'shopglut'); ?></th>
 									<td>
-										<input type="number" id="shopglut_price_margin_left" class="small-text" value="<?php echo esc_attr(isset($price_display['margin_left']) ? $price_display['margin_left'] : 0); ?>" min="0" max="30">
-										<span class="unit">px</span>
-									</td>
-								</tr>
-								<tr>
-									<th><?php esc_html_e('Right Margin', 'shopglut'); ?></th>
-									<td>
-										<input type="number" id="shopglut_price_margin_right" class="small-text" value="<?php echo esc_attr(isset($price_display['margin_right']) ? $price_display['margin_right'] : 15); ?>" min="0" max="30">
-										<span class="unit">px</span>
-									</td>
-								</tr>
-								<tr>
-									<th><?php esc_html_e('Bottom Margin', 'shopglut'); ?></th>
-									<td>
-										<input type="number" id="shopglut_price_margin_bottom" class="small-text" value="<?php echo esc_attr(isset($price_display['margin_bottom']) ? $price_display['margin_bottom'] : 0); ?>" min="0" max="30">
-										<span class="unit">px</span>
+										<div class="shopglut-padding-box-wrapper">
+											<div class="shopglut-padding-box">
+												<div class="shopglut-padding-field">
+													<label for="shopglut_price_margin_top"><?php esc_html_e('Top', 'shopglut'); ?></label>
+													<input type="number" id="shopglut_price_margin_top" class="small-text" value="<?php echo esc_attr(isset($price_display['margin']['top']) ? $price_display['margin']['top'] : (isset($price_display['margin_top']) ? $price_display['margin_top'] : 12)); ?>" min="0" max="30">
+													<span class="unit">px</span>
+												</div>
+												<div class="shopglut-padding-row">
+													<div class="shopglut-padding-field">
+														<label for="shopglut_price_margin_left"><?php esc_html_e('Left', 'shopglut'); ?></label>
+														<input type="number" id="shopglut_price_margin_left" class="small-text" value="<?php echo esc_attr(isset($price_display['margin']['left']) ? $price_display['margin']['left'] : (isset($price_display['margin_left']) ? $price_display['margin_left'] : 0)); ?>" min="0" max="30">
+														<span class="unit">px</span>
+													</div>
+													<div class="shopglut-padding-field">
+														<label for="shopglut_price_margin_right"><?php esc_html_e('Right', 'shopglut'); ?></label>
+														<input type="number" id="shopglut_price_margin_right" class="small-text" value="<?php echo esc_attr(isset($price_display['margin']['right']) ? $price_display['margin']['right'] : (isset($price_display['margin_right']) ? $price_display['margin_right'] : 15)); ?>" min="0" max="30">
+														<span class="unit">px</span>
+													</div>
+												</div>
+												<div class="shopglut-padding-field">
+													<label for="shopglut_price_margin_bottom"><?php esc_html_e('Bottom', 'shopglut'); ?></label>
+													<input type="number" id="shopglut_price_margin_bottom" class="small-text" value="<?php echo esc_attr(isset($price_display['margin']['bottom']) ? $price_display['margin']['bottom'] : (isset($price_display['margin_bottom']) ? $price_display['margin_bottom'] : 0)); ?>" min="0" max="30">
+													<span class="unit">px</span>
+												</div>
+											</div>
+										</div>
 									</td>
 								</tr>
 							</table>

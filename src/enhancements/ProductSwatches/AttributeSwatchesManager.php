@@ -411,9 +411,12 @@ class AttributeSwatchesManager {
 		);
 
 		// Clear Button - Margins
-		$clear_button_margin_right = isset($_POST['clear_button_margin_right']) ? absint($_POST['clear_button_margin_right']) : 0;
-		$clear_button_margin_top = isset($_POST['clear_button_margin_top']) ? absint($_POST['clear_button_margin_top']) : 0;
-		$clear_button_margin_bottom = isset($_POST['clear_button_margin_bottom']) ? absint($_POST['clear_button_margin_bottom']) : 0;
+		$clear_button_margin = array(
+			'top' => isset($_POST['clear_button_margin_top']) ? absint($_POST['clear_button_margin_top']) : 0,
+			'right' => isset($_POST['clear_button_margin_right']) ? absint($_POST['clear_button_margin_right']) : 0,
+			'bottom' => isset($_POST['clear_button_margin_bottom']) ? absint($_POST['clear_button_margin_bottom']) : 0,
+			'left' => isset($_POST['clear_button_margin_left']) ? absint($_POST['clear_button_margin_left']) : 15,
+		);
 
 		// Clear Button - Hover & Transition
 		$clear_button_hover_color = isset($_POST['clear_button_hover_color']) ? sanitize_hex_color($_POST['clear_button_hover_color']) : '#135e96';
@@ -452,9 +455,12 @@ class AttributeSwatchesManager {
 		);
 
 		// Price Display - Margins
-		$price_margin_left = isset($_POST['price_margin_left']) ? absint($_POST['price_margin_left']) : 0;
-		$price_margin_right = isset($_POST['price_margin_right']) ? absint($_POST['price_margin_right']) : 15;
-		$price_margin_bottom = isset($_POST['price_margin_bottom']) ? absint($_POST['price_margin_bottom']) : 0;
+		$price_margin = array(
+			'top' => isset($_POST['price_margin_top']) ? absint($_POST['price_margin_top']) : 12,
+			'right' => isset($_POST['price_margin_right']) ? absint($_POST['price_margin_right']) : 15,
+			'bottom' => isset($_POST['price_margin_bottom']) ? absint($_POST['price_margin_bottom']) : 0,
+			'left' => isset($_POST['price_margin_left']) ? absint($_POST['price_margin_left']) : 0,
+		);
 
 		// Actions position setting
 		$actions_position = isset($_POST['actions_position']) ? sanitize_text_field(wp_unslash($_POST['actions_position'])) : 'new_line';
@@ -498,7 +504,6 @@ class AttributeSwatchesManager {
 				'text' => $clear_button_text,
 				'color' => $clear_button_color,
 				'font_size' => $clear_button_font_size,
-				'margin_left' => $clear_button_margin_left,
 				// Typography
 				'font_family' => $clear_button_font_family,
 				'font_weight' => $clear_button_font_weight,
@@ -516,9 +521,7 @@ class AttributeSwatchesManager {
 				// Padding
 				'padding' => $clear_button_padding,
 				// Margins
-				'margin_right' => $clear_button_margin_right,
-				'margin_top' => $clear_button_margin_top,
-				'margin_bottom' => $clear_button_margin_bottom,
+				'margin' => $clear_button_margin,
 				// Hover & Transition
 				'hover_color' => $clear_button_hover_color,
 				'hover_background' => $clear_button_hover_background,
@@ -530,7 +533,6 @@ class AttributeSwatchesManager {
 				'color' => $price_color,
 				'font_size' => $price_font_size,
 				'font_weight' => $price_font_weight,
-				'margin_top' => $price_margin_top,
 				// Typography
 				'font_family' => $price_font_family,
 				'line_height' => $price_line_height,
@@ -547,9 +549,7 @@ class AttributeSwatchesManager {
 				// Padding
 				'padding' => $price_padding,
 				// Margins
-				'margin_left' => $price_margin_left,
-				'margin_right' => $price_margin_right,
-				'margin_bottom' => $price_margin_bottom,
+				'margin' => $price_margin,
 			),
 			'actions_position' => $actions_position,
 			'variations_form' => $variations_form,

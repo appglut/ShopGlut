@@ -152,3 +152,8 @@
 .shopglut-swatch-option[aria-disabled="true"] {
     cursor: not-allowed;
 }
+
+/* Variation price display - hide when empty */
+.shopglut-variation-price:empty {
+    display: none !important;
+}
