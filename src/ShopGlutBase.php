@@ -94,29 +94,29 @@ class ShopGlutBase {
 		SingleProductDataManage::get_instance();
 		SingleProductTemplates::get_instance();
 
-		CartPageTemplates::get_instance();
-		CartPageDataManage::get_instance();
+		// CartPageTemplates::get_instance();
+		// CartPageDataManage::get_instance();
 		
 		
-		ShopLayoutTemplates::get_instance();
-		ShopLayoutDataManage::get_instance();
+		// ShopLayoutTemplates::get_instance();
+		// ShopLayoutDataManage::get_instance();
 
-		CheckoutFieldsManager::get_instance();
-		CheckoutFieldsDisplay::get_instance();
-		CheckoutFieldsInit::get_instance();
-		BlockCheckoutFields::get_instance();
+		// CheckoutFieldsManager::get_instance();
+		// CheckoutFieldsDisplay::get_instance();
+		// CheckoutFieldsInit::get_instance();
+		// BlockCheckoutFields::get_instance();
 
         wishlistManage::get_instance();
 		wishlistAdminManage::get_instance();
 
-		FiltersDataManage::get_instance();
+		// FiltersDataManage::get_instance();
 
 
-		orderCompletedataManage::get_instance();
-		orderCompleteTemplates::get_instance();
+		// orderCompletedataManage::get_instance();
+		// orderCompleteTemplates::get_instance();
 
-		AccountPageChooseTemplates::get_instance();
-		AccountPageDataManage::get_instance();
+		// AccountPageChooseTemplates::get_instance();
+		// AccountPageDataManage::get_instance();
 
 		BadgechooseTemplates::get_instance();
 		BadgeDataManage::get_instance();
@@ -124,40 +124,40 @@ class ShopGlutBase {
 		ComparisonchooseTemplates::get_instance();
 		ProductComparisonDataManage::get_instance();
 
-		QuickViewchooseTemplates::get_instance();
-		QuickViewDataManage::get_instance();
+		// QuickViewchooseTemplates::get_instance();
+		// QuickViewDataManage::get_instance();
 
 
-		SliderchooseTemplates::get_instance();
-		SliderDataManage::get_instance();
+		// SliderchooseTemplates::get_instance();
+		// SliderDataManage::get_instance();
 
-		GalleryChooseTemplates::get_instance();
+		// GalleryChooseTemplates::get_instance();
 
-		ProductCustomFieldDataManage::get_instance();
-		ProductCustomFieldHandler::get_instance();
+		// ProductCustomFieldDataManage::get_instance();
+		// ProductCustomFieldHandler::get_instance();
 
 		SwatchesTemplates::get_instance();
 		ProductSwatchesDataManage::get_instance();
 		AttributeSwatchesManager::get_instance();
 
-		LoginRegister::get_instance();
+		// LoginRegister::get_instance();
 
-		MiniCart::get_instance();
+		// MiniCart::get_instance();
 		
 		// Initialize ShopBanner module
-		ShopBannerChooseTemplates::get_instance();
-		ShopBannerDataManage::get_instance();
-		ShopBannerFrontend::get_instance();
+		// ShopBannerChooseTemplates::get_instance();
+		// ShopBannerDataManage::get_instance();
+		// ShopBannerFrontend::get_instance();
 
 		// Initialize Accordion module
-		AccordionchooseTemplates::get_instance();
-		AccordionDataManage::get_instance();
+		// AccordionchooseTemplates::get_instance();
+		// AccordionDataManage::get_instance();
 
 		// Initialize Tabs module
-		TabchooseTemplates::get_instance();
+		// TabchooseTemplates::get_instance();
 
 		// SliderdataManage::get_instance();
-		TabDataManage::get_instance();
+		// TabDataManage::get_instance();
 	
 
 
@@ -185,10 +185,10 @@ class ShopGlutBase {
 		require_once SHOPGLUT_PATH . 'src/ModuleManager.php';
 		require_once SHOPGLUT_PATH . 'src/library/model/classes/setup.class.php';
 		require_once SHOPGLUT_PATH . 'src/layouts/singleProduct/singleLayout-settings.php';
-		require_once SHOPGLUT_PATH . 'src/layouts/cartPage/template-settings.php';
-		require_once SHOPGLUT_PATH . 'src/layouts/orderCompletePage/template-settings.php';
-		require_once SHOPGLUT_PATH . 'src/layouts/accountPage/template-settings.php';
-		require_once SHOPGLUT_PATH . 'src/enhancements/Filters/filters-config.php';
+		//require_once SHOPGLUT_PATH . 'src/layouts/cartPage/template-settings.php';
+		//require_once SHOPGLUT_PATH . 'src/layouts/orderCompletePage/template-settings.php';
+		//require_once SHOPGLUT_PATH . 'src/layouts/accountPage/template-settings.php';
+		//require_once SHOPGLUT_PATH . 'src/enhancements/Filters/filters-config.php';
 		// Commented out - using new ProductSwatches module instead
 		// require_once SHOPGLUT_PATH . 'src/enhancements/Swatches/product-swatches-settings.php';
 		require_once SHOPGLUT_PATH . 'src/enhancements/ProductSwatches/productSwatches-settings.php';
@@ -196,17 +196,16 @@ class ShopGlutBase {
 		require_once SHOPGLUT_PATH . 'src/enhancements/wishlist/wishlist-settings.php';
 		//require_once SHOPGLUT_PATH . 'src/tools/miniCart/mini-cart-settings.php';
 		require_once SHOPGLUT_PATH . 'src/enhancements/ProductComparison/template-settings.php';
-		require_once SHOPGLUT_PATH . 'src/enhancements/ProductQuickView/template-settings.php';
+		//require_once SHOPGLUT_PATH . 'src/enhancements/ProductQuickView/template-settings.php';
 		//require_once SHOPGLUT_PATH . 'src/BusinessSolutions/PdfInvoices/pdf-invoices-settings.php';
-		require_once SHOPGLUT_PATH . 'src/layouts/singleProduct/singleLayout-settings.php';
-		require_once SHOPGLUT_PATH . 'src/layouts/shopLayout/shopLayouts-config.php';
-	    require_once SHOPGLUT_PATH . 'src/tools/productCustomField/product-custom-field-settings.php';
-		require_once SHOPGLUT_PATH . 'src/showcases/Gallery/templates/template1/template1-settings.php';
-		require_once SHOPGLUT_PATH . 'src/showcases/ShopBanner/template-settings.php';
-		require_once SHOPGLUT_PATH . 'src/showcases/Sliders/template-settings.php';
-	    require_once SHOPGLUT_PATH . 'src/showcases/Tabs/template-settings.php';
-	    require_once SHOPGLUT_PATH . 'src/showcases/Accordions/template-settings.php';
-	    require_once SHOPGLUT_PATH . 'src/tools/shortcodeShowcase/init.php';
+		// require_once SHOPGLUT_PATH . 'src/layouts/shopLayout/shopLayouts-config.php';
+	    // require_once SHOPGLUT_PATH . 'src/tools/productCustomField/product-custom-field-settings.php';
+		// require_once SHOPGLUT_PATH . 'src/showcases/Gallery/templates/template1/template1-settings.php';
+		// require_once SHOPGLUT_PATH . 'src/showcases/ShopBanner/template-settings.php';
+		// require_once SHOPGLUT_PATH . 'src/showcases/Sliders/template-settings.php';
+	    // require_once SHOPGLUT_PATH . 'src/showcases/Tabs/template-settings.php';
+	    // require_once SHOPGLUT_PATH . 'src/showcases/Accordions/template-settings.php';
+	    // require_once SHOPGLUT_PATH . 'src/tools/shortcodeShowcase/init.php';
 	
 		
 		// Load business solutions modules

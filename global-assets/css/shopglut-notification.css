@@ -34,9 +34,9 @@
 	right: 20px;
 }
 
-/* Frontend position (top-right) */
+/* Frontend position (bottom-right) */
 .shopglut-frontend-notification {
-	top: 30px;
+	bottom: 30px;
 	right: 30px;
 }
 
@@ -123,6 +123,42 @@
 }
 
 /* ============================================
+   View Cart Link Styling
+   ============================================ */
+
+.shopglut-notification a,
+.shopglut-frontend-notification a {
+	display: inline-block;
+	margin-top: 8px;
+	padding: 6px 16px;
+	background: rgba(255, 255, 255, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	border-radius: 4px;
+	color: #ffffff;
+	text-decoration: none;
+	font-size: 13px;
+	font-weight: 500;
+	transition: all 0.2s ease;
+}
+
+/* Center the View cart link within the notification */
+.shopglut-notification .notification-message:has(a),
+.shopglut-frontend-notification .notification-message:has(a),
+.shopglut-notification .notification-message a,
+.shopglut-frontend-notification .notification-message a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.shopglut-notification a:hover,
+.shopglut-frontend-notification a:hover {
+	background: rgba(255, 255, 255, 0.3);
+	border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================
    Responsive Styles
    ============================================ */
 
@@ -135,11 +171,6 @@
 		max-width: none;
 		bottom: 10px;
 		top: auto;
-	}
-
-	.shopglut-frontend-notification {
-		top: 10px;
-		bottom: auto;
 	}
 }
 

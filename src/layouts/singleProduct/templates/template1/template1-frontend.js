@@ -777,7 +777,7 @@ jQuery(document).ready(function($) {
     // Notification function - uses centralized ShopGlutNotification utility
     function showNotification(message, type) {
         if (typeof ShopGlutNotification !== 'undefined') {
-            ShopGlutNotification.show(message, type, { position: 'top-right', duration: 3000 });
+            ShopGlutNotification.show(message, type, { position: 'bottom-right', duration: 3000 });
         } else {
             // Fallback if centralized utility not loaded
             $('.shopglut-frontend-notification').remove();

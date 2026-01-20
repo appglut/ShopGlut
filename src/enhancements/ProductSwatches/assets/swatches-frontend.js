@@ -167,9 +167,18 @@
         $(document).on('woocommerce_variation_has_changed', '.variations_form', function() {
             var $form = $(this);
 
-            // Get current form data
+            // Get current form data - check both variations selects and shopglut dropdowns
             var currentAttributes = {};
+
+            // First check .variations select (standard WooCommerce dropdowns)
             $form.find('.variations select').each(function() {
+                var name = $(this).attr('name');
+                var value = $(this).val() || '';
+                currentAttributes[name] = value;
+            });
+
+            // Also check shopglut dropdowns (for template1 style)
+            $form.find('.shopglut-swatch-dropdown').each(function() {
                 var name = $(this).attr('name');
                 var value = $(this).val() || '';
                 currentAttributes[name] = value;
@@ -352,15 +361,31 @@
 
             // Check if already wrapped
             if ($form.find('.shopglut-actions-container').length) {
+                // Container exists, make sure any new price/clear elements are moved to it
+                var $actionsContainer = $form.find('.shopglut-actions-container');
+                var $resetButton = $form.find('.shopglut-reset-variations').not($actionsContainer.find('.shopglut-reset-variations'));
+                var $priceElement = $form.find('.shopglut-variation-price').not($actionsContainer.find('.shopglut-variation-price'));
+
+                // Move any elements not already in container
+                if ($resetButton.length) {
+                    $resetButton.appendTo($actionsContainer);
+                }
+                if ($priceElement.length) {
+                    $priceElement.appendTo($actionsContainer);
+                }
                 return;
             }
 
-            // Find the clear button and price
+            // Find the clear button and price (look everywhere in form)
             var $resetButton = $form.find('.shopglut-reset-variations');
-            var $priceElement = $form.find('.shopglut-variation-price.shopglut-global-price');
+            var $priceElement = $form.find('.shopglut-variation-price');
 
-            // Only wrap if we have at least one element
-            if ($resetButton.length || $priceElement.length) {
+            // Always create container for template1, template2, template3 or if we have elements
+            var isTemplate1 = $form.closest('.shopglut-single-product.template1').length > 0;
+            var isTemplate2 = $form.closest('.single-product-template2').length > 0;
+            var isTemplate3 = $form.closest('.shopglut-single-product-container').length > 0;
+
+            if ($resetButton.length || $priceElement.length || isTemplate1 || isTemplate2 || isTemplate3) {
                 // Create actions container
                 var $actionsContainer = $('<div class="shopglut-actions-container"></div>');
 
@@ -403,13 +428,56 @@
                 return;
             }
 
-            // Get current variation data
+            // Get current variation data - check both variations selects and shopglut dropdowns
             var currentAttributes = {};
+
+            // First check .variations select (standard WooCommerce dropdowns)
             $form.find('.variations select').each(function() {
                 var name = $(this).attr('name');
                 var value = $(this).val() || '';
                 currentAttributes[name] = value;
             });
+
+            // Also check shopglut dropdowns (for template1 style)
+            $form.find('.shopglut-swatch-dropdown').each(function() {
+                var name = $(this).attr('name');
+                var value = $(this).val() || '';
+                currentAttributes[name] = value;
+            });
+
+            // Check if all attributes have values (complete variation selected)
+            var allSelected = true;
+            for (var attr in currentAttributes) {
+                if (!currentAttributes[attr] || currentAttributes[attr] === '') {
+                    allSelected = false;
+                    break;
+                }
+            }
+
+            // Add/remove variation-selected class on the product container
+            // Support multiple template types: template1, template2, template3
+            var $productContainer = $form.closest('.shopglut-single-product, .single-product-template2, .shopglut-single-product-container');
+            if (allSelected) {
+                $productContainer.addClass('variation-selected');
+
+                // Fade in the variation price and clear button with animation
+                var $priceEl = $form.find('.shopglut-variation-price');
+                var $resetBtn = $form.find('.shopglut-reset-variations');
+
+                $priceEl.removeClass('fade-in').hide().css('opacity', 0).fadeIn(300, function() {
+                    $(this).addClass('fade-in').css('opacity', 1);
+                });
+
+                $resetBtn.removeClass('fade-in').hide().css('opacity', 0).fadeIn(300, function() {
+                    $(this).addClass('fade-in').css('opacity', 1);
+                });
+            } else {
+                $productContainer.removeClass('variation-selected');
+
+                // Fade out the variation price and clear button
+                $form.find('.shopglut-variation-price').fadeOut(200);
+                $form.find('.shopglut-reset-variations').fadeOut(200);
+            }
 
             // Find matching variation
             var variations = $form.data('product_variations');

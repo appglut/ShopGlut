@@ -3750,6 +3750,30 @@ class template1Style {
             $css .= 'font-size: ' . $this->getSetting($settings, 'dropdown_attribute_font_size', 14) . 'px !important;';
             $css .= '}';
 
+            // Product Swatches dropdown styling - Ensure proper width for template1 swatches dropdowns
+            $css .= '.shopglut-single-product.template1 .shopglut-swatch-dropdown {';
+            $css .= 'background-color: ' . $this->getSetting($settings, 'dropdown_attribute_background', '#ffffff') . ' !important;';
+            $css .= 'border: 1px solid ' . $this->getSetting($settings, 'dropdown_attribute_border_color', '#d1d5db') . ' !important;';
+            $css .= 'border-radius: ' . $this->getSetting($settings, 'dropdown_attribute_border_radius', 6) . 'px !important;';
+            $css .= 'color: ' . $this->getSetting($settings, 'dropdown_attribute_text_color', '#374151') . ' !important;';
+            $css .= 'font-size: ' . $this->getSetting($settings, 'dropdown_attribute_font_size', 14) . 'px !important;';
+            $css .= 'min-width: 200px !important;';
+            $css .= 'width: 100% !important;';
+            $css .= 'max-width: 100% !important;';
+            $css .= '}';
+
+            // Ensure variations table cells have enough width for dropdowns
+            $css .= '.shopglut-single-product.template1 table.variations td.value {';
+            $css .= 'width: 100% !important;';
+            $css .= 'min-width: 250px !important;';
+            $css .= '}';
+
+            // Ensure swatches wrapper has full width
+            $css .= '.shopglut-single-product.template1 .shopglut-swatches-wrapper {';
+            $css .= 'width: 100% !important;';
+            $css .= 'display: block !important;';
+            $css .= '}';
+
             // Attribute Behavior - Unavailable attributes styling
             if ($this->getSetting($settings, 'show_unavailable_attributes', true)) {
                 $css .= '.shopglut-single-product.template1 .size-button.unavailable, ';
@@ -3767,6 +3791,104 @@ class template1Style {
                 $css .= '}';
             }
         }
+
+        // Product Swatches Clear Button and Price Display Visibility
+        // Ensure the clear button is visible when not hidden
+        $css .= '.shopglut-single-product.template1 .shopglut-reset-variations {';
+        $css .= 'margin-top: 5px !important;';
+        $css .= 'margin-bottom: 5px !important;';
+        $css .= '}';
+
+        // Ensure the variation price is visible
+        $css .= '.shopglut-single-product.template1 .shopglut-variation-price {';
+        $css .= 'display: inline-block !important;';
+        $css .= 'margin-top: 5px !important;';
+        $css .= 'margin-bottom: 5px !important;';
+        $css .= 'background-color: transparent !important;'; // Override inline style
+        $css .= 'border: none !important;'; // Remove any borders
+        $css .= '}';
+
+        // Ensure the actions container for clear button and price is visible
+        $css .= '.shopglut-single-product.template1 .shopglut-actions-container {';
+        $css .= 'display: flex !important;';
+        $css .= 'align-items: center !important;';
+        $css .= 'gap: 15px !important;';
+        $css .= 'flex-wrap: wrap !important;';
+        $css .= 'margin-top: 8px !important;'; // Reduced spacing from variations table
+        $css .= 'margin-bottom: 8px !important;'; // Reduced spacing before add to cart
+        $css .= '}';
+
+        // Reduce spacing for variations table
+        $css .= '.shopglut-single-product.template1 table.variations {';
+        $css .= 'margin-bottom: 5px !important;';
+        $css .= '}';
+
+        // Ensure the single_variation div is visible for price display
+        $css .= '.shopglut-single-product.template1 .single_variation {';
+        $css .= 'display: block !important;';
+        $css .= 'width: 100% !important;';
+        $css .= '}';
+
+        // Hide the initial price range when a variation is selected and custom price is shown
+        $css .= '.shopglut-single-product.template1.variation-selected .product-info .price-section,';
+        $css .= '.shopglut-single-product.template1.variation-selected > .single-product-container > .product-info .price-section,';
+        $css .= '.shopglut-single-product.template1.variation-selected .price-section {';
+        $css .= 'display: none !important;';
+        $css .= '}';
+
+        // Show price range when no variation is selected
+        $css .= '.shopglut-single-product.template1:not(.variation-selected) .shopglut-variation-price {';
+        $css .= 'display: none !important;';
+        $css .= '}';
+
+        // Add fade-in animation keyframes for price and clear button
+        $css .= '@keyframes shopglutFadeInUp {';
+        $css .= 'from { opacity: 0; transform: translateY(-10px); }';
+        $css .= 'to { opacity: 1; transform: translateY(0); }';
+        $css .= '}';
+
+        // Apply animation when variation is selected
+        $css .= '.shopglut-single-product.template1.variation-selected .shopglut-variation-price.fade-in {';
+        $css .= 'animation: shopglutFadeInUp 0.3s ease-out forwards;';
+        $css .= '}';
+
+        $css .= '.shopglut-single-product.template1.variation-selected .shopglut-reset-variations.fade-in {';
+        $css .= 'animation: shopglutFadeInUp 0.3s ease-out forwards;';
+        $css .= '}';
+
+        // Style WooCommerce's default price HTML to match template1 styling (for variable product price ranges)
+        $css .= '.shopglut-single-product.template1 .price-section .price {';
+        $css .= 'color: ' . $this->getSetting($settings, 'current_price_color', '#ffffff') . ' !important;';
+        $css .= 'font-size: ' . $this->getSetting($settings, 'current_price_font_size', 28) . 'px !important;';
+        $css .= 'font-weight: 700 !important;';
+        $css .= '}';
+
+        // Ensure all text within price element has the same color (including dashes)
+        $css .= '.shopglut-single-product.template1 .price-section .price > * {';
+        $css .= 'color: inherit !important;';
+        $css .= '}';
+
+        $css .= '.shopglut-single-product.template1 .price-section .woocommerce-Price-amount {';
+        $css .= 'color: ' . $this->getSetting($settings, 'current_price_color', '#ffffff') . ' !important;';
+        $css .= 'font-size: ' . $this->getSetting($settings, 'current_price_font_size', 28) . 'px !important;';
+        $css .= 'font-weight: 700 !important;';
+        $css .= '}';
+
+        $css .= '.shopglut-single-product.template1 .price-section .woocommerce-Price-currencySymbol {';
+        $css .= 'color: ' . $this->getSetting($settings, 'current_price_color', '#ffffff') . ' !important;';
+        $css .= '}';
+
+        // Style del element (strikethrough price in price range)
+        $css .= '.shopglut-single-product.template1 .price-section del {';
+        $css .= 'color: ' . $this->getSetting($settings, 'original_price_color', '#9ca3af') . ' !important;';
+        $css .= 'font-size: 1.2rem !important;';
+        $css .= 'opacity: 0.8 !important;';
+        $css .= '}';
+
+        $css .= '.shopglut-single-product.template1 .price-section del .woocommerce-Price-amount {';
+        $css .= 'color: ' . $this->getSetting($settings, 'original_price_color', '#9ca3af') . ' !important;';
+        $css .= 'font-size: 1.2rem !important;';
+        $css .= '}';
 
         // Purchase Section
         $css .= '.shopglut-single-product.template1 .purchase-section {';
@@ -4218,6 +4340,23 @@ class template1Style {
             $css .= '.shopglut-single-product.template1 .quick-add-btn:hover {';
             $css .= 'background-color: ' . $this->getSetting($settings, 'quick_add_button_hover_background', '#5a67d8') . ' !important;';
             $css .= 'transform: translateY(-2px) !important;';
+            $css .= '}';
+
+            // Center the quick-add-btn within the related-product-card
+            $css .= '.shopglut-single-product.template1 .related-product-card {';
+            $css .= 'display: flex !important;';
+            $css .= 'flex-direction: column !important;';
+            $css .= 'align-items: stretch !important;';
+            $css .= '}';
+
+            $css .= '.shopglut-single-product.template1 .related-product-card .quick-add-btn {';
+            $css .= 'margin-top: auto !important;';
+            $css .= 'text-align: center !important;';
+            $css .= 'display: block !important;';
+            $css .= 'justify-content: center !important;';
+            $css .= 'align-items: center !important;';
+            $css .= 'width: 100% !important;';
+            $css .= 'box-sizing: border-box !important;';
             $css .= '}';
 
             // Responsive styles for Related Products

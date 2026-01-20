@@ -2886,6 +2886,102 @@ class template2Style {
         $css .= 'color: ' . $this->getSetting($settings, 'tab_icon_active_color', '#667eea') . ';';
         $css .= '}';
 
+        // Product Swatches Styles for Template2
+        // Dropdown width fix
+        $css .= '.single-product-template2 .shopglut-swatch-dropdown {';
+        $css .= 'min-width: 200px !important;';
+        $css .= 'width: 100% !important;';
+        $css .= 'max-width: 100% !important;';
+        $css .= '}';
+
+        $css .= '.single-product-template2 table.variations td.value {';
+        $css .= 'width: 100% !important;';
+        $css .= 'min-width: 250px !important;';
+        $css .= '}';
+
+        $css .= '.single-product-template2 .shopglut-swatches-wrapper {';
+        $css .= 'width: 100% !important;';
+        $css .= 'display: block !important;';
+        $css .= '}';
+
+        // Clear button and price styling
+        $css .= '.single-product-template2 .shopglut-reset-variations {';
+        $css .= 'margin-top: 5px !important;';
+        $css .= 'margin-bottom: 5px !important;';
+        $css .= '}';
+
+        $css .= '.single-product-template2 .shopglut-variation-price {';
+        $css .= 'display: inline-block !important;';
+        $css .= 'margin-top: 5px !important;';
+        $css .= 'margin-bottom: 5px !important;';
+        $css .= 'background-color: transparent !important;';
+        $css .= 'border: none !important;';
+        $css .= '}';
+
+        $css .= '.single-product-template2 .shopglut-actions-container {';
+        $css .= 'display: flex !important;';
+        $css .= 'align-items: center !important;';
+        $css .= 'gap: 15px !important;';
+        $css .= 'flex-wrap: wrap !important;';
+        $css .= 'margin-top: 8px !important;';
+        $css .= 'margin-bottom: 8px !important;';
+        $css .= '}';
+
+        $css .= '.single-product-template2 table.variations {';
+        $css .= 'margin-bottom: 5px !important;';
+        $css .= '}';
+
+        // Price range hide/show for variable products
+        $css .= '.single-product-template2.variation-selected .product-info .price-section,';
+        $css .= '.single-product-template2.variation-selected .price-section {';
+        $css .= 'display: none !important;';
+        $css .= '}';
+
+        $css .= '.single-product-template2:not(.variation-selected) .shopglut-variation-price {';
+        $css .= 'display: none !important;';
+        $css .= '}';
+
+        // WooCommerce price styling for variable product price ranges
+        $css .= '.single-product-template2 .price-section .price {';
+        $css .= 'color: ' . $this->getSetting($settings, 'current_price_color', '#667eea') . ' !important;';
+        $css .= 'font-size: ' . $this->getSetting($settings, 'price_font_size', 28) . 'px !important;';
+        $css .= 'font-weight: 700 !important;';
+        $css .= '}';
+
+        $css .= '.single-product-template2 .price-section .woocommerce-Price-amount {';
+        $css .= 'color: ' . $this->getSetting($settings, 'current_price_color', '#667eea') . ' !important;';
+        $css .= 'font-size: ' . $this->getSetting($settings, 'price_font_size', 28) . 'px !important;';
+        $css .= 'font-weight: 700 !important;';
+        $css .= '}';
+
+        $css .= '.single-product-template2 .price-section .woocommerce-Price-currencySymbol {';
+        $css .= 'color: ' . $this->getSetting($settings, 'current_price_color', '#667eea') . ' !important;';
+        $css .= '}';
+
+        $css .= '.single-product-template2 .price-section .price > * {';
+        $css .= 'color: inherit !important;';
+        $css .= '}';
+
+        $css .= '.single-product-template2 .price-section del {';
+        $css .= 'color: ' . $this->getSetting($settings, 'original_price_color', '#9ca3af') . ' !important;';
+        $css .= 'font-size: 1.2rem !important;';
+        $css .= 'opacity: 0.8 !important;';
+        $css .= '}';
+
+        // Animation for price and clear button
+        $css .= '@keyframes shopglutFadeInUp {';
+        $css .= 'from { opacity: 0; transform: translateY(-10px); }';
+        $css .= 'to { opacity: 1; transform: translateY(0); }';
+        $css .= '}';
+
+        $css .= '.single-product-template2.variation-selected .shopglut-variation-price.fade-in {';
+        $css .= 'animation: shopglutFadeInUp 0.3s ease-out forwards;';
+        $css .= '}';
+
+        $css .= '.single-product-template2.variation-selected .shopglut-reset-variations.fade-in {';
+        $css .= 'animation: shopglutFadeInUp 0.3s ease-out forwards;';
+        $css .= '}';
+
         return $css;
     }
 

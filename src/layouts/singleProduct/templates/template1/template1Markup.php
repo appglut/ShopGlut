@@ -926,11 +926,17 @@ class template1Markup {
 
 					<!-- Product Price -->
 					<div class="price-section">
-						<span class="current-price"><?php echo esc_html($currency_symbol . number_format((float)$current_price, 2)); ?></span>
-						<?php if ($is_on_sale && $regular_price): ?>
-							<span class="original-price"><?php echo esc_html($currency_symbol . number_format((float)$regular_price, 2)); ?></span>
-							<?php if ($discount_percentage > 0): ?>
-								<span class="discount-badge"><?php echo esc_html($discount_percentage . '% OFF'); ?></span>
+						<?php if ($product->is_type('variable')): ?>
+							<!-- Variable Product: Show price range -->
+							<?php echo wp_kses_post($product_price); ?>
+						<?php else: ?>
+							<!-- Simple Product: Show individual price components -->
+							<span class="current-price"><?php echo esc_html($currency_symbol . number_format((float)$current_price, 2)); ?></span>
+							<?php if ($is_on_sale && $regular_price): ?>
+								<span class="original-price"><?php echo esc_html($currency_symbol . number_format((float)$regular_price, 2)); ?></span>
+								<?php if ($discount_percentage > 0): ?>
+									<span class="discount-badge"><?php echo esc_html($discount_percentage . '% OFF'); ?></span>
+								<?php endif; ?>
 							<?php endif; ?>
 						<?php endif; ?>
 					</div>
@@ -1009,6 +1015,25 @@ class template1Markup {
 											<?php endforeach; ?>
 										</tbody>
 									</table>
+
+									<!-- Reset Variations Link (Clear Button) -->
+									<?php
+									/**
+									 * Output the reset variations link. This triggers the woocommerce_reset_variations_link filter
+									 * which is used by the Product Swatches module to display the custom clear button.
+									 */
+									echo apply_filters('woocommerce_reset_variations_link', '<a class="reset_variations" href="#">' . esc_html__('Clear', 'woocommerce') . '</a>');
+									?>
+
+									<!-- Product Swatches Custom Variation Price -->
+									<?php
+									// Manually output the custom variation price element for Product Swatches module
+									if (class_exists('\Shopglut\enhancements\ProductSwatches\FrontendRenderer')) {
+										$swatches_renderer = \Shopglut\enhancements\ProductSwatches\FrontendRenderer::get_instance();
+										// Call the price output method directly
+										$swatches_renderer->output_custom_variation_price();
+									}
+									?>
 
 									<div class="single_variation_wrap">
 										<?php do_action('woocommerce_before_single_variation'); ?>

@@ -628,9 +628,15 @@ class template2Markup {
 
 						<!-- Price -->
 						<div class="price-section">
-							<span class="current-price"><?php echo esc_html($currency_symbol . number_format((float)$current_price, 2)); ?></span>
-							<?php if ($is_on_sale && $regular_price): ?>
-								<span class="original-price"><?php echo esc_html($currency_symbol . number_format((float)$regular_price, 2)); ?></span>
+							<?php if ($product->is_type('variable')): ?>
+								<!-- Variable Product: Show price range -->
+								<?php echo wp_kses_post($product_price); ?>
+							<?php else: ?>
+								<!-- Simple Product: Show individual price components -->
+								<span class="current-price"><?php echo esc_html($currency_symbol . number_format((float)$current_price, 2)); ?></span>
+								<?php if ($is_on_sale && $regular_price): ?>
+									<span class="original-price"><?php echo esc_html($currency_symbol . number_format((float)$regular_price, 2)); ?></span>
+								<?php endif; ?>
 							<?php endif; ?>
 						</div>
 
@@ -719,30 +725,118 @@ class template2Markup {
 
 					<!-- Cart Actions -->
 					<?php if ($product->is_in_stock()): ?>
-					<form class="cart" method="post" enctype='multipart/form-data'>
-						<div class="cart-actions">
-							<div class="quantity-selector">
-								<?php
-								$min_qty = $product->get_min_purchase_quantity();
-								$max_qty = $product->get_max_purchase_quantity();
-								$input_value = isset($_POST['quantity']) ? wc_stock_amount(wp_unslash($_POST['quantity'])) : $product->get_min_purchase_quantity();
-								?>
-								<button type="button" class="quantity-btn" onclick="return false;">
-									<i class="fas fa-minus"></i>
-								</button>
-								<input type="number" class="quantity-input" name="quantity" value="<?php echo esc_attr($input_value); ?>" min="<?php echo esc_attr($min_qty); ?>" max="<?php echo esc_attr($max_qty); ?>">
-								<button type="button" class="quantity-btn" onclick="return false;">
-									<i class="fas fa-plus"></i>
-								</button>
-							</div>
-							<button type="submit" class="add-to-cart">
-								<i class="fas fa-shopping-cart"></i>
-								<?php echo esc_html($product->single_add_to_cart_text()); ?>
-							</button>
-							<!-- Module Integration: After Add to Cart (Wishlist, Compare, etc.) -->
-							<?php ModuleIntegration::render_module_wrapper($settings, $product_id, 'after_add_to_cart'); ?>
-						</div>
-					</form>
+						<?php if ($product->is_type('variable')): ?>
+							<!-- Variable Product Purchase Section -->
+							<form class="variations_form cart shopglut-variations-form woocommerce-variation-add-to-cart-enabled" action="<?php echo esc_url(apply_filters('woocommerce_add_to_cart_form_action', $product->get_permalink())); ?>" method="post" enctype='multipart/form-data' data-product_id="<?php echo absint($product->get_id()); ?>" data-product_variations="<?php echo esc_attr(wp_json_encode($product->get_available_variations())); ?>">
+								<?php do_action('woocommerce_before_variations_form'); ?>
+
+								<?php if (empty($product->get_available_variations()) && false !== $product->get_available_variations()): ?>
+									<p class="stock out-of-stock"><?php echo esc_html(apply_filters('woocommerce_out_of_stock_message', __('This product is currently out of stock and unavailable.', 'shopglut'))); ?></p>
+								<?php else: ?>
+									<table class="variations" cellspacing="0">
+										<tbody>
+											<?php foreach ($product->get_variation_attributes() as $attribute_name => $options): ?>
+												<tr>
+													<td class="label"><label for="<?php echo esc_attr(sanitize_title($attribute_name)); ?>"><?php echo esc_html(wc_attribute_label($attribute_name)); ?></label></td>
+													<td class="value">
+														<?php
+														wc_dropdown_variation_attribute_options(array(
+															'options'   => $options,
+															'attribute' => $attribute_name,
+															'product'   => $product,
+														));
+														?>
+													</td>
+												</tr>
+											<?php endforeach; ?>
+										</tbody>
+									</table>
+
+									<!-- Reset Variations Link (Clear Button) -->
+									<?php
+									echo apply_filters('woocommerce_reset_variations_link', '<a class="reset_variations" href="#">' . esc_html__('Clear', 'woocommerce') . '</a>');
+									?>
+
+									<!-- Product Swatches Custom Variation Price -->
+									<?php
+									if (class_exists('\Shopglut\enhancements\ProductSwatches\FrontendRenderer')) {
+										$swatches_renderer = \Shopglut\enhancements\ProductSwatches\FrontendRenderer::get_instance();
+										$swatches_renderer->output_custom_variation_price();
+									}
+									?>
+
+									<div class="single_variation_wrap">
+										<?php do_action('woocommerce_before_single_variation'); ?>
+										<div class="single_variation"></div>
+										<div class="woocommerce-variation-add-to-cart variations_button">
+											<?php do_action('woocommerce_before_add_to_cart_quantity'); ?>
+											<!-- Module Integration: Before Add to Cart -->
+											<?php ModuleIntegration::render_module_wrapper($settings, $product_id, 'before_add_to_cart'); ?>
+
+											<div class="cart-actions">
+												<div class="quantity-selector">
+													<?php
+													$min_qty = $product->get_min_purchase_quantity();
+													$max_qty = $product->get_max_purchase_quantity();
+													$input_value = isset($_POST['quantity']) ? wc_stock_amount(wp_unslash($_POST['quantity'])) : $product->get_min_purchase_quantity();
+													?>
+													<button type="button" class="quantity-btn" onclick="return false;">
+														<i class="fas fa-minus"></i>
+													</button>
+													<?php
+													woocommerce_quantity_input(array(
+														'min_value'   => apply_filters('woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product),
+														'max_value'   => apply_filters('woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product),
+														'input_value' => isset($_POST['quantity']) ? wc_stock_amount(sanitize_text_field(wp_unslash($_POST['quantity']))) : $product->get_min_purchase_quantity(),
+														'classes'     => array('quantity-input'),
+													), $product);
+													?>
+													<button type="button" class="quantity-btn" onclick="return false;">
+														<i class="fas fa-plus"></i>
+													</button>
+												</div>
+												<?php do_action('woocommerce_after_add_to_cart_quantity'); ?>
+												<button type="submit" class="add-to-cart single_add_to_cart_button">
+													<i class="fas fa-shopping-cart"></i>
+													<?php echo esc_html($product->single_add_to_cart_text()); ?>
+												</button>
+												<!-- Module Integration: After Add to Cart -->
+												<?php ModuleIntegration::render_module_wrapper($settings, $product_id, 'after_add_to_cart'); ?>
+											</div>
+										</div>
+										<?php do_action('woocommerce_after_single_variation'); ?>
+									</div>
+								<?php endif; ?>
+
+								<?php do_action('woocommerce_after_variations_form'); ?>
+							</form>
+						<?php else: ?>
+							<!-- Simple Product Form -->
+							<form class="cart" method="post" enctype='multipart/form-data'>
+								<div class="cart-actions">
+									<div class="quantity-selector">
+										<?php
+										$min_qty = $product->get_min_purchase_quantity();
+										$max_qty = $product->get_max_purchase_quantity();
+										$input_value = isset($_POST['quantity']) ? wc_stock_amount(wp_unslash($_POST['quantity'])) : $product->get_min_purchase_quantity();
+										?>
+										<button type="button" class="quantity-btn" onclick="return false;">
+											<i class="fas fa-minus"></i>
+										</button>
+										<input type="number" class="quantity-input" name="quantity" value="<?php echo esc_attr($input_value); ?>" min="<?php echo esc_attr($min_qty); ?>" max="<?php echo esc_attr($max_qty); ?>">
+										<button type="button" class="quantity-btn" onclick="return false;">
+											<i class="fas fa-plus"></i>
+										</button>
+									</div>
+									<button type="submit" class="add-to-cart">
+										<i class="fas fa-shopping-cart"></i>
+										<?php echo esc_html($product->single_add_to_cart_text()); ?>
+									</button>
+									<!-- Module Integration: After Add to Cart (Wishlist, Compare, etc.) -->
+									<?php ModuleIntegration::render_module_wrapper($settings, $product_id, 'after_add_to_cart'); ?>
+								</div>
+							</form>
+						<?php endif; ?>
 					<?php else: ?>
 						<p class="stock out-of-stock"><?php esc_html_e('Out of stock', 'shopglut'); ?></p>
 					<?php endif; ?>
