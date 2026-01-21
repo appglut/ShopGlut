@@ -15,9 +15,9 @@ class dataManage {
         add_action('wp_ajax_shopglut_save_single_product_layout', [$this, 'shopglut_save_single_product_layout']);
         add_action('wp_ajax_shopglut_reset_single_product_layout', [$this, 'shopglut_reset_single_product_layout']);
 
-        if (!$this->is_pro_plugin_active_and_enabled()) {
-            add_filter('template_include', [$this, 'override_template'], 99);
-        }
+        // Use hook-based approach to preserve theme header/footer
+        // Use 'wp' action which fires earlier and more reliably
+        add_action('wp', [$this, 'setup_custom_product_template']);
 
        add_action('wp_ajax_shopglut_singleProduct_get_product_options', array($this, 'shopglut_singleProduct_get_product_options'));
        add_action('wp_ajax_nopriv_shopglut_singleProduct_get_product_options', array($this, 'shopglut_singleProduct_get_product_options'));
@@ -402,166 +402,450 @@ class dataManage {
     }
 
 
-	public function override_template($template) {
-    if (!is_product()) {
-        return $template;
-    }
+	/**
+	 * Setup custom product template using hooks
+	 * This preserves theme header/footer while replacing product content
+	 */
+	public function setup_custom_product_template() {
+		if (!is_product()) {
+			return;
+		}
 
-    global $wpdb;
-    $product_id = get_the_ID();
+		$layout = $this->get_layout_for_product(get_the_ID());
+		if (!$layout) {
+			return;
+		}
 
-    // Get layouts from database
-    $table_name = $wpdb->prefix . 'shopglut_single_product_layout';
-    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
-    $layouts = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}shopglut_single_product_layout`", ARRAY_A);
+		global $shopglut_custom_layout;
+		$shopglut_custom_layout = $layout;
 
-    $should_override = false;
-    $selected_layout = null;
+		add_action('wp_head', function() {
+			echo '<style>
+				.woocommerce .product,
+				.woocommerce-page .product {
+					display: none !important;
+				}
+				.shopglut-custom-product-wrapper {
+					display: block !important;
+				}
+			</style>';
+		}, 999);
 
-    foreach ($layouts as $layout) {
-        $settings = maybe_unserialize($layout['layout_settings']);
+		add_action('woocommerce_after_main_content', [$this, 'render_custom_product_content'], 1);
+	}
 
-        if (empty($settings)) continue;
+	public function render_custom_product_content() {
+		global $shopglut_custom_layout;
 
-        $layout_template = $layout['layout_template'] ?? 'template1';
-        $template_settings_key = 'shopg_singleproduct_settings_' . $layout_template;
+		if (empty($shopglut_custom_layout)) {
+			return;
+		}
 
-        if (isset($settings[$template_settings_key])) {
-            $template_settings = $settings[$template_settings_key];
-            $overwrite_all = $template_settings['overwrite-all-products'] ?? false;
-            $specific_products = $template_settings['overwrite-specific-products'] ?? [];
-            $is_specific_product = in_array($product_id, $specific_products);
+		$layout_template = $shopglut_custom_layout['layout_template'];
+		$is_pro_template = (strpos($layout_template, 'templatePro') === 0);
 
-            if ($overwrite_all || $is_specific_product) {
-                $should_override = true;
-                $selected_layout = $layout;
-                break;
-            }
-        }
-    }
+		if ($is_pro_template) {
+			$template_markup_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/templateMarkup.php';
+			$template_style_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/templateStyle.php';
+			$markup_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\templateMarkup';
+			$style_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\templateStyle';
+		} else {
+			$template_markup_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/' . $layout_template . 'Markup.php';
+			$template_style_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/' . $layout_template . 'Style.php';
+			$markup_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\' . $layout_template . 'Markup';
+			$style_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\' . $layout_template . 'Style';
+		}
 
-    if ($should_override && $selected_layout) {
-        $layout_template = $selected_layout['layout_template'];
+		echo '<div class="shopglut-custom-product-wrapper">';
 
-        // Check if this is a pro template (starts with 'templatePro')
-        $is_pro_template = (strpos($layout_template, 'templatePro') === 0);
+		echo '<style>
+			.shopglut-single-product-container {
+				width: 100%;
+				max-width: 1240px;
+				margin: 0 auto;
+				padding: 20px;
+			}
+			.shopglut-single-product-container .product-main-wrapper {
+				display: flex;
+				gap: 40px;
+			}
+			@media (max-width: 921px) {
+				.shopglut-single-product-container .product-main-wrapper {
+					flex-direction: column;
+				}
+			}
+		</style>';
 
-        if ($is_pro_template) {
-            // Pro templates use generic file names: templateMarkup.php, templateStyle.php
-            $template_markup_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/templateMarkup.php';
-            $template_style_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/templateStyle.php';
-            $markup_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\templateMarkup';
-            $style_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\templateStyle';
-        } else {
-            // Regular templates use template-specific file names: template1Markup.php, template1Style.php
-            $template_markup_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/' . $layout_template . 'Markup.php';
-            $template_style_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/' . $layout_template . 'Style.php';
-            $markup_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\' . $layout_template . 'Markup';
-            $style_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\' . $layout_template . 'Style';
-        }
+		if (file_exists($template_markup_path) && file_exists($template_style_path)) {
+			require_once $template_markup_path;
+			require_once $template_style_path;
 
-        if (file_exists($template_markup_path) && file_exists($template_style_path)) {
-            // Include template files
-            require_once $template_markup_path;
-            require_once $template_style_path;
+			if (class_exists($markup_class) && class_exists($style_class)) {
+				global $layout_settings;
+				$layout_settings = maybe_unserialize($shopglut_custom_layout['layout_settings']);
 
-            if (class_exists($markup_class) && class_exists($style_class)) {
-                get_header();
+				$markup_instance = new $markup_class(array(), false);
+				$style_instance = new $style_class();
 
-                // Make layout settings globally available
-                global $layout_settings;
-                $layout_settings = maybe_unserialize($selected_layout['layout_settings']);
+				if (method_exists($style_instance, 'dynamicCss')) {
+					$layout_id = $shopglut_custom_layout['id'];
+					$dynamic_css = $style_instance->dynamicCss($layout_id);
+					if (!empty($dynamic_css)) {
+						echo '<style>' . $dynamic_css . '</style>';
+					}
+				}
 
-                // Create instances
-                // Frontend should never use admin preview mode - always use live product data
-                $markup_instance = new $markup_class(array(), false);
-                $style_instance = new $style_class();
+				if (method_exists($markup_instance, 'layout_render')) {
+					$template_data = array(
+						'layout_id' => $shopglut_custom_layout['id'],
+						'layout_name' => $shopglut_custom_layout['layout_name'] ?? '',
+						'settings' => $layout_settings
+					);
+					$markup_instance->layout_render($template_data);
+				}
+			}
+		}
 
-                // Add CSS to override Astra theme container restrictions
-                echo '<style type="text/css">
-                    /* Override Astra theme container restrictions for ShopGlut templates */
-                    .shopglut-single-product-container {
-                        width: 100% !important;
-                        max-width: 100% !important;
-                        margin: 0 !important;
-                        padding: 0 20px !important;
-                    }
+		echo '</div>';
+	}
 
-                    /* Ensure full width display */
-                    .shopglut-single-product {
-                        width: 100% !important;
-                        max-width: 1240px !important;
-                        margin: 0 auto !important;
-                        padding: 20px !important;
-                    }
+	/**
+	public function render_custom_product_content_simple() {
+		global $shopglut_custom_layout;
 
-                    /* Override any container flex restrictions */
-                    .site-content .ast-container {
-                        display: block !important;
-                    }
+		if (empty($shopglut_custom_layout)) {
+			return;
+		}
 
-                    /* Ensure our template gets proper spacing */
-                    .shopglut-single-product-container .product-main-wrapper {
-                        display: flex !important;
-                        gap: 40px !important;
-                        margin-bottom: 40px !important;
-                    }
+		$layout_template = $shopglut_custom_layout['layout_template'];
+		$is_pro_template = (strpos($layout_template, 'templatePro') === 0);
 
-                    @media (min-width: 922px) {
-                        .shopglut-single-product-container .product-gallery-section {
-                            flex: 0 0 50% !important;
-                        }
+		if ($is_pro_template) {
+			$template_markup_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/templateMarkup.php';
+			$template_style_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/templateStyle.php';
+			$markup_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\templateMarkup';
+			$style_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\templateStyle';
+		} else {
+			$template_markup_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/' . $layout_template . 'Markup.php';
+			$template_style_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/' . $layout_template . 'Style.php';
+			$markup_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\' . $layout_template . 'Markup';
+			$style_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\' . $layout_template . 'Style';
+		}
 
-                        .shopglut-single-product-container .product-info-section {
-                            flex: 0 0 50% !important;
-                        }
-                    }
+		echo '<div class="shopglut-custom-product-wrapper" style="display:block; padding:20px; background:yellow; border:3px solid red;">';
+		echo '<p style="color:red; font-size:24px; font-weight:bold;">SHOPGLUT TEMPLATE - TEST</p>';
 
-                    @media (max-width: 921px) {
-                        .shopglut-single-product-container .product-main-wrapper {
-                            flex-direction: column !important;
-                        }
-                    }
-                </style>';
+		if (file_exists($template_markup_path) && file_exists($template_style_path)) {
+			require_once $template_markup_path;
+			require_once $template_style_path;
 
-                // Generate and output template-specific CSS
-                if (method_exists($style_instance, 'dynamicCss')) {
-                    $layout_id = $selected_layout['id'];
-                    $dynamic_css = $style_instance->dynamicCss($layout_id);
-                    if (!empty($dynamic_css)) {
-                        echo '<style type="text/css">' . wp_kses($dynamic_css, array()) . '</style>';
-                    }
-                }
+			if (class_exists($markup_class) && class_exists($style_class)) {
+				global $layout_settings;
+				$layout_settings = maybe_unserialize($shopglut_custom_layout['layout_settings']);
 
-                // Use the layout_render method
-                if (method_exists($markup_instance, 'layout_render')) {
-                    $template_data = array(
-                        'layout_id' => $selected_layout['id'],
-                        'layout_name' => $selected_layout['layout_name'] ?? '',
-                        'settings' => $layout_settings
-                    );
-                    $markup_instance->layout_render($template_data);
-                } else {
-                    echo '<div style="padding: 20px; background: #ffe6e6; color: #d8000c;">Error: Template class method not found</div>';
-                }
+				$markup_instance = new $markup_class(array(), false);
+				$style_instance = new $style_class();
 
-                get_footer();
-                exit;
-            } else {
-                echo '<div style="padding: 20px; background: #ffe6e6; color: #d8000c;">Error: Template classes not found for ' . esc_html($layout_template) . '</div>';
-                get_footer();
-                exit;
-            }
-        } else {
-            echo '<div style="padding: 20px; background: #ffe6e6; color: #d8000c;">Error: Template files not found for ' . esc_html($layout_template) . '</div>';
-            get_footer();
-            exit;
-        }
-    }
+				if (method_exists($markup_instance, 'layout_render')) {
+					$template_data = array(
+						'layout_id' => $shopglut_custom_layout['id'],
+						'layout_name' => $shopglut_custom_layout['layout_name'] ?? '',
+						'settings' => $layout_settings
+					);
+					$markup_instance->layout_render($template_data);
+				}
+			}
+		}
 
-    // No override - return default template
-    return $template;
-}
+		echo '</div>';
+	}
+
+	/**
+	 * Output custom template in footer (temporary workaround)
+	 */
+	public function output_custom_template_in_footer() {
+		global $shopglut_custom_layout;
+
+		if (empty($shopglut_custom_layout)) {
+			return;
+		}
+
+		// Hide default product content with CSS
+		echo '<style>
+			.woocommerce .product,
+			.woocommerce-page .product,
+			.product.type-product {
+				display: none !important;
+			}
+		</style>';
+
+		// Output custom content hidden
+		echo '<div id="shopglut-custom-content" style="display:none;">';
+		$this->render_custom_product_content_direct();
+		echo '</div>';
+
+		// Use JavaScript to insert content AFTER the page loads
+		echo '<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				var customContent = document.getElementById("shopglut-custom-content");
+				var productDiv = document.querySelector(".product, .woocommerce-product");
+
+				// Hide default product
+				if (productDiv) {
+					productDiv.style.display = "none";
+				}
+
+				// Show and insert custom content after the hidden product
+				if (customContent && productDiv) {
+					customContent.style.display = "block";
+					productDiv.parentNode.insertBefore(customContent, productDiv.nextSibling);
+				}
+			});
+		</script>';
+	}
+
+	/**
+	 * Filter product page content to replace with custom template
+	 */
+	public function filter_product_content($content) {
+		// Only modify for product pages
+		if (!is_product()) {
+			return $content;
+		}
+
+		// Prevent duplicate filtering
+		static $filtered = false;
+		if ($filtered) {
+			return $content;
+		}
+		$filtered = true;
+
+		global $shopglut_custom_layout;
+
+		if (empty($shopglut_custom_layout)) {
+			return $content;
+		}
+
+		error_log('ShopGlut: filter_product_content called, replacing content');
+
+		// Generate our custom content directly
+		$custom_content = $this->get_custom_product_html();
+
+		// Add CSS to hide default product content
+		$custom_content .= '<style>
+			.woocommerce .product,
+			.woocommerce-page .product,
+			.product.type-product {
+				display: none !important;
+			}
+			.shopglut-custom-product-wrapper {
+				display: block !important;
+				visibility: visible !important;
+			}
+		</style>';
+
+		return $custom_content;
+	}
+
+	/**
+	 * Get custom product HTML
+	 */
+	private function get_custom_product_html() {
+		global $shopglut_custom_layout;
+
+		if (empty($shopglut_custom_layout)) {
+			return '';
+		}
+
+		$layout_template = $shopglut_custom_layout['layout_template'];
+		$is_pro_template = (strpos($layout_template, 'templatePro') === 0);
+
+		if ($is_pro_template) {
+			$template_markup_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/templateMarkup.php';
+			$template_style_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/templateStyle.php';
+			$markup_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\templateMarkup';
+			$style_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\templateStyle';
+		} else {
+			$template_markup_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/' . $layout_template . 'Markup.php';
+			$template_style_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/' . $layout_template . 'Style.php';
+			$markup_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\' . $layout_template . 'Markup';
+			$style_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\' . $layout_template . 'Style';
+		}
+
+		// Start output buffer only for template rendering
+		ob_start();
+		echo '<div class="shopglut-custom-product-wrapper" style="display: block !important; padding: 20px; background: #f0f0f0; border: 2px solid red; min-height: 200px;">';
+		echo '<p style="color: red; font-weight: bold; font-size: 20px;">SHOPGLUT CUSTOM TEMPLATE - Content filter working!</p>';
+
+		if (file_exists($template_markup_path) && file_exists($template_style_path)) {
+			require_once $template_markup_path;
+			require_once $template_style_path;
+
+			$markup_class_short = preg_replace('/^Shopglut\\\\layouts\\\\singleProduct\\\\templates\\\\/', '', $markup_class);
+			$markup_class_short = str_replace('\\\\', '\\', $markup_class_short);
+
+			if (class_exists($markup_class) && class_exists($style_class)) {
+				global $layout_settings;
+				$layout_settings = maybe_unserialize($shopglut_custom_layout['layout_settings']);
+
+				$markup_instance = new $markup_class(array(), false);
+				$style_instance = new $style_class();
+
+				if (method_exists($markup_instance, 'layout_render')) {
+					$template_data = array(
+						'layout_id' => $shopglut_custom_layout['id'],
+						'layout_name' => $shopglut_custom_layout['layout_name'] ?? '',
+						'settings' => $layout_settings
+					);
+					$markup_instance->layout_render($template_data);
+				}
+			}
+		}
+
+		echo '</div>';
+		return ob_get_clean();
+	}
+
+	/**
+	 * Render custom product content directly (called from filter)
+	 */
+	public function render_custom_product_content_direct() {
+		global $shopglut_custom_layout;
+
+		if (empty($shopglut_custom_layout)) {
+			echo '<!-- ShopGlut: No custom layout found -->';
+			return;
+		}
+
+		// Open wrapper div with test message
+		echo '<div class="shopglut-custom-product-wrapper" style="display: block !important; visibility: visible !important; padding: 20px; background: #f0f0f0; border: 2px solid red; min-height: 200px;">';
+		echo '<p style="color: red; font-weight: bold; font-size: 20px;">SHOPGLUT CUSTOM TEMPLATE - If you see this, the content filter is working!</p>';
+
+		$layout_template = $shopglut_custom_layout['layout_template'];
+		$is_pro_template = (strpos($layout_template, 'templatePro') === 0);
+
+		if ($is_pro_template) {
+			$template_markup_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/templateMarkup.php';
+			$template_style_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/templateStyle.php';
+			$markup_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\templateMarkup';
+			$style_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\templateStyle';
+		} else {
+			$template_markup_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/' . $layout_template . 'Markup.php';
+			$template_style_path = plugin_dir_path(__FILE__) . 'templates/' . $layout_template . '/' . $layout_template . 'Style.php';
+			$markup_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\' . $layout_template . 'Markup';
+			$style_class = 'Shopglut\\layouts\\singleProduct\\templates\\' . $layout_template . '\\' . $layout_template . 'Style';
+		}
+
+		if (!file_exists($template_markup_path) || !file_exists($template_style_path)) {
+			echo '<div style="padding: 20px; background: #ffe6e6; color: #d8000c;">Error: Template files not found for ' . esc_html($layout_template) . '</div>';
+			return;
+		}
+
+		require_once $template_markup_path;
+		require_once $template_style_path;
+
+		if (!class_exists($markup_class) || !class_exists($style_class)) {
+			echo '<div style="padding: 20px; background: #ffe6e6; color: #d8000c;">Error: Template classes not found for ' . esc_html($layout_template) . '</div>';
+			return;
+		}
+
+		global $layout_settings;
+		$layout_settings = maybe_unserialize($shopglut_custom_layout['layout_settings']);
+
+		$markup_instance = new $markup_class(array(), false);
+		$style_instance = new $style_class();
+
+		// Add CSS
+		echo '<style type="text/css">
+			.shopglut-single-product-container {
+				width: 100% !important;
+				max-width: 100% !important;
+				margin: 0 !important;
+				padding: 0 20px !important;
+			}
+			.shopglut-single-product {
+				width: 100% !important;
+				max-width: 1240px !important;
+				margin: 0 auto !important;
+				padding: 20px !important;
+			}
+			.shopglut-single-product-container .product-main-wrapper {
+				display: flex !important;
+				gap: 40px !important;
+				margin-bottom: 40px !important;
+			}
+			@media (min-width: 922px) {
+				.shopglut-single-product-container .product-gallery-section {
+					flex: 0 0 50% !important;
+				}
+				.shopglut-single-product-container .product-info-section {
+					flex: 0 0 50% !important;
+				}
+			}
+			@media (max-width: 921px) {
+				.shopglut-single-product-container .product-main-wrapper {
+					flex-direction: column !important;
+				}
+			}
+		</style>';
+
+		// Generate and output template-specific CSS
+		if (method_exists($style_instance, 'dynamicCss')) {
+			$layout_id = $shopglut_custom_layout['id'];
+			$dynamic_css = $style_instance->dynamicCss($layout_id);
+			if (!empty($dynamic_css)) {
+				echo '<style type="text/css">' . wp_kses($dynamic_css, array()) . '</style>';
+			}
+		}
+
+		// Render template
+		if (method_exists($markup_instance, 'layout_render')) {
+			$template_data = array(
+				'layout_id' => $shopglut_custom_layout['id'],
+				'layout_name' => $shopglut_custom_layout['layout_name'] ?? '',
+				'settings' => $layout_settings
+			);
+			$markup_instance->layout_render($template_data);
+		} else {
+			echo '<div style="padding: 20px; background: #ffe6e6; color: #d8000c;">Error: Template class method not found</div>';
+		}
+
+		// Close wrapper div
+		echo '</div>';
+	}
+
+	/**
+	 * Get the layout that should be used for a specific product
+	 */
+	private function get_layout_for_product($product_id) {
+		global $wpdb;
+
+		$table_name = $wpdb->prefix . 'shopglut_single_product_layout';
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
+		$layouts = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}shopglut_single_product_layout`", ARRAY_A);
+
+		foreach ($layouts as $layout) {
+			$settings = maybe_unserialize($layout['layout_settings']);
+
+			if (empty($settings)) continue;
+
+			$layout_template = $layout['layout_template'] ?? 'template1';
+			$template_settings_key = 'shopg_singleproduct_settings_' . $layout_template;
+
+			if (isset($settings[$template_settings_key])) {
+				$template_settings = $settings[$template_settings_key];
+				$overwrite_all = $template_settings['overwrite-all-products'] ?? false;
+				$specific_products = $template_settings['overwrite-specific-products'] ?? [];
+				$is_specific_product = in_array($product_id, $specific_products);
+
+				if ($overwrite_all || $is_specific_product) {
+					return $layout;
+				}
+			}
+		}
+
+		return null;
+	}
 
 	/**
 	 * Get template settings keys that have overwrite functionality enabled
