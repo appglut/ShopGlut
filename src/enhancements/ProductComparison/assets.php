@@ -88,7 +88,7 @@ class product_comparisonAssets {
         // Enqueue enhancement data converter on editor page
         if ($is_product_comparison_editor && file_exists(__DIR__ . '/assets/js/product_comparison-data-converter.js')) {
             wp_enqueue_script(
-                'shopglut-product_comparison-enhancement-data-converter',
+                'shopglut-product_comparison-data-converter',
                 $plugin_url . 'assets/js/product_comparison-data-converter.js',
                 ['jquery'],
                 filemtime(__DIR__ . '/assets/js/product_comparison-data-converter.js'),
@@ -98,7 +98,7 @@ class product_comparisonAssets {
             // Localize script with ajax URL and other data
             wp_localize_script('shopglut-product_comparison-data-converter', 'shopglut_admin_vars', array(
                 'ajax_url' => admin_url('admin-ajax.php'),
-                'nonce' => wp_create_nonce('shopglut_admin_nonce')
+                'nonce' => wp_create_nonce('shopg_productcomparison_layouts')
             ));
         }
     }

@@ -62,25 +62,25 @@ class templateMarkup {
                 <div class="left-side">
                     <!-- Main Image -->
                     <div class="main-image-container">
-                        <img id="main-product-image" src="demo-image.png" alt="Product main image">
+                        <img id="main-product-image" src="<?php echo esc_url($placeholder_url); ?>" alt="Product main image">
                     </div>
 
                     <!-- Thumbnail Carousel -->
                     <div class="thumbnail-carousel">
-                        <div class="thumb-item active" onclick="changeMainImage(this, 'demo-image.png')">
-                            <img src="demo-image.png" alt="Thumbnail 1">
+                        <div class="thumb-item active" onclick="changeMainImage(this, '<?php echo esc_js($placeholder_url); ?>')">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Thumbnail 1">
                         </div>
-                        <div class="thumb-item" onclick="changeMainImage(this, 'demo-image.png')">
-                            <img src="demo-image.png" alt="Thumbnail 2">
+                        <div class="thumb-item" onclick="changeMainImage(this, '<?php echo esc_js($placeholder_url); ?>')">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Thumbnail 2">
                         </div>
-                        <div class="thumb-item" onclick="changeMainImage(this, 'demo-image.png')">
-                            <img src="demo-image.png" alt="Thumbnail 3">
+                        <div class="thumb-item" onclick="changeMainImage(this, '<?php echo esc_js($placeholder_url); ?>')">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Thumbnail 3">
                         </div>
-                        <div class="thumb-item" onclick="changeMainImage(this, 'demo-image.png')">
-                            <img src="demo-image.png" alt="Thumbnail 4">
+                        <div class="thumb-item" onclick="changeMainImage(this, '<?php echo esc_js($placeholder_url); ?>')">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Thumbnail 4">
                         </div>
-                        <div class="thumb-item" onclick="changeMainImage(this, 'demo-image.png')">
-                            <img src="demo-image.png" alt="Thumbnail 5">
+                        <div class="thumb-item" onclick="changeMainImage(this, '<?php echo esc_js($placeholder_url); ?>')">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Thumbnail 5">
                         </div>
                     </div>
 
@@ -272,7 +272,7 @@ class templateMarkup {
                 <div class="right-side">
                     <!-- Banner -->
                     <div class="side-banner">
-                        <img src="demo-image.png" alt="Promotional Banner">
+                        <img src="<?php echo esc_url($placeholder_url); ?>" alt="Promotional Banner">
                     </div>
 
                     <!-- Top Rated Products -->
@@ -281,7 +281,7 @@ class templateMarkup {
 
                         <div class="rated-product-item">
                             <div class="rated-product-img">
-                                <img src="demo-image.png" alt="Product 1">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product 1">
                             </div>
                             <div class="rated-product-info">
                                 <div class="rated-product-title">Wireless Earbuds Pro Max</div>
@@ -301,7 +301,7 @@ class templateMarkup {
 
                         <div class="rated-product-item">
                             <div class="rated-product-img">
-                                <img src="demo-image.png" alt="Product 2">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product 2">
                             </div>
                             <div class="rated-product-info">
                                 <div class="rated-product-title">Portable Bluetooth Speaker</div>
@@ -321,7 +321,7 @@ class templateMarkup {
 
                         <div class="rated-product-item">
                             <div class="rated-product-img">
-                                <img src="demo-image.png" alt="Product 3">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product 3">
                             </div>
                             <div class="rated-product-info">
                                 <div class="rated-product-title">USB-C Hub Multiport Adapter</div>
@@ -341,7 +341,7 @@ class templateMarkup {
 
                         <div class="rated-product-item">
                             <div class="rated-product-img">
-                                <img src="demo-image.png" alt="Product 4">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product 4">
                             </div>
                             <div class="rated-product-info">
                                 <div class="rated-product-title">Smart Watch Series 5</div>
@@ -361,7 +361,7 @@ class templateMarkup {
 
                         <div class="rated-product-item">
                             <div class="rated-product-img">
-                                <img src="demo-image.png" alt="Product 5">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product 5">
                             </div>
                             <div class="rated-product-info">
                                 <div class="rated-product-title">Laptop Stand Aluminum</div>
@@ -502,7 +502,7 @@ class templateMarkup {
                         <h2 class="section-title">Related Products</h2>
                         <div class="related-products-grid">
                             <div class="related-product">
-                                <img src="demo-image.png" alt="Related Product 1">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Related Product 1">
                                 <div class="related-product-info">
                                     <div class="related-product-title">Wireless Earbuds Pro</div>
                                     <div class="related-product-price">$149.99</div>
@@ -510,7 +510,7 @@ class templateMarkup {
                                 </div>
                             </div>
                             <div class="related-product">
-                                <img src="demo-image.png" alt="Related Product 2">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Related Product 2">
                                 <div class="related-product-info">
                                     <div class="related-product-title">Portable Speaker</div>
                                     <div class="related-product-price">$89.99</div>
@@ -518,7 +518,7 @@ class templateMarkup {
                                 </div>
                             </div>
                             <div class="related-product">
-                                <img src="demo-image.png" alt="Related Product 3">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Related Product 3">
                                 <div class="related-product-info">
                                     <div class="related-product-title">Headphone Stand</div>
                                     <div class="related-product-price">$29.99</div>
@@ -526,7 +526,7 @@ class templateMarkup {
                                 </div>
                             </div>
                             <div class="related-product">
-                                <img src="demo-image.png" alt="Related Product 4">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Related Product 4">
                                 <div class="related-product-info">
                                     <div class="related-product-title">USB-C Charging Cable</div>
                                     <div class="related-product-price">$19.99</div>
@@ -534,7 +534,7 @@ class templateMarkup {
                                 </div>
                             </div>
                             <div class="related-product">
-                                <img src="demo-image.png" alt="Related Product 5">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Related Product 5">
                                 <div class="related-product-info">
                                     <div class="related-product-title">Carrying Case</div>
                                     <div class="related-product-price">$24.99</div>
@@ -542,7 +542,7 @@ class templateMarkup {
                                 </div>
                             </div>
                             <div class="related-product">
-                                <img src="demo-image.png" alt="Related Product 6">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Related Product 6">
                                 <div class="related-product-info">
                                     <div class="related-product-title">Audio Cable 3.5mm</div>
                                     <div class="related-product-price">$14.99</div>

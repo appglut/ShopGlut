@@ -74,7 +74,6 @@
             },
             error: function(xhr, status, error) {
                 // If server fails, try client-side generation
-                console.log('Server QR generation failed, trying client-side...');
                 generateClientSideQR(listName);
             }
         });
@@ -87,7 +86,6 @@
             displayQRCode(qrData);
         };
         img.onerror = function() {
-            console.log('Primary QR service failed, trying alternatives...');
             tryAlternativeQRServices(qrData);
         };
         img.src = qrData.qr_url;
@@ -641,8 +639,6 @@
         
         services.forEach((service, index) => {
             const img = new Image();
-            img.onload = () => console.log(`QR Service ${index + 1} is working:`, service);
-            img.onerror = () => console.log(`QR Service ${index + 1} failed:`, service);
             img.src = service;
         });
     };

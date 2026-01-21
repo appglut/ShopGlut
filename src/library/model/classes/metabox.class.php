@@ -402,7 +402,7 @@ if ( ! class_exists( 'AGSHOPGLUT_Metabox' ) ) {
 			}
 
 			if ( ! empty( $field['id'] ) ) {
-				$value = ( isset( $layout_options_array['shopglut_product_comparison_settings_'.$layout_template][ $field['id'] ] ) ) ? $layout_options_array['shopglut_product_comparison_settings_'.$layout_template][ $field['id'] ] : null;
+				$value = ( isset( $layout_options_array['shopg_product_comparison_settings_'.$layout_template][ $field['id'] ] ) ) ? $layout_options_array['shopg_product_comparison_settings_'.$layout_template][ $field['id'] ] : null;
 			}
 
 

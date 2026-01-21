@@ -351,12 +351,10 @@ class template4Markup {
             // Image navigation
             document.querySelector('.prev').addEventListener('click', function() {
                 // Previous image logic would go here
-                console.log('Previous image');
             });
 
             document.querySelector('.next').addEventListener('click', function() {
                 // Next image logic would go here
-                console.log('Next image');
             });
 
             // Button interactions

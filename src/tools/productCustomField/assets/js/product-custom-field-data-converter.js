@@ -22,7 +22,6 @@
             // Get form element
             var $form = this.getFormElement('#shopglut_shop_layouts');
             if (!$form.length) {
-                console.log('Order complete layout form not found');
                 return cleanData;
             }
 
@@ -34,7 +33,7 @@
                 cleanData = this.collectAllFormData($form);
 
             } catch (error) {
-                console.error('Error collecting order complete layout data:', error);
+                // Silently fail
             } finally {
                 // Restore original hidden state of tabs
                 this.restoreHiddenTabs(hiddenTabsData);

@@ -648,35 +648,28 @@ class ProductCustomFieldHandler {
             var $html = <?php echo json_encode($fields_html); ?>;
 
             function injectFields() {
-                console.log('Attempting to inject after_add_to_cart fields...');
-
                 // Try to insert after the add to cart form
                 if ($('.cart').length) {
-                    console.log('Found .cart, inserting after it');
                     $('.cart').after($html);
                     return true;
                 }
                 // Try to insert after the wishlist/comparison buttons (more specific)
                 else if ($('.shopglut-comparison-button-wrapper').length) {
-                    console.log('Found comparison buttons, inserting after them');
                     $('.shopglut-comparison-button-wrapper').parent().after($html);
                     return true;
                 }
                 // Try to insert after the add to cart button
                 else if ($('.single_add_to_cart_button').length) {
-                    console.log('Found add to cart button, inserting after form');
                     $('.single_add_to_cart_button').closest('form').after($html);
                     return true;
                 }
                 // Try to insert before product meta
                 else if ($('.product_meta').length) {
-                    console.log('Found product meta, inserting before it');
                     $('.product_meta').before($html);
                     return true;
                 }
                 // Fallback: insert at end of summary
                 else if ($('.summary.entry-summary').length) {
-                    console.log('Found summary, appending to end');
                     $('.summary.entry-summary').append($html);
                     return true;
                 }
@@ -694,7 +687,6 @@ class ProductCustomFieldHandler {
             // Also try after DOM is fully loaded
             $(window).on('load', function() {
                 setTimeout(function() {
-                    console.log('Window loaded, trying final injection...');
                     injectFields();
                 }, 500);
             });

@@ -71,7 +71,7 @@ class AccordionSettingsPage {
 
 						<div class="back-to-menu">
 
-							<a href="<?php echo esc_url( admin_url( 'admin.php?page=shopglut_showcases&view=accordion' ) ); ?>"
+							<a href="<?php echo esc_url( admin_url( 'admin.php?page=shopglut_showcases&view=accordions' ) ); ?>"
 								class="button button-secondary button-large">
 								<i class="fa-solid fa-angles-left"></i>
 								<?php echo esc_html__( 'Back To Menu', 'shopglut' ); ?>

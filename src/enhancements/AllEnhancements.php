@@ -34,6 +34,8 @@ use Shopglut\enhancements\ProductQuickView\QuickViewchooseTemplates as QuickView
 
 use Shopglut\enhancements\ProductComparison\ProductComparisonListTable;
 
+use Shopglut\enhancements\ProductComparison\ProductComparisonEntity;
+
 use Shopglut\enhancements\ProductComparison\SettingsPage as ComparisonSettings;
 
 use Shopglut\enhancements\ProductComparison\ComparisonchooseTemplates as ComparisonTemplates;
@@ -440,7 +442,7 @@ class AllEnhancements {
 						<h3 style="margin: 0; color: #333;"><?php echo esc_html__( 'Wishlist', 'shopglut' ); ?></h3>
 					</div>
 					<p style="color: #666; margin-bottom: 15px;"><?php echo esc_html__( 'Enable and configure wishlist functionality for your customers.', 'shopglut' ); ?></p>
-					<a href="<?php echo esc_url( admin_url( 'admin.php?page=shopglut_wishlist' ) ); ?>" class="button button-primary"><?php echo esc_html__( 'Manage Wishlist', 'shopglut' ); ?></a>
+					<a href="<?php echo esc_url( admin_url( 'admin.php?page=shopglut_enhancements&view=wishlist' ) ); ?>" class="button button-primary"><?php echo esc_html__( 'Manage Wishlist', 'shopglut' ); ?></a>
 				</div>
 
 				<!-- Shop Filters -->
@@ -460,7 +462,7 @@ class AllEnhancements {
 						<h3 style="margin: 0; color: #333;"><?php echo esc_html__( 'Product Swatches', 'shopglut' ); ?></h3>
 					</div>
 					<p style="color: #666; margin-bottom: 15px;"><?php echo esc_html__( 'Create color and image swatches for product variations.', 'shopglut' ); ?></p>
-					<a href="<?php echo esc_url( admin_url( 'admin.php?page=shopglut_swatches_settings' ) ); ?>" class="button button-primary"><?php echo esc_html__( 'Configure Swatches', 'shopglut' ); ?></a>
+					<a href="<?php echo esc_url( admin_url( 'admin.php?page=shopglut_enhancements&view=product_swatches' ) ); ?>" class="button button-primary"><?php echo esc_html__( 'Configure Swatches', 'shopglut' ); ?></a>
 				</div>
 
 				<!-- Product Badges -->
@@ -480,7 +482,7 @@ class AllEnhancements {
 						<h3 style="margin: 0; color: #333;"><?php echo esc_html__( 'Product Comparison', 'shopglut' ); ?></h3>
 					</div>
 					<p style="color: #666; margin-bottom: 15px;"><?php echo esc_html__( 'Allow customers to compare products side by side.', 'shopglut' ); ?></p>
-					<a href="<?php echo esc_url( admin_url( 'admin.php?page=shopglut_enhancements&view=product_comparison' ) ); ?>" class="button button-primary"><?php echo esc_html__( 'Setup Comparison', 'shopglut' ); ?></a>
+					<a href="<?php echo esc_url( admin_url( 'admin.php?page=shopglut_enhancements&view=product_comparisons' ) ); ?>" class="button button-primary"><?php echo esc_html__( 'Setup Comparison', 'shopglut' ); ?></a>
 				</div>
 
 				<!-- Quick View -->
@@ -763,7 +765,7 @@ class AllEnhancements {
 						</p>
 					</div>
 
-					<a href="<?php echo esc_url( admin_url( 'admin.php?page=shopglut_wishlist' ) ); ?>" class="shopglut-wishlist-button">
+					<a href="<?php echo esc_url( admin_url( 'admin.php?page=shopglut_enhancements&view=wishlist' ) ); ?>" class="shopglut-wishlist-button">
 						<span><i class="fa fa-cog"></i></span>
 						<?php echo esc_html__( 'Go to Wishlist Admin', 'shopglut' ); ?>
 					</a>
@@ -2553,7 +2555,7 @@ class AllEnhancements {
 				ProductComparisonEntity::delete_layout( $layout_id );
 
 				// Redirect to avoid resubmission
-				wp_safe_redirect( admin_url( 'admin.php?page=shopglut_enhancements&view=product_comparison_templates&deleted=true' ) );
+				wp_safe_redirect( admin_url( 'admin.php?page=shopglut_enhancements&view=product_comparisons&deleted=true' ) );
 				exit;
 			} else {
 				wp_die( esc_html__( 'Security check failed.', 'shopglut' ) );

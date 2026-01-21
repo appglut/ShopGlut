@@ -22,7 +22,6 @@
             // Get form element
             var $form = this.getFormElement('#shopglut_shop_layouts');
             if (!$form.length) {
-                console.log('Order complete layout form not found');
                 return cleanData;
             }
 
@@ -483,8 +482,6 @@
                     },
                     timeout: 15000, // 15 second timeout
                     success: function(response) {
-                        console.log('Tab display options response:', response);
-
                         if (response.success && response.data) {
                             // response.data is an array of {value, text, disabled} objects
                             var usedOptions = response.data.filter(opt => opt.disabled).map(opt => opt.text);

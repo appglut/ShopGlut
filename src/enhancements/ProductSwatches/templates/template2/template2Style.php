@@ -5,9 +5,6 @@ class template2Style {
 
     public function dynamicCss($layout_id = 0)
     {
-        // DEBUG: Log when dynamicCss is called
-        error_log('=== dynamicCss called for layout_id: ' . $layout_id . ' ===');
-
         // Get settings for this layout
         $settings = $this->getLayoutSettings($layout_id);
 
@@ -332,15 +329,6 @@ class template2Style {
         /* Settings-based Dynamic CSS - Loaded last to override base styles */
         <?php
         $generated_css = $this->generateSettingsBasedCSS($settings);
-
-        // DEBUG: Output the generated CSS
-        error_log('=== GENERATED CSS DEBUG ===');
-        error_log('Layout ID: ' . $layout_id);
-        error_log('Settings count: ' . count($settings));
-        error_log('Generated CSS length: ' . strlen($generated_css));
-        error_log('Generated CSS: ' . $generated_css);
-        error_log('=== END GENERATED CSS DEBUG ===');
-
         echo $generated_css;
         ?>
 
@@ -354,11 +342,6 @@ class template2Style {
 
         // Get the buffered content and return it
         $css_output = ob_get_clean();
-
-        // Debug log the final output
-        error_log('=== FINAL CSS OUTPUT ===');
-        error_log('CSS Output length: ' . strlen($css_output));
-        error_log('=== END FINAL CSS OUTPUT ===');
 
         return $css_output;
     }

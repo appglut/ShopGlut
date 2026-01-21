@@ -22,7 +22,6 @@
             // Get form element
             var $form = this.getFormElement('#shopglut_shop_layouts');
             if (!$form.length) {
-                console.log('Cart layout form not found');
                 return cleanData;
             }
 
@@ -34,7 +33,7 @@
                 cleanData = this.collectAllFormData($form);
 
             } catch (error) {
-                console.error('Error collecting cart layout data:', error);
+                // Silently fail
             } finally {
                 // Restore original hidden state of tabs
                 this.restoreHiddenTabs(hiddenTabsData);
@@ -234,8 +233,6 @@
          * Save cart layout data via AJAX
          */
         saveCartLayoutData: function() {
-            console.log('Starting cart layout data save...');
-
             // Show loader
             if (window.showLoader && typeof window.showLoader === 'function') {
                 window.showLoader();
@@ -246,10 +243,6 @@
             var layoutName = $('#layout_name').val() || 'Untitled Layout';
             var layoutId = $('#shopg_shop_layoutid').val() || 0;
             var nonce = $('input[name="shopg_cartpage_layouts_nonce"]').val();
-
-            console.log('Form data collected:', formData);
-            console.log('Layout name:', layoutName);
-            console.log('Layout ID:', layoutId);
 
             // Prepare AJAX data
             var ajaxData = {
@@ -267,8 +260,6 @@
                 data: ajaxData,
                 dataType: 'json',
                 success: function(response) {
-                    console.log('Save response:', response);
-
                     if (response.success) {
                         // Show success message
                         ShopGlutCartLayout.dataConverter.showNotification('success', response.data.message || 'Cart layout saved successfully!');
@@ -283,7 +274,6 @@
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error('AJAX error:', error);
                     ShopGlutCartLayout.dataConverter.showNotification('error', 'Network error occurred while saving.');
                 },
                 complete: function() {
@@ -302,8 +292,6 @@
             if (!confirm('Are you sure you want to reset all settings to default? This action cannot be undone.')) {
                 return;
             }
-
-            console.log('Resetting cart layout settings to default...');
 
             // Show loader
             if (window.showLoader && typeof window.showLoader === 'function') {
@@ -327,8 +315,6 @@
                 data: ajaxData,
                 dataType: 'json',
                 success: function(response) {
-                    console.log('Reset response:', response);
-
                     if (response.success) {
                         // Show success message
                         ShopGlutCartLayout.dataConverter.showNotification('success', response.data.message || 'Settings reset to default successfully!');
@@ -343,7 +329,6 @@
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error('AJAX error:', error);
                     ShopGlutCartLayout.dataConverter.showNotification('error', 'Network error occurred while resetting settings.');
                 },
                 complete: function() {

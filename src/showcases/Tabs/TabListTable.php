@@ -49,12 +49,12 @@ class TabListTable extends \WP_List_Table {
 		$layout_id = absint( $item['id'] );
 		$edit_link = add_query_arg( array( 'editor' => 'tab', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_showcases' ) );
 		$delete_link = wp_nonce_url(
-			add_query_arg( array( 'action' => 'delete', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_showcases&view=tab' ) ),
+			add_query_arg( array( 'action' => 'delete', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_showcases&view=tabs' ) ),
 			'shopglut_delete_layout_' . $layout_id
 		);
 		$duplicate_link = add_query_arg(
 			array( 'action' => 'duplicate', 'layout_id' => $layout_id ),
-			admin_url( 'admin.php?page=shopglut_showcases&view=tab' )
+			admin_url( 'admin.php?page=shopglut_showcases&view=tabs' )
 		);
 
 		$actions = array(

@@ -42,8 +42,6 @@ jQuery(document).ready(function($) {
             postid = $("input[name='layout_id']").val();
         }
 
-        console.log('Reset: Layout ID found:', postid);
-
         var nonce = $("input[name='shopg_singleproduct_layouts_nonce']").val();
 
         // Fallback: try different nonce field names
@@ -58,7 +56,6 @@ jQuery(document).ready(function($) {
         }
 
         if (!nonce) {
-            console.error("Security nonce not found");
             showNotification('Security error: nonce not found', 'error');
             $(".loader-overlay").css({"display": "none", "opacity": "0"});
             $(".loader-container").hide();
@@ -66,7 +63,6 @@ jQuery(document).ready(function($) {
         }
 
         if (!postid) {
-            console.error("Layout ID not found");
             showNotification('Error: Layout ID not found', 'error');
             $(".loader-overlay").css({"display": "none", "opacity": "0"});
             $(".loader-container").hide();
@@ -314,8 +310,6 @@ jQuery(document).ready(function($) {
                 },
                 timeout: 15000, // 15 second timeout
                 success: function(response) {
-                    console.log('Product options response:', response);
-
                     if (response.success && response.data) {
                         var usedProductNames = response.data.map(product => product.name);
 
@@ -334,16 +328,9 @@ jQuery(document).ready(function($) {
                                 $(this).addClass("active-result").removeClass("result-selected");
                             }
                         });
-                    } else {
-                        console.warn('Invalid response from server:', response);
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    console.error("Failed to retrieve product options:", {
-                        status: textStatus,
-                        error: errorThrown,
-                        response: jqXHR.responseText
-                    });
                     
                     if (jqXHR.status === 403) {
                         showNotification('Access denied. Please refresh the page.', 'error');

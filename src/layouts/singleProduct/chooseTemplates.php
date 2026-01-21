@@ -47,12 +47,12 @@ class chooseTemplates {
 			'tab1' => [
 				'name' => esc_html__("Free Templates", 'shopglut'),
 				'templates' => ['template1', 'template2', 'template3']
-				// 'template4', 'template5', 'template6', 'template7']
+				 //'template4', 'template5', 'template6', 'template7']
 			],
 			'tab2' => [
 				'name' => esc_html__("Pro Templates", 'shopglut'),
-				'templates' => ['templatePro1']
-				//'templatePro2', 'templatePro3', 'templatePro4', 'templatePro5', 'templatePro6', 'templatePro7', 'templatePro8', 'templatePro9', 'templatePro10']
+				'templates' => ['templatePro1', 'templatePro2']
+				//, 'templatePro3', 'templatePro4', 'templatePro5', 'templatePro6', 'templatePro7', 'templatePro8', 'templatePro9', 'templatePro10']
 			]
 
 		];
@@ -82,23 +82,22 @@ class chooseTemplates {
 		// Define template images using the constant
 		$template_images = [
 			'template1' => 'template1.jpg',
-			'template2' => 'template1.png',
-			'template3' => 'template1.png',
-			'template4' => 'template1.png',
-			'template5' => 'template1.png',
-			'template6' => 'template1.png',
-			'template7' => 'template1.png',
-			'template8' => 'template1.png',
-			'templatePro1' => 'template1.png',
-			'templatePro2' => 'template1.png',
-			'templatePro3' => 'template1.png',
-			'templatePro4' => 'template1.png',
-			'templatePro5' => 'template1.png',
-			'templatePro6' => 'template1.png',
-			'templatePro7' => 'template1.png',
-			'templatePro8' => 'template1.png',
-			'templatePro9' => 'template1.png',
-			'templatePro10' => 'template1.png',
+			'template2' => 'template2.jpg',
+			'template3' => 'template3.jpg',
+			'template4' => 'template4.jpg',
+			'template5' => 'template5.jpg',
+			'template6' => 'template6.jpg',
+			'template7' => 'template7.jpg',
+			'templatePro1' => 'templatePro1.jpg',
+			'templatePro2' => 'templatePro2.jpg',
+			'templatePro3' => 'templatePro3.jpg',
+			'templatePro4' => 'templatePro4.jpg',
+			'templatePro5' => 'templatePro5.jpg',
+			'templatePro6' => 'templatePro6.jpg',
+			'templatePro7' => 'templatePro7.jpg',
+			'templatePro8' => 'templatePro8.jpg',
+			'templatePro9' => 'templatePro9.jpg',
+			'templatePro10' => 'templatePro10.jpg',
 		];
 
 		// Define which templates use HTML preview vs image preview
@@ -145,7 +144,7 @@ class chooseTemplates {
 
 										<!-- Foreground: View Demo Button with Overlay -->
 										<div class="html-preview-overlay">
-											<button type="button" class="demo-view-btn" onclick="console.log('Template button clicked: <?php echo esc_attr($layout_template); ?>'); (typeof openHtmlDemoModal !== 'undefined' ? openHtmlDemoModal : window.originalOpenHtmlDemoModal)('<?php echo esc_attr($layout_template); ?>', 'single-product')">
+											<button type="button" class="demo-view-btn" onclick="(typeof openHtmlDemoModal !== 'undefined' ? openHtmlDemoModal : window.originalOpenHtmlDemoModal)('<?php echo esc_attr($layout_template); ?>', 'single-product')">
 												<svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 													<path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 													<circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

@@ -344,9 +344,8 @@
         checkedBoxes.each(function() {
             templates.push($(this).val());
         });
-        
+
         // Execute bulk action via AJAX
-        console.log('Bulk action:', action, 'Templates:', templates);
         showNotification(`Bulk action "${action}" executed on ${templates.length} templates`, 'info');
     }
 

@@ -70,7 +70,7 @@ $layout_data = $wpdb->get_row( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.
 
 						<div class="back-to-menu">
 
-							<a href="<?php echo esc_url( admin_url( 'admin.php?page=shopglut_showcases&view=tab' ) ); ?>"
+							<a href="<?php echo esc_url( admin_url( 'admin.php?page=shopglut_showcases&view=tabs' ) ); ?>"
 								class="button button-secondary button-large">
 								<i class="fa-solid fa-angles-left"></i>
 								<?php echo esc_html__( 'Back To Menu', 'shopglut' ); ?>

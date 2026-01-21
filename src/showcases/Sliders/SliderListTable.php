@@ -49,12 +49,12 @@ class SliderListTable extends \WP_List_Table {
 		$layout_id = absint( $item['id'] );
 		$edit_link = add_query_arg( array( 'editor' => 'slider', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_showcases' ) );
 		$delete_link = wp_nonce_url(
-			add_query_arg( array( 'action' => 'delete', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_showcases&view=slider' ) ),
+			add_query_arg( array( 'action' => 'delete', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_showcases&view=sliders' ) ),
 			'shopglut_delete_layout_' . $layout_id
 		);
 		$duplicate_link = add_query_arg(
 			array( 'action' => 'duplicate', 'layout_id' => $layout_id ),
-			admin_url( 'admin.php?page=shopglut_showcases&view=slider' )
+			admin_url( 'admin.php?page=shopglut_showcases&view=sliders' )
 		);
 
 		$actions = array(

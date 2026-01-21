@@ -212,7 +212,6 @@ jQuery(document).ready(function($) {
         clearTimeout(autoSaveTimer);
         autoSaveTimer = setTimeout(function() {
             // Could implement auto-save here if needed
-            console.log('Auto-save triggered');
         }, 5000);
     });
     

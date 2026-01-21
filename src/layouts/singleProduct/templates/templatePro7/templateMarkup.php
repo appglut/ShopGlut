@@ -64,20 +64,20 @@ class templateMarkup {
                         <div class="col-lg-3 col-md-4">
                             <div class="left-section">
                                 <div class="main-product-image">
-                                    <img id="mainProductImage" src="https://picsum.photos/seed/book1/400/600.jpg" alt="The Hunter Series Book">
+                                    <img id="mainProductImage" src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro7-demo-image.png'); ?>" alt="The Hunter Series Book">
                                 </div>
                                 <div class="image-thumbnails">
                                     <div class="thumbnail active" onclick="changeProductImage('book1')">
-                                        <img src="https://picsum.photos/seed/book1/150/150.jpg" alt="Front Cover">
+                                        <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro7-demo-image.png'); ?>" alt="Front Cover">
                                     </div>
                                     <div class="thumbnail" onclick="changeProductImage('book2')">
-                                        <img src="https://picsum.photos/seed/book2/150/150.jpg" alt="Back Cover">
+                                        <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro7-demo-image.png'); ?>" alt="Back Cover">
                                     </div>
                                     <div class="thumbnail" onclick="changeProductImage('book3')">
-                                        <img src="https://picsum.photos/seed/book3/150/150.jpg" alt="Side View">
+                                        <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro7-demo-image.png'); ?>" alt="Side View">
                                     </div>
                                     <div class="thumbnail" onclick="changeProductImage('book4')">
-                                        <img src="https://picsum.photos/seed/book4/150/150.jpg" alt="Book Pages">
+                                        <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro7-demo-image.png'); ?>" alt="Book Pages">
                                     </div>
                                 </div>
                             </div>
@@ -236,7 +236,7 @@ class templateMarkup {
 
                 <!-- Full Width Banner Image -->
                 <div class="banner-section">
-                    <img src="https://picsum.photos/seed/book-banner/1400/300.jpg" alt="Special Book Collection Banner">
+                    <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro7-demo-image.png'); ?>" alt="Special Book Collection Banner">
                 </div>
 
                 <!-- Product Tabs -->
@@ -421,7 +421,7 @@ class templateMarkup {
                         <!-- Book 1 -->
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="https://picsum.photos/seed/book5/220/300.jpg" alt="Fantasy Book">
+                                <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro7-demo-image.png'); ?>" alt="Fantasy Book">
                                 <div class="product-badge">-20%</div>
                             </div>
                             <div class="product-info">
@@ -452,7 +452,7 @@ class templateMarkup {
                         <!-- Book 2 -->
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="https://picsum.photos/seed/book6/220/300.jpg" alt="Adventure Book">
+                                <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro7-demo-image.png'); ?>" alt="Adventure Book">
                                 <div class="product-badge">New</div>
                             </div>
                             <div class="product-info">
@@ -482,7 +482,7 @@ class templateMarkup {
                         <!-- Book 3 -->
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="https://picsum.photos/seed/book7/220/300.jpg" alt="Mystery Book">
+                                <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro7-demo-image.png'); ?>" alt="Mystery Book">
                                 <div class="product-badge">Bestseller</div>
                             </div>
                             <div class="product-info">
@@ -513,7 +513,7 @@ class templateMarkup {
                         <!-- Book 4 -->
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="https://picsum.photos/seed/book8/220/300.jpg" alt="Sci-Fi Book">
+                                <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro7-demo-image.png'); ?>" alt="Sci-Fi Book">
                                 <div class="product-badge">Hot</div>
                             </div>
                             <div class="product-info">
@@ -543,7 +543,7 @@ class templateMarkup {
                         <!-- Book 5 -->
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="https://picsum.photos/seed/book9/220/300.jpg" alt="Young Adult Book">
+                                <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro7-demo-image.png'); ?>" alt="Young Adult Book">
                             </div>
                             <div class="product-info">
                                 <div class="product-category">Young Adult</div>
@@ -579,7 +579,7 @@ class templateMarkup {
         // Change product image when thumbnail is clicked
         function changeProductImage(imageName) {
             const mainImage = document.getElementById('mainProductImage');
-            mainImage.src = `https://picsum.photos/seed/${imageName}/400/600.jpg`;
+            mainImage.src = "<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro7-demo-image.png'); ?>";
 
             // Update active thumbnail
             const thumbnails = document.querySelectorAll('.thumbnail');

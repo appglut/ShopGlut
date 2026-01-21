@@ -22,7 +22,6 @@
             // Get form element
             var $form = this.getFormElement('#shopglut_shop_layouts');
             if (!$form.length) {
-                console.log('Order complete layout form not found');
                 return cleanData;
             }
 
@@ -239,9 +238,8 @@
          */
         saveProductComparisonLayoutData: function() {
             // Show loader
-            if (window.showLoader && typeof window.showLoader === 'function') {
-                window.showLoader();
-            }
+            $(".loader-overlay").css({"display": "flex", "opacity": "1"});
+            $(".loader-container").show();
 
             // Get form data
             var formData = this.convertFormDataToJSON();
@@ -344,9 +342,8 @@
                 },
                 complete: function() {
                     // Hide loader
-                    if (window.hideLoader && typeof window.hideLoader === 'function') {
-                        window.hideLoader();
-                    }
+                    $(".loader-overlay").css({"display": "none", "opacity": "0"});
+                    $(".loader-container").hide();
                 }
             });
         },
@@ -360,9 +357,8 @@
             }
 
             // Show loader
-            if (window.showLoader && typeof window.showLoader === 'function') {
-                window.showLoader();
-            }
+            $(".loader-overlay").css({"display": "flex", "opacity": "1"});
+            $(".loader-container").show();
 
             var layoutId = $('#shopg_shop_layoutid').val() || 0;
             var nonce = $('input[name="shopg_productcomparison_layouts_nonce"]').val();
@@ -399,9 +395,8 @@
                 },
                 complete: function() {
                     // Hide loader
-                    if (window.hideLoader && typeof window.hideLoader === 'function') {
-                        window.hideLoader();
-                    }
+                    $(".loader-overlay").css({"display": "none", "opacity": "0"});
+                    $(".loader-container").hide();
                 }
             });
         },
@@ -437,6 +432,21 @@
 
     // Initialize on document ready
     $(document).ready(function() {
+        // Wait for everything to fully load including images, styles, and scripts
+        $(window).on('load', function() {
+            // Add a small delay to ensure everything is rendered
+            setTimeout(function() {
+                $(".loader-overlay").css({"display": "none", "opacity": "0"});
+                $(".loader-container").hide();
+            }, 500); // 500ms delay to ensure complete loading
+        });
+
+        // Fallback: Hide loader after maximum 10 seconds even if something doesn't load
+        setTimeout(function() {
+            $(".loader-overlay").css({"display": "none", "opacity": "0"});
+            $(".loader-container").hide();
+        }, 10000);
+
         // Bind save button click
         $('#productcomparisonLayout-publishing-action #publish').on('click', function(e) {
             e.preventDefault();
@@ -480,8 +490,6 @@
                     },
                     timeout: 15000, // 15 second timeout
                     success: function(response) {
-                        console.log('Comparison display options response:', response);
-
                         if (response.success && response.data) {
                             // response.data is an array of {value, text, disabled} objects
                             var usedOptions = response.data.filter(opt => opt.disabled).map(opt => opt.text);

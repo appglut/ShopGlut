@@ -79,15 +79,10 @@ function createEnhancementModal(moduleType) {
  * @param {HTMLElement} modal - The modal element
  */
 function loadEnhancementDemoContent(templateId, moduleType, modal) {
-	console.log('loadEnhancementDemoContent called with templateId:', templateId, 'moduleType:', moduleType);
-
 	// Ensure nonce is always fetched from shopglut_admin_vars if available
 	if (typeof shopglut_admin_vars !== 'undefined' && shopglut_admin_vars.nonce) {
 		window.nonce = shopglut_admin_vars.nonce;
 	}
-
-	console.log('ajax_url:', ajax_url);
-	console.log('nonce:', nonce);
 
 	const actionMap = {
 		'single-product': 'shopglut_get_template_demo_content',
@@ -118,10 +113,6 @@ function loadEnhancementDemoContent(templateId, moduleType, modal) {
 	modalBody.innerHTML = '<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 300px; padding: 40px;"><div style="width: 50px; height: 50px; border: 4px solid #f3f3f3; border-top: 4px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px;"></div><p style="color: #666; font-size: 16px; margin: 0;">Loading template preview...</p></div><style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>';
 
 	// Load content via AJAX
-	console.log('Making AJAX request to:', ajax_url);
-	console.log('Action:', action);
-	console.log('Template ID:', templateId);
-
 	// Create timeout promise
 	const timeoutPromise = new Promise((_, reject) => {
 		setTimeout(() => reject(new Error('Request timeout')), 10000); // 10 second timeout
@@ -143,13 +134,8 @@ function loadEnhancementDemoContent(templateId, moduleType, modal) {
 
 	// Race the fetch against timeout
 	Promise.race([fetchPromise, timeoutPromise])
-	.then(response => {
-		console.log('AJAX response status:', response.status);
-		return response.text();
-	})
+	.then(response => response.text())
 	.then(html => {
-		console.log('AJAX response HTML length:', html.length);
-		console.log('AJAX response HTML preview:', html.substring(0, 200));
 		modalBody.innerHTML = html;
 		// Show close button when content loads
 		const closeButton = modal.querySelector('.shopglut-template-modal-close-modal');

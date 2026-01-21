@@ -62,28 +62,28 @@ class templateMarkup {
                 <div class="left-side">
                     <!-- Main Image -->
                     <div class="main-image-wrapper">
-                        <img id="main-product-image" src="demo-image.png" alt="Product main image">
+                        <img id="main-product-image" src="<?php echo esc_url($placeholder_url); ?>" alt="Product main image">
                     </div>
 
                     <!-- Image Grid 3x2 -->
                     <div class="image-grid">
-                        <div class="grid-image active" onclick="changeMainImage(this, 'demo-image.png')">
-                            <img src="demo-image.png" alt="Product image 1">
+                        <div class="grid-image active" onclick="changeMainImage(this, '<?php echo esc_js($placeholder_url); ?>')">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product image 1">
                         </div>
-                        <div class="grid-image" onclick="changeMainImage(this, 'demo-image.png')">
-                            <img src="demo-image.png" alt="Product image 2">
+                        <div class="grid-image" onclick="changeMainImage(this, '<?php echo esc_js($placeholder_url); ?>')">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product image 2">
                         </div>
-                        <div class="grid-image" onclick="changeMainImage(this, 'demo-image.png')">
-                            <img src="demo-image.png" alt="Product image 3">
+                        <div class="grid-image" onclick="changeMainImage(this, '<?php echo esc_js($placeholder_url); ?>')">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product image 3">
                         </div>
-                        <div class="grid-image" onclick="changeMainImage(this, 'demo-image.png')">
-                            <img src="demo-image.png" alt="Product image 4">
+                        <div class="grid-image" onclick="changeMainImage(this, '<?php echo esc_js($placeholder_url); ?>')">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product image 4">
                         </div>
-                        <div class="grid-image" onclick="changeMainImage(this, 'demo-image.png')">
-                            <img src="demo-image.png" alt="Product image 5">
+                        <div class="grid-image" onclick="changeMainImage(this, '<?php echo esc_js($placeholder_url); ?>')">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product image 5">
                         </div>
-                        <div class="grid-image" onclick="changeMainImage(this, 'demo-image.png')">
-                            <img src="demo-image.png" alt="Product image 6">
+                        <div class="grid-image" onclick="changeMainImage(this, '<?php echo esc_js($placeholder_url); ?>')">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product image 6">
                         </div>
                     </div>
                 </div>
@@ -200,7 +200,7 @@ class templateMarkup {
                         <div class="bundle-items">
                             <div class="bundle-item">
                                 <input type="checkbox" class="bundle-checkbox" checked data-price="299.99" onchange="updateBundleTotal()">
-                                <img src="demo-image.png" alt="Main product">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Main product">
                                 <div class="bundle-item-info">
                                     <div class="bundle-item-title">Premium Wireless Headphones</div>
                                     <div class="bundle-item-price">$299.99</div>
@@ -208,7 +208,7 @@ class templateMarkup {
                             </div>
                             <div class="bundle-item">
                                 <input type="checkbox" class="bundle-checkbox" data-price="49.99" onchange="updateBundleTotal()">
-                                <img src="demo-image.png" alt="Accessory 1">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Accessory 1">
                                 <div class="bundle-item-info">
                                     <div class="bundle-item-title">Headphone Stand</div>
                                     <div class="bundle-item-price">$49.99</div>
@@ -216,7 +216,7 @@ class templateMarkup {
                             </div>
                             <div class="bundle-item">
                                 <input type="checkbox" class="bundle-checkbox" data-price="24.99" onchange="updateBundleTotal()">
-                                <img src="demo-image.png" alt="Accessory 2">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Accessory 2">
                                 <div class="bundle-item-info">
                                     <div class="bundle-item-title">Carrying Case</div>
                                     <div class="bundle-item-price">$24.99</div>
@@ -356,7 +356,7 @@ class templateMarkup {
                         <div class="slider-container">
                             <div class="slider-wrapper" id="slider-wrapper">
                                 <div class="related-product">
-                                    <img src="demo-image.png" alt="Product 1">
+                                    <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product 1">
                                     <div class="related-product-info">
                                         <div class="related-product-title">Wireless Earbuds Pro</div>
                                         <div class="related-product-price">$149.99</div>
@@ -364,7 +364,7 @@ class templateMarkup {
                                     </div>
                                 </div>
                                 <div class="related-product">
-                                    <img src="demo-image.png" alt="Product 2">
+                                    <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product 2">
                                     <div class="related-product-info">
                                         <div class="related-product-title">Portable Speaker</div>
                                         <div class="related-product-price">$89.99</div>
@@ -372,7 +372,7 @@ class templateMarkup {
                                     </div>
                                 </div>
                                 <div class="related-product">
-                                    <img src="demo-image.png" alt="Product 3">
+                                    <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product 3">
                                     <div class="related-product-info">
                                         <div class="related-product-title">USB-C Hub Adapter</div>
                                         <div class="related-product-price">$49.99</div>
@@ -380,7 +380,7 @@ class templateMarkup {
                                     </div>
                                 </div>
                                 <div class="related-product">
-                                    <img src="demo-image.png" alt="Product 4">
+                                    <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product 4">
                                     <div class="related-product-info">
                                         <div class="related-product-title">Headphone Stand</div>
                                         <div class="related-product-price">$29.99</div>
@@ -388,7 +388,7 @@ class templateMarkup {
                                     </div>
                                 </div>
                                 <div class="related-product">
-                                    <img src="demo-image.png" alt="Product 5">
+                                    <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product 5">
                                     <div class="related-product-info">
                                         <div class="related-product-title">Carrying Case</div>
                                         <div class="related-product-price">$24.99</div>
@@ -396,7 +396,7 @@ class templateMarkup {
                                     </div>
                                 </div>
                                 <div class="related-product">
-                                    <img src="demo-image.png" alt="Product 6">
+                                    <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product 6">
                                     <div class="related-product-info">
                                         <div class="related-product-title">Audio Cable 3.5mm</div>
                                         <div class="related-product-price">$14.99</div>

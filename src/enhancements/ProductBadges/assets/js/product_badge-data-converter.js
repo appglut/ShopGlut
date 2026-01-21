@@ -22,7 +22,6 @@
             // Get form element
             var $form = this.getFormElement('#shopglut_product_badge_layouts');
             if (!$form.length) {
-                console.log('Product badge form not found');
                 return cleanData;
             }
 
@@ -266,10 +265,6 @@
             // Get form data
             var formData = this.convertFormDataToJSON();
 
-            // Debug: Log the collected data
-            console.log('Collected form data:', formData);
-            console.log('Form data JSON:', JSON.stringify(formData, null, 2));
-
             var layoutName = $('#badge_name').val() || 'Untitled Badge';
             var layoutId = $('#shopg_badge_id').val() || 0;
             var nonce = $('input[name="shopg_productbadge_nonce"]').val();
@@ -291,9 +286,6 @@
                 shopg_productbadge_nonce: nonce,
                 shopg_product_badge_settings: jsonString  // Send as JSON string
             };
-
-            // Debug: Log AJAX data
-            console.log('AJAX data:', ajaxData);
 
             // Send AJAX request
             $.ajax({
@@ -502,8 +494,6 @@
                     },
                     timeout: 15000, // 15 second timeout
                     success: function(response) {
-                        console.log('Badge display options response:', response);
-
                         if (response.success && response.data) {
                             // response.data is an array of {value, text, disabled} objects
                             var usedOptions = response.data.filter(opt => opt.disabled).map(opt => opt.text);

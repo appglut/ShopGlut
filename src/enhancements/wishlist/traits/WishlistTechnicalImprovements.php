@@ -536,17 +536,13 @@ trait WishlistTechnicalImprovements {
                 new PerformanceObserver((entryList) => {
                     const entries = entryList.getEntries();
                     const lastEntry = entries[entries.length - 1];
-                    console.log('LCP:', lastEntry.startTime);
                 }).observe({entryTypes: ['largest-contentful-paint']});
-                
+
                 // Measure FID
                 new PerformanceObserver((entryList) => {
                     const entries = entryList.getEntries();
-                    entries.forEach(entry => {
-                        console.log('FID:', entry.processingStart - entry.startTime);
-                    });
                 }).observe({entryTypes: ['first-input']});
-                
+
                 // Measure CLS
                 new PerformanceObserver((entryList) => {
                     let clsValue = 0;
@@ -555,7 +551,6 @@ trait WishlistTechnicalImprovements {
                             clsValue += entry.value;
                         }
                     });
-                    console.log('CLS:', clsValue);
                 }).observe({entryTypes: ['layout-shift']});
             }
         }

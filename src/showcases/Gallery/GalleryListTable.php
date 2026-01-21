@@ -49,12 +49,12 @@ class GalleryListTable extends \WP_List_Table {
 		$layout_id = absint( $item['id'] );
 		$edit_link = add_query_arg( array( 'editor' => 'gallery', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_showcases' ) );
 		$delete_link = wp_nonce_url(
-			add_query_arg( array( 'action' => 'delete', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_showcases&view=gallery' ) ),
+			add_query_arg( array( 'action' => 'delete', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_showcases&view=gallerys' ) ),
 			'shopglut_delete_layout_' . $layout_id
 		);
 		$duplicate_link = add_query_arg(
 			array( 'action' => 'duplicate', 'layout_id' => $layout_id ),
-			admin_url( 'admin.php?page=shopglut_showcases&view=gallery' )
+			admin_url( 'admin.php?page=shopglut_showcases&view=gallerys' )
 		);
 
 		$actions = array(

@@ -121,25 +121,25 @@ class templateMarkup {
                             <div class="middle-section">
                                 <!-- Product Image Slider -->
                                 <div class="product-image-slider">
-                                    <img id="mainProductImage" src="https://picsum.photos/seed/headphones1/600/600.jpg" alt="Premium Wireless Headphones">
+                                    <img id="mainProductImage" src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro5-demo-image.png'); ?>" alt="Premium Wireless Headphones">
                                 </div>
 
                                 <!-- Image Thumbnails -->
                                 <div class="image-thumbnails">
                                     <div class="thumbnail active" onclick="changeProductImage('headphones1')">
-                                        <img src="https://picsum.photos/seed/headphones1/150/150.jpg" alt="View 1">
+                                        <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro5-demo-image.png'); ?>" alt="View 1">
                                     </div>
                                     <div class="thumbnail" onclick="changeProductImage('headphones2')">
-                                        <img src="https://picsum.photos/seed/headphones2/150/150.jpg" alt="View 2">
+                                        <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro5-demo-image.png'); ?>" alt="View 2">
                                     </div>
                                     <div class="thumbnail" onclick="changeProductImage('headphones3')">
-                                        <img src="https://picsum.photos/seed/headphones3/150/150.jpg" alt="View 3">
+                                        <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro5-demo-image.png'); ?>" alt="View 3">
                                     </div>
                                     <div class="thumbnail" onclick="changeProductImage('headphones4')">
-                                        <img src="https://picsum.photos/seed/headphones4/150/150.jpg" alt="View 4">
+                                        <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro5-demo-image.png'); ?>" alt="View 4">
                                     </div>
                                     <div class="thumbnail" onclick="changeProductImage('headphones5')">
-                                        <img src="https://picsum.photos/seed/headphones5/150/150.jpg" alt="View 5">
+                                        <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro5-demo-image.png'); ?>" alt="View 5">
                                     </div>
                                 </div>
                             </div>
@@ -468,7 +468,7 @@ class templateMarkup {
                         <!-- Product 1 -->
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="https://picsum.photos/seed/earbuds1/300/300.jpg" alt="Wireless Earbuds">
+                                <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro5-demo-image.png'); ?>" alt="Wireless Earbuds">
                                 <div class="product-badge">-25%</div>
                             </div>
                             <div class="product-info">
@@ -498,7 +498,7 @@ class templateMarkup {
                         <!-- Product 2 -->
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="https://picsum.photos/seed/speaker1/300/300.jpg" alt="Bluetooth Speaker">
+                                <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro5-demo-image.png'); ?>" alt="Bluetooth Speaker">
                                 <div class="product-badge">New</div>
                             </div>
                             <div class="product-info">
@@ -527,7 +527,7 @@ class templateMarkup {
                         <!-- Product 3 -->
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="https://picsum.photos/seed/headphones2/300/300.jpg" alt="Studio Headphones">
+                                <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro5-demo-image.png'); ?>" alt="Studio Headphones">
                                 <div class="product-badge">-15%</div>
                             </div>
                             <div class="product-info">
@@ -557,7 +557,7 @@ class templateMarkup {
                         <!-- Product 4 -->
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="https://picsum.photos/seed/earbuds2/300/300.jpg" alt="Sports Earbuds">
+                                <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro5-demo-image.png'); ?>" alt="Sports Earbuds">
                                 <div class="product-badge">Hot</div>
                             </div>
                             <div class="product-info">
@@ -585,7 +585,7 @@ class templateMarkup {
                         <!-- Product 5 -->
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="https://picsum.photos/seed/headphonecase/300/300.jpg" alt="Headphone Case">
+                                <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro5-demo-image.png'); ?>" alt="Headphone Case">
                             </div>
                             <div class="product-info">
                                 <div class="product-category">Accessories</div>
@@ -620,7 +620,7 @@ class templateMarkup {
         // Change product image when thumbnail is clicked
         function changeProductImage(imageName) {
             const mainImage = document.getElementById('mainProductImage');
-            mainImage.src = `https://picsum.photos/seed/${imageName}/600/600.jpg`;
+            mainImage.src = "<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro5-demo-image.png'); ?>";
 
             // Update active thumbnail
             const thumbnails = document.querySelectorAll('.thumbnail');

@@ -925,11 +925,11 @@ private function renderSupportTab() {
         PHP Version: <?php echo PHP_VERSION; ?>
         Site URL: <?php echo esc_js( home_url() ); ?>
             `.trim();
-        
+
         navigator.clipboard.writeText(systemInfo).then(function() {
             alert('<?php echo esc_js(__('System information copied to clipboard!', 'shopglut')); ?>');
         }).catch(function() {
-            console.log('Failed to copy system info');
+            // Silently fail
         });
     }
     </script>

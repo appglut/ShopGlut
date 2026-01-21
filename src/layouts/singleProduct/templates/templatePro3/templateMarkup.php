@@ -63,23 +63,23 @@ class templateMarkup {
                 <div class="product-images">
                     <div class="thumbnail-container">
                         <div class="thumbnail active" onclick="changeImage(1)">
-                            <img src="https://picsum.photos/80/80?random=1" alt="Thumbnail 1">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Thumbnail 1">
                         </div>
                         <div class="thumbnail" onclick="changeImage(2)">
-                            <img src="https://picsum.photos/80/80?random=2" alt="Thumbnail 2">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Thumbnail 2">
                         </div>
                         <div class="thumbnail" onclick="changeImage(3)">
-                            <img src="https://picsum.photos/80/80?random=3" alt="Thumbnail 3">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Thumbnail 3">
                         </div>
                         <div class="thumbnail" onclick="changeImage(4)">
-                            <img src="https://picsum.photos/80/80?random=4" alt="Thumbnail 4">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Thumbnail 4">
                         </div>
                         <div class="thumbnail" onclick="changeImage(5)">
-                            <img src="https://picsum.photos/80/80?random=5" alt="Thumbnail 5">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Thumbnail 5">
                         </div>
                     </div>
                     <div class="main-image">
-                        <img id="mainImage" src="https://picsum.photos/500/500?random=1" alt="Product Image">
+                        <img id="mainImage" src="<?php echo esc_url($placeholder_url); ?>" alt="Product Image">
                     </div>
                 </div>
 
@@ -233,7 +233,7 @@ class templateMarkup {
                 <div class="featured-product">
                     <h3 class="featured-title">🔥 Featured Deal</h3>
                     <div class="featured-item">
-                        <img src="https://picsum.photos/300/200?random=10" alt="Featured Product" class="featured-image">
+                        <img src="<?php echo esc_url($placeholder_url); ?>" alt="Featured Product" class="featured-image">
                         <div class="featured-overlay">
                             <h4 class="featured-product-title">Smart Watch Pro</h4>
                             <div class="featured-price">$199.99</div>
@@ -263,7 +263,7 @@ class templateMarkup {
         // Image Gallery
         function changeImage(imageNumber) {
             const mainImage = document.getElementById('mainImage');
-            mainImage.src = `https://picsum.photos/500/500?random=${imageNumber}`;
+            mainImage.src = `<?php echo esc_url($placeholder_url); ?>`;
 
             // Update active thumbnail
             const thumbnails = document.querySelectorAll('.thumbnail');
@@ -311,25 +311,25 @@ class templateMarkup {
 
         // Product Data
         const relatedProducts = [
-            { id: 1, title: "Wireless Earbuds Pro", price: "$149.99", image: "https://picsum.photos/250/200?random=11" },
-            { id: 2, title: "Studio Monitor Speakers", price: "$399.99", image: "https://picsum.photos/250/200?random=12" },
-            { id: 3, title: "Audio Interface", price: "$249.99", image: "https://picsum.photos/250/200?random=13" },
-            { id: 4, title: "Microphone Stand", price: "$49.99", image: "https://picsum.photos/250/200?random=14" },
-            { id: 5, title: "DJ Controller", price: "$599.99", image: "https://picsum.photos/250/200?random=15" },
-            { id: 6, title: "Portable Speaker", price: "$89.99", image: "https://picsum.photos/250/200?random=16" },
-            { id: 7, title: "Cable Organizer", price: "$19.99", image: "https://picsum.photos/250/200?random=17" },
-            { id: 8, title: "Headphone Stand", price: "$29.99", image: "https://picsum.photos/250/200?random=18" }
+            { id: 1, title: "Wireless Earbuds Pro", price: "$149.99", image: "<?php echo esc_url($placeholder_url); ?>" },
+            { id: 2, title: "Studio Monitor Speakers", price: "$399.99", image: "<?php echo esc_url($placeholder_url); ?>" },
+            { id: 3, title: "Audio Interface", price: "$249.99", image: "<?php echo esc_url($placeholder_url); ?>" },
+            { id: 4, title: "Microphone Stand", price: "$49.99", image: "<?php echo esc_url($placeholder_url); ?>" },
+            { id: 5, title: "DJ Controller", price: "$599.99", image: "<?php echo esc_url($placeholder_url); ?>" },
+            { id: 6, title: "Portable Speaker", price: "$89.99", image: "<?php echo esc_url($placeholder_url); ?>" },
+            { id: 7, title: "Cable Organizer", price: "$19.99", image: "<?php echo esc_url($placeholder_url); ?>" },
+            { id: 8, title: "Headphone Stand", price: "$29.99", image: "<?php echo esc_url($placeholder_url); ?>" }
         ];
 
         const recentlyViewedProducts = [
-            { id: 9, title: "Gaming Headset", price: "$79.99", image: "https://picsum.photos/250/200?random=19" },
-            { id: 10, title: "USB Microphone", price: "$129.99", image: "https://picsum.photos/250/200?random=20" },
-            { id: 11, title: "Mixer Console", price: "$449.99", image: "https://picsum.photos/250/200?random=21" },
-            { id: 12, title: "Amplifier", price: "$699.99", image: "https://picsum.photos/250/200?random=22" },
-            { id: 13, title: "Turntable", price: "$299.99", image: "https://picsum.photos/250/200?random=23" },
-            { id: 14, title: "Audio Cables Set", price: "$39.99", image: "https://picsum.photos/250/200?random=24" },
-            { id: 15, title: "Carrying Case", price: "$59.99", image: "https://picsum.photos/250/200?random=25" },
-            { id: 16, title: "Power Bank", price: "$49.99", image: "https://picsum.photos/250/200?random=26" }
+            { id: 9, title: "Gaming Headset", price: "$79.99", image: "<?php echo esc_url($placeholder_url); ?>" },
+            { id: 10, title: "USB Microphone", price: "$129.99", image: "<?php echo esc_url($placeholder_url); ?>" },
+            { id: 11, title: "Mixer Console", price: "$449.99", image: "<?php echo esc_url($placeholder_url); ?>" },
+            { id: 12, title: "Amplifier", price: "$699.99", image: "<?php echo esc_url($placeholder_url); ?>" },
+            { id: 13, title: "Turntable", price: "$299.99", image: "<?php echo esc_url($placeholder_url); ?>" },
+            { id: 14, title: "Audio Cables Set", price: "$39.99", image: "<?php echo esc_url($placeholder_url); ?>" },
+            { id: 15, title: "Carrying Case", price: "$59.99", image: "<?php echo esc_url($placeholder_url); ?>" },
+            { id: 16, title: "Power Bank", price: "$49.99", image: "<?php echo esc_url($placeholder_url); ?>" }
         ];
 
         // Related Products Tabs

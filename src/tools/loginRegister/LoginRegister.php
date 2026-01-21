@@ -1588,8 +1588,6 @@ class LoginRegister {
         };
 
         window.previewTemplate = function(templateId) {
-            console.log('previewTemplate called with templateId:', templateId);
-
             // Create or get inline loader
             var loaderId = 'shopglut-preview-loader';
             var loader = document.getElementById(loaderId);

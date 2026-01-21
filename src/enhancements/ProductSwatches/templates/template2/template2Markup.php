@@ -154,12 +154,10 @@ class template2Markup {
 	 */
 	private function get_assigned_attribute_terms($product, $assigned_attribute) {
 		if (empty($assigned_attribute)) {
-			error_log('template2Markup: No assigned attribute provided');
 			return array();
 		}
 
 		if (!$product) {
-			error_log('template2Markup: No product found for preview');
 			return array();
 		}
 
@@ -168,8 +166,6 @@ class template2Markup {
 		if (strpos($attribute, 'pa_') !== 0) {
 			$attribute = 'pa_' . $attribute;
 		}
-
-		error_log('template2Markup: Looking for attribute: ' . $attribute);
 
 		// Get the label for this attribute
 		$label = wc_attribute_label($attribute);
@@ -180,10 +176,7 @@ class template2Markup {
 			'hide_empty' => false,
 		));
 
-		error_log('template2Markup: Found ' . count($terms) . ' terms for ' . $attribute);
-
 		if (empty($terms) || is_wp_error($terms)) {
-			error_log('template2Markup: No terms found or error for ' . $attribute);
 			return array();
 		}
 
@@ -194,8 +187,6 @@ class template2Markup {
 				'name' => $term->name,
 			);
 		}
-
-		error_log('template2Markup: Returning ' . count($options) . ' options for ' . $label);
 
 		return array(
 			'label' => $label . ':',
@@ -210,25 +201,19 @@ class template2Markup {
 	 * @return array Attribute data with label and options
 	 */
 	private function get_product_attributes_for_preview($product) {
-		// Debug logging
 		if (!$product) {
-			error_log('template2Markup: No product found for preview');
 			return array();
 		}
 
 		if (!method_exists($product, 'is_type') || !$product->is_type('variable')) {
-			error_log('template2Markup: Product is not variable type: ' . get_class($product));
 			return array();
 		}
 
 		$attributes = $product->get_attributes();
 
 		if (empty($attributes)) {
-			error_log('template2Markup: Product has no attributes');
 			return array();
 		}
-
-		error_log('template2Markup: Found ' . count($attributes) . ' attributes');
 
 		// Find the first variation attribute (try taxonomy first, then custom)
 		foreach ($attributes as $attr_key => $attribute) {
@@ -238,8 +223,6 @@ class template2Markup {
 			if (!$is_variation) {
 				continue;
 			}
-
-			error_log('template2Markup: Processing attribute: ' . $attr_key . ', is_taxonomy: ' . ($attribute->is_taxonomy() ? 'yes' : 'no'));
 
 			// Handle taxonomy-based attributes
 			if ($attribute->is_taxonomy()) {
@@ -252,8 +235,6 @@ class template2Markup {
 					'hide_empty' => false,
 				));
 
-				error_log('template2Markup: Taxonomy ' . $taxonomy . ' has ' . count($terms) . ' terms');
-
 				$options = array();
 				foreach ($terms as $term) {
 					$options[] = array(
@@ -263,7 +244,6 @@ class template2Markup {
 				}
 
 				if (!empty($options)) {
-					error_log('template2Markup: Returning ' . count($options) . ' options for taxonomy ' . $taxonomy);
 					return array(
 						'label' => $label . ':',
 						'options' => $options,
@@ -274,8 +254,6 @@ class template2Markup {
 			else {
 				$label = $attribute->get_name();
 				$options = $attribute->get_options();
-
-				error_log('template2Markup: Custom attribute ' . $label . ' has ' . count($options) . ' options');
 
 				if (!empty($options)) {
 					$formatted_options = array();
@@ -288,7 +266,6 @@ class template2Markup {
 						);
 					}
 
-					error_log('template2Markup: Returning ' . count($formatted_options) . ' options for custom attribute ' . $label);
 					return array(
 						'label' => $label . ':',
 						'options' => $formatted_options,
@@ -297,7 +274,6 @@ class template2Markup {
 			}
 		}
 
-		error_log('template2Markup: No valid variation attributes found');
 		return array();
 	}
 
@@ -339,8 +315,6 @@ class template2Markup {
 				$assigned_attribute = $assigned[0]; // Get first assigned attribute
 			}
 		}
-
-		error_log('template2Markup: Layout ID ' . $layout_id . ' has assigned attribute: ' . $assigned_attribute);
 
 		// Try to extract template settings
 		$keys = array(

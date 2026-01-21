@@ -201,12 +201,10 @@
         // Add to comparison button click (skip template1 icon-only buttons)
         $(document).on('click', '.shopglut-add-to-comparison:not(.compare), .shopglut-add-to-comparison-single', function(e) {
             e.preventDefault();
-            console.log('ShopGlut Comparison: Button clicked!');
             const $button = $(this);
             const productId = parseInt($button.data('product-id'));
             const addedText = $button.data('added-text') || 'Remove from Compare';
             const defaultText = $button.data('default-text') || 'Add to Compare';
-            console.log('ShopGlut Comparison: Product ID:', productId);
 
             if (comparisonProducts.includes(productId)) {
                 // Remove from comparison

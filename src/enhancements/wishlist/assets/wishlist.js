@@ -166,17 +166,12 @@ jQuery(document).ready(function ($) {
   // Basic notification function
   function showNotification(message) {
     const $notification = $("#shopglut-wishlist-notification");
-    
-    // Debug logging
-    console.log('Showing notification:', message);
-    console.log('Notification element found:', $notification.length);
-    
+
     if ($notification.length === 0) {
       // Create notification div if it doesn't exist
       $('body').append('<div id="shopglut-wishlist-notification" style="display: none;"></div>');
-      console.log('Created notification div');
     }
-    
+
     // Clear any existing content and show notification
     $("#shopglut-wishlist-notification")
       .stop(true, true) // Stop any ongoing animations
@@ -224,10 +219,10 @@ jQuery(document).ready(function ($) {
           nonce: ajax_data.nonce,
         },
         success: function (response) {
-          console.log("Wishlist merged successfully");
+          // Wishlist merged successfully
         },
         error: function (xhr, status, error) {
-          console.error("Failed to merge wishlist: ", error);
+          // Silently fail
         },
       });
     }
@@ -256,11 +251,8 @@ jQuery(document).ready(function ($) {
           nonce: ajax_data.nonce,
         },
         success: function (response) {
-          console.log('AJAX Response:', response);
-          
           if (response.success) {
             const performToggle = response.data.perform_toggle;
-            console.log('Perform toggle:', performToggle);
 
             if (performToggle === true) {
               if (isAdded) {
@@ -301,16 +293,13 @@ jQuery(document).ready(function ($) {
               showPopupNotification(response.data.notification_text, ajax_data.popup_notification_effect, isAdded);
             } else {
               // Fallback to basic notification (even if notification is "off", show something)
-              console.log('Using fallback notification, type:', ajax_data.notification_type);
               const statusClass = isAdded ? "wishlist-removed" : "success-added";
               const message = `<div class='${statusClass}'><i class='fa ${isAdded ? "fa-times-circle" : "fa-check-circle"}'></i> <span>${response.data.notification_text || (isAdded ? 'Removed from wishlist' : 'Added to wishlist')}</span></div>`;
-              console.log('Calling showNotification with:', message);
               showNotification(message);
             }
           }
         },
         error: function(xhr, status, error) {
-          console.error('AJAX Error:', xhr, status, error);
           showNotification("<div class='wishlist-removed'><i class='fa fa-times-circle'></i> <span>Error processing request</span></div>");
         }
       });
@@ -488,7 +477,6 @@ jQuery(document).ready(function ($) {
   
   // Test function - you can call this in browser console to test notifications
   window.testWishlistNotification = function() {
-    console.log('Testing notification...');
     showNotification("<div class='success-added'><i class='fa fa-check-circle'></i> <span>Test notification - Added to wishlist!</span></div>");
   };
 });

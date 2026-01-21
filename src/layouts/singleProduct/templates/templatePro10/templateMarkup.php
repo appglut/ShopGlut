@@ -60,7 +60,7 @@ class templateMarkup {
                 <!-- ==================== LEFT COLUMN - GALLERY ==================== -->
                 <div class="left-gallery">
                     <div class="main-image-wrapper">
-                        <img id="main-product-image" src="demo-image.png" alt="Product main image">
+                        <img id="main-product-image" src="<?php echo esc_url($placeholder_url); ?>" alt="Product main image">
                         <div class="image-zoom-badge" onclick="zoomImage()">
                             <i class="fas fa-search-plus"></i>
                         </div>
@@ -68,20 +68,20 @@ class templateMarkup {
 
                     <!-- Thumbnails Beneath Main Image -->
                     <div class="thumbnails-container">
-                        <div class="thumbnail-item active" onclick="changeMainImage(this, 'demo-image.png')">
-                            <img src="demo-image.png" alt="Thumbnail 1">
+                        <div class="thumbnail-item active" onclick="changeMainImage(this, '<?php echo esc_js($placeholder_url); ?>')">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Thumbnail 1">
                         </div>
-                        <div class="thumbnail-item" onclick="changeMainImage(this, 'demo-image.png')">
-                            <img src="demo-image.png" alt="Thumbnail 2">
+                        <div class="thumbnail-item" onclick="changeMainImage(this, '<?php echo esc_js($placeholder_url); ?>')">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Thumbnail 2">
                         </div>
-                        <div class="thumbnail-item" onclick="changeMainImage(this, 'demo-image.png')">
-                            <img src="demo-image.png" alt="Thumbnail 3">
+                        <div class="thumbnail-item" onclick="changeMainImage(this, '<?php echo esc_js($placeholder_url); ?>')">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Thumbnail 3">
                         </div>
-                        <div class="thumbnail-item" onclick="changeMainImage(this, 'demo-image.png')">
-                            <img src="demo-image.png" alt="Thumbnail 4">
+                        <div class="thumbnail-item" onclick="changeMainImage(this, '<?php echo esc_js($placeholder_url); ?>')">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Thumbnail 4">
                         </div>
-                        <div class="thumbnail-item" onclick="changeMainImage(this, 'demo-image.png')">
-                            <img src="demo-image.png" alt="Thumbnail 5">
+                        <div class="thumbnail-item" onclick="changeMainImage(this, '<?php echo esc_js($placeholder_url); ?>')">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Thumbnail 5">
                         </div>
                     </div>
 
@@ -422,7 +422,7 @@ class templateMarkup {
                         <h2 class="section-title">Related Products</h2>
                         <div class="products-grid">
                             <div class="product-card">
-                                <img src="demo-image.png" alt="Product 1">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product 1">
                                 <div class="product-card-info">
                                     <div class="product-card-title">Wireless Earbuds Pro</div>
                                     <div class="product-card-price">$149.99</div>
@@ -430,7 +430,7 @@ class templateMarkup {
                                 </div>
                             </div>
                             <div class="product-card">
-                                <img src="demo-image.png" alt="Product 2">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product 2">
                                 <div class="product-card-info">
                                     <div class="product-card-title">Portable Bluetooth Speaker</div>
                                     <div class="product-card-price">$89.99</div>
@@ -438,7 +438,7 @@ class templateMarkup {
                                 </div>
                             </div>
                             <div class="product-card">
-                                <img src="demo-image.png" alt="Product 3">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product 3">
                                 <div class="product-card-info">
                                     <div class="product-card-title">Premium Headphone Stand</div>
                                     <div class="product-card-price">$49.99</div>
@@ -446,7 +446,7 @@ class templateMarkup {
                                 </div>
                             </div>
                             <div class="product-card">
-                                <img src="demo-image.png" alt="Product 4">
+                                <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product 4">
                                 <div class="product-card-info">
                                     <div class="product-card-title">Hard Carrying Case</div>
                                     <div class="product-card-price">$29.99</div>

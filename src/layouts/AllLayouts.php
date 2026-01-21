@@ -919,10 +919,10 @@ class AllLayouts {
 
 				// Product Enhancement
 				//$module_manager->render_module_card('quick_views', admin_url( 'admin.php?page=shopglut_enhancements&view=product_quickview' ));
-				$module_manager->render_module_card('product_comparison', admin_url( 'admin.php?page=shopglut_enhancements&view=product_comparison' ));
-				$module_manager->render_module_card('wishlist', admin_url( 'admin.php?page=shopglut_wishlist' ));
-				$module_manager->render_module_card('product_swatches', admin_url( 'admin.php?page=shopglut_swatches_settings' ));
-				$module_manager->render_module_card('product_badges', admin_url( 'admin.php?page=shopglut_badges' ));
+				$module_manager->render_module_card('product_comparison', admin_url( 'admin.php?page=shopglut_enhancements&view=product_comparisons' ));
+				$module_manager->render_module_card('wishlist', admin_url( 'admin.php?page=shopglut_enhancements&view=wishlist' ));
+				$module_manager->render_module_card('product_swatches', admin_url( 'admin.php?page=shopglut_enhancements&view=product_swatches' ));
+				$module_manager->render_module_card('product_badges', admin_url( 'admin.php?page=shopglut_enhancements&view=product_badges' ));
 				//$module_manager->render_module_card('shop_filters', admin_url( 'admin.php?page=shopglut_enhancements&editor=filters' ));
 
 				// ===== WOOCOMMERCE TOOLS MODULES =====

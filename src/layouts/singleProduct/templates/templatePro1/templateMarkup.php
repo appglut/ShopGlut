@@ -716,39 +716,31 @@ class templateMarkup {
             const selectedColor = document.querySelector('.color-swatch.selected').dataset.color;
             const selectedSize = document.querySelector('.swatch.selected').dataset.size;
 
-            console.log(`Added ${quantity} x Premium Headphones (${selectedColor}, ${selectedSize}) to cart`);
-
             // Show notification
             showNotification('Product added to cart!');
         }
 
         function buyNow() {
-            console.log('Proceeding to checkout...');
             showNotification('Redirecting to checkout...');
         }
 
         function addToWishlist() {
-            console.log('Added to wishlist');
             showNotification('Added to wishlist!');
         }
 
         function addToCompare() {
-            console.log('Added to compare');
             showNotification('Added to compare list!');
         }
 
         function askQuestion() {
-            console.log('Opening question form...');
             showNotification('Question form would open here');
         }
 
         function quickAddToCart(productName, price) {
-            console.log(`Quick add: ${productName} - $${price}`);
             showNotification(`${productName} added to cart!`);
         }
 
         function contactSupport() {
-            console.log('Opening customer support...');
             showNotification('Customer support team will contact you soon!');
         }
 

@@ -176,9 +176,6 @@ class MegaMenuEntity {
         $result = $wpdb->insert($table, $data, $format);
 
         if ($result === false) {
-            if (defined('WP_DEBUG') && WP_DEBUG) {
-                error_log('MegaMenuEntity: Failed to insert layout - ' . $wpdb->last_error); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Only log in debug mode
-            }
             return false;
         }
 
@@ -246,9 +243,6 @@ class MegaMenuEntity {
         );
 
         if ($result === false) {
-            if (defined('WP_DEBUG') && WP_DEBUG) {
-                error_log('MegaMenuEntity: Failed to update layout ' . $id . ' - ' . $wpdb->last_error); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Only log in debug mode
-            }
             return false;
         }
 

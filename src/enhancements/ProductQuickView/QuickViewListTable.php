@@ -40,7 +40,7 @@ class QuickviewListTable extends \WP_List_Table {
 		echo '<div style="font-size: 48px; color: #d1d5db; margin-bottom: 16px;">📦</div>';
 		echo '<h3 style="color: #374151; margin: 0 0 8px 0;">' . esc_html__( 'No QuickView Layouts Found', 'shopglut' ) . '</h3>';
 		echo '<p style="color: #6b7280; margin: 0 0 20px 0;">' . esc_html__( 'Create your first QuickView layout to get started.', 'shopglut' ) . '</p>';
-		echo '<a href="' . esc_url( admin_url( 'admin.php?page=shopglut_enhancements&view=product_quickview&action=create' ) ) . '" class="button button-primary">' . esc_html__( 'Create New Layout', 'shopglut' ) . '</a>';
+		echo '<a href="' . esc_url( admin_url( 'admin.php?page=shopglut_enhancements&view=product_quickviews&action=create' ) ) . '" class="button button-primary">' . esc_html__( 'Create New Layout', 'shopglut' ) . '</a>';
 		echo '</div>';
 	}
 
@@ -48,12 +48,12 @@ class QuickviewListTable extends \WP_List_Table {
 		$layout_id = absint( $item['id'] );
 		$edit_link = add_query_arg( array( 'editor' => 'product_quickview', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_enhancements' ) );
 		$delete_link = wp_nonce_url(
-			add_query_arg( array( 'action' => 'delete', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_enhancements&view=product_quickview' ) ),
+			add_query_arg( array( 'action' => 'delete', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_enhancements&view=product_quickviews' ) ),
 			'shopglut_delete_layout_' . $layout_id
 		);
 		$duplicate_link = add_query_arg(
 			array( 'action' => 'duplicate', 'layout_id' => $layout_id ),
-			admin_url( 'admin.php?page=shopglut_enhancements&view=product_quickview' )
+			admin_url( 'admin.php?page=shopglut_enhancements&view=product_quickviews' )
 		);
 
 		$actions = array(
@@ -435,7 +435,7 @@ class QuickviewListTable extends \WP_List_Table {
 		}
 
 		// Build view links
-		$base_url = admin_url( 'admin.php?page=shopglut_enhancements&view=product_quickview' );
+		$base_url = admin_url( 'admin.php?page=shopglut_enhancements&view=product_quickviews' );
 
 		$views['all'] = sprintf(
 			'<a href="%s" class="%s">%s <span class="count">(%d)</span></a>',

@@ -33,7 +33,7 @@ class ProductComparisonListTable extends \WP_List_Table {
 		$layout_id = absint( $item['id'] );
 		$edit_link = add_query_arg( array( 'editor' => 'product_comparison', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_enhancements' ) );
 		$delete_link = wp_nonce_url(
-			add_query_arg( array( 'action' => 'delete', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_enhancements&view=product_comparison' ) ),
+			add_query_arg( array( 'action' => 'delete', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_enhancements&view=product_comparisons' ) ),
 			'shopglut_delete_layout_' . $layout_id
 		);
 
@@ -63,9 +63,13 @@ class ProductComparisonListTable extends \WP_List_Table {
 		if ( isset( $item['layout_settings'] ) ) {
 			$settings = maybe_unserialize( $item['layout_settings'] );
 
+			// Get layout template to determine correct settings key
+			$layout_template = isset( $item['layout_template'] ) ? $item['layout_template'] : 'template1';
+			$settings_key = 'shopg_product_comparison_settings_' . $layout_template;
+
 			// Check if any display locations are set for this layout
-			if ( isset( $settings['shopg_product_comparison_settings_template1']['display-locations'] ) ) {
-				$locations = $settings['shopg_product_comparison_settings_template1']['display-locations'];
+			if ( isset( $settings[ $settings_key ]['display-locations'] ) ) {
+				$locations = $settings[ $settings_key ]['display-locations'];
 				// Layout is active if it has any display locations configured
 				if ( !empty( $locations ) && is_array( $locations ) && count( $locations ) > 0 ) {
 					$is_active = true;

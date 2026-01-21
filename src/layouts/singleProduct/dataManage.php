@@ -56,9 +56,6 @@ class dataManage {
 
 	public function handle_add_to_cart()
     {
-        // Debug: Log the incoming data
-        error_log('Template2 AJAX: Add to cart called with data: ' . print_r($_POST, true));
-
         // Load WooCommerce if not loaded
         if (!function_exists('WC')) {
             // Try to load WooCommerce
@@ -69,7 +66,6 @@ class dataManage {
 
         // Check if WooCommerce is available after loading attempt
         if (!class_exists('WooCommerce')) {
-            error_log('Template2 AJAX: WooCommerce class not found');
             wp_send_json_error(array('message' => __('WooCommerce not available', 'shopglut')));
         }
 
@@ -78,14 +74,12 @@ class dataManage {
             wc_load_cart();
         }
 
-        // Verify nonce - add more debugging
+        // Verify nonce
         if (!isset($_POST['nonce'])) {
-            error_log('Template2 AJAX: Nonce not provided');
             wp_send_json_error(array('message' => __('Security nonce not provided', 'shopglut')));
         }
 
         if (!wp_verify_nonce($_POST['nonce'], 'shopglut_template2_nonce')) {
-            error_log('Template2 AJAX: Nonse verification failed. Nonce: ' . $_POST['nonce']);
             wp_send_json_error(array('message' => __('Security check failed', 'shopglut')));
         }
 
@@ -369,21 +363,14 @@ class dataManage {
             $current_layout_id = isset($_GET['post']) ? intval($_GET['post']) : 0;
         }
 
-        // Debug logging
-        error_log('shopglut_singleProduct_get_product_options - Current Layout ID: ' . $current_layout_id);
-        error_log('shopglut_singleProduct_get_product_options - Total layouts found: ' . count($results));
-
         foreach ($results as $result) {
             // Skip the current layout being edited
             if ($current_layout_id > 0 && $result['id'] == $current_layout_id) {
-                error_log('Skipping current layout ID: ' . $result['id']);
                 continue;
             }
 
             $layout_settings = unserialize($result['layout_settings']);
             $template_settings_key = 'shopg_singleproduct_settings_' . $result['layout_template'];
-
-            error_log('Checking layout ID: ' . $result['id'] . ' with template key: ' . $template_settings_key);
 
             // Check if template settings exist
             if (isset($layout_settings[$template_settings_key])) {
@@ -392,26 +379,19 @@ class dataManage {
                 // ONLY collect specific product selections (ignore "Overwrite All Products" completely)
                 $used_options = $template_settings['overwrite-specific-products'] ?? array();
                 if (is_array($used_options) && !empty($used_options)) {
-                    error_log('Layout ' . $result['id'] . ' has specific products: ' . implode(',', $used_options));
                     $all_used_options = array_merge($all_used_options, $used_options);
                 }
 
                 // Also check nested structure: single-product-settings -> overwrite-specific-products
                 $nested_used_options = $template_settings['single-product-settings']['overwrite-specific-products'] ?? array();
                 if (is_array($nested_used_options) && !empty($nested_used_options)) {
-                    error_log('Layout ' . $result['id'] . ' has nested specific products: ' . implode(',', $nested_used_options));
                     $all_used_options = array_merge($all_used_options, $nested_used_options);
                 }
-            } else {
-                error_log('Layout ' . $result['id'] . ' - template settings key not found: ' . $template_settings_key);
             }
         }
 
         // Remove duplicates and re-index
         $all_used_options = array_values(array_unique($all_used_options));
-
-        error_log('Final used products count: ' . count($all_used_options));
-        error_log('Final used product IDs: ' . implode(',', $all_used_options));
 
         wp_send_json_success(array_map(function($id) {
             return [

@@ -685,12 +685,10 @@ class template1Markup {
 
             // Force scroll to top immediately and repeatedly
             function forceScrollToTop() {
-                console.log("Forcing scroll to top");
                 var modalBody = document.querySelector(".shopglut-template-modal-modal-body");
                 if (modalBody) {
                     modalBody.scrollTop = 0;
                     modalBody.scrollIntoView({ block: "start", behavior: "auto" });
-                    console.log("ModalBody scrollTop:", modalBody.scrollTop);
                 }
                 var modal = document.getElementById("htmlDemoModal");
                 if (modal) {

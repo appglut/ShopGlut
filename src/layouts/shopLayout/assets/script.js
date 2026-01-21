@@ -36,7 +36,6 @@
             // Wishlist - match template classes - use wishlist module's toggle
             $(document).on('click', '.wishlist, .shopglut-add-to-wishlist, .shopg-add-to-wishlist', function(e) {
                 e.preventDefault();
-                console.log('Wishlist button clicked!', $(this));
                 self.toggleWishlist($(this));
             });
 
@@ -47,15 +46,12 @@
                 var productId = $button.data('product-id');
 
                 if (!productId) {
-                    console.error('Product ID not found');
                     return;
                 }
 
                 // Call Quick View module function if available
                 if (window.ShopGlutQuickView && typeof window.ShopGlutQuickView.loadQuickView === 'function') {
                     window.ShopGlutQuickView.loadQuickView(productId, $button);
-                } else {
-                    console.error('Quick View module not loaded');
                 }
             });
 
@@ -185,8 +181,6 @@
                             $button.removeClass('ajax-spin-cart loading').addClass('view-cart-link');
                             $button.find('.cart-title').html('<i class="fa fa-check-square"></i> View Cart');
                             $button.prop('disabled', false);
-
-                            console.log('Button converted to View Cart link:', cartUrl);
                         }, 1000);
 
                         self.showNotification('Product added to cart!', 'success');
@@ -212,7 +206,6 @@
                     // Show error state
                     $cartLoading.hide();
                     $cartContents.show();
-                    console.error('Add to Cart AJAX error:', error);
                     self.showNotification('Network error occurred', 'error');
                 },
                 complete: function() {
@@ -242,9 +235,6 @@
             var isAdded = $parent.hasClass('added') ? 1 : 0;
             var $icon = $button.find('i');
 
-            console.log('Toggling wishlist - Product ID:', productId, 'Is Added:', isAdded);
-            console.log('Add Icon:', addIcon, 'Added Icon:', addedIcon);
-
             $button.addClass('loading').prop('disabled', true);
 
             $.ajax({
@@ -258,19 +248,16 @@
                     nonce: shopglut_shop_vars.wishlist_nonce
                 },
                 success: function(response) {
-                    console.log('Wishlist response:', response);
                     if (response.success) {
                         // Use shop layout's icons instead of module's icons
                         if (isAdded) {
                             // Was in wishlist, now removing - show add icon
                             $parent.removeClass('added').addClass('not-added');
                             $icon.attr('class', addIcon);
-                            console.log('Removed from wishlist, showing add icon:', addIcon);
                         } else {
                             // Was not in wishlist, now adding - show added icon
                             $parent.removeClass('not-added').addClass('added');
                             $icon.attr('class', addedIcon);
-                            console.log('Added to wishlist, showing added icon:', addedIcon);
                         }
 
                         // Show notification from response using module settings

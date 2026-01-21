@@ -63,16 +63,16 @@ class templateMarkup {
                 <div class="image-gallery">
                     <div class="gallery-grid">
                         <div class="gallery-item">
-                            <img src="demo-image.png" alt="Product Image">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product Image">
                         </div>
                         <div class="gallery-item">
-                            <img src="demo-image.png" alt="Product View 2">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product View 2">
                         </div>
                         <div class="gallery-item">
-                            <img src="demo-image.png" alt="Product View 3">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product View 3">
                         </div>
                         <div class="gallery-item">
-                            <img src="demo-image.png" alt="Product View 4">
+                            <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product View 4">
                         </div>
                     </div>
                 </div>
@@ -311,28 +311,28 @@ class templateMarkup {
 
                 <div class="products-grid" id="related-products">
                     <div class="product-card">
-                        <img src="demo-image.png" alt="Product">
+                        <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product">
                         <div class="product-card-content">
                             <h4 class="product-card-title">Wireless Earbuds Pro</h4>
                             <p class="product-card-price">$149.99</p>
                         </div>
                     </div>
                     <div class="product-card">
-                        <img src="demo-image.png" alt="Product">
+                        <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product">
                         <div class="product-card-content">
                             <h4 class="product-card-title">Bluetooth Speaker Max</h4>
                             <p class="product-card-price">$199.99</p>
                         </div>
                     </div>
                     <div class="product-card">
-                        <img src="demo-image.png" alt="Product">
+                        <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product">
                         <div class="product-card-content">
                             <h4 class="product-card-title">Studio Headphones</h4>
                             <p class="product-card-price">$249.99</p>
                         </div>
                     </div>
                     <div class="product-card">
-                        <img src="demo-image.png" alt="Product">
+                        <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product">
                         <div class="product-card-content">
                             <h4 class="product-card-title">Gaming Headset RGB</h4>
                             <p class="product-card-price">$179.99</p>
@@ -342,28 +342,28 @@ class templateMarkup {
 
                 <div class="products-grid" id="recently-viewed" style="display: none;">
                     <div class="product-card">
-                        <img src="demo-image.png" alt="Product">
+                        <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product">
                         <div class="product-card-content">
                             <h4 class="product-card-title">Portable DAC</h4>
                             <p class="product-card-price">$299.99</p>
                         </div>
                     </div>
                     <div class="product-card">
-                        <img src="demo-image.png" alt="Product">
+                        <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product">
                         <div class="product-card-content">
                             <h4 class="product-card-title">Audio Cable Premium</h4>
                             <p class="product-card-price">$49.99</p>
                         </div>
                     </div>
                     <div class="product-card">
-                        <img src="demo-image.png" alt="Product">
+                        <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product">
                         <div class="product-card-content">
                             <h4 class="product-card-title">Headphone Stand</h4>
                             <p class="product-card-price">$39.99</p>
                         </div>
                     </div>
                     <div class="product-card">
-                        <img src="demo-image.png" alt="Product">
+                        <img src="<?php echo esc_url($placeholder_url); ?>" alt="Product">
                         <div class="product-card-content">
                             <h4 class="product-card-title">Carrying Case Pro</h4>
                             <p class="product-card-price">$29.99</p>

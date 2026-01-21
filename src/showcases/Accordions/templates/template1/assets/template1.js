@@ -311,7 +311,6 @@ class ShopGlutAccordionTemplate1 {
 		// Listen for custom accordion events
 		document.addEventListener('shopglutAccordionChange', (e) => {
 			// Allow external code to react to accordion changes
-			console.log('Accordion changed:', e.detail);
 		});
 
 		// Global keyboard shortcuts

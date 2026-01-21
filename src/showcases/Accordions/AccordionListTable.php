@@ -49,12 +49,12 @@ class AccordionListTable extends \WP_List_Table {
 		$layout_id = absint( $item['id'] );
 		$edit_link = add_query_arg( array( 'editor' => 'accordion', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_showcases' ) );
 		$delete_link = wp_nonce_url(
-			add_query_arg( array( 'action' => 'delete', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_showcases&view=accordion' ) ),
+			add_query_arg( array( 'action' => 'delete', 'layout_id' => $layout_id ), admin_url( 'admin.php?page=shopglut_showcases&view=accordions' ) ),
 			'shopglut_delete_layout_' . $layout_id
 		);
 		$duplicate_link = add_query_arg(
 			array( 'action' => 'duplicate', 'layout_id' => $layout_id ),
-			admin_url( 'admin.php?page=shopglut_showcases&view=accordion' )
+			admin_url( 'admin.php?page=shopglut_showcases&view=accordions' )
 		);
 
 		$actions = array(

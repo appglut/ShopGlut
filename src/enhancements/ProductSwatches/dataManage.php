@@ -314,13 +314,6 @@ class dataManage {
             // Generate dynamic CSS
             $dynamic_css = $style_instance->dynamicCss( $layout_id );
 
-            // DEBUG: Log CSS generation
-            error_log('=== PREVIEW CSS DEBUG ===');
-            error_log('Layout ID: ' . $layout_id);
-            error_log('Dynamic CSS length: ' . strlen($dynamic_css));
-            error_log('Dynamic CSS empty: ' . (empty($dynamic_css) ? 'YES' : 'NO'));
-            error_log('=== END PREVIEW CSS DEBUG ===');
-
             // Output CSS
             if ( ! empty( $dynamic_css ) ) {
                 echo '<style type="text/css">' . $dynamic_css . '</style>';

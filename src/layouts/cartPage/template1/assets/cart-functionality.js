@@ -45,15 +45,12 @@
          * Decrease quantity
          */
         decreaseQuantity(e) {
-            console.log('Decrease quantity clicked');
             e.preventDefault();
             const button = $(e.currentTarget);
             const cartKey = button.data('cart-key');
             const qtyControl = button.closest('.qty-control');
             const qtyInput = qtyControl.find('.qty-input');
             const currentQty = parseInt(qtyInput.val()) || 1;
-
-            console.log('Current qty:', currentQty, 'Cart key:', cartKey, 'Input found:', qtyInput.length);
 
             if (currentQty > 1) {
                 // Update the input immediately for visual feedback
@@ -66,7 +63,6 @@
          * Increase quantity
          */
         increaseQuantity(e) {
-            console.log('Increase quantity clicked');
             e.preventDefault();
             const button = $(e.currentTarget);
             const cartKey = button.data('cart-key');
@@ -74,8 +70,6 @@
             const qtyInput = qtyControl.find('.qty-input');
             const currentQty = parseInt(qtyInput.val()) || 1;
             const maxQty = parseInt(qtyInput.attr('max')) || 999;
-
-            console.log('Current qty:', currentQty, 'Max qty:', maxQty, 'Cart key:', cartKey, 'Input found:', qtyInput.length);
 
             if (currentQty < maxQty) {
                 // Update the input immediately for visual feedback
@@ -130,7 +124,6 @@
                     nonce: shopglut_cart_ajax.nonce
                 },
                 success: (response) => {
-                    console.log('AJAX Response:', response);
                     if (response.success) {
                         if (response.data && response.data.fragments) {
                             this.updateCartFragments(response.data.fragments);
@@ -192,7 +185,6 @@
                     nonce: shopglut_cart_ajax.nonce
                 },
                 success: (response) => {
-                    console.log('Remove item response:', response);
                     if (response.success) {
                         if (response.data && response.data.fragments) {
                             this.updateCartFragments(response.data.fragments);

@@ -97,6 +97,11 @@ class ProductComparisonEntity {
         return $result;
     }
 
+    // Alias method for consistency with other modules
+    public static function delete_layout($layout_id) {
+        return self::delete_enhancement($layout_id);
+    }
+
     // Add a method to verify table exists
     public static function verifyTable() {
         global $wpdb;

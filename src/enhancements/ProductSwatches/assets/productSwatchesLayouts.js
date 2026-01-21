@@ -42,8 +42,6 @@ jQuery(document).ready(function($) {
             postid = $("input[name='layout_id']").val();
         }
 
-        console.log('Reset: Layout ID found:', postid);
-
         var nonce = $("input[name='shopg_productswatches_layouts_nonce']").val();
 
         // Fallback: try different nonce field names

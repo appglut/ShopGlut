@@ -31,11 +31,6 @@ function load_template_settings_dynamically() {
         wp_cache_set($cache_key, $layout_template, 'shopglut_layouts', 30 * MINUTE_IN_SECONDS);
     }
 
-    // Debug: Log template loading (remove in production)
-    if (defined('WP_DEBUG') && WP_DEBUG) {
-        error_log("ShopGlut: Loading template settings for template: " . ($layout_template ?: 'default'));
-    }
-
     // Load settings based on template
     switch ($layout_template) {
         case 'templatePro1':

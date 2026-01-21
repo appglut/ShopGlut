@@ -22,7 +22,6 @@
             // Get form element
             var $form = this.getFormElement('#shopglut_shop_layouts');
             if (!$form.length) {
-                console.log('Shop layout form not found');
                 return cleanData;
             }
 
@@ -31,7 +30,7 @@
                 cleanData = this.collectAllFormData($form);
 
             } catch (error) {
-                console.error('Error collecting shop layout data:', error);
+                // Silently fail
             }
 
             return cleanData;
@@ -210,12 +209,6 @@
             var layoutTemplate = $('#layout_template').val() || 'template1';
             var nonce = $('input[name="shopg_shoplayouts_layouts_nonce"]').val();
 
-            // Debug: Log the collected form data to verify style settings are included
-            console.log('📋 Collected form data:', formData);
-            if (formData.shopg_options_settings && formData.shopg_options_settings.shopg_settings_options) {
-                console.log('🎨 Style settings:', formData.shopg_options_settings.shopg_settings_options.shopg_settings_element_accordion);
-            }
-
             // Prepare AJAX data
             var ajaxData = {
                 action: 'save_shopg_shopdata',
@@ -245,19 +238,12 @@
 
                         // Update preview with saved layout
                         if (response.data.html) {
-                            console.log('=== PREVIEW UPDATE STARTED ===');
-                            console.log('Response HTML length:', response.data.html.length);
-
                             // Find the outer preview wrapper
                             var $previewWrapper = $('.shopg_shop_layout_contents');
-                            console.log('Found preview wrapper:', $previewWrapper.length);
 
                             if ($previewWrapper.length) {
-                                console.log('Replacing preview with saved layout...');
-
                                 // Directly replace with the server's HTML (your updated layout)
                                 $previewWrapper.replaceWith(response.data.html);
-                                console.log('✅ Preview updated with saved layout successfully!');
 
                                 // Scroll to the updated preview
                                 setTimeout(function() {
@@ -268,11 +254,7 @@
                                         }, 500);
                                     }
                                 }, 100);
-                            } else {
-                                console.error('❌ Preview wrapper not found!');
                             }
-                        } else {
-                            console.error('❌ No HTML in response');
                         }
                     } else {
                         // Show error message

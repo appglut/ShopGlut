@@ -296,7 +296,6 @@ class SettingsPage {
 			// Auto-refresh template settings when template field changes
 			$(document).on('change', 'input[name="layout_template"]', function() {
 				var newTemplate = $(this).val();
-				console.log('Template changed to:', newTemplate);
 
 				// Add visual indicator that settings need to be reloaded
 				$('#shopg-notification-container').html(

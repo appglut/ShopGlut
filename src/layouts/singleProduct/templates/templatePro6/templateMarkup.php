@@ -70,42 +70,42 @@ class templateMarkup {
 
                     <div class="product-slider" id="productSlider">
                         <div class="slider-item" onclick="selectImage(0)">
-                            <img src="https://picsum.photos/seed/headphones1/400/300.jpg" alt="Premium Wireless Headphones">
+                            <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro6-demo-image.png'); ?>" alt="Premium Wireless Headphones">
                             <div class="slider-info">
                                 <h5>Main Product</h5>
                                 <p>Premium Wireless Headphones</p>
                             </div>
                         </div>
                         <div class="slider-item" onclick="selectImage(1)">
-                            <img src="https://picsum.photos/seed/headphones2/400/300.jpg" alt="Side View">
+                            <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro6-demo-image.png'); ?>" alt="Side View">
                             <div class="slider-info">
                                 <h5>Side View</h5>
                                 <p>Comfortable ear cushions</p>
                             </div>
                         </div>
                         <div class="slider-item" onclick="selectImage(2)">
-                            <img src="https://picsum.photos/seed/headphones3/400/300.jpg" alt="Detail View">
+                            <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro6-demo-image.png'); ?>" alt="Detail View">
                             <div class="slider-info">
                                 <h5>Detail View</h5>
                                 <p>Adjustable headband</p>
                             </div>
                         </div>
                         <div class="slider-item" onclick="selectImage(3)">
-                            <img src="https://picsum.photos/seed/headphones4/400/300.jpg" alt="Features">
+                            <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro6-demo-image.png'); ?>" alt="Features">
                             <div class="slider-info">
                                 <h5>Features</h5>
                                 <p>Touch controls</p>
                             </div>
                         </div>
                         <div class="slider-item" onclick="selectImage(4)">
-                            <img src="https://picsum.photos/seed/headphones5/400/300.jpg" alt="Accessories">
+                            <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro6-demo-image.png'); ?>" alt="Accessories">
                             <div class="slider-info">
                                 <h5>Accessories</h5>
                                 <p>What's in the box</p>
                             </div>
                         </div>
                         <div class="slider-item" onclick="selectImage(5)">
-                            <img src="https://picsum.photos/seed/headphones6/400/300.jpg" alt="Color Options">
+                            <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro6-demo-image.png'); ?>" alt="Color Options">
                             <div class="slider-info">
                                 <h5>Colors</h5>
                                 <p>Multiple color options</p>
@@ -446,7 +446,7 @@ class templateMarkup {
                         <!-- Product 1 -->
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="https://picsum.photos/seed/earbuds1/300/300.jpg" alt="Wireless Earbuds">
+                                <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro6-demo-image.png'); ?>" alt="Wireless Earbuds">
                                 <div class="product-badge">-25%</div>
                             </div>
                             <div class="product-info">
@@ -476,7 +476,7 @@ class templateMarkup {
                         <!-- Product 2 -->
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="https://picsum.photos/seed/speaker1/300/300.jpg" alt="Bluetooth Speaker">
+                                <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro6-demo-image.png'); ?>" alt="Bluetooth Speaker">
                                 <div class="product-badge">New</div>
                             </div>
                             <div class="product-info">
@@ -505,7 +505,7 @@ class templateMarkup {
                         <!-- Product 3 -->
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="https://picsum.photos/seed/headphones2/300/300.jpg" alt="Studio Headphones">
+                                <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro6-demo-image.png'); ?>" alt="Studio Headphones">
                                 <div class="product-badge">-15%</div>
                             </div>
                             <div class="product-info">
@@ -535,7 +535,7 @@ class templateMarkup {
                         <!-- Product 4 -->
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="https://picsum.photos/seed/earbuds2/300/300.jpg" alt="Sports Earbuds">
+                                <img src="<?php echo esc_url(SHOPGLUT_URL . 'global-assets/images/templatePro6-demo-image.png'); ?>" alt="Sports Earbuds">
                                 <div class="product-badge">Hot</div>
                             </div>
                             <div class="product-info">

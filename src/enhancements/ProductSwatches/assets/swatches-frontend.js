@@ -556,9 +556,6 @@
                         if (priceHtml) {
                             $priceEl.html(priceHtml);
                             priceUpdated = true;
-                            if (window.console && window.console.log) {
-                                console.log('ShopGlut: Price updated to:', priceHtml);
-                            }
                         }
                     } else {
                         // Check if this attribute has a value selected
@@ -595,10 +592,6 @@
                     }
                 }
             });
-
-            if (window.console && window.console.log) {
-                console.log('ShopGlut: Price elements found:', priceFound, 'Price updated:', priceUpdated, 'Matching variation:', matchingVariation ? matchingVariation.variation_id : 'none');
-            }
 
             // NOW animate the elements AFTER price has been populated
             // Add/remove variation-selected class on the product container
@@ -741,7 +734,7 @@
 
         // Log initialization
         if (window.console) {
-            console.log('ShopGlut Product Swatches initialized');
+            // Product Swatches initialized
         }
     });
 

@@ -241,7 +241,6 @@
         toggleShareForm: function(e) {
             e.preventDefault();
             // This method is no longer needed - using inline JavaScript
-            console.log('Legacy toggleShareForm called - using inline JavaScript instead');
         },
 
         sendCartEmail: function(e) {
@@ -324,9 +323,7 @@
 
     // Initialize on document ready
     $(document).ready(function() {
-        console.log('ShopGlut Mini Cart initializing...');
         ShopGlutMiniCart.init();
-        console.log('ShopGlut Mini Cart initialized.');
     });
 
     // Make it globally available

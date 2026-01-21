@@ -536,14 +536,13 @@ class QuickViewchooseTemplates {
 			})
 			.then(response => response.text())
 			.then(html => {
-				console.log('AJAX Response:', html);
 				// Show close button when content loads successfully
 				if (html && html.trim() !== '') {
 					showCloseButtonOnContentLoad();
 				}
 			})
 			.catch(error => {
-				console.error('AJAX Error:', error);
+				// Silently fail
 			});
 		}
 
