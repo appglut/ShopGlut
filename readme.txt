@@ -1,36 +1,25 @@
-=== ShopGlut - All in One Store Builder for Woocommerce ===
+=== ShopGlut - Builder for WooCommerce ===
 Contributors: appglut
 Tags: woocommerce product , woocommerce customizer, woocommerce builder, woocommerce bundle, woocommerce
 Requires at least: 5.1
 Requires PHP: 7.4
 Tested up to: 6.9
-Stable tag: 1.7.2
+Stable tag: 1.7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-All-in-one WooCommerce store builder with advanced filtering, layouts, and customization. Build professional e-commerce stores.
+Builder for Woocommerce with 6 powerful modules including single product builder, wishlist, custom fields, swatches, badges, and comparison.
 
 == Description ==
 
-**ShopGlut** - The ultimate all-in-one WooCommerce store builder with seventeen powerful modules for creating complete e-commerce websites:
+**ShopGlut** - The ultimate all-in-one WooCommerce store builder with 6 powerful modules for creating complete e-commerce websites:
 
 🛍️ **Single Product** - Create conversion-optimized product pages with Product Page Builder
-🏪 **Shop & Archive Layouts** - Customize shop pages and archive layouts with advanced design options
-🔍 **Shop Filter** - Advanced AJAX-powered product filtering with customizable filter options and pagination
-🛒 **Cart Page** - Design custom cart experiences with Cart Layout Builder
-📝 **Checkout Page** - Manage checkout fields for classic and block checkout with Checkout Field Editor
-📦 **OrderComplete Page** - Create engaging thank you pages with Order Complete Builder
-👤 **My Account** - Customize WooCommerce My Account pages with Account Page Builder
-🔍 **Quick View** - Instant product preview with Product Popup Modal
-⚖️ **Product Comparison** - Side-by-side product comparison with Compare Products Table
 💝 **Wishlist** - Save favorite products with advanced features
+📝 **Product Custom Fields** - Add custom fields to products
 🎨 **Product Swatches** - Color, image, and label swatches for variations
 🏷️ **Product Badges** - Custom product labels and badges
-📝 **Product Custom Fields** - Add custom fields to products
-🔐 **Login/Register** - Fully customizable login, register, and forgot password forms with advanced styling options
-🛒 **Mini Cart** - Advanced mini cart with customizable design and placement options
-🎯 **Shop Banner** - Dynamic shop banners with promotions and custom content
-📋 **Shortcode Showcase** - Display WooCommerce content with powerful shortcodes using Woo Templates
+⚖️ **Product Comparison** - Side-by-side product comparison with Compare Products Table
 
 = KEY FEATURES =
 
@@ -42,72 +31,26 @@ All-in-one WooCommerce store builder with advanced filtering, layouts, and custo
 * Related products and upsells display
 * Mobile responsive design
 
-**Shop & Archive Layouts:**
-* Complete shop page customization with advanced layout options
-* Multiple pre-designed templates for different store styles
-* Responsive grid and list layouts with customizable columns
-* Advanced typography and color controls
-* Product sorting and ordering options
-* Custom header and footer designs
-* Mobile-optimized shop layouts
-* Category and tag archive customization
-* Search results page styling
-* SEO-friendly structure with proper schema markup
-
-**Shop Filter System:**
-* Advanced AJAX-powered product filtering without page reloads
-* Multiple filter types: categories, tags, attributes, price ranges
-* Customizable filter appearance (checkbox, radio, dropdown styles)
-* Configurable products per page with pagination
-* Live preview filter builder with drag-and-drop interface
-* Responsive filter layouts for all devices
-* Filter position control (left sidebar, right sidebar, above content)
-* Show/hide product count options
-* Custom filter titles and styling
-* Seamless integration with all WooCommerce themes
-* Mobile-friendly filter interface
-* Real-time filter updates with smooth animations
-
-**Cart Page Builder:**
-* Visual cart layout customization
-* Responsive cart tables with customizable columns
-* AJAX cart updates without page refresh
-* Cross-sell product integration
-* Empty cart state customization
-
-**Checkout Field Editor:**
-* Add, edit, remove checkout fields
-* Support for text, email, select, checkbox, date fields
-* Classic and WooCommerce Blocks integration
-* Drag-and-drop field reordering
-* Import/export configurations
-
-**Account Page Builder:**
-* Beautiful, modern My Account page layouts
-* Customizable navigation sidebar with active states
-* Responsive grid-based design system
-* Advanced typography and color controls
-* Custom dashboard, orders, and downloads displays
-* Mobile-optimized account interface
-* Live preview with demo mode
-* Easy template switching and customization
-* Comprehensive styling options for all elements
-* One-click layout activation with conflict prevention
-
-**Order Complete Page Builder:**
-* Custom thank you page layouts
-* Display order details, customer information, and items
-* Add custom messages and promotional content
-* Multiple pre-designed templates
-* Mobile-responsive design
-* Works with both classic and block themes
-
 **Wishlist System:**
 * Guest user support with cookie storage
 * Social sharing (Facebook, Twitter, WhatsApp, etc.)
 * Email notifications for stock and price changes
 * Bulk add to cart functionality
 * Sortable and filterable tables
+
+**Product Swatches:**
+* Color, image, bicolor, and label swatches
+* Global and product-level configuration
+* Shop and archive page integration
+* Custom shapes, sizes, and styling
+* Stock integration with disabled states
+
+**Product Badges:**
+* Custom product labels and badges
+* Badge shapes, colors, and animations
+* Conditional display based on stock, sales, categories
+* Position controls on product images
+* Unlimited badge creation
 
 **Product Comparison:**
 * Side-by-side product comparison with customizable tables
@@ -120,31 +63,13 @@ All-in-one WooCommerce store builder with advanced filtering, layouts, and custo
 * Direct add to cart from comparison table
 * Page-specific comparison layouts (shop page, categories, tags)
 
-**Product Swatches:**
-* Color, image, bicolor, and label swatches
-* Global and product-level configuration
-* Shop and archive page integration
-* Custom shapes, sizes, and styling
-* Stock integration with disabled states
-
-**Product Quick View:**
-* Instant modal popup for quick product preview
-* View product details without leaving current page
-* Fully functional add to cart and variations
-* Responsive modal with image gallery
-* Customizable button and modal styling
-* Multiple display locations (shop, categories, tags)
-
-**Shortcode Showcase:**
-* Powerful WooCommerce shortcodes for displaying products and categories
-* Category-based product display with [shopglut_woo_category] shortcode
-* Advanced filtering, sorting, and pagination options
-* Integration with Woo Templates for custom product display
-* Customizable grid layouts and responsive design
-* AJAX-powered pagination for smooth user experience
-* Search and sort functionality within product displays
-* Toolbar with filter controls and customization options
-* Mobile-optimized shortcode output with touch-friendly interface
+**Product Custom Fields:**
+* Add custom fields to products
+* Multiple field types: text, textarea, select, checkbox, radio, date, number
+* Display custom fields on product pages
+* Field validation and conditional logic
+* Organize fields in groups
+* Import/export field configurations
 
 = BENEFITS =
 
@@ -164,18 +89,18 @@ All-in-one WooCommerce store builder with advanced filtering, layouts, and custo
 2. Search for "ShopGlut Builder and Customized Solutions"
 3. Click "Install Now" and then "Activate"
 4. Navigate to ShopGlut → Single Product to start designing product pages
-5. Access all fifteen modules from the ShopGlut menu: Shop & Archive Layouts, Shop Filter, Cart Page, Checkout Page, OrderComplete Page, My Account, Quick View, Product Comparison, Wishlist, Product Swatches, Product Badges, Product Custom Fields, Login/Register, and Shortcode Showcase
+5. Access all six modules from the ShopGlut menu: Single Product, Wishlist, Product Custom Fields, Product Swatches, Product Badges, and Product Comparison
 
 **Manual Installation:**
 1. Download the plugin zip file from WordPress.org
 2. Upload via WordPress admin → Plugins → Add New → Upload Plugin
 3. Or extract to `/wp-content/plugins/shopglut/` directory
 4. Activate through the Plugins menu in WordPress
-5. Access all fifteen modules through the ShopGlut admin menu
+5. Access all six modules through the ShopGlut admin menu
 
 **Quick Start:**
 1. Go to ShopGlut in admin menu
-2. Choose a module (Single Product, Shop & Archive Layouts, Shop Filter, Cart Page, Checkout Page, etc.)
+2. Choose a module (Single Product, Wishlist, Product Custom Fields, Product Swatches, Product Badges, or Product Comparison)
 3. Create or edit a layout
 4. Customize using the visual builder
 5. Apply changes and preview
@@ -200,18 +125,6 @@ No. ShopGlut is performance-optimized with conditional loading, efficient databa
 
 = Does the page builder work with all WooCommerce product types? =
 Absolutely! The plugin fully supports all WooCommerce product types including simple products, variable products (with attributes), grouped products, and external/affiliate products. Each product type has specialized layout options and form handling.
-
-= How do I customize my WooCommerce cart page? =
-Navigate to ShopGlut → Cart Page Builder in your admin dashboard. You can customize the cart table layout, product information display, quantity controls, and cart totals section. The visual builder allows you to see changes in real-time and create a mobile-responsive cart experience.
-
-= Can I add custom fields to the WooCommerce checkout? =
-Yes! Go to ShopGlut → Checkout Field Editor to add, edit, or remove checkout fields. You can create custom fields for billing, shipping, and additional information sections. The plugin supports both classic checkout and WooCommerce Blocks checkout with various field types including text, email, select, checkbox, and more.
-
-= How do I customize my WooCommerce account page? =
-Navigate to ShopGlut → Layouts → Account Page in your admin dashboard. Create a new layout or edit an existing one. The Account Page Builder provides a modern, grid-based design with customizable navigation sidebar, content area, and comprehensive styling options. You can customize colors, typography, spacing, borders, and more. Simply enable your layout and it will automatically replace the default WooCommerce My Account page.
-
-= Can I have multiple account page layouts? =
-Yes, you can create multiple account page layouts, but only one can be active at a time. The plugin includes a status column in the layout list to show which layout is currently enabled. When you try to enable a new layout, the system will prevent conflicts by showing a message if another layout is already active.
 
 = How do I display the wishlist on my website? =
 Create a new page in WordPress and add the shortcode `[shopglut_wishlist]` where you want the wishlist to appear. You can also set this page as the default wishlist page in the plugin settings under ShopGlut → Wishlist Options.
@@ -279,12 +192,6 @@ By default, customers can compare up to 4 products simultaneously for optimal vi
 = Can I have different comparison layouts for different pages? =
 Yes! You can create multiple comparison layouts and assign them to specific locations like the main shop page, individual product categories, or product tags. Only one layout can be active per location, and the system prevents conflicts by showing which locations are already taken by other layouts.
 
-= How do I enable product quick view on my site? =
-Navigate to ShopGlut → Layouts → Quick Views in your admin dashboard. Create a new quick view layout and customize the modal appearance, button styling, and display options. You can set different layouts for shop pages, specific categories, tags, or even individual products. Customers will see a quick view button on product listings that opens an instant preview modal.
-
-= Can I customize the quick view modal appearance? =
-Absolutely! You can customize every aspect of the quick view modal including size, colors, fonts, spacing, borders, and animations. Control the button appearance (icon, text, position), modal overlay opacity, image gallery display, variation controls styling, and action button designs. The modal is fully responsive and works perfectly on all devices.
-
 = How do I add product badges to my products? =
 Navigate to ShopGlut → Product Badges to enable and configure custom product labels. Create badges for sales, new products, featured items, out-of-stock status, and more. You can customize badge colors, shapes, positions, and animations. Badges can be applied globally to all products or individually to specific products based on categories, tags, or custom conditions.
 
@@ -311,6 +218,27 @@ Yes! All ShopGlut shortcodes are compatible with major page builders and the Wor
 4. **ShopGlut Wishlist Admin Dashboard**
 
 == Changelog ==
+
+= 1.7.3 =
+
+**Plugin Restructure to Core Modules**
+* **UPDATED: Plugin branding and positioning**
+  - Renamed from "All in One Store Builder" to "Builder for WooCommerce"
+  - Streamlined plugin to focus on 6 core modules
+  - Improved documentation and module descriptions
+
+* **Active Core Modules (6):**
+  - Single Product - Create conversion-optimized product pages with Product Page Builder
+  - Wishlist - Save favorite products with advanced features
+  - Product Custom Fields - Add custom fields to products
+  - Product Swatches - Color, image, and label swatches for variations
+  - Product Badges - Custom product labels and badges
+  - Product Comparison - Side-by-side product comparison
+
+* **Technical Improvements**
+  - Removed unused modules for better performance
+  - Cleaner codebase with focused functionality
+  - Updated plugin documentation
 
 = 1.7.2 =
 
@@ -790,6 +718,6 @@ Wishlist bug fixed, some adjustments with code
 
 ---
 
-**Transform your WooCommerce store today with ShopGlut - The most comprehensive WooCommerce customization plugin with 15 powerful modules!**
+**Transform your WooCommerce store today with ShopGlut - The most comprehensive WooCommerce customization plugin with 6 powerful modules!**
 
-*Build stunning product pages, customize cart & checkout, create beautiful account pages, design thank you pages, add wishlists, compare products side-by-side, enhance products with swatches, enable quick view modals, add custom badges and labels, and create custom product fields - all without coding!*
+*Build stunning product pages, add wishlists, create custom product fields, enhance products with swatches and badges, and compare products side-by-side - all without coding!*

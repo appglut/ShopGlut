@@ -36,10 +36,10 @@ class chooseTemplates {
 	}
 
 	/**
-	 * Check if templatePro1 pro features are available
+	 * Check if Product Swatches pro features are available
 	 */
 	private function is_template1_pro_available() {
-		return $this->is_productswatches_pro_active();
+		return $this->is_ProductSwatches_pro_active();
 	}
 
 	public function loadProductSwatchesTemplates( $attribute = '' ) {
@@ -172,10 +172,12 @@ class chooseTemplates {
 							<div class="template-footer">
 								<?php
 								// Check if this template requires pro and if pro is active
-								// Only templatePro1 requires the pro plugin
-								$is_pro_template_required = ($layout_template === 'templatePro1');
+								// Free templates: template1, template2
+								// Pro templates: template9 and above
+								$free_templates = array('template1', 'template2');
+								$is_pro_template = !in_array($layout_template, $free_templates);
 								$is_pro_available = $this->is_template1_pro_available();
-								$should_disable = $is_pro_template_required && !$is_pro_available;
+								$should_disable = $is_pro_template && !$is_pro_available;
 								?>
 
 								<?php if ($should_disable): ?>
@@ -185,8 +187,8 @@ class chooseTemplates {
 											<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 												<path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
 											</svg>
-											<span><?php esc_html_e("Upgrade to Pro", 'shopglut'); ?></span>
-											<span class="pro-link-message"><?php esc_html_e("to use this template", 'shopglut'); ?></span>
+											<span><?php esc_html_e("Get Pro Version", 'shopglut'); ?></span>
+											<span class="pro-link-message"><?php esc_html_e("to unlock this template", 'shopglut'); ?></span>
 										</a>
 									</div>
 								<?php else: ?>

@@ -250,17 +250,9 @@
          * Save order complete layout data via AJAX
          */
         saveProductBadgeLayoutData: function() {
-            // Show loader - use global function if available, otherwise show directly
-            if (window.showLoader && typeof window.showLoader === 'function') {
-                window.showLoader();
-            } else {
-                // Fallback: show loader directly
-                $('.loader-overlay').css({
-                    'display': 'flex',
-                    'opacity': '1'
-                });
-                $('.loader-container').show();
-            }
+            // Show loader - direct CSS like single product module
+            $(".loader-overlay").css({"display": "flex", "opacity": "1"});
+            $(".loader-container").show();
 
             // Get form data
             var formData = this.convertFormDataToJSON();
@@ -297,26 +289,19 @@
                 success: function(response) {
                     if (response.success) {
                         // Show success message
-                        ShopGlutProductBadgeLayout.dataConverter.showNotification('success', response.data.message || 'Order complete layout saved successfully!');
+                        ShopGlutProductBadgeLayout.dataConverter.showNotification('success', response.data.message || 'Product badge saved successfully!');
 
                         // Update layout ID if it's a new layout
                         if (response.data.badge_id) {
                             $('#shopg_badge_id').val(response.data.badge_id);
                             $('input[name="shopg_badge_id"]').val(response.data.badge_id);
-                        }
 
-                        // Update preview if HTML is returned - find the specific preview field
-                        if (response.data.html) {
-                            // Target the badge preview wrapper
-                            var $previewField = $('.shopglut-badge-preview-wrapper');
-                            if ($previewField.length) {
-                                // Replace the entire preview wrapper with the updated preview
-                                $previewField.replaceWith(response.data.html);
-                            }
+                            // Reload the preview from server after save
+                            ShopGlutProductBadgeLayout.dataConverter.reloadBadgePreview(response.data.badge_id);
                         }
                     } else {
                         // Show error message
-                        ShopGlutProductBadgeLayout.dataConverter.showNotification('error', response.data.message || response.data || 'Failed to save order complete layout.');
+                        ShopGlutProductBadgeLayout.dataConverter.showNotification('error', response.data.message || response.data || 'Failed to save product badge.');
                     }
                 },
                 error: function(xhr) {
@@ -338,16 +323,9 @@
                     ShopGlutProductBadgeLayout.dataConverter.showNotification('error', errorMessage);
                 },
                 complete: function() {
-                    // Hide loader - use global function if available, otherwise hide directly
-                    if (window.hideLoader && typeof window.hideLoader === 'function') {
-                        window.hideLoader();
-                    } else {
-                        // Fallback: hide loader directly
-                        $('.loader-overlay').css('opacity', '0');
-                        setTimeout(function() {
-                            $('.loader-overlay').css('display', 'none');
-                        }, 500);
-                    }
+                    // Hide loader - direct CSS like single product module
+                    $(".loader-overlay").css({"display": "none", "opacity": "0"});
+                    $(".loader-container").hide();
                 }
             });
         },
@@ -360,17 +338,9 @@
                 return;
             }
 
-            // Show loader - use global function if available, otherwise show directly
-            if (window.showLoader && typeof window.showLoader === 'function') {
-                window.showLoader();
-            } else {
-                // Fallback: show loader directly
-                $('.loader-overlay').css({
-                    'display': 'flex',
-                    'opacity': '1'
-                });
-                $('.loader-container').show();
-            }
+            // Show loader - direct CSS like single product module
+            $(".loader-overlay").css({"display": "flex", "opacity": "1"});
+            $(".loader-container").show();
 
             var layoutId = $('#shopg_shop_layoutid').val() || 0;
             var nonce = $('input[name="shopg_productbadge_layouts_nonce"]').val();
@@ -406,16 +376,9 @@
                     ShopGlutProductBadgeLayout.dataConverter.showNotification('error', 'Network error occurred while resetting settings.');
                 },
                 complete: function() {
-                    // Hide loader - use global function if available, otherwise hide directly
-                    if (window.hideLoader && typeof window.hideLoader === 'function') {
-                        window.hideLoader();
-                    } else {
-                        // Fallback: hide loader directly
-                        $('.loader-overlay').css('opacity', '0');
-                        setTimeout(function() {
-                            $('.loader-overlay').css('display', 'none');
-                        }, 500);
-                    }
+                    // Hide loader - direct CSS like single product module
+                    $(".loader-overlay").css({"display": "none", "opacity": "0"});
+                    $(".loader-container").hide();
                 }
             });
         },
@@ -446,11 +409,66 @@
             $notice.on('click', '.notice-dismiss', function() {
                 $notice.remove();
             });
+        },
+
+        /**
+         * Reload badge preview from server after save
+         */
+        reloadBadgePreview: function(badgeId) {
+            if (!badgeId) {
+                return;
+            }
+
+            var nonce = $('input[name="shopg_productbadge_nonce"]').val();
+            if (!nonce) {
+                console.warn('Missing nonce for badge preview request');
+                return;
+            }
+
+            // Fetch the updated preview from the server
+            $.ajax({
+                url: shopglut_admin_vars.ajax_url || ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'shopglut_get_badge_preview',
+                    badge_id: badgeId,
+                    nonce: nonce
+                },
+                success: function(response) {
+                    if (response.success && response.data.html) {
+                        // Replace the preview container with the updated preview
+                        var $previewContainer = $('.shopglut-badge-preview-wrapper');
+                        if ($previewContainer.length) {
+                            $previewContainer.replaceWith(response.data.html);
+                        } else {
+                            // If preview container doesn't exist, append it to the settings panel
+                            $('#shopg-productbadge-settings').prepend(response.data.html);
+                        }
+                    }
+                },
+                error: function() {
+                    console.warn('Failed to reload badge preview');
+                }
+            });
         }
     };
 
     // Initialize on document ready
     $(document).ready(function() {
+        // Hide loader on page load - same as single product module
+        $(window).on('load', function() {
+            setTimeout(function() {
+                $(".loader-overlay").css({"display": "none", "opacity": "0"});
+                $(".loader-container").hide();
+            }, 500);
+        });
+
+        // Fallback: Hide loader after maximum 10 seconds
+        setTimeout(function() {
+            $(".loader-overlay").css({"display": "none", "opacity": "0"});
+            $(".loader-container").hide();
+        }, 10000);
+
         // Bind save button click
         $('#productbadge-publishing-action #productbadge-save-badge-button').on('click', function(e) {
             e.preventDefault();

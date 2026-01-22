@@ -110,7 +110,7 @@ class template2Markup {
 
 		?>
 		<!-- Button Swatches Preview -->
-		<div class="shopglut-swatches-demo">
+		<div class="shopglut-swatches-demo shopglut-demo-center">
 			<div class="shopglut-swatches-wrapper shopglut-template2">
 				<!-- Label -->
 				<label class="shopglut-attribute-label" style="color:<?php echo esc_attr($label_color); ?>;font-size:<?php echo intval($label_font_size); ?>px;font-weight:600;display:block;margin-bottom:12px;">
@@ -129,6 +129,71 @@ class template2Markup {
 
 			<!-- Inline styles for interactions -->
 			<style>
+				/* Parent container styles for proper centering */
+				.shopg-template-preview .html-preview-background {
+					display: flex !important;
+					align-items: center !important;
+					justify-content: center !important;
+				}
+
+				.shopg-template-preview .shopglut-single-product {
+					width: 100% !important;
+				}
+
+				.shopg-template-preview .single-product-container {
+					display: flex !important;
+					align-items: center !important;
+					justify-content: center !important;
+					width: 100% !important;
+					padding: 20px !important;
+				}
+
+				.shopg-template-preview .demo-content {
+					display: flex !important;
+					align-items: center !important;
+					justify-content: center !important;
+					width: 100% !important;
+				}
+
+				/* Centered demo styling */
+				.shopglut-demo-center {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					padding: 24px;
+					width: 100%;
+				}
+
+				/* Wrapper container with max-width */
+				.shopglut-demo-center .shopglut-swatches-wrapper {
+					width: 100%;
+					max-width: 380px;
+					text-align: left;
+				}
+
+				/* Enhanced label styling */
+				.shopglut-demo-center .shopglut-attribute-label {
+					position: relative;
+					padding-left: 12px;
+					display: flex;
+					align-items: center;
+					gap: 4px;
+				}
+
+				.shopglut-demo-center .shopglut-attribute-label::before {
+					content: '';
+					position: absolute;
+					left: 0;
+					top: 50%;
+					transform: translateY(-50%);
+					width: 3px;
+					height: 16px;
+					background: linear-gradient(180deg, #2271b1 0%, #135e96 100%);
+					border-radius: 2px;
+				}
+
+				/* Button hover and active states */
 				.shopglut-template2 .shopglut-swatch-button:hover {
 					background-color: <?php echo esc_attr($hover_bg); ?> !important;
 					color: <?php echo esc_attr($hover_text); ?> !important;

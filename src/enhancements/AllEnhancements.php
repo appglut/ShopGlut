@@ -765,7 +765,7 @@ class AllEnhancements {
 						</p>
 					</div>
 
-					<a href="<?php echo esc_url( admin_url( 'admin.php?page=shopglut_enhancements&view=wishlist' ) ); ?>" class="shopglut-wishlist-button">
+					<a href="<?php echo esc_url( admin_url( 'admin.php?page=shopglut_wishlist' ) ); ?>" class="shopglut-wishlist-button">
 						<span><i class="fa fa-cog"></i></span>
 						<?php echo esc_html__( 'Go to Wishlist Admin', 'shopglut' ); ?>
 					</a>
@@ -2478,12 +2478,6 @@ class AllEnhancements {
 		?>
 		<div class="wrap shopglut-admin-contents shoplayouts-templates">
 			<div class="shopglut-templates-header">
-				<?php if ( ! empty( $attribute ) ) : ?>
-					<a href="<?php echo esc_url( admin_url( 'admin.php?page=shopglut_enhancements&view=product_swatches' ) ); ?>" class="button button-secondary">
-						<span class="dashicons dashicons-arrow-left-alt"></span>
-						<?php esc_html_e( 'Back to Attributes', 'shopglut' ); ?>
-					</a>
-				<?php endif; ?>
 				<h1>
 					<?php
 					if ( ! empty( $attribute_label ) ) {

@@ -133,8 +133,8 @@ class ShopGlutBase {
 
 		// GalleryChooseTemplates::get_instance();
 
-		// ProductCustomFieldDataManage::get_instance();
-		// ProductCustomFieldHandler::get_instance();
+		ProductCustomFieldDataManage::get_instance();
+		ProductCustomFieldHandler::get_instance();
 
 		SwatchesTemplates::get_instance();
 		ProductSwatchesDataManage::get_instance();
@@ -199,7 +199,7 @@ class ShopGlutBase {
 		//require_once SHOPGLUT_PATH . 'src/enhancements/ProductQuickView/template-settings.php';
 		//require_once SHOPGLUT_PATH . 'src/BusinessSolutions/PdfInvoices/pdf-invoices-settings.php';
 		// require_once SHOPGLUT_PATH . 'src/layouts/shopLayout/shopLayouts-config.php';
-	    // require_once SHOPGLUT_PATH . 'src/tools/productCustomField/product-custom-field-settings.php';
+	     require_once SHOPGLUT_PATH . 'src/tools/productCustomField/product-custom-field-settings.php';
 		// require_once SHOPGLUT_PATH . 'src/showcases/Gallery/templates/template1/template1-settings.php';
 		// require_once SHOPGLUT_PATH . 'src/showcases/ShopBanner/template-settings.php';
 		// require_once SHOPGLUT_PATH . 'src/showcases/Sliders/template-settings.php';
