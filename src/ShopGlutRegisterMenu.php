@@ -152,7 +152,19 @@ class ShopGlutRegisterMenu {
 			$this->menut_slug,
 			array( $shopt_menu, 'rendertoolsPages' )
         );
-         
+
+        // Add Woo Management submenu only if PosGlut is active
+        if ( $this->is_posglut_active() ) {
+            add_submenu_page(
+                $this->menu_slug,
+                esc_html__( 'Woo Management', 'shopglut' ),
+                esc_html__( 'Woo Management', 'shopglut' ),
+                'manage_options',
+                'shopglut_management',
+                array( $this, 'renderWooManagement' )
+            );
+        }
+
 
          // Add a submenu item
 		// add_submenu_page(
@@ -977,6 +989,118 @@ class ShopGlutRegisterMenu {
 		require_once SHOPGLUT_PATH . 'src/tools/galleryShortcode/galleryadmin.php';
 		$gallery_admin = new \Shopglut\galleryShortcode\GalleryAdmin();
 		$gallery_admin->render_admin_page();
+	}
+
+	public function renderWooManagement() {
+		// Check if PosGlut is active
+		if ( ! $this->is_posglut_active() ) {
+			?>
+			<div class="wrap">
+				<h1><?php esc_html_e( 'Woo Management', 'shopglut' ); ?></h1>
+				<div class="notice notice-info">
+					<p>
+						<?php
+						printf(
+							/* translators: %1$s: GitHub URL, %2$s: plugin name */
+							esc_html__( 'Woo Management features require the %1$s%2$s%3$s plugin to be installed and activated.', 'shopglut' ),
+							'<a href="https://github.com/appglut/posglut" target="_blank">',
+							esc_html__( 'PosGlut', 'shopglut' ),
+							'</a>'
+						);
+						?>
+					</p>
+					<p>
+						<a href="https://github.com/appglut/posglut" target="_blank" class="button button-primary">
+							<?php esc_html_e( 'Download PosGlut from GitHub', 'shopglut' ); ?>
+						</a>
+					</p>
+				</div>
+			</div>
+			<?php
+			return;
+		}
+
+		// Get PosGlut path
+		$posglut_path = $this->get_posglut_path();
+
+		if ( ! $posglut_path ) {
+			?>
+			<div class="wrap">
+				<h1><?php esc_html_e( 'Woo Management', 'shopglut' ); ?></h1>
+				<div class="notice notice-error">
+					<p><?php esc_html_e( 'PosGlut plugin not found. Please install and activate it.', 'shopglut' ); ?></p>
+				</div>
+			</div>
+			<?php
+			return;
+		}
+
+		// Load PosGlut AdminPage and render management page
+		if ( file_exists( $posglut_path . '/src/pos/AdminPage.php' ) ) {
+			require_once $posglut_path . '/src/pos/AdminPage.php';
+			$posglut_admin = new \Posglut\pos\AdminPage();
+			$posglut_admin->renderManagementPage();
+		} else {
+			?>
+			<div class="wrap">
+				<h1><?php esc_html_e( 'Woo Management', 'shopglut' ); ?></h1>
+				<div class="notice notice-error">
+					<p><?php esc_html_e( 'PosGlut AdminPage not found. Please ensure PosGlut is properly installed.', 'shopglut' ); ?></p>
+				</div>
+			</div>
+			<?php
+		}
+	}
+
+	/**
+	 * Check if PosGlut plugin is installed and active
+	 *
+	 * @return bool True if PosGlut is active
+	 */
+	private function is_posglut_active() {
+		// Check by active plugins list
+		$active_plugins = apply_filters( 'active_plugins', get_option( 'active_plugins', array() ) );
+
+		if ( is_multisite() ) {
+			// Get network active plugins
+			$network_active_plugins = get_site_option( 'active_sitewide_plugins', array() );
+			$active_plugins = array_merge( $active_plugins, array_keys( $network_active_plugins ) );
+		}
+
+		// Check for posglut/posglut.php plugin
+		foreach ( $active_plugins as $plugin ) {
+			if ( $plugin === 'posglut/posglut.php' ) {
+				return true;
+			}
+		}
+
+		// Also check if the main class exists
+		return class_exists( 'Posglut\\PosglutBase' );
+	}
+
+	/**
+	 * Get PosGlut plugin path if installed
+	 *
+	 * @return string|false Path to PosGlut plugin or false if not found
+	 */
+	private function get_posglut_path() {
+		// Check standard plugin path
+		$plugin_path = WP_PLUGIN_DIR . '/posglut';
+
+		if ( file_exists( $plugin_path . '/posglut.php' ) ) {
+			return $plugin_path;
+		}
+
+		// Fallback: check in plugins list
+		$plugins = get_plugins();
+
+		foreach ( $plugins as $plugin_path_key => $plugin_data ) {
+			if ( strpos( $plugin_path_key, 'posglut.php' ) !== false ) {
+				return WP_PLUGIN_DIR . '/' . dirname( $plugin_path_key );
+			}
+		}
+
+		return false;
 	}
 
 	public function shopglutLayoutsScreenOptions() {

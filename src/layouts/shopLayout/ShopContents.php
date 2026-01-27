@@ -1,9 +1,10 @@
 <?php
+namespace Shopglut\layouts\shopLayout;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-namespace Shopglut\layouts\shopLayout;
 
 use Shopglut\layouts\shopLayout\pagination;
 

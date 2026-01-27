@@ -796,7 +796,23 @@ class ShopGlutDatabase {
 		global $wpdb;
 
 		$table_name = self::table_woo_templates();
-		if ( self::table_exists( $table_name ) ) {
+
+		// Check if column exists, if not add it (for existing installations)
+		$was_existing = self::table_exists( $table_name );
+		$added_column = false;
+		if ( $was_existing && ! self::column_exists( $table_name, 'is_default' ) ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- ALTER TABLE for adding column to existing table
+			$wpdb->query( "ALTER TABLE {$table_name} ADD COLUMN is_default tinyint(1) DEFAULT 0 AFTER template_tags" );
+			$added_column = true;
+		}
+
+		if ( self::table_exists( $table_name ) && ! $added_column ) {
+			// Table exists and we didn't just add the column - check if we need to insert defaults
+			$count = $wpdb->get_var( "SELECT COUNT(*) FROM {$table_name}" );
+			if ( $count == 0 ) {
+				// Table is empty, insert default templates
+				\Shopglut\tools\wooTemplates\WooTemplatesEntity::insert_default_templates();
+			}
 			return;
 		}
 
@@ -809,16 +825,19 @@ class ShopGlutDatabase {
             template_html longtext,
             template_css longtext,
             template_tags longtext,
+            is_default tinyint(1) DEFAULT 0,
             created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-            PRIMARY KEY  (id)
+            PRIMARY KEY  (id),
+            UNIQUE KEY template_id (template_id)
         ) {$charset_collate};";
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- dbDelta for table creation, safe SQL with placeholders
 		dbDelta( $sql );
 
-		// Clear cache after table creation
+		// Insert default templates after table creation
+		\Shopglut\tools\wooTemplates\WooTemplatesEntity::insert_default_templates();
 	}
 
 	public static function create_product_custom_field_settings() {

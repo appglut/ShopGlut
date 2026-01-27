@@ -2,7 +2,7 @@
 /*
  * Plugin Name: ShopGlut - Builder for WooCommerce
  * Description: Complete WooCommerce builder with 6 powerful modules including single product builder, wishlist, product custom fields, swatches, badges, and comparison for professional e-commerce sites
- * Version: 1.7.3
+ * Version: 1.7.4
  * Author: AppGlut
  * Author URI: https://www.appglut.com
  * Plugin URI: https://wordpress.org/plugins/shopglut/
@@ -15,7 +15,7 @@
 defined( 'ABSPATH' ) or die;
 
 define( 'SHOPGLUT_NAME', 'ShopGlut' );
-define( 'SHOPGLUT_VERSION', '1.7.3' );
+define( 'SHOPGLUT_VERSION', '1.7.4' );
 define( 'SHOPGLUT_BASENAME', plugin_basename( __FILE__ ) );
 define( 'SHOPGLUT_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SHOPGLUT_URL', plugin_dir_url( __FILE__ ) );

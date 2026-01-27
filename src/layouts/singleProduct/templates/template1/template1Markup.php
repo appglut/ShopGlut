@@ -304,8 +304,8 @@ class template1Markup {
 					</div>
 					<?php endif; ?>
 
-					<!-- Module Integration: After product title position for custom fields -->
-					<?php ModuleIntegration::render_module_wrapper($settings, 0, 'after_product_title', 'custom_fields'); ?>
+					<!-- Module Integration: After product title position (includes wishlist based on position setting) -->
+					<?php ModuleIntegration::render_module_wrapper($settings, 0, 'after_product_title'); ?>
 
 					<!-- Product Rating -->
 					<?php if ($this->shouldShowRating($settings)): ?>
@@ -319,9 +319,8 @@ class template1Markup {
 					</div>
 					<?php endif; ?>
 
-					<!-- Module Integration: Before price position -->
-					<?php ModuleIntegration::render_module_wrapper($settings, 0, 'before_price', 'badges'); ?>
-					<?php ModuleIntegration::render_module_wrapper($settings, 0, 'before_price', 'custom_fields'); ?>
+					<!-- Module Integration: Before price position (includes wishlist based on position setting) -->
+					<?php ModuleIntegration::render_module_wrapper($settings, 0, 'before_price'); ?>
 
 					<!-- Badges before price -->
 					<?php
@@ -406,7 +405,7 @@ class template1Markup {
 						</div>
 
 						<!-- Module Integration: After Add to Cart -->
-						<?php ModuleIntegration::render_module_wrapper($settings, 0, 'after_add_to_cart', 'custom_fields'); ?>
+						<?php ModuleIntegration::render_module_wrapper($settings, 0, 'after_add_to_cart'); ?>
 					</div>
 				</div>
 			</div>
@@ -891,8 +890,8 @@ class template1Markup {
 					</div>
 					<?php endif; ?>
 
-					<!-- Module Integration: After product title position for custom fields -->
-					<?php ModuleIntegration::render_module_wrapper($settings, $product_id, 'after_product_title', 'custom_fields'); ?>
+					<!-- Module Integration: After product title position (includes wishlist based on position setting) -->
+					<?php ModuleIntegration::render_module_wrapper($settings, $product_id, 'after_product_title'); ?>
 
 					<!-- Product Rating -->
 					<?php if ($this->shouldShowRating($settings) && ($average_rating > 0 || $rating_count > 0)): ?>
@@ -906,9 +905,8 @@ class template1Markup {
 					</div>
 					<?php endif; ?>
 
-					<!-- Module Integration: Before price position -->
-					<?php ModuleIntegration::render_module_wrapper($settings, $product_id, 'before_price', 'badges'); ?>
-					<?php ModuleIntegration::render_module_wrapper($settings, $product_id, 'before_price', 'custom_fields'); ?>
+					<!-- Module Integration: Before price position (includes wishlist based on position setting) -->
+					<?php ModuleIntegration::render_module_wrapper($settings, $product_id, 'before_price'); ?>
 
 					<!-- Badges before price -->
 					<?php
@@ -1139,23 +1137,6 @@ class template1Markup {
 
 								<!-- Module Integration: After Add to Cart -->
 								<?php ModuleIntegration::render_module_wrapper($settings, $product_id, 'after_add_to_cart'); ?>
-
-								<!-- Secondary Actions: Wishlist & Compare -->
-								<?php if ($this->shouldShowSecondaryActions($settings)): ?>
-								<div class="secondary-actions">
-									<?php if ($this->shouldShowWishlistButton($settings)): ?>
-									<button type="button" class="wishlist-btn">
-										<i class="fas fa-heart"></i> <?php esc_html_e('Add to Wishlist', 'shopglut'); ?>
-									</button>
-									<?php endif; ?>
-
-									<?php if ($this->shouldShowCompareButton($settings)): ?>
-									<button type="button" class="compare-btn">
-										<i class="fas fa-balance-scale"></i> <?php esc_html_e('Compare', 'shopglut'); ?>
-									</button>
-									<?php endif; ?>
-								</div>
-								<?php endif; ?>
 							</form>
 						<?php elseif ($product->is_type('external')): ?>
 							<!-- External/Affiliate Product Purchase Section -->
@@ -1171,23 +1152,6 @@ class template1Markup {
 
 							<!-- Module Integration: After Add to Cart -->
 							<?php ModuleIntegration::render_module_wrapper($settings, $product_id, 'after_add_to_cart'); ?>
-
-							<!-- Secondary Actions: Wishlist & Compare -->
-							<?php if ($this->shouldShowSecondaryActions($settings)): ?>
-							<div class="secondary-actions">
-								<?php if ($this->shouldShowWishlistButton($settings)): ?>
-								<button type="button" class="wishlist-btn">
-									<i class="fas fa-heart"></i> <?php esc_html_e('Add to Wishlist', 'shopglut'); ?>
-								</button>
-								<?php endif; ?>
-
-								<?php if ($this->shouldShowCompareButton($settings)): ?>
-								<button type="button" class="compare-btn">
-									<i class="fas fa-balance-scale"></i> <?php esc_html_e('Compare', 'shopglut'); ?>
-								</button>
-								<?php endif; ?>
-							</div>
-							<?php endif; ?>
 						<?php else: ?>
 							<!-- Simple Product Purchase Section -->
 

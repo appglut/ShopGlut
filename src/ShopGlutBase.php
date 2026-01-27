@@ -77,6 +77,7 @@ use Shopglut\enhancements\ProductSwatches\dataManage as ProductSwatchesDataManag
 use Shopglut\enhancements\ProductSwatches\AttributeSwatchesManager;
 
 
+
 class ShopGlutBase {
 
 	// Declare properties to fix PHP 8.2+ deprecation warnings
@@ -140,6 +141,9 @@ class ShopGlutBase {
 		ProductSwatchesDataManage::get_instance();
 		AttributeSwatchesManager::get_instance();
 
+
+		
+
 		// LoginRegister::get_instance();
 
 		// MiniCart::get_instance();
@@ -194,6 +198,8 @@ class ShopGlutBase {
 		require_once SHOPGLUT_PATH . 'src/enhancements/ProductSwatches/productSwatches-settings.php';
 		require_once SHOPGLUT_PATH . 'src/enhancements/ProductBadges/product-badges-settings.php';
 		require_once SHOPGLUT_PATH . 'src/enhancements/wishlist/wishlist-settings.php';
+		require_once SHOPGLUT_PATH . 'src/tools/shortcodeShowcase/shortcodeglut-integration-settings.php';
+		require_once SHOPGLUT_PATH . 'src/tools/posglut/posglut-integration-settings.php';
 		//require_once SHOPGLUT_PATH . 'src/tools/miniCart/mini-cart-settings.php';
 		require_once SHOPGLUT_PATH . 'src/enhancements/ProductComparison/template-settings.php';
 		//require_once SHOPGLUT_PATH . 'src/enhancements/ProductQuickView/template-settings.php';
@@ -205,8 +211,8 @@ class ShopGlutBase {
 		// require_once SHOPGLUT_PATH . 'src/showcases/Sliders/template-settings.php';
 	    // require_once SHOPGLUT_PATH . 'src/showcases/Tabs/template-settings.php';
 	    // require_once SHOPGLUT_PATH . 'src/showcases/Accordions/template-settings.php';
-	    // require_once SHOPGLUT_PATH . 'src/tools/shortcodeShowcase/init.php';
-	
+	    // Load shortcodeShowcase with universal loader
+	    // This loader automatically detects which plugin is loading and sets up compatibility	
 		
 		// Load business solutions modules
 		if ( file_exists( SHOPGLUT_PATH . 'src/business-solutions/index.php' ) ) {

@@ -4,7 +4,7 @@ Tags: woocommerce product , woocommerce customizer, woocommerce builder, woocomm
 Requires at least: 5.1
 Requires PHP: 7.4
 Tested up to: 6.9
-Stable tag: 1.7.3
+Stable tag: 1.7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 

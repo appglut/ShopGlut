@@ -169,7 +169,7 @@ class chooseTemplates {
 										</div>
 
 										<!-- Template Image (same for preview and modal) -->
-										<img src="<?php echo esc_url(SHOPGLUT_URL .'global-assets/images/singleproduct-templates/'. $template_images[$layout_template]);// phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>"
+										<img src="<?php echo esc_url(SHOPGLUT_URL .'global-assets/images/demo-image.png');// phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>"
 											 alt="<?php echo esc_attr($template_names[$layout_template]); ?>"
 											 class="template-preview-image"
 											 loading="lazy">
@@ -296,7 +296,7 @@ class chooseTemplates {
 		function openImageModal(imageName) {
 			const modal = document.getElementById('imageModal');
 			const mainImage = document.getElementById('modalMainImage');
-			const assetsUrl = '<?php echo esc_js(SHOPGLUT_URL . "global-assets/images/singleproduct-templates/"); ?>';
+			const assetsUrl = '<?php echo esc_js(SHOPGLUT_URL . "global-assets/images/demo-image.png"); ?>';
 
 			if (!modal || !mainImage) {
 				return;

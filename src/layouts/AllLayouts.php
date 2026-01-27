@@ -929,10 +929,10 @@ class AllLayouts {
 
 				// Product Tools
 				$module_manager->render_module_card('acf_fields', admin_url( 'admin.php?page=shopglut_tools&view=acf_fields' )); // Product Custom Fields
-				//$module_manager->render_module_card('shortcode_showcase', admin_url( 'admin.php?page=shopglut_shortcode_showcase' ));
+				$module_manager->render_module_card('shortcode_showcase', admin_url( 'admin.php?page=shopglut_shortcode_showcase' ));
 				//$module_manager->render_module_card('mini_cart', admin_url( 'admin.php?page=shopglut_tools&view=mini_cart' ));
 				//$module_manager->render_module_card('shop_banner', admin_url( 'admin.php?page=shopglut_tools&view=shop_banner' ));
-				//$module_manager->render_module_card('woo_templates', admin_url( 'admin.php?page=shopglut_tools&view=woo_templates' ));
+				$module_manager->render_module_card('woo_templates', admin_url( 'admin.php?page=shopglut_tools&view=woo_templates' ));
 				//$module_manager->render_module_card('login_register', admin_url( 'admin.php?page=shopglut_tools&view=login_register' ));
 				//$module_manager->render_module_card('woo_themes', admin_url( 'admin.php?page=shopglut_tools&view=woo_themes' ));
 
